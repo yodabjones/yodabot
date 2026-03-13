@@ -43,6 +43,20 @@
     (async () => {
       const status = document.getElementById("status");
       const content = document.getElementById("content");
+
+      const retargetExternalLinks = (root) => {
+        if (!root) return;
+        root.querySelectorAll("a[href]").forEach((a) => {
+          const href = a.getAttribute("href") || "";
+          if (!href || href.startsWith("#") || href.startsWith("/") || href.startsWith("./") || href.startsWith("../")) {
+            return;
+          }
+          if (/^https?:\/\//i.test(href)) {
+            a.setAttribute("target", "_blank");
+            a.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+      };
       try {
         const resp = await fetch("./2026-03-12T23-47-10Z.md", { cache: "no-cache" });
         if (!resp.ok) throw new Error("HTTP " + resp.status + " while loading ./2026-03-12T23-47-10Z.md");
@@ -52,6 +66,7 @@
           const rawHtml = window.marked.parse(markdown);
           const safeHtml = (window.DOMPurify && typeof window.DOMPurify.sanitize === "function") ? window.DOMPurify.sanitize(rawHtml) : rawHtml;
           content.innerHTML = safeHtml;
+          retargetExternalLinks(content);
           status.textContent = "Report loaded.";
           return;
         }

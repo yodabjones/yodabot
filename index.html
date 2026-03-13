@@ -260,6 +260,20 @@
         return { key: "other", name: "Other" };
       };
 
+      const retargetExternalLinks = (root) => {
+        if (!root) return;
+        root.querySelectorAll("a[href]").forEach((a) => {
+          const href = a.getAttribute("href") || "";
+          if (!href || href.startsWith("#") || href.startsWith("/") || href.startsWith("./") || href.startsWith("../")) {
+            return;
+          }
+          if (/^https?:\/\//i.test(href)) {
+            a.setAttribute("target", "_blank");
+            a.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+      };
+
       const applyFilter = () => {
         const selected = filterEl.value;
         const items = fallbackEl.querySelectorAll("li[data-company]");
@@ -322,6 +336,8 @@
             badge.textContent = company.name;
             li.appendChild(badge);
           });
+
+          retargetExternalLinks(fallbackEl);
 
           filterEl.addEventListener("change", applyFilter);
           applyFilter();
