@@ -342,7 +342,7 @@
 
         items.forEach((li) => {
           const tags = (li.dataset.tags || "").split(" ").filter(Boolean);
-          const matches = Array.from(activeTags).every((t) => tags.includes(t));
+          const matches = activeTags.size === 0 || Array.from(activeTags).some((t) => tags.includes(t));
           li.hidden = !matches;
         });
 
@@ -377,7 +377,7 @@
           : "Showing latest report (all tags).";
 
         tagMetaEl.textContent = labels.length
-          ? "Active tags: " + labels.join(" · ")
+          ? "Active tags (match any): " + labels.join(" · ")
           : "No tags selected. Showing all entries.";
 
         syncToolbarState();
