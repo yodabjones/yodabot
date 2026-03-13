@@ -1,0 +1,36 @@
+name: Update Archive Index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - reports/ai/*.md
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-archive-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build archive index
+        run: bash scripts/build-archive-index.sh
+
+      - name: Commit and push archive index
+        run: |
+          if git diff --quiet -- docs/ARCHIVE.md; then
+            echo "No changes to docs/ARCHIVE.md"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ARCHIVE.md
+          git commit -m "chore(docs): update archive index"
+          git push
