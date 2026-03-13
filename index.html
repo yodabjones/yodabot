@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>yodabot</title>
-  <meta name="description" content="yodabot landing page rendered from README.md" />
+  <title>blearling.com - Latest AI Research Report</title>
+  <meta name="description" content="Latest AI research report from yodabot" />
   <style>
     :root {
-      --bg: #f7f5ef;
-      --panel: #fffdf8;
-      --ink: #1f1d1a;
-      --muted: #6d675f;
-      --line: #dfd8ca;
-      --accent: #8b2f1f;
-      --accent-soft: #f6e3dc;
-      --code-bg: #f3efe6;
+      --bg: #f2f7fb;
+      --panel: #ffffff;
+      --ink: #1c2733;
+      --muted: #5d6b79;
+      --line: #d8e0e8;
+      --accent: #0a5f7e;
+      --accent-soft: #e7f6fb;
+      --code-bg: #f5f8fb;
     }
 
     * { box-sizing: border-box; }
@@ -23,121 +23,130 @@
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at 20% 0%, #fff6dd 0, rgba(255,246,221,0) 50%),
-        radial-gradient(circle at 80% 10%, #ffe7de 0, rgba(255,231,222,0) 45%),
+        radial-gradient(circle at 14% 0%, #dff5ff 0, rgba(223,245,255,0) 45%),
+        radial-gradient(circle at 86% 0%, #ecffe6 0, rgba(236,255,230,0) 48%),
         var(--bg);
       color: var(--ink);
-      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", serif;
-      line-height: 1.6;
+      font: 16px/1.6 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .shell {
-      width: min(980px, 100% - 2rem);
-      margin: 1.2rem auto 2rem;
+      width: min(1080px, 100% - 2rem);
+      margin: 1rem auto 1.5rem;
     }
 
     .hero {
-      padding: 1rem 1.25rem;
+      padding: 1rem 1.2rem;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(170deg, rgba(255,253,248,0.95), rgba(255,250,242,0.9));
-      box-shadow: 0 10px 24px rgba(67, 43, 26, 0.08);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #f9fdff 100%);
+      box-shadow: 0 10px 24px rgba(14, 30, 37, 0.07);
     }
 
-    .kicker {
-      font: 700 0.74rem/1.2 "Trebuchet MS", Verdana, sans-serif;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3.8vw, 2rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0.35rem 0 0;
       color: var(--muted);
     }
 
-    h1 {
-      margin: 0.3rem 0 0;
-      font-size: clamp(1.7rem, 4vw, 2.3rem);
-      line-height: 1.1;
-      letter-spacing: 0.01em;
+    .links {
+      margin-top: 0.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
     }
 
-    .hint {
-      margin-top: 0.4rem;
-      color: var(--muted);
-      font-family: "Trebuchet MS", Verdana, sans-serif;
-      font-size: 0.95rem;
+    .links a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 700;
+      background: var(--accent-soft);
+      border: 1px solid #c7e9f5;
+      border-radius: 999px;
+      padding: 0.35rem 0.72rem;
+      font-size: 0.92rem;
     }
 
     .board {
-      margin-top: 1rem;
-      padding: 1.2rem;
+      margin-top: 0.9rem;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       background: var(--panel);
-      box-shadow: 0 12px 28px rgba(47, 29, 19, 0.06);
+      box-shadow: 0 10px 28px rgba(8, 19, 32, 0.06);
+      overflow: hidden;
     }
 
     .status {
-      margin: 0 0 0.9rem;
+      margin: 0;
+      padding: 0.8rem 1rem;
       color: var(--muted);
-      font-family: "Trebuchet MS", Verdana, sans-serif;
-      font-size: 0.95rem;
+      border-bottom: 1px solid var(--line);
+      background: #f8fbfd;
+      font-size: 0.94rem;
     }
 
     .status.error {
-      color: var(--accent);
+      color: #b42318;
       font-weight: 700;
     }
 
-    #content {
-      max-width: 78ch;
+    #report-frame {
+      width: 100%;
+      min-height: 74vh;
+      border: 0;
+      display: none;
+      background: #fff;
+    }
+
+    #fallback {
+      display: none;
+      padding: 1rem;
+      max-width: 84ch;
       margin: 0 auto;
     }
 
-    #content h1,
-    #content h2,
-    #content h3,
-    #content h4,
-    #content h5,
-    #content h6 {
-      margin: 1.1em 0 0.45em;
+    #fallback h1,
+    #fallback h2,
+    #fallback h3,
+    #fallback h4 {
       line-height: 1.25;
+      margin: 1.1em 0 0.45em;
     }
 
-    #content h1 { font-size: 1.95rem; }
-    #content h2 {
-      padding-bottom: 0.2em;
+    #fallback h2 {
       border-bottom: 1px solid var(--line);
-      font-size: 1.45rem;
+      padding-bottom: 0.2em;
     }
-    #content h3 { font-size: 1.2rem; }
 
-    #content p,
-    #content ul,
-    #content ol,
-    #content pre,
-    #content blockquote,
-    #content table {
+    #fallback p,
+    #fallback ul,
+    #fallback ol,
+    #fallback pre,
+    #fallback blockquote,
+    #fallback table {
       margin: 0.65em 0;
     }
 
-    #content a {
+    #fallback a {
       color: var(--accent);
-      text-decoration-thickness: 0.08em;
-      text-underline-offset: 0.13em;
+      text-underline-offset: 0.12em;
     }
 
-    #content a:hover {
-      background: var(--accent-soft);
-    }
-
-    #content code {
+    #fallback code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
       font-size: 0.92em;
       background: var(--code-bg);
-      padding: 0.12em 0.35em;
       border: 1px solid var(--line);
       border-radius: 0.35em;
+      padding: 0.12em 0.35em;
     }
 
-    #content pre {
+    #fallback pre {
       overflow: auto;
       background: var(--code-bg);
       border: 1px solid var(--line);
@@ -145,54 +154,26 @@
       padding: 0.8rem;
     }
 
-    #content pre code {
+    #fallback pre code {
       border: 0;
       background: transparent;
       padding: 0;
-      white-space: pre;
     }
 
-    #content blockquote {
-      border-left: 4px solid #d8a995;
-      padding: 0.3rem 0.9rem;
-      color: #4b433b;
-      background: #fff7f1;
-      border-radius: 0 10px 10px 0;
-    }
-
-    #content hr {
-      border: 0;
-      border-top: 1px solid var(--line);
-      margin: 1rem 0;
-    }
-
-    #content img {
-      max-width: 100%;
-      border-radius: 0.6rem;
-    }
-
-    #content table {
+    #fallback table {
       border-collapse: collapse;
       width: 100%;
     }
 
-    #content th,
-    #content td {
+    #fallback th,
+    #fallback td {
       border: 1px solid var(--line);
       padding: 0.45rem 0.6rem;
       text-align: left;
     }
 
-    #content th {
-      background: #fbf3e5;
-    }
-
-    .footer {
-      margin-top: 1rem;
-      color: var(--muted);
-      font-family: "Trebuchet MS", Verdana, sans-serif;
-      font-size: 0.88rem;
-      text-align: center;
+    #fallback th {
+      background: #ebf6fb;
     }
   </style>
   <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -200,56 +181,73 @@
 </head>
 <body>
   <main class="shell">
-    <section class="hero" aria-label="Page Intro">
-      <div class="kicker">Landing Page</div>
-      <h1>yodabot</h1>
-      <div class="hint">Rendering from README.md through index.html</div>
+    <section class="hero">
+      <h1>Latest AI Research Report</h1>
+      <p>Writer-rendered report output from researcher findings.</p>
+      <nav class="links" aria-label="report links">
+        <a href="./reports/ai/latest.html">Open latest report HTML</a>
+        <a href="./reports/ai/latest.md">Open latest report Markdown</a>
+        <a href="./reports/ai/">Open report archive</a>
+      </nav>
     </section>
 
     <section class="board" aria-live="polite">
-      <p id="status" class="status">Loading README.md...</p>
-      <article id="content"></article>
+      <p id="status" class="status">Loading latest report HTML...</p>
+      <iframe id="report-frame" title="Latest AI report" loading="eager"></iframe>
+      <article id="fallback"></article>
     </section>
-
-    <p class="footer">Source: README.md</p>
   </main>
 
   <script>
     (async () => {
-      const status = document.getElementById("status");
-      const content = document.getElementById("content");
+      const statusEl = document.getElementById("status");
+      const frameEl = document.getElementById("report-frame");
+      const fallbackEl = document.getElementById("fallback");
+      const latestHtmlPath = "./reports/ai/latest.html";
+      const latestMdPath = "./reports/ai/latest.md";
 
+      // Primary path: render prebuilt HTML report.
       try {
-        const resp = await fetch("./README.md", { cache: "no-cache" });
-        if (!resp.ok) {
-          throw new Error("HTTP " + resp.status + " while loading README.md");
+        const htmlResp = await fetch(latestHtmlPath, { method: "HEAD", cache: "no-cache" });
+        if (htmlResp.ok) {
+          frameEl.src = latestHtmlPath;
+          frameEl.style.display = "block";
+          statusEl.textContent = "Showing latest report HTML.";
+          return;
         }
+      } catch (_err) {
+        // Continue to markdown fallback path.
+      }
 
-        const markdown = await resp.text();
+      // Fallback path: render markdown file as HTML in this page.
+      try {
+        statusEl.textContent = "HTML report missing; rendering Markdown fallback...";
+        const mdResp = await fetch(latestMdPath, { cache: "no-cache" });
+        if (!mdResp.ok) {
+          throw new Error("HTTP " + mdResp.status + " while loading latest.md");
+        }
+        const markdown = await mdResp.text();
 
         if (window.marked && typeof window.marked.parse === "function") {
-          window.marked.setOptions({
-            gfm: true,
-            breaks: true,
-            headerIds: true,
-            mangle: false
-          });
-
+          window.marked.setOptions({ gfm: true, breaks: true, headerIds: true, mangle: false });
           const rawHtml = window.marked.parse(markdown);
           const safeHtml = (window.DOMPurify && typeof window.DOMPurify.sanitize === "function")
             ? window.DOMPurify.sanitize(rawHtml)
             : rawHtml;
-          content.innerHTML = safeHtml;
-          status.textContent = "README.md loaded.";
+          fallbackEl.innerHTML = safeHtml;
+          fallbackEl.style.display = "block";
+          statusEl.textContent = "Showing Markdown-rendered fallback.";
           return;
         }
 
-        content.textContent = markdown;
-        status.textContent = "README.md loaded as plain text (markdown renderer unavailable).";
+        fallbackEl.textContent = markdown;
+        fallbackEl.style.display = "block";
+        statusEl.textContent = "Renderer unavailable; showing raw markdown fallback.";
       } catch (err) {
-        status.textContent = "Failed to load README.md.";
-        status.classList.add("error");
-        content.innerHTML = "<p>Could not render README content. Check that README.md exists in this repository root.</p>";
+        statusEl.textContent = "Could not load latest report HTML or Markdown.";
+        statusEl.classList.add("error");
+        fallbackEl.innerHTML = "<p>No report is available yet. Please check back after the next publish cycle.</p>";
+        fallbackEl.style.display = "block";
         console.error(err);
       }
     })();
