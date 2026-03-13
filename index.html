@@ -74,23 +74,42 @@
 
     .controls {
       margin-top: 0.8rem;
-      display: flex;
-      align-items: center;
+      display: grid;
       gap: 0.55rem;
-      flex-wrap: wrap;
       color: var(--muted);
       font-size: 0.93rem;
     }
 
-    .controls select {
+    .tag-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .tag-btn {
       appearance: none;
       border: 1px solid #bfd8ea;
       background: #ffffff;
-      color: var(--ink);
-      border-radius: 10px;
-      padding: 0.35rem 0.6rem;
-      font-size: 0.92rem;
-      font-weight: 600;
+      color: #1f3f5c;
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+
+    .tag-btn.active,
+    .tag-btn[aria-pressed="true"] {
+      background: #dff1ff;
+      border-color: #85bddf;
+      color: #0f466a;
+    }
+
+    .tag-meta {
+      color: var(--muted);
+      font-size: 0.84rem;
     }
 
     .badge {
@@ -215,18 +234,8 @@
         <a href="/reports/ai/">Open report archive</a>
       </nav>
       <div class="controls" aria-label="filter controls">
-        <label for="company-filter">Filter by company:</label>
-        <select id="company-filter">
-          <option value="all">All</option>
-          <option value="openai">OpenAI</option>
-          <option value="anthropic">Anthropic</option>
-          <option value="google">Google</option>
-          <option value="microsoft">Microsoft</option>
-          <option value="meta">Meta</option>
-          <option value="nvidia">NVIDIA</option>
-          <option value="xai">xAI</option>
-          <option value="other">Other</option>
-        </select>
+        <div class="tag-toolbar" id="tag-toolbar" aria-label="tag filters"></div>
+        <div class="tag-meta" id="tag-meta">Filter entries by one or more tags.</div>
       </div>
     </section>
 
@@ -241,7 +250,9 @@
       const statusEl = document.getElementById("status");
       const fallbackEl = document.getElementById("fallback");
       const latestMdPath = "/reports/ai/latest.md";
-      const filterEl = document.getElementById("company-filter");
+      const tagToolbarEl = document.getElementById("tag-toolbar");
+      const tagMetaEl = document.getElementById("tag-meta");
+      const activeTags = new Set();
 
       const companies = [
         { key: "openai", name: "OpenAI", rx: [/\bopenai\b/i] },
@@ -253,11 +264,54 @@
         { key: "xai", name: "xAI", rx: [/\bxai\b/i, /\bx\.ai\b/i, /\bgrok\b/i] }
       ];
 
+      const tagDefs = [
+        { key: "all", label: "All" },
+        { key: "company-openai", label: "OpenAI" },
+        { key: "company-anthropic", label: "Anthropic" },
+        { key: "company-google", label: "Google" },
+        { key: "company-microsoft", label: "Microsoft" },
+        { key: "company-meta", label: "Meta" },
+        { key: "company-nvidia", label: "NVIDIA" },
+        { key: "company-xai", label: "xAI" },
+        { key: "company-other", label: "Other" },
+        { key: "topic-model-releases", label: "Model Releases" },
+        { key: "topic-revenue-fiscal", label: "Revenue/Fiscal" },
+        { key: "topic-infrastructure-data-centers", label: "Infrastructure" },
+        { key: "topic-ecosystem-policy", label: "Ecosystem/Policy" },
+        { key: "topic-xai-grok-watch", label: "xAI/Grok Watch" },
+        { key: "topic-general", label: "General" },
+        { key: "meta-unverified", label: "UNVERIFIED" },
+        { key: "meta-with-url", label: "Has URL" }
+      ];
+
+      const topicMap = {
+        "model releases": "model-releases",
+        "revenue and fiscal": "revenue-fiscal",
+        "infrastructure and data centers": "infrastructure-data-centers",
+        "ecosystem and policy": "ecosystem-policy",
+        "xai / grok watch": "xai-grok-watch"
+      };
+
       const detectCompany = (text) => {
         for (const c of companies) {
           if (c.rx.some((r) => r.test(text))) return c;
         }
         return { key: "other", name: "Other" };
+      };
+
+      const detectTopicKey = (sectionText) => {
+        if (!sectionText) return "general";
+        const k = sectionText.trim().toLowerCase();
+        return topicMap[k] || "general";
+      };
+
+      const nearestSectionText = (li) => {
+        let node = li.previousElementSibling;
+        while (node) {
+          if (node.tagName === "H2") return node.textContent || "";
+          node = node.previousElementSibling;
+        }
+        return "";
       };
 
       const retargetExternalLinks = (root) => {
@@ -274,20 +328,30 @@
         });
       };
 
+      const syncToolbarState = () => {
+        tagToolbarEl.querySelectorAll("button[data-tag]").forEach((btn) => {
+          const key = btn.dataset.tag;
+          const pressed = key === "all" ? activeTags.size === 0 : activeTags.has(key);
+          btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+          btn.classList.toggle("active", pressed);
+        });
+      };
+
       const applyFilter = () => {
-        const selected = filterEl.value;
-        const items = fallbackEl.querySelectorAll("li[data-company]");
+        const items = fallbackEl.querySelectorAll("li[data-tags]");
 
         items.forEach((li) => {
-          li.style.display = (selected === "all" || li.dataset.company === selected) ? "" : "none";
+          const tags = (li.dataset.tags || "").split(" ").filter(Boolean);
+          const matches = Array.from(activeTags).every((t) => tags.includes(t));
+          li.hidden = !matches;
         });
 
         // Hide empty lists and section headers when no filtered items remain.
         const blocks = fallbackEl.querySelectorAll("h2, ul, ol");
         blocks.forEach((node) => {
           if (node.tagName === "UL" || node.tagName === "OL") {
-            const visible = node.querySelector('li[data-company]:not([style*="display: none"])');
-            node.style.display = visible ? "" : "none";
+            const visible = node.querySelector("li[data-tags]:not([hidden])");
+            node.hidden = !visible;
           }
         });
 
@@ -296,18 +360,50 @@
           let cursor = h2.nextElementSibling;
           let hasVisible = false;
           while (cursor && cursor.tagName !== "H2") {
-            if ((cursor.tagName === "UL" || cursor.tagName === "OL") && cursor.style.display !== "none") {
+            if ((cursor.tagName === "UL" || cursor.tagName === "OL") && !cursor.hidden) {
               hasVisible = true;
               break;
             }
             cursor = cursor.nextElementSibling;
           }
-          h2.style.display = hasVisible ? "" : "none";
+          h2.hidden = !hasVisible;
         });
 
-        statusEl.textContent = selected === "all"
-          ? "Showing latest report (all companies)."
-          : "Showing latest report filtered by company.";
+        const visibleCount = fallbackEl.querySelectorAll("li[data-tags]:not([hidden])").length;
+        const labels = tagDefs.filter((d) => activeTags.has(d.key)).map((d) => d.label);
+
+        statusEl.textContent = labels.length
+          ? "Showing " + visibleCount + " entries for: " + labels.join(", ")
+          : "Showing latest report (all tags).";
+
+        tagMetaEl.textContent = labels.length
+          ? "Active tags: " + labels.join(" · ")
+          : "No tags selected. Showing all entries.";
+
+        syncToolbarState();
+      };
+
+      const renderTagToolbar = () => {
+        tagToolbarEl.innerHTML = "";
+        tagDefs.forEach((def) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "tag-btn";
+          btn.dataset.tag = def.key;
+          btn.textContent = def.label;
+          btn.setAttribute("aria-pressed", def.key === "all" ? "true" : "false");
+          btn.addEventListener("click", () => {
+            if (def.key === "all") {
+              activeTags.clear();
+              applyFilter();
+              return;
+            }
+            if (activeTags.has(def.key)) activeTags.delete(def.key);
+            else activeTags.add(def.key);
+            applyFilter();
+          });
+          tagToolbarEl.appendChild(btn);
+        });
       };
 
       try {
@@ -330,7 +426,12 @@
           fallbackEl.querySelectorAll("li").forEach((li) => {
             const text = li.textContent || "";
             const company = detectCompany(text);
-            li.dataset.company = company.key;
+            const topic = detectTopicKey(nearestSectionText(li));
+            const tags = ["company-" + company.key, "topic-" + topic];
+            if (/\[UNVERIFIED\]/i.test(text)) tags.push("meta-unverified");
+            if (li.querySelector('a[href]')) tags.push("meta-with-url");
+            li.dataset.tags = tags.join(" ");
+
             const badge = document.createElement("span");
             badge.className = "badge";
             badge.textContent = company.name;
@@ -339,7 +440,7 @@
 
           retargetExternalLinks(fallbackEl);
 
-          filterEl.addEventListener("change", applyFilter);
+          renderTagToolbar();
           applyFilter();
           return;
         }
@@ -347,13 +448,15 @@
         fallbackEl.textContent = markdown;
         fallbackEl.style.display = "block";
         statusEl.textContent = "Renderer unavailable; showing raw markdown fallback.";
-        filterEl.disabled = true;
+        tagToolbarEl.innerHTML = "";
+        tagMetaEl.textContent = "Tag filtering disabled in raw markdown fallback mode.";
       } catch (err) {
         statusEl.textContent = "Could not load latest report HTML or Markdown.";
         statusEl.classList.add("error");
         fallbackEl.innerHTML = "<p>No report is available yet. Please check back after the next publish cycle.</p>";
         fallbackEl.style.display = "block";
-        filterEl.disabled = true;
+        tagToolbarEl.innerHTML = "";
+        tagMetaEl.textContent = "Tag filtering unavailable.";
         console.error(err);
       }
     })();
