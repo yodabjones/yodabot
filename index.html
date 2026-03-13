@@ -72,6 +72,39 @@
       font-size: 0.92rem;
     }
 
+    .controls {
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .controls select {
+      appearance: none;
+      border: 1px solid #bfd8ea;
+      background: #ffffff;
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-left: 0.45rem;
+      font-size: 0.74rem;
+      color: #204b6d;
+      background: #e9f4fc;
+      border: 1px solid #c5dff2;
+      border-radius: 999px;
+      padding: 0.05rem 0.42rem;
+      vertical-align: middle;
+    }
+
     .board {
       margin-top: 0.9rem;
       border: 1px solid var(--line);
@@ -93,14 +126,6 @@
     .status.error {
       color: #b42318;
       font-weight: 700;
-    }
-
-    #report-frame {
-      width: 100%;
-      min-height: 74vh;
-      border: 0;
-      display: none;
-      background: #fff;
     }
 
     #fallback {
@@ -186,15 +211,27 @@
       <p>Writer-rendered report output from researcher findings.</p>
       <nav class="links" aria-label="report links">
         <a href="/reports/ai/latest.html">Open latest report HTML</a>
-        <a href="/reports/ai/by-company.html">View latest by company</a>
         <a href="/reports/ai/latest.md">Open latest report Markdown</a>
         <a href="/reports/ai/">Open report archive</a>
       </nav>
+      <div class="controls" aria-label="filter controls">
+        <label for="company-filter">Filter by company:</label>
+        <select id="company-filter">
+          <option value="all">All</option>
+          <option value="openai">OpenAI</option>
+          <option value="anthropic">Anthropic</option>
+          <option value="google">Google</option>
+          <option value="microsoft">Microsoft</option>
+          <option value="meta">Meta</option>
+          <option value="nvidia">NVIDIA</option>
+          <option value="xai">xAI</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
     </section>
 
     <section class="board" aria-live="polite">
-      <p id="status" class="status">Loading latest report HTML...</p>
-      <iframe id="report-frame" title="Latest AI report" loading="eager"></iframe>
+      <p id="status" class="status">Loading latest report...</p>
       <article id="fallback"></article>
     </section>
   </main>
@@ -202,27 +239,64 @@
   <script>
     (async () => {
       const statusEl = document.getElementById("status");
-      const frameEl = document.getElementById("report-frame");
       const fallbackEl = document.getElementById("fallback");
-      const latestHtmlPath = "/reports/ai/latest.html";
       const latestMdPath = "/reports/ai/latest.md";
+      const filterEl = document.getElementById("company-filter");
 
-      // Primary path: render prebuilt HTML report.
-      try {
-        const htmlResp = await fetch(latestHtmlPath, { method: "HEAD", cache: "no-cache" });
-        if (htmlResp.ok) {
-          frameEl.src = latestHtmlPath;
-          frameEl.style.display = "block";
-          statusEl.textContent = "Showing latest report HTML.";
-          return;
+      const companies = [
+        { key: "openai", name: "OpenAI", rx: [/\bopenai\b/i] },
+        { key: "anthropic", name: "Anthropic", rx: [/\banthropic\b/i] },
+        { key: "google", name: "Google", rx: [/\bgoogle\b/i, /\balphabet\b/i, /\bgemini\b/i] },
+        { key: "microsoft", name: "Microsoft", rx: [/\bmicrosoft\b/i, /\bazure\b/i] },
+        { key: "meta", name: "Meta", rx: [/\bmeta\b/i, /\bfacebook\b/i] },
+        { key: "nvidia", name: "NVIDIA", rx: [/\bnvidia\b/i] },
+        { key: "xai", name: "xAI", rx: [/\bxai\b/i, /\bx\.ai\b/i, /\bgrok\b/i] }
+      ];
+
+      const detectCompany = (text) => {
+        for (const c of companies) {
+          if (c.rx.some((r) => r.test(text))) return c;
         }
-      } catch (_err) {
-        // Continue to markdown fallback path.
-      }
+        return { key: "other", name: "Other" };
+      };
 
-      // Fallback path: render markdown file as HTML in this page.
+      const applyFilter = () => {
+        const selected = filterEl.value;
+        const items = fallbackEl.querySelectorAll("li[data-company]");
+
+        items.forEach((li) => {
+          li.style.display = (selected === "all" || li.dataset.company === selected) ? "" : "none";
+        });
+
+        // Hide empty lists and section headers when no filtered items remain.
+        const blocks = fallbackEl.querySelectorAll("h2, ul, ol");
+        blocks.forEach((node) => {
+          if (node.tagName === "UL" || node.tagName === "OL") {
+            const visible = node.querySelector('li[data-company]:not([style*="display: none"])');
+            node.style.display = visible ? "" : "none";
+          }
+        });
+
+        const headings = fallbackEl.querySelectorAll("h2");
+        headings.forEach((h2) => {
+          let cursor = h2.nextElementSibling;
+          let hasVisible = false;
+          while (cursor && cursor.tagName !== "H2") {
+            if ((cursor.tagName === "UL" || cursor.tagName === "OL") && cursor.style.display !== "none") {
+              hasVisible = true;
+              break;
+            }
+            cursor = cursor.nextElementSibling;
+          }
+          h2.style.display = hasVisible ? "" : "none";
+        });
+
+        statusEl.textContent = selected === "all"
+          ? "Showing latest report (all companies)."
+          : "Showing latest report filtered by company.";
+      };
+
       try {
-        statusEl.textContent = "HTML report missing; rendering Markdown fallback...";
         const mdResp = await fetch(latestMdPath, { cache: "no-cache" });
         if (!mdResp.ok) {
           throw new Error("HTTP " + mdResp.status + " while loading latest.md");
@@ -237,18 +311,33 @@
             : rawHtml;
           fallbackEl.innerHTML = safeHtml;
           fallbackEl.style.display = "block";
-          statusEl.textContent = "Showing Markdown-rendered fallback.";
+
+          // Classify list items and annotate with company badges.
+          fallbackEl.querySelectorAll("li").forEach((li) => {
+            const text = li.textContent || "";
+            const company = detectCompany(text);
+            li.dataset.company = company.key;
+            const badge = document.createElement("span");
+            badge.className = "badge";
+            badge.textContent = company.name;
+            li.appendChild(badge);
+          });
+
+          filterEl.addEventListener("change", applyFilter);
+          applyFilter();
           return;
         }
 
         fallbackEl.textContent = markdown;
         fallbackEl.style.display = "block";
         statusEl.textContent = "Renderer unavailable; showing raw markdown fallback.";
+        filterEl.disabled = true;
       } catch (err) {
         statusEl.textContent = "Could not load latest report HTML or Markdown.";
         statusEl.classList.add("error");
         fallbackEl.innerHTML = "<p>No report is available yet. Please check back after the next publish cycle.</p>";
         fallbackEl.style.display = "block";
+        filterEl.disabled = true;
         console.error(err);
       }
     })();
