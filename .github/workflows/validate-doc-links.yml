@@ -1,0 +1,54 @@
+name: Validate Documentation Links
+
+on:
+  pull_request:
+    paths:
+      - README.md
+      - docs/**
+      - reports/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate relative markdown links
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          files = [Path('README.md')]
+          docs_dir = Path('docs')
+          if docs_dir.exists():
+            files.extend(sorted(docs_dir.rglob('*.md')))
+
+          pat = re.compile(r'\[[^\]]+\]\(([^)]+)\)')
+          missing = []
+
+          for f in files:
+            txt = f.read_text(encoding='utf-8')
+            for m in pat.finditer(txt):
+              tgt = m.group(1).strip()
+              if not tgt or '://' in tgt or tgt.startswith('#') or tgt.startswith('mailto:'):
+                continue
+              candidate = (f.parent / tgt).resolve()
+              if not candidate.exists():
+                missing.append((str(f), tgt))
+
+          if missing:
+            print('Broken relative links found:')
+            for src, tgt in missing:
+              print(f'- {src} -> {tgt}')
+            sys.exit(1)
+
+          print('All checked relative links resolve.')
+          PY
