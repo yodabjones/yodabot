@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latest AI News by Company</title>
+  <meta name="description" content="Latest AI report view grouped by foundation company" />
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --panel: #ffffff;
+      --ink: #172333;
+      --muted: #5c6979;
+      --line: #d4dee8;
+      --accent: #0f5f89;
+      --accent-soft: #e4f3ff;
+      --chip: #edf5ff;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 12% 0%, #d9f0ff 0, rgba(217,240,255,0) 42%), var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .shell {
+      width: min(1100px, 100% - 2rem);
+      margin: 1rem auto 2rem;
+    }
+    .hero,
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(17, 30, 43, 0.06);
+    }
+    .hero {
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.9rem;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.3rem, 3.3vw, 1.95rem);
+    }
+    .hero p {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+    }
+    .hero a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .status {
+      padding: 0.8rem 1rem;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fbff;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    .status.error {
+      color: #b42318;
+      font-weight: 700;
+    }
+    .grid {
+      margin-top: 0.9rem;
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .card {
+      padding: 0.9rem;
+    }
+    .card h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.15rem;
+    }
+    .count {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+    ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+    li {
+      margin: 0;
+    }
+    .item-section {
+      display: inline-block;
+      margin-right: 0.45rem;
+      font-size: 0.78rem;
+      color: #23405f;
+      background: var(--chip);
+      border: 1px solid #cfe0f4;
+      border-radius: 999px;
+      padding: 0.1rem 0.45rem;
+      vertical-align: middle;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .meta {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>Latest AI News by Foundation Company</h1>
+      <p>Alternate view of the latest report grouped by company. <a href="/">Go to topic view</a> · <a href="./">Go to archive</a>.</p>
+    </section>
+
+    <p id="status" class="status">Loading latest report data...</p>
+    <section id="results" class="grid" aria-live="polite"></section>
+    <p id="meta" class="meta"></p>
+  </main>
+
+  <script>
+    (() => {
+      const statusEl = document.getElementById("status");
+      const resultsEl = document.getElementById("results");
+      const metaEl = document.getElementById("meta");
+
+      const companies = [
+        { name: "OpenAI", patterns: [/\bopenai\b/i] },
+        { name: "Anthropic", patterns: [/\banthropic\b/i] },
+        { name: "Google", patterns: [/\bgoogle\b/i, /\balphabet\b/i, /\bgemini\b/i] },
+        { name: "Microsoft", patterns: [/\bmicrosoft\b/i, /\bazure\b/i] },
+        { name: "Meta", patterns: [/\bmeta\b/i, /\bfacebook\b/i] },
+        { name: "NVIDIA", patterns: [/\bnvidia\b/i] },
+        { name: "xAI", patterns: [/\bxai\b/i, /\bx\.ai\b/i, /\bgrok\b/i] }
+      ];
+
+      const normalizeSection = (line) => line.replace(/^##\s+/, "").trim();
+
+      const detectCompany = (text, sourceHint) => {
+        const haystack = [text, sourceHint].filter(Boolean).join(" \n ");
+        for (const company of companies) {
+          if (company.patterns.some((rx) => rx.test(haystack))) {
+            return company.name;
+          }
+        }
+        return "Other / Multi-company";
+      };
+
+      const parseMarkdown = (markdown) => {
+        const lines = markdown.split(/\r?\n/);
+        let section = "General";
+        let sourceHint = "";
+        const grouped = new Map();
+
+        const pushItem = (company, item) => {
+          if (!grouped.has(company)) grouped.set(company, []);
+          grouped.get(company).push(item);
+        };
+
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (!line) continue;
+
+          if (line.startsWith("## ")) {
+            section = normalizeSection(line);
+            sourceHint = "";
+            continue;
+          }
+
+          if (/^-\s+Source:\s+/i.test(line)) {
+            sourceHint = line.replace(/^-\s+Source:\s+/i, "").trim();
+            continue;
+          }
+
+          if (!line.startsWith("- ")) continue;
+
+          const text = line.replace(/^-\s+/, "").trim();
+          if (/^Generated \(UTC\):/i.test(text) || /^Mode:/i.test(text) || /^Tavily used:/i.test(text) || /^Notes:/i.test(text)) {
+            continue;
+          }
+
+          const urlMatch = text.match(/https?:\/\/\S+/i);
+          const company = detectCompany(text, sourceHint);
+          pushItem(company, {
+            section,
+            text,
+            url: urlMatch ? urlMatch[0] : null
+          });
+        }
+
+        return grouped;
+      };
+
+      const escapeHtml = (s) => s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+      const render = (grouped) => {
+        const preferredOrder = companies.map((c) => c.name).concat(["Other / Multi-company"]);
+        const presentCompanies = preferredOrder.filter((name) => grouped.has(name));
+
+        if (!presentCompanies.length) {
+          statusEl.textContent = "No company-groupable items found in latest report.";
+          return;
+        }
+
+        resultsEl.innerHTML = "";
+        let total = 0;
+
+        for (const company of presentCompanies) {
+          const items = grouped.get(company) || [];
+          total += items.length;
+
+          const card = document.createElement("article");
+          card.className = "card";
+          const list = items.map((item) => {
+            const body = item.url
+              ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.text)}</a>`
+              : escapeHtml(item.text);
+            return `<li><span class="item-section">${escapeHtml(item.section)}</span>${body}</li>`;
+          }).join("\n");
+
+          card.innerHTML = `
+            <h2>${escapeHtml(company)}</h2>
+            <div class="count">${items.length} item${items.length === 1 ? "" : "s"}</div>
+            <ul>${list}</ul>
+          `;
+          resultsEl.appendChild(card);
+        }
+
+        statusEl.textContent = "Showing latest report grouped by company.";
+        metaEl.textContent = `Parsed ${total} item${total === 1 ? "" : "s"} from latest.md.`;
+      };
+
+      (async () => {
+        try {
+          const resp = await fetch("./latest.md", { cache: "no-cache" });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status} while loading latest.md`);
+          const markdown = await resp.text();
+          const grouped = parseMarkdown(markdown);
+          render(grouped);
+        } catch (err) {
+          statusEl.textContent = "Failed to load latest report data.";
+          statusEl.classList.add("error");
+          metaEl.textContent = "Could not build company view from latest.md.";
+          console.error(err);
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
