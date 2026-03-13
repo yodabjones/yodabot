@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Report Archive</title>
+  <meta name="description" content="Archive of AI research reports with timestamps" />
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --panel: #ffffff;
+      --ink: #172333;
+      --muted: #5c6979;
+      --line: #d4dee8;
+      --accent: #0f5f89;
+      --accent-soft: #e4f3ff;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 12% 0%, #d9f0ff 0, rgba(217,240,255,0) 42%), var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .shell {
+      width: min(980px, 100% - 2rem);
+      margin: 1rem auto 2rem;
+    }
+    .hero,
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(17, 30, 43, 0.06);
+    }
+    .hero {
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.85rem;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.3rem, 3.3vw, 1.95rem);
+    }
+    .hero p {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+    }
+    .hero a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .card {
+      padding: 0.3rem 0;
+      overflow: hidden;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: minmax(180px, 280px) 1fr auto;
+      gap: 0.8rem;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+    }
+    .row:first-child {
+      border-top: 0;
+    }
+    .ts {
+      font-weight: 700;
+      color: #102a43;
+      white-space: nowrap;
+    }
+    .label {
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .actions a {
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid #c5dbef;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 0.25rem 0.62rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    @media (max-width: 720px) {
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+      }
+      .actions {
+        justify-content: flex-start;
+      }
+      .ts {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>AI Report Archive</h1>
+      <p>Timestamped research reports. <a href="/">Go to landing page</a>.</p>
+    </section>
+    <section class="card">
+      <div class="row">
+        <div class="ts">Latest (rolling)</div>
+        <div class="label">Current report endpoint</div>
+        <div class="actions">
+          <a href="./latest.html">HTML</a>
+          <a href="./latest.md">Markdown</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ts">2026-03-12T23-47-10Z</div>
+        <div class="label">Archived report snapshot</div>
+        <div class="actions">
+          <a href="./2026-03-12T23-47-10Z.html">HTML</a>
+          <a href="./2026-03-12T23-47-10Z.md">Markdown</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ts">2026-03-12T23-42-42Z</div>
+        <div class="label">Archived report snapshot</div>
+        <div class="actions">
+          <a href="./2026-03-12T23-42-42Z.html">HTML</a>
+          <a href="./2026-03-12T23-42-42Z.md">Markdown</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ts">2026-03-12T23-41-23Z</div>
+        <div class="label">Archived report snapshot</div>
+        <div class="actions">
+          <a href="./2026-03-12T23-41-23Z.html">HTML</a>
+          <a href="./2026-03-12T23-41-23Z.md">Markdown</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ts">2026-03-12T23-41-06Z</div>
+        <div class="label">Archived report snapshot</div>
+        <div class="actions">
+          <a href="./2026-03-12T23-41-06Z.html">HTML</a>
+          <a href="./2026-03-12T23-41-06Z.md">Markdown</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
