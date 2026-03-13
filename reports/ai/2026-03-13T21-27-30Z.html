@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Report - Latest</title>
+  <title>AI Report - 2026-03-13T21-27-30Z</title>
   <meta name="description" content="yodabot AI report" />
   <style>
     :root {
@@ -86,7 +86,7 @@
   <main class="shell">
     <section class="card" aria-live="polite">
       <p class="meta">yodabot AI report</p>
-      <h1>AI Report - Latest</h1>
+      <h1>AI Report - 2026-03-13T21-27-30Z</h1>
       <p id="status" class="status">Loading report markdown...</p>
       <article id="content"></article>
     </section>
@@ -112,9 +112,9 @@
       };
 
       try {
-        const resp = await fetch("./latest.md", { cache: "no-cache" });
+        const resp = await fetch("./2026-03-13T21-27-30Z.md", { cache: "no-cache" });
         if (!resp.ok) {
-          throw new Error("HTTP " + resp.status + " while loading ./latest.md");
+          throw new Error("HTTP " + resp.status + " while loading ./2026-03-13T21-27-30Z.md");
         }
         const markdown = await resp.text();
 
