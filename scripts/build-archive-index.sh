@@ -13,6 +13,63 @@ html_escape() {
   sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'
 }
 
+extract_article_tags() {
+  local summary="$1"
+  local url="$2"
+
+  node - "$summary" "$url" <<'NODE'
+const summary = process.argv[2] || "";
+const url = process.argv[3] || "";
+
+const tags = new Set();
+const add = (value) => {
+  const v = (value || "").replace(/\s+/g, " ").trim();
+  if (!v) return;
+  if (v.length < 2 || v.length > 48) return;
+  tags.add(v);
+};
+
+const lower = summary.toLowerCase();
+const topicMap = [
+  ["infrastructure", ["infrastructure", "data center", "datacenter", "power", "grid", "cooling", "facility"]],
+  ["model", ["model", "release", "llm", "foundation model", "reasoning"]],
+  ["revenue", ["revenue", "earnings", "qoq", "guidance", "capex", "contract"]],
+  ["regulation", ["regulation", "regulatory", "doj", "ftc", "eu", "cma", "lawsuit"]],
+  ["policy", ["policy", "export control", "antitrust", "compliance"]],
+  ["gpu", ["gpu", "chip", "accelerator", "cuda", "h100", "b200", "rubin"]],
+  ["cloud", ["cloud", "azure", "aws", "gcp", "hosting"]],
+  ["funding", ["funding", "raise", "valuation", "series", "investment"]],
+  ["acquisition", ["acquire", "acquisition", "merger", "m&a"]],
+];
+
+for (const [topic, keys] of topicMap) {
+  if (keys.some((k) => lower.includes(k))) add(topic);
+}
+
+try {
+  const host = new URL(url).hostname.replace(/^www\./, "");
+  add(host);
+  for (const part of host.split(".")) {
+    if (part && !["com", "org", "net", "co", "io", "ai", "gov"].includes(part)) add(part);
+  }
+} catch {}
+
+for (const m of summary.matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) add(m[0]);
+
+const stop = new Set([
+  "The", "A", "An", "And", "Or", "For", "With", "From", "In", "On", "At", "By", "To", "Of", "Latest", "Report", "Open", "Source"
+]);
+for (const m of summary.matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\b/g)) {
+  const phrase = m[1].trim();
+  const parts = phrase.split(/\s+/);
+  if (parts.every((p) => stop.has(p))) continue;
+  add(phrase);
+}
+
+process.stdout.write(Array.from(tags).sort((a, b) => a.localeCompare(b)).join("|"));
+NODE
+}
+
 {
   echo "# Article Archive Index"
   echo
@@ -119,6 +176,42 @@ if [[ ! -s "$ARCHIVE_DATA" ]]; then
     }
     .label {
       color: var(--muted);
+    }
+    .summary {
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tag-list {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      border: 1px solid #c8d8e6;
+      background: #f4f9ff;
+      color: #36546b;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .search-row {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f9fcff;
+    }
+    .search-row input {
+      width: 100%;
+      border: 1px solid #c5dbef;
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font: inherit;
+      margin-bottom: 0.4rem;
+    }
+    .search-row .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -229,8 +322,11 @@ HTML_HEAD
 fi
 
 current_month=""
-while IFS=$'\t' read -r _epoch stamp summary url; do
+while IFS=$'\t' read -r _epoch stamp summary url tags; do
   [[ -z "$stamp" || -z "$summary" || -z "$url" ]] && continue
+  if [[ -z "${tags:-}" ]]; then
+    tags="$(extract_article_tags "$summary" "$url")"
+  fi
   month="${stamp:0:7}"
   if [[ "$month" != "$current_month" ]]; then
     current_month="$month"
@@ -243,6 +339,7 @@ while IFS=$'\t' read -r _epoch stamp summary url; do
   {
     echo "- $stamp - $summary"
     echo "  - <$url>"
+    echo "  - tags: ${tags//|/, }"
   } >> "$OUT_FILE"
 done < "$ARCHIVE_DATA"
 
@@ -369,11 +466,19 @@ done < "$ARCHIVE_DATA"
           <a href="./latest.md">Markdown</a>
         </div>
       </div>
+      <div class="search-row">
+        <input id="tag-query" type="text" list="tag-options" placeholder="Search tags (comma-separated, e.g. OpenAI, infrastructure, FTC)" />
+        <datalist id="tag-options"></datalist>
+        <div id="filter-hint" class="hint">Showing all archived articles.</div>
+      </div>
 HTML_HEAD
 
   current_month=""
-  while IFS=$'\t' read -r _epoch stamp summary url; do
+  while IFS=$'\t' read -r _epoch stamp summary url tags; do
     [[ -z "$stamp" || -z "$summary" || -z "$url" ]] && continue
+    if [[ -z "${tags:-}" ]]; then
+      tags="$(extract_article_tags "$summary" "$url")"
+    fi
     month="${stamp:0:7}"
     if [[ "$month" != "$current_month" ]]; then
       current_month="$month"
@@ -387,10 +492,21 @@ HTML_HEAD
     safe_summary="$(printf '%s' "$summary" | html_escape)"
     safe_url="$(printf '%s' "$url" | html_escape)"
     safe_domain="$(printf '%s' "$domain" | html_escape)"
+    safe_tags_attr="$(printf '%s' "$tags" | html_escape)"
     {
-      echo "      <div class=\"row\" data-entry=\"1\" data-month=\"$month\">"
+      echo "      <div class=\"row\" data-entry=\"1\" data-month=\"$month\" data-tags=\"$safe_tags_attr\">"
       echo "        <div class=\"ts\">$safe_stamp</div>"
-      echo "        <div class=\"label\">$safe_summary</div>"
+      echo "        <div class=\"label\">"
+      echo "          <div class=\"summary\">$safe_summary</div>"
+      echo "          <div class=\"tag-list\">"
+      IFS='|' read -r -a tag_items <<< "$tags"
+      for tag in "${tag_items[@]}"; do
+        [[ -z "$tag" ]] && continue
+        safe_tag="$(printf '%s' "$tag" | html_escape)"
+        echo "            <span class=\"tag\">$safe_tag</span>"
+      done
+      echo "          </div>"
+      echo "        </div>"
       echo "        <div class=\"actions\">"
       echo "          <span class=\"domain\">$safe_domain</span>"
       echo "          <a href=\"$safe_url\" target=\"_blank\" rel=\"noopener noreferrer\">Open source</a>"
@@ -413,22 +529,62 @@ HTML_HEAD
     (() => {
       const pageSize = 12;
       const entries = Array.from(document.querySelectorAll('.row[data-entry="1"]'));
-      if (entries.length <= pageSize) return;
-
       const pager = document.getElementById('pager');
       const meta = document.getElementById('pager-meta');
       const prev = document.getElementById('prev-page');
       const next = document.getElementById('next-page');
       const monthRows = Array.from(document.querySelectorAll('.month-row[data-month]'));
-      const totalPages = Math.ceil(entries.length / pageSize);
+      const queryInput = document.getElementById('tag-query');
+      const options = document.getElementById('tag-options');
+      const hint = document.getElementById('filter-hint');
+      const tagSet = new Set();
+      entries.forEach((row) => {
+        const tags = (row.getAttribute('data-tags') || '').split('|').map((t) => t.trim()).filter(Boolean);
+        tags.forEach((t) => tagSet.add(t));
+      });
+      Array.from(tagSet).sort((a, b) => a.localeCompare(b)).forEach((tag) => {
+        const opt = document.createElement('option');
+        opt.value = tag;
+        options.appendChild(opt);
+      });
+
       let page = 0;
+      let filtered = entries;
+
+      const parseQueryTags = () => {
+        return (queryInput.value || '')
+          .split(',')
+          .map((v) => v.trim().toLowerCase())
+          .filter(Boolean);
+      };
+
+      const applyFilter = () => {
+        const active = parseQueryTags();
+        if (active.length === 0) {
+          filtered = entries;
+          hint.textContent = 'Showing all archived articles.';
+          return;
+        }
+        filtered = entries.filter((row) => {
+          const rowTags = (row.getAttribute('data-tags') || '').toLowerCase().split('|');
+          return active.every((q) => rowTags.some((tag) => tag.includes(q)));
+        });
+        hint.textContent = `Filter active: ${active.join(', ')} • ${filtered.length} matches`;
+      };
 
       const render = () => {
+        applyFilter();
+        const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+        if (page >= totalPages) page = totalPages - 1;
         const start = page * pageSize;
         const end = start + pageSize;
         const visibleMonths = new Set();
 
-        entries.forEach((row, idx) => {
+        entries.forEach((row) => {
+          row.style.display = 'none';
+        });
+
+        filtered.forEach((row, idx) => {
           const show = idx >= start && idx < end;
           row.style.display = show ? '' : 'none';
           if (show) {
@@ -441,12 +597,12 @@ HTML_HEAD
           row.style.display = visibleMonths.has(month) ? '' : 'none';
         });
 
-        meta.textContent = `Page ${page + 1} of ${totalPages} • ${entries.length} archived articles`;
+        meta.textContent = `Page ${page + 1} of ${totalPages} • ${filtered.length} matching archived articles`;
         prev.disabled = page === 0;
         next.disabled = page >= totalPages - 1;
+        pager.classList.toggle('hidden', filtered.length <= pageSize);
       };
 
-      pager.classList.remove('hidden');
       prev.addEventListener('click', () => {
         if (page > 0) {
           page -= 1;
@@ -455,11 +611,16 @@ HTML_HEAD
         }
       });
       next.addEventListener('click', () => {
+        const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
         if (page < totalPages - 1) {
           page += 1;
           render();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+      });
+      queryInput.addEventListener('input', () => {
+        page = 0;
+        render();
       });
 
       render();

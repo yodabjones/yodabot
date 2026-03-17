@@ -1,6 +1,6 @@
 # Article Archive Index
 
-Generated: 2026-03-17 17:12:00Z
+Generated: 2026-03-17 17:47:25Z
 
 This index tracks previously reported article links and summaries in reverse chronological order.
 
@@ -11,65 +11,96 @@ This index tracks previously reported article links and summaries in reverse chr
 
 - Mar 17, 2026 1:08:16 EDT - Anthropic added $6B of ARR in February alone, driven by surging token demand and agentic workflow adoption. *(SemiAnalysis, 2026-03-12)*
   - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
+  - tags: Anthropic, ARR, February, newsletter, newsletter.semianalysis.com, semianalysis
 - Mar 17, 2026 1:08:16 EDT - Anthropic sued DeepSeek, Moonshot, and MiniMax, accusing the three Chinese AI firms of using ~24,000 fraudulent accounts to harvest training data. *(2026-02-23)*
   - <https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html>
+  - tags: AI, Anthropic, Chinese, Moonshot, nytimes, nytimes.com
 - Mar 17, 2026 1:08:16 EDT - ByteDance paused the global launch of Seedance 2.0, its video AI model, due to copyright disputes with Hollywood. *(2026-03-15)*
   - <https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/>
+  - tags: AI, Hollywood, model, Seedance, techcrunch, techcrunch.com
 - Mar 17, 2026 1:08:16 EDT - CoreWeave expanded its AI cloud with Nvidia B300 chips as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*
   - <https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo>
+  - tags: acquisition, AI, cloud, gpu, infrastructure, IPO, Nvidia, The Information, theinformation, theinformation.com, UNVERIFIED
 - Mar 17, 2026 1:08:16 EDT - DOGE used ChatGPT to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*
   - <https://www.nytimes.com/2026/03/07/arts/humanities-endowment-doge-trump.html>
+  - tags: AI, DOGE, NEH, nytimes, nytimes.com
 - Mar 17, 2026 1:08:16 EDT - Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*
   - <https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation>
+  - tags: AI, Anthropic, Ex, funding, The Information, theinformation, theinformation.com, UNVERIFIED
 - Mar 17, 2026 1:08:16 EDT - Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon to build capability benchmarks. *(2026-03-17)*
   - <https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/>
+  - tags: AGI, blog, blog.google, google, Google, Kaggle
 - Mar 17, 2026 1:08:16 EDT - Iran's Hormuz stranglehold is escalating energy prices and scrambling Trump's foreign policy — compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*
   - <https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html>
+  - tags: AI, Hormuz, infrastructure, Iran, nytimes, nytimes.com, Persian Gulf, policy, Trump
 - Mar 17, 2026 1:08:16 EDT - Jensen Huang opened Nvidia GTC 2026, framing Nvidia as defending the AI era it built. *(2026-03-16)*
   - <https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html>
+  - tags: AI, GTC, Jensen Huang, Nvidia, nytimes, nytimes.com
 - Mar 17, 2026 1:08:16 EDT - Kleiner Perkins and a16z led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*
   - <https://www.theinformation.com/briefings/kleiner-perkins-andreessen-horowitz-lead-investment-1-billion-neolab>
+  - tags: funding, Kleiner Perkins, Neolab, The Information, theinformation, theinformation.com, UNVERIFIED
 - Mar 17, 2026 1:08:16 EDT - Lawsuit filed against Rubio challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger social media/AI regulation. *(2026-03-09)*
   - <https://www.nytimes.com/2026/03/09/us/politics/lawsuit-rubio-social-media.html>
+  - tags: AI, cloud, Lawsuit, nytimes, nytimes.com, regulation, Rubio, State Dept
 - Mar 17, 2026 1:08:16 EDT - Meta delayed its flagship model ("Avocado") after performance concerns, despite billions spent to stay competitive. *(2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html>
+  - tags: Avocado, Meta, model, nytimes, nytimes.com
 - Mar 17, 2026 1:08:16 EDT - Microsoft + Meta fueling a near-$1T boom in global data center leases. [UNVERIFIED] *(AFR, 2026-03-13)*
   - <https://www.afr.com/technology/microsoft-meta-fuel-near-1trn-boom-in-data-centre-leases-20260313-p5oa2l>
+  - tags: afr, AFR, afr.com, infrastructure, Meta, Microsoft, UNVERIFIED
 - Mar 17, 2026 1:08:16 EDT - Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*
   - <https://www.nytimes.com/2026/03/11/business/dealbook/microsoft-anthropic-pentagon.html>
+  - tags: Anthropic, Microsoft, nytimes, nytimes.com, Pentagon
 - Mar 17, 2026 1:08:16 EDT - Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces local opposition over rising electric bills and harm to a nearby tribal reservation. *(2026-03-17)*
   - <https://www.nytimes.com/2026/03/17/nyregion/ai-data-center-new-york.html>
+  - tags: AI, Buffalo, infrastructure, NY, nytimes, nytimes.com, Rochester, Rural
 - Mar 17, 2026 1:08:16 EDT - Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*
   - <https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html>
+  - tags: AI, Anthropic, nytimes, nytimes.com, Pentagon, Trump
 - Mar 17, 2026 1:08:16 EDT - Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*
   - <https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html>
+  - tags: AI, Anthropic, nytimes, nytimes.com, Pentagon, Trump
 ## 2026-03
 
 - 2026-03-17T00-38-58Z - AI Daily Brief email lead: ByteDance reportedly paused global launch of Seedance 2.0 video generator, with matching secondary signal from TechCrunch.
   - <https://www.theinformation.com/articles/bytedance-suspends-launch-video-ai-model-copyright-disputes-hollywood>
+  - tags: AI, Daily Brief, Seedance, theinformation, theinformation.com
 - 2026-03-17T00-38-58Z - AI industry energy pledge: Google, Microsoft, and OpenAI committed to fund their own power plants and grid upgrades at a White House event. *(2026-03-04)*
   - <https://www.nytimes.com/2026/03/04/technology/ai-energy-pledge-white-house-trump.html>
+  - tags: AI, Google, infrastructure, Microsoft, nytimes, nytimes.com, White House
 - 2026-03-17T00-38-58Z - Google profits +30% to $34.5B last quarter; plans to increase capital spending to as much as $185B this year. *(2026-02-04)*
   - <https://www.nytimes.com/2026/02/04/business/google-earnings-ai.html>
+  - tags: Google, nytimes, nytimes.com
 - 2026-03-17T00-38-58Z - Iran threatened attacks on Amazon, Google, and other U.S. tech infrastructure in the Persian Gulf, putting trillions in regional AI investments at risk. *(2026-03-13)*
   - <https://www.nytimes.com/2026/03/13/technology/amazon-google-persian-gulf-war.html>
+  - tags: AI, Amazon, funding, Google, infrastructure, Iran, nytimes, nytimes.com, Persian Gulf
 - 2026-03-17T00-38-58Z - Microsoft Q2: $81.3B revenue, profit +60% — stock still dropped 7% after-hours on capex concerns. *(2026-01-28)*
   - <https://www.nytimes.com/2026/01/28/technology/microsoft-earnings-ai-expenditures.html>
+  - tags: Microsoft, nytimes, nytimes.com, revenue
 - 2026-03-17T00-38-58Z - Nscale raised $2B for AI data centers; Sheryl Sandberg joined its board. *(2026-03-09)*
   - <https://www.nytimes.com/2026/03/09/business/nscale-ai-data-center-boom.html>
+  - tags: AI, funding, infrastructure, Nscale, nytimes, nytimes.com, Sheryl Sandberg
 - 2026-03-17T00-38-58Z - Nvidia quarterly profit hit $43B; full fiscal year was $120B vs. $4.4B just three years ago. *(2026-02-25)*
   - <https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html>
+  - tags: Nvidia, nytimes, nytimes.com
 - 2026-03-17T00-38-58Z - OpenAI / Disney struck a deal to bring Disney characters into Sora-generated video — a watershed moment for Hollywood's AI reckoning. *(2025-12-11)*
   - <https://www.nytimes.com/2025/12/11/business/media/disney-openai-sora-deal.html>
+  - tags: AI, Disney, Hollywood, nytimes, nytimes.com, Sora
 - 2026-03-17T00-38-58Z - OpenAI closed $110B raise led by Amazon, Nvidia, and SoftBank at a $730B valuation. *(2026-02-27)*
   - <https://www.nytimes.com/2026/02/27/business/openai-funding.html>
+  - tags: Amazon, funding, Nvidia, nytimes, nytimes.com
 - 2026-03-17T00-38-58Z - OpenAI vs. Google: OpenAI released new tech claiming to top Google's latest, signaling a tougher competitive phase ahead. *(2025-12-11)*
   - <https://www.nytimes.com/2025/12/11/technology/openai-google-ai-technology-gap.html>
+  - tags: Google, model, nytimes, nytimes.com
 - 2026-03-14T16-07-16Z - AMD signed a chips-for-stock deal with Meta in a push to challenge Nvidia. *(2026-02-24)*
   - <https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html>
+  - tags: AMD, gpu, Meta, Nvidia, nytimes, nytimes.com
 - 2026-03-14T16-07-16Z - Anthropic resumed talks with the Pentagon and is reportedly working toward a resolution. *(2026-03-05)*
   - <https://www.nytimes.com/2026/03/05/business/dealbook/anthropic-pentagon-ai.html>
+  - tags: Anthropic, nytimes, nytimes.com, Pentagon
 - 2026-03-14T16-07-16Z - Cloverleaf Infrastructure is packaging land + electricity for data center buildouts — the modern "land rush" play. *(2026-03-05)*
   - <https://www.nytimes.com/2026/03/05/technology/ai-data-centers-land-cloverleaf-infrastructure.html>
+  - tags: Cloverleaf Infrastructure, infrastructure, nytimes, nytimes.com
 - 2026-03-14T16-07-16Z - Google acquired Intersect (data center + energy developer) for $4.75B to accelerate AI infra buildout. *(2025-12-22)*
   - <https://www.nytimes.com/2025/12/22/technology/google-intersect-data-centers.html>
+  - tags: acquisition, AI, Google, infrastructure, Intersect, nytimes, nytimes.com
