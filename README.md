@@ -21,8 +21,9 @@ It is designed to be simple, stable, and easy to browse in GitHub.
 
 ## What This Repo Contains
 
-- Timestamped AI report snapshots in [reports/ai](reports/ai)
 - A rolling latest report at [reports/ai/latest.md](reports/ai/latest.md)
+- A chronological article archive dataset at [reports/ai/article-archive.tsv](reports/ai/article-archive.tsv)
+- A browser archive page generated from article history at [reports/ai/index.html](reports/ai/index.html)
 - Operational docs for generation, delivery, and troubleshooting in [docs/README.md](docs/README.md)
 
 ## How To Read Reports
@@ -47,7 +48,7 @@ For operational details, see [docs/OPERATIONS.md](docs/OPERATIONS.md).
 ## For Web Ingestion
 
 Use [reports/ai/latest.md](reports/ai/latest.md) as the canonical current artifact.
-If needed, use timestamped files in [reports/ai](reports/ai) for history/backfill.
+Use [reports/ai/article-archive.tsv](reports/ai/article-archive.tsv) for historical links and summaries.
 
 ## Browser Preview
 
@@ -68,6 +69,6 @@ For navigation-first browsing in GitHub, use [docs/README.md](docs/README.md) an
 
 ## Roadmap
 
-- Add generated report index pages by month.
+- Add tags and filters to the article archive index.
 - Add metadata sidecar files for machine parsing.
 - Add automated docs validation checks.

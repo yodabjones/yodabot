@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - reports/ai/*.md
+      - reports/ai/article-archive.tsv
+      - scripts/build-archive-index.sh
   workflow_dispatch:
 
 permissions:
@@ -24,13 +26,13 @@ jobs:
 
       - name: Commit and push archive index
         run: |
-          if git diff --quiet -- docs/ARCHIVE.md; then
-            echo "No changes to docs/ARCHIVE.md"
+          if git diff --quiet -- docs/ARCHIVE.md reports/ai/index.html; then
+            echo "No archive index changes"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/ARCHIVE.md
-          git commit -m "chore(docs): update archive index"
+          git add docs/ARCHIVE.md reports/ai/index.html
+          git commit -m "chore(docs): update article archive index"
           git push

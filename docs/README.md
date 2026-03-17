@@ -11,7 +11,8 @@ Use this page as the starting point for operations and content policy.
 ## Content Entrypoints
 
 - Latest report: [../reports/ai/latest.md](../reports/ai/latest.md)
-- Report archive: [../reports/ai](../reports/ai)
+- Article archive page: [../reports/ai/index.html](../reports/ai/index.html)
+- Article archive data: [../reports/ai/article-archive.tsv](../reports/ai/article-archive.tsv)
 
 ## Intended Audience
 

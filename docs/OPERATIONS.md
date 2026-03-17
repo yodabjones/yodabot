@@ -10,8 +10,9 @@ This document describes how reports are delivered into this repository.
 
 ## GitHub Artifact Layout
 
-- Timestamped files: [../reports/ai](../reports/ai)
 - Canonical latest file: [../reports/ai/latest.md](../reports/ai/latest.md)
+- Chronological article archive data: [../reports/ai/article-archive.tsv](../reports/ai/article-archive.tsv)
+- Browser archive page: [../reports/ai/index.html](../reports/ai/index.html)
 
 ## Sender Scripts
 
