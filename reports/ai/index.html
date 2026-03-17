@@ -55,12 +55,22 @@
       padding: 0.3rem 0;
       overflow: hidden;
     }
+    .month-row {
+      padding: 0.45rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f6fbff;
+      color: #0d3c5a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
     .row {
       display: grid;
       grid-template-columns: minmax(180px, 280px) 1fr auto;
       gap: 0.8rem;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.62rem 1rem;
       border-top: 1px solid var(--line);
     }
     .row:first-child {
@@ -73,6 +83,42 @@
     }
     .label {
       color: var(--muted);
+    }
+    .summary {
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tag-list {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      border: 1px solid #c8d8e6;
+      background: #f4f9ff;
+      color: #36546b;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .search-row {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f9fcff;
+    }
+    .search-row input {
+      width: 100%;
+      border: 1px solid #c5dbef;
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font: inherit;
+      margin-bottom: 0.4rem;
+    }
+    .search-row .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -90,6 +136,48 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
+    .domain {
+      border: 1px solid #c2d8ea;
+      background: #f7fbff;
+      color: #33536a;
+      border-radius: 999px;
+      padding: 0.23rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      border-top: 1px solid var(--line);
+      padding: 0.65rem 1rem;
+      background: #f8fcff;
+    }
+    .pager.hidden { display: none; }
+    .pager .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pager .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pager button {
+      border: 1px solid #c5dbef;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+    }
+    .pager button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     @media (max-width: 720px) {
       .row {
         grid-template-columns: 1fr;
@@ -100,6 +188,10 @@
       }
       .ts {
         white-space: normal;
+      }
+      .pager {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -126,7 +218,7 @@
       </div>
       <div class="month-row" data-month="Mar 17,">Mar 17,</div>
       <div class="row" data-entry="1" data-article-id="a1" data-month="Mar 17," data-tags="Anthropic|ARR|February|newsletter|newsletter.semianalysis.com|semianalysis">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Anthropic added $6B of ARR in February alone. *(SemiAnalysis, 2026-03-12)*</div>
           <div class="tag-list">
@@ -144,7 +236,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a2" data-month="Mar 17," data-tags="AI|Anthropic|Chinese|Moonshot|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Anthropic sued DeepSeek, Moonshot, and MiniMax, accusing the three Chinese AI firms of using ~24,000 fraudulent accounts to harvest training data. *(2026-02-23)*</div>
           <div class="tag-list">
@@ -162,7 +254,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a3" data-month="Mar 17," data-tags="AI|Hollywood|model|Seedance|techcrunch|techcrunch.com">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">ByteDance paused the global launch of Seedance 2.0, its video AI model, due to copyright disputes with Hollywood. *(2026-03-15)*</div>
           <div class="tag-list">
@@ -180,7 +272,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a4" data-month="Mar 17," data-tags="acquisition|gpu|infrastructure|IPO|Nvidia|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">CoreWeave expanded with Nvidia B300 chips as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*</div>
           <div class="tag-list">
@@ -201,7 +293,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a5" data-month="Mar 17," data-tags="AI|DOGE|NEH|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">DOGE used ChatGPT to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*</div>
           <div class="tag-list">
@@ -218,7 +310,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a6" data-month="Mar 17," data-tags="AI|Anthropic|Ex|funding|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
           <div class="tag-list">
@@ -238,7 +330,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a7" data-month="Mar 17," data-tags="AGI|blog|blog.google|google|Google|Kaggle">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon to build capability benchmarks. *(2026-03-17)*</div>
           <div class="tag-list">
@@ -256,7 +348,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a8" data-month="Mar 17," data-tags="AI|Hormuz|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Iran's Hormuz stranglehold is escalating energy prices — compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*</div>
           <div class="tag-list">
@@ -275,7 +367,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a9" data-month="Mar 17," data-tags="funding|Kleiner Perkins|Neolab|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Kleiner Perkins and a16z led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
           <div class="tag-list">
@@ -294,7 +386,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a10" data-month="Mar 17," data-tags="AI|cloud|Lawsuit|nytimes|nytimes.com|regulation|Rubio|State Dept">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Lawsuit filed against Rubio challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger social media/AI regulation. *(2026-03-09)*</div>
           <div class="tag-list">
@@ -314,7 +406,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a11" data-month="Mar 17," data-tags="Avocado|Meta|model|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Meta delayed its flagship model (&quot;Avocado&quot;) after performance concerns, despite billions spent to stay competitive. *(2026-03-12)*</div>
           <div class="tag-list">
@@ -331,7 +423,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a12" data-month="Mar 17," data-tags="Anthropic|Microsoft|nytimes|nytimes.com|Pentagon">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*</div>
           <div class="tag-list">
@@ -348,7 +440,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a13" data-month="Mar 17," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|gpu|infrastructure|Moody|revenue">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Moody's: hyperscaler capex is snowballing toward $700B — but firms are pacing data center builds and chip orders to limit overbuild risk. *(DCK, 2026-03-17)*</div>
           <div class="tag-list">
@@ -367,7 +459,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a14" data-month="Mar 17," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|funding|gpu|GTC|infrastructure|Jensen Huang|Nvidia|revenue|Vera Rubin">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Nvidia raised its revenue outlook to $1T through 2027 at GTC, where Jensen Huang debuted Vera Rubin and laid out a path to orbital data centers. *(DCK, 2026-03-17)*</div>
           <div class="tag-list">
@@ -390,7 +482,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a15" data-month="Mar 17," data-tags="AI|Buffalo|infrastructure|NY|nytimes|nytimes.com|Rochester|Rural">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces opposition over electric bills and harm to a nearby tribal reservation. *(2026-03-17)*</div>
           <div class="tag-list">
@@ -410,7 +502,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a16" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
           <div class="tag-list">
@@ -428,7 +520,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a17" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
-        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="ts">Mar 17, 2026 2:32:32 EDT</div>
         <div class="label">
           <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
           <div class="tag-list">
