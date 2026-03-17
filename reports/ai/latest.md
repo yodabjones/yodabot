@@ -1,6 +1,6 @@
 # AI Intelligence Report
 
-**Timestamp:** Mar 17, 2026 1:11:48 EDT
+**Timestamp:** Mar 17, 2026 2:32:32 EDT
 **BLUF:** Jensen Huang unveiled Nvidia's Vera Rubin AI platform at GTC with a $1T revenue target by 2027 — as Moody's warns hyperscaler capex is snowballing toward $700B and Google DeepMind publishes a formal framework to measure progress toward AGI.
 
 ---

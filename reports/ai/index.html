@@ -55,12 +55,22 @@
       padding: 0.3rem 0;
       overflow: hidden;
     }
+    .month-row {
+      padding: 0.45rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f6fbff;
+      color: #0d3c5a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
     .row {
       display: grid;
       grid-template-columns: minmax(180px, 280px) 1fr auto;
       gap: 0.8rem;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.62rem 1rem;
       border-top: 1px solid var(--line);
     }
     .row:first-child {
@@ -73,6 +83,42 @@
     }
     .label {
       color: var(--muted);
+    }
+    .summary {
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tag-list {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      border: 1px solid #c8d8e6;
+      background: #f4f9ff;
+      color: #36546b;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .search-row {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f9fcff;
+    }
+    .search-row input {
+      width: 100%;
+      border: 1px solid #c5dbef;
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font: inherit;
+      margin-bottom: 0.4rem;
+    }
+    .search-row .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -90,6 +136,48 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
+    .domain {
+      border: 1px solid #c2d8ea;
+      background: #f7fbff;
+      color: #33536a;
+      border-radius: 999px;
+      padding: 0.23rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      border-top: 1px solid var(--line);
+      padding: 0.65rem 1rem;
+      background: #f8fcff;
+    }
+    .pager.hidden { display: none; }
+    .pager .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pager .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pager button {
+      border: 1px solid #c5dbef;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+    }
+    .pager button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     @media (max-width: 720px) {
       .row {
         grid-template-columns: 1fr;
@@ -100,6 +188,10 @@
       }
       .ts {
         white-space: normal;
+      }
+      .pager {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -126,9 +218,9 @@
       </div>
       <div class="month-row" data-month="Mar 17,">Mar 17,</div>
       <div class="row" data-entry="1" data-article-id="a1" data-month="Mar 17," data-tags="Anthropic|ARR|February|newsletter|newsletter.semianalysis.com|semianalysis">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
-          <div class="summary">Anthropic added $6B of ARR in February alone, driven by surging token demand and agentic workflow adoption. *(SemiAnalysis, 2026-03-12)*</div>
+          <div class="summary">Anthropic added $6B of ARR in February alone. *(SemiAnalysis, 2026-03-12)*</div>
           <div class="tag-list">
             <span class="tag">Anthropic</span>
             <span class="tag">ARR</span>
@@ -144,7 +236,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a2" data-month="Mar 17," data-tags="AI|Anthropic|Chinese|Moonshot|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Anthropic sued DeepSeek, Moonshot, and MiniMax, accusing the three Chinese AI firms of using ~24,000 fraudulent accounts to harvest training data. *(2026-02-23)*</div>
           <div class="tag-list">
@@ -162,7 +254,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a3" data-month="Mar 17," data-tags="AI|Hollywood|model|Seedance|techcrunch|techcrunch.com">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">ByteDance paused the global launch of Seedance 2.0, its video AI model, due to copyright disputes with Hollywood. *(2026-03-15)*</div>
           <div class="tag-list">
@@ -179,14 +271,12 @@
           <a href="https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a4" data-month="Mar 17," data-tags="acquisition|AI|cloud|gpu|infrastructure|IPO|Nvidia|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a4" data-month="Mar 17," data-tags="acquisition|gpu|infrastructure|IPO|Nvidia|The Information|theinformation|theinformation.com|UNVERIFIED">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
-          <div class="summary">CoreWeave expanded its AI cloud with Nvidia B300 chips as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*</div>
+          <div class="summary">CoreWeave expanded with Nvidia B300 chips as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*</div>
           <div class="tag-list">
             <span class="tag">acquisition</span>
-            <span class="tag">AI</span>
-            <span class="tag">cloud</span>
             <span class="tag">gpu</span>
             <span class="tag">infrastructure</span>
             <span class="tag">IPO</span>
@@ -203,7 +293,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a5" data-month="Mar 17," data-tags="AI|DOGE|NEH|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">DOGE used ChatGPT to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*</div>
           <div class="tag-list">
@@ -220,7 +310,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a6" data-month="Mar 17," data-tags="AI|Anthropic|Ex|funding|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
           <div class="tag-list">
@@ -240,7 +330,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a7" data-month="Mar 17," data-tags="AGI|blog|blog.google|google|Google|Kaggle">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon to build capability benchmarks. *(2026-03-17)*</div>
           <div class="tag-list">
@@ -257,10 +347,10 @@
           <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a8" data-month="Mar 17," data-tags="AI|Hormuz|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf|policy|Trump">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a8" data-month="Mar 17," data-tags="AI|Hormuz|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
-          <div class="summary">Iran's Hormuz stranglehold is escalating energy prices and scrambling Trump's foreign policy — compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*</div>
+          <div class="summary">Iran's Hormuz stranglehold is escalating energy prices — compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*</div>
           <div class="tag-list">
             <span class="tag">AI</span>
             <span class="tag">Hormuz</span>
@@ -269,8 +359,6 @@
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
             <span class="tag">Persian Gulf</span>
-            <span class="tag">policy</span>
-            <span class="tag">Trump</span>
           </div>
         </div>
         <div class="actions">
@@ -278,26 +366,8 @@
           <a href="https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a9" data-month="Mar 17," data-tags="AI|GTC|Jensen Huang|Nvidia|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
-        <div class="label">
-          <div class="summary">Jensen Huang opened Nvidia GTC 2026, framing Nvidia as defending the AI era it built. *(2026-03-16)*</div>
-          <div class="tag-list">
-            <span class="tag">AI</span>
-            <span class="tag">GTC</span>
-            <span class="tag">Jensen Huang</span>
-            <span class="tag">Nvidia</span>
-            <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com</span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="domain">nytimes.com</span>
-          <a href="https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html" target="_blank" rel="noopener noreferrer">Open source</a>
-        </div>
-      </div>
-      <div class="row" data-entry="1" data-article-id="a10" data-month="Mar 17," data-tags="funding|Kleiner Perkins|Neolab|The Information|theinformation|theinformation.com|UNVERIFIED">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a9" data-month="Mar 17," data-tags="funding|Kleiner Perkins|Neolab|The Information|theinformation|theinformation.com|UNVERIFIED">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Kleiner Perkins and a16z led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
           <div class="tag-list">
@@ -315,8 +385,8 @@
           <a href="https://www.theinformation.com/briefings/kleiner-perkins-andreessen-horowitz-lead-investment-1-billion-neolab" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a11" data-month="Mar 17," data-tags="AI|cloud|Lawsuit|nytimes|nytimes.com|regulation|Rubio|State Dept">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a10" data-month="Mar 17," data-tags="AI|cloud|Lawsuit|nytimes|nytimes.com|regulation|Rubio|State Dept">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Lawsuit filed against Rubio challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger social media/AI regulation. *(2026-03-09)*</div>
           <div class="tag-list">
@@ -335,8 +405,8 @@
           <a href="https://www.nytimes.com/2026/03/09/us/politics/lawsuit-rubio-social-media.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a12" data-month="Mar 17," data-tags="Avocado|Meta|model|nytimes|nytimes.com">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a11" data-month="Mar 17," data-tags="Avocado|Meta|model|nytimes|nytimes.com">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
         <div class="label">
           <div class="summary">Meta delayed its flagship model (&quot;Avocado&quot;) after performance concerns, despite billions spent to stay competitive. *(2026-03-12)*</div>
           <div class="tag-list">
@@ -352,7 +422,140 @@
           <a href="https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a13" data-month="Mar 17," data-tags="afr|AFR|afr.com|infrastructure|Meta|Microsoft|UNVERIFIED">
+      <div class="row" data-entry="1" data-article-id="a12" data-month="Mar 17," data-tags="Anthropic|Microsoft|nytimes|nytimes.com|Pentagon">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*</div>
+          <div class="tag-list">
+            <span class="tag">Anthropic</span>
+            <span class="tag">Microsoft</span>
+            <span class="tag">nytimes</span>
+            <span class="tag">nytimes.com</span>
+            <span class="tag">Pentagon</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">nytimes.com</span>
+          <a href="https://www.nytimes.com/2026/03/11/business/dealbook/microsoft-anthropic-pentagon.html" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a13" data-month="Mar 17," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|gpu|infrastructure|Moody|revenue">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Moody's: hyperscaler capex is snowballing toward $700B — but firms are pacing data center builds and chip orders to limit overbuild risk. *(DCK, 2026-03-17)*</div>
+          <div class="tag-list">
+            <span class="tag">datacenterknowledge</span>
+            <span class="tag">datacenterknowledge.com</span>
+            <span class="tag">DCK</span>
+            <span class="tag">gpu</span>
+            <span class="tag">infrastructure</span>
+            <span class="tag">Moody</span>
+            <span class="tag">revenue</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">datacenterknowledge.com</span>
+          <a href="https://www.datacenterknowledge.com/hyperscalers/hyperscaler-capex-snowballs-toward-700b-as-firms-stage-ai-capacity-builds" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a14" data-month="Mar 17," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|funding|gpu|GTC|infrastructure|Jensen Huang|Nvidia|revenue|Vera Rubin">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Nvidia raised its revenue outlook to $1T through 2027 at GTC, where Jensen Huang debuted Vera Rubin and laid out a path to orbital data centers. *(DCK, 2026-03-17)*</div>
+          <div class="tag-list">
+            <span class="tag">datacenterknowledge</span>
+            <span class="tag">datacenterknowledge.com</span>
+            <span class="tag">DCK</span>
+            <span class="tag">funding</span>
+            <span class="tag">gpu</span>
+            <span class="tag">GTC</span>
+            <span class="tag">infrastructure</span>
+            <span class="tag">Jensen Huang</span>
+            <span class="tag">Nvidia</span>
+            <span class="tag">revenue</span>
+            <span class="tag">Vera Rubin</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">datacenterknowledge.com</span>
+          <a href="https://www.datacenterknowledge.com/data-center-chips/gtc-2026-nvidia-unveils-vera-rubin-ai-platform-eyes-1t-by-2027" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a15" data-month="Mar 17," data-tags="AI|Buffalo|infrastructure|NY|nytimes|nytimes.com|Rochester|Rural">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces opposition over electric bills and harm to a nearby tribal reservation. *(2026-03-17)*</div>
+          <div class="tag-list">
+            <span class="tag">AI</span>
+            <span class="tag">Buffalo</span>
+            <span class="tag">infrastructure</span>
+            <span class="tag">NY</span>
+            <span class="tag">nytimes</span>
+            <span class="tag">nytimes.com</span>
+            <span class="tag">Rochester</span>
+            <span class="tag">Rural</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">nytimes.com</span>
+          <a href="https://www.nytimes.com/2026/03/17/nyregion/ai-data-center-new-york.html" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a16" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
+          <div class="tag-list">
+            <span class="tag">AI</span>
+            <span class="tag">Anthropic</span>
+            <span class="tag">nytimes</span>
+            <span class="tag">nytimes.com</span>
+            <span class="tag">Pentagon</span>
+            <span class="tag">Trump</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">nytimes.com</span>
+          <a href="https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a17" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
+        <div class="ts">Mar 17, 2026 1:11:48 EDT</div>
+        <div class="label">
+          <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
+          <div class="tag-list">
+            <span class="tag">AI</span>
+            <span class="tag">Anthropic</span>
+            <span class="tag">nytimes</span>
+            <span class="tag">nytimes.com</span>
+            <span class="tag">Pentagon</span>
+            <span class="tag">Trump</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">nytimes.com</span>
+          <a href="https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a18" data-month="Mar 17," data-tags="AI|GTC|Jensen Huang|Nvidia|nytimes|nytimes.com">
+        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
+        <div class="label">
+          <div class="summary">Jensen Huang opened Nvidia GTC 2026, framing Nvidia as defending the AI era it built. *(2026-03-16)*</div>
+          <div class="tag-list">
+            <span class="tag">AI</span>
+            <span class="tag">GTC</span>
+            <span class="tag">Jensen Huang</span>
+            <span class="tag">Nvidia</span>
+            <span class="tag">nytimes</span>
+            <span class="tag">nytimes.com</span>
+          </div>
+        </div>
+        <div class="actions">
+          <span class="domain">nytimes.com</span>
+          <a href="https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html" target="_blank" rel="noopener noreferrer">Open source</a>
+        </div>
+      </div>
+      <div class="row" data-entry="1" data-article-id="a19" data-month="Mar 17," data-tags="afr|AFR|afr.com|infrastructure|Meta|Microsoft|UNVERIFIED">
         <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
         <div class="label">
           <div class="summary">Microsoft + Meta fueling a near-$1T boom in global data center leases. [UNVERIFIED] *(AFR, 2026-03-13)*</div>
@@ -371,81 +574,8 @@
           <a href="https://www.afr.com/technology/microsoft-meta-fuel-near-1trn-boom-in-data-centre-leases-20260313-p5oa2l" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a14" data-month="Mar 17," data-tags="Anthropic|Microsoft|nytimes|nytimes.com|Pentagon">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
-        <div class="label">
-          <div class="summary">Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*</div>
-          <div class="tag-list">
-            <span class="tag">Anthropic</span>
-            <span class="tag">Microsoft</span>
-            <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com</span>
-            <span class="tag">Pentagon</span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="domain">nytimes.com</span>
-          <a href="https://www.nytimes.com/2026/03/11/business/dealbook/microsoft-anthropic-pentagon.html" target="_blank" rel="noopener noreferrer">Open source</a>
-        </div>
-      </div>
-      <div class="row" data-entry="1" data-article-id="a15" data-month="Mar 17," data-tags="AI|Buffalo|infrastructure|NY|nytimes|nytimes.com|Rochester|Rural">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
-        <div class="label">
-          <div class="summary">Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces local opposition over rising electric bills and harm to a nearby tribal reservation. *(2026-03-17)*</div>
-          <div class="tag-list">
-            <span class="tag">AI</span>
-            <span class="tag">Buffalo</span>
-            <span class="tag">infrastructure</span>
-            <span class="tag">NY</span>
-            <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com</span>
-            <span class="tag">Rochester</span>
-            <span class="tag">Rural</span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="domain">nytimes.com</span>
-          <a href="https://www.nytimes.com/2026/03/17/nyregion/ai-data-center-new-york.html" target="_blank" rel="noopener noreferrer">Open source</a>
-        </div>
-      </div>
-      <div class="row" data-entry="1" data-article-id="a16" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
-        <div class="label">
-          <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
-          <div class="tag-list">
-            <span class="tag">AI</span>
-            <span class="tag">Anthropic</span>
-            <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com</span>
-            <span class="tag">Pentagon</span>
-            <span class="tag">Trump</span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="domain">nytimes.com</span>
-          <a href="https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
-        </div>
-      </div>
-      <div class="row" data-entry="1" data-article-id="a17" data-month="Mar 17," data-tags="AI|Anthropic|nytimes|nytimes.com|Pentagon|Trump">
-        <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
-        <div class="label">
-          <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
-          <div class="tag-list">
-            <span class="tag">AI</span>
-            <span class="tag">Anthropic</span>
-            <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com</span>
-            <span class="tag">Pentagon</span>
-            <span class="tag">Trump</span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="domain">nytimes.com</span>
-          <a href="https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
-        </div>
-      </div>
       <div class="month-row" data-month="2026-03">2026-03</div>
-      <div class="row" data-entry="1" data-article-id="a18" data-month="2026-03" data-tags="AI|Daily Brief|Seedance|theinformation|theinformation.com">
+      <div class="row" data-entry="1" data-article-id="a20" data-month="2026-03" data-tags="AI|Daily Brief|Seedance|theinformation|theinformation.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">AI Daily Brief email lead: ByteDance reportedly paused global launch of Seedance 2.0 video generator, with matching secondary signal from TechCrunch.</div>
@@ -462,7 +592,7 @@
           <a href="https://www.theinformation.com/articles/bytedance-suspends-launch-video-ai-model-copyright-disputes-hollywood" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a19" data-month="2026-03" data-tags="AI|Google|infrastructure|Microsoft|nytimes|nytimes.com|White House">
+      <div class="row" data-entry="1" data-article-id="a21" data-month="2026-03" data-tags="AI|Google|infrastructure|Microsoft|nytimes|nytimes.com|White House">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">AI industry energy pledge: Google, Microsoft, and OpenAI committed to fund their own power plants and grid upgrades at a White House event. *(2026-03-04)*</div>
@@ -481,7 +611,7 @@
           <a href="https://www.nytimes.com/2026/03/04/technology/ai-energy-pledge-white-house-trump.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a20" data-month="2026-03" data-tags="Google|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a22" data-month="2026-03" data-tags="Google|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Google profits +30% to $34.5B last quarter; plans to increase capital spending to as much as $185B this year. *(2026-02-04)*</div>
@@ -496,7 +626,7 @@
           <a href="https://www.nytimes.com/2026/02/04/business/google-earnings-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a21" data-month="2026-03" data-tags="AI|Amazon|funding|Google|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf">
+      <div class="row" data-entry="1" data-article-id="a23" data-month="2026-03" data-tags="AI|Amazon|funding|Google|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Iran threatened attacks on Amazon, Google, and other U.S. tech infrastructure in the Persian Gulf, putting trillions in regional AI investments at risk. *(2026-03-13)*</div>
@@ -517,7 +647,7 @@
           <a href="https://www.nytimes.com/2026/03/13/technology/amazon-google-persian-gulf-war.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a22" data-month="2026-03" data-tags="Microsoft|nytimes|nytimes.com|revenue">
+      <div class="row" data-entry="1" data-article-id="a24" data-month="2026-03" data-tags="Microsoft|nytimes|nytimes.com|revenue">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Microsoft Q2: $81.3B revenue, profit +60% — stock still dropped 7% after-hours on capex concerns. *(2026-01-28)*</div>
@@ -533,7 +663,7 @@
           <a href="https://www.nytimes.com/2026/01/28/technology/microsoft-earnings-ai-expenditures.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a23" data-month="2026-03" data-tags="AI|funding|infrastructure|Nscale|nytimes|nytimes.com|Sheryl Sandberg">
+      <div class="row" data-entry="1" data-article-id="a25" data-month="2026-03" data-tags="AI|funding|infrastructure|Nscale|nytimes|nytimes.com|Sheryl Sandberg">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Nscale raised $2B for AI data centers; Sheryl Sandberg joined its board. *(2026-03-09)*</div>
@@ -552,7 +682,7 @@
           <a href="https://www.nytimes.com/2026/03/09/business/nscale-ai-data-center-boom.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a24" data-month="2026-03" data-tags="Nvidia|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a26" data-month="2026-03" data-tags="Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Nvidia quarterly profit hit $43B; full fiscal year was $120B vs. $4.4B just three years ago. *(2026-02-25)*</div>
@@ -567,7 +697,7 @@
           <a href="https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a25" data-month="2026-03" data-tags="AI|Disney|Hollywood|nytimes|nytimes.com|Sora">
+      <div class="row" data-entry="1" data-article-id="a27" data-month="2026-03" data-tags="AI|Disney|Hollywood|nytimes|nytimes.com|Sora">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI / Disney struck a deal to bring Disney characters into Sora-generated video — a watershed moment for Hollywood's AI reckoning. *(2025-12-11)*</div>
@@ -585,7 +715,7 @@
           <a href="https://www.nytimes.com/2025/12/11/business/media/disney-openai-sora-deal.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a26" data-month="2026-03" data-tags="Amazon|funding|Nvidia|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a28" data-month="2026-03" data-tags="Amazon|funding|Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI closed $110B raise led by Amazon, Nvidia, and SoftBank at a $730B valuation. *(2026-02-27)*</div>
@@ -602,7 +732,7 @@
           <a href="https://www.nytimes.com/2026/02/27/business/openai-funding.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a27" data-month="2026-03" data-tags="Google|model|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a29" data-month="2026-03" data-tags="Google|model|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI vs. Google: OpenAI released new tech claiming to top Google's latest, signaling a tougher competitive phase ahead. *(2025-12-11)*</div>
@@ -618,7 +748,7 @@
           <a href="https://www.nytimes.com/2025/12/11/technology/openai-google-ai-technology-gap.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a28" data-month="2026-03" data-tags="AMD|gpu|Meta|Nvidia|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a30" data-month="2026-03" data-tags="AMD|gpu|Meta|Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">AMD signed a chips-for-stock deal with Meta in a push to challenge Nvidia. *(2026-02-24)*</div>
@@ -636,7 +766,7 @@
           <a href="https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a29" data-month="2026-03" data-tags="Anthropic|nytimes|nytimes.com|Pentagon">
+      <div class="row" data-entry="1" data-article-id="a31" data-month="2026-03" data-tags="Anthropic|nytimes|nytimes.com|Pentagon">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Anthropic resumed talks with the Pentagon and is reportedly working toward a resolution. *(2026-03-05)*</div>
@@ -652,7 +782,7 @@
           <a href="https://www.nytimes.com/2026/03/05/business/dealbook/anthropic-pentagon-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a30" data-month="2026-03" data-tags="Cloverleaf Infrastructure|infrastructure|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a32" data-month="2026-03" data-tags="Cloverleaf Infrastructure|infrastructure|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Cloverleaf Infrastructure is packaging land + electricity for data center buildouts — the modern &quot;land rush&quot; play. *(2026-03-05)*</div>
@@ -668,7 +798,7 @@
           <a href="https://www.nytimes.com/2026/03/05/technology/ai-data-centers-land-cloverleaf-infrastructure.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a31" data-month="2026-03" data-tags="acquisition|AI|Google|infrastructure|Intersect|nytimes|nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a33" data-month="2026-03" data-tags="acquisition|AI|Google|infrastructure|Intersect|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Google acquired Intersect (data center + energy developer) for $4.75B to accelerate AI infra buildout. *(2025-12-22)*</div>
