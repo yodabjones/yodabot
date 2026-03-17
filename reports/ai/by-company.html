@@ -186,7 +186,7 @@
           if (!line.startsWith("- ")) continue;
 
           const text = line.replace(/^-\s+/, "").trim();
-          if (/^Generated \(UTC\):/i.test(text) || /^Mode:/i.test(text) || /^Tavily used:/i.test(text) || /^Notes:/i.test(text)) {
+          if (/^Generated \(UTC\):/i.test(text) || /^Mode:/i.test(text) || /^Notes:/i.test(text)) {
             continue;
           }
 
