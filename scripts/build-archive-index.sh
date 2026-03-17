@@ -6,6 +6,7 @@ REPORT_DIR="$ROOT_DIR/reports/ai"
 OUT_FILE="$ROOT_DIR/docs/ARCHIVE.md"
 OUT_HTML="$ROOT_DIR/reports/ai/index.html"
 ARCHIVE_DATA="$ROOT_DIR/reports/ai/article-archive.tsv"
+OUT_TAG_INDEX="$ROOT_DIR/reports/ai/tag-index.json"
 
 mkdir -p "$ROOT_DIR/docs"
 
@@ -70,6 +71,97 @@ process.stdout.write(Array.from(tags).sort((a, b) => a.localeCompare(b)).join("|
 NODE
 }
 
+build_tag_index_json() {
+  local archive_tsv="$1"
+  local out_json="$2"
+
+  node - "$archive_tsv" "$out_json" <<'NODE'
+const fs = require("fs");
+
+const archivePath = process.argv[2];
+const outPath = process.argv[3];
+
+function extractArticleTags(summary, url) {
+  const tags = new Set();
+  const add = (value) => {
+    const v = (value || "").replace(/\s+/g, " ").trim();
+    if (!v) return;
+    if (v.length < 2 || v.length > 48) return;
+    tags.add(v);
+  };
+
+  const lower = (summary || "").toLowerCase();
+  const topicMap = [
+    ["infrastructure", ["infrastructure", "data center", "datacenter", "power", "grid", "cooling", "facility"]],
+    ["model", ["model", "release", "llm", "foundation model", "reasoning"]],
+    ["revenue", ["revenue", "earnings", "qoq", "guidance", "capex", "contract"]],
+    ["regulation", ["regulation", "regulatory", "doj", "ftc", "eu", "cma", "lawsuit"]],
+    ["policy", ["policy", "export control", "antitrust", "compliance"]],
+    ["gpu", ["gpu", "chip", "accelerator", "cuda", "h100", "b200", "rubin"]],
+    ["cloud", ["cloud", "azure", "aws", "gcp", "hosting"]],
+    ["funding", ["funding", "raise", "valuation", "series", "investment"]],
+    ["acquisition", ["acquire", "acquisition", "merger", "m&a"]],
+  ];
+
+  for (const [topic, keys] of topicMap) {
+    if (keys.some((k) => lower.includes(k))) add(topic);
+  }
+
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    add(host);
+    for (const part of host.split(".")) {
+      if (part && !["com", "org", "net", "co", "io", "ai", "gov"].includes(part)) add(part);
+    }
+  } catch {}
+
+  for (const m of (summary || "").matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) add(m[0]);
+
+  const stop = new Set(["The", "A", "An", "And", "Or", "For", "With", "From", "In", "On", "At", "By", "To", "Of", "Latest", "Report", "Open", "Source"]);
+  for (const m of (summary || "").matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\b/g)) {
+    const phrase = m[1].trim();
+    const parts = phrase.split(/\s+/);
+    if (parts.every((p) => stop.has(p))) continue;
+    add(phrase);
+  }
+
+  return Array.from(tags).sort((a, b) => a.localeCompare(b));
+}
+
+const lines = fs.existsSync(archivePath) ? fs.readFileSync(archivePath, "utf8").split(/\r?\n/).filter(Boolean) : [];
+const articles = [];
+const tagToArticleIds = {};
+
+for (let i = 0; i < lines.length; i += 1) {
+  const cols = lines[i].split("\t");
+  if (cols.length < 4) continue;
+
+  const [epoch, stamp, summary, url] = cols;
+  const tagsRaw = cols.slice(4).join("\t");
+  const tags = tagsRaw ? tagsRaw.split("|").map((t) => t.trim()).filter(Boolean) : extractArticleTags(summary, url);
+  const id = `a${i + 1}`;
+
+  articles.push({ id, epoch: Number(epoch) || 0, stamp, summary, url, tags });
+  for (const tag of tags) {
+    if (!tagToArticleIds[tag]) tagToArticleIds[tag] = [];
+    tagToArticleIds[tag].push(id);
+  }
+}
+
+const orderedTagMap = Object.fromEntries(Object.entries(tagToArticleIds).sort((a, b) => a[0].localeCompare(b[0])));
+const payload = {
+  version: 1,
+  generatedAt: new Date().toISOString(),
+  articleCount: articles.length,
+  tagCount: Object.keys(orderedTagMap).length,
+  articles,
+  tagToArticleIds: orderedTagMap,
+};
+
+fs.writeFileSync(outPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+NODE
+}
+
 {
   echo "# Article Archive Index"
   echo
@@ -83,6 +175,17 @@ NODE
 } > "$OUT_FILE"
 
 if [[ ! -s "$ARCHIVE_DATA" ]]; then
+  cat > "$OUT_TAG_INDEX" <<'JSON'
+{
+  "version": 1,
+  "generatedAt": "",
+  "articleCount": 0,
+  "tagCount": 0,
+  "articles": [],
+  "tagToArticleIds": {}
+}
+JSON
+
   {
     echo "## No Archived Articles"
     echo
@@ -318,8 +421,11 @@ HTML_HEAD
 
   echo "Wrote $OUT_FILE"
   echo "Wrote $OUT_HTML"
+  echo "Wrote $OUT_TAG_INDEX"
   exit 0
 fi
+
+build_tag_index_json "$ARCHIVE_DATA" "$OUT_TAG_INDEX"
 
 current_month=""
 while IFS=$'\t' read -r _epoch stamp summary url tags; do
@@ -474,8 +580,11 @@ done < "$ARCHIVE_DATA"
 HTML_HEAD
 
   current_month=""
+  article_id_counter=0
   while IFS=$'\t' read -r _epoch stamp summary url tags; do
     [[ -z "$stamp" || -z "$summary" || -z "$url" ]] && continue
+    article_id_counter=$((article_id_counter + 1))
+    article_id="a${article_id_counter}"
     if [[ -z "${tags:-}" ]]; then
       tags="$(extract_article_tags "$summary" "$url")"
     fi
@@ -494,7 +603,7 @@ HTML_HEAD
     safe_domain="$(printf '%s' "$domain" | html_escape)"
     safe_tags_attr="$(printf '%s' "$tags" | html_escape)"
     {
-      echo "      <div class=\"row\" data-entry=\"1\" data-month=\"$month\" data-tags=\"$safe_tags_attr\">"
+      echo "      <div class=\"row\" data-entry=\"1\" data-article-id=\"$article_id\" data-month=\"$month\" data-tags=\"$safe_tags_attr\">"
       echo "        <div class=\"ts\">$safe_stamp</div>"
       echo "        <div class=\"label\">"
       echo "          <div class=\"summary\">$safe_summary</div>"
@@ -537,16 +646,36 @@ HTML_HEAD
       const queryInput = document.getElementById('tag-query');
       const options = document.getElementById('tag-options');
       const hint = document.getElementById('filter-hint');
-      const tagSet = new Set();
+      const entryById = new Map(entries.map((row) => [row.getAttribute('data-article-id'), row]));
+      let indexMap = null;
+
+      const hydrateTagOptions = (tags) => {
+        options.innerHTML = '';
+        tags.forEach((tag) => {
+          const opt = document.createElement('option');
+          opt.value = tag;
+          options.appendChild(opt);
+        });
+      };
+
+      const localTags = new Set();
       entries.forEach((row) => {
         const tags = (row.getAttribute('data-tags') || '').split('|').map((t) => t.trim()).filter(Boolean);
-        tags.forEach((t) => tagSet.add(t));
+        tags.forEach((t) => localTags.add(t));
       });
-      Array.from(tagSet).sort((a, b) => a.localeCompare(b)).forEach((tag) => {
-        const opt = document.createElement('option');
-        opt.value = tag;
-        options.appendChild(opt);
-      });
+      hydrateTagOptions(Array.from(localTags).sort((a, b) => a.localeCompare(b)));
+
+      fetch('./tag-index.json', { cache: 'no-cache' })
+        .then((resp) => (resp.ok ? resp.json() : null))
+        .then((data) => {
+          if (!data || !data.tagToArticleIds) return;
+          indexMap = data.tagToArticleIds;
+          hydrateTagOptions(Object.keys(indexMap).sort((a, b) => a.localeCompare(b)));
+          render();
+        })
+        .catch(() => {
+          // Keep local fallback behavior when index is unavailable.
+        });
 
       let page = 0;
       let filtered = entries;
@@ -565,10 +694,34 @@ HTML_HEAD
           hint.textContent = 'Showing all archived articles.';
           return;
         }
-        filtered = entries.filter((row) => {
-          const rowTags = (row.getAttribute('data-tags') || '').toLowerCase().split('|');
-          return active.every((q) => rowTags.some((tag) => tag.includes(q)));
-        });
+
+        if (indexMap) {
+          const tagEntries = Object.entries(indexMap);
+          let candidateIds = null;
+
+          active.forEach((query) => {
+            const idsForQuery = new Set();
+            tagEntries.forEach(([tag, ids]) => {
+              if (tag.toLowerCase().includes(query)) {
+                ids.forEach((id) => idsForQuery.add(id));
+              }
+            });
+            if (candidateIds === null) {
+              candidateIds = idsForQuery;
+            } else {
+              candidateIds = new Set(Array.from(candidateIds).filter((id) => idsForQuery.has(id)));
+            }
+          });
+
+          const idSet = candidateIds || new Set();
+          filtered = entries.filter((row) => idSet.has(row.getAttribute('data-article-id')));
+        } else {
+          filtered = entries.filter((row) => {
+            const rowTags = (row.getAttribute('data-tags') || '').toLowerCase().split('|');
+            return active.every((q) => rowTags.some((tag) => tag.includes(q)));
+          });
+        }
+
         hint.textContent = `Filter active: ${active.join(', ')} • ${filtered.length} matches`;
       };
 
@@ -633,3 +786,4 @@ HTML_FOOT
 
 echo "Wrote $OUT_FILE"
 echo "Wrote $OUT_HTML"
+echo "Wrote $OUT_TAG_INDEX"
