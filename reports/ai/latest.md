@@ -1,18 +1,19 @@
 # AI Intelligence Report
 
-**Timestamp:** Mar 16, 2026 8:38:57 EDT
-**BLUF:** Anthropic hit $6B ARR in a single month and sued three Chinese AI firms for IP theft — all while Jensen Huang opened GTC to defend Nvidia's empire against a worsening global silicon shortage.
+**Timestamp:** Mar 17, 2026 1:08:16 EDT
+**BLUF:** Google DeepMind published a formal framework to measure progress toward AGI today while the AI infrastructure boom faces fresh local resistance, intensifying Iran-Hormuz risk, and a growing legal fight over U.S. threats to foreign tech regulators.
 
 ---
 
 ## 🤖 Model Releases
 
+- **Google DeepMind** published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon to build capability benchmarks. *(2026-03-17)*
+  - <https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/>
+- **ByteDance paused the global launch of Seedance 2.0**, its video AI model, due to copyright disputes with Hollywood. *(2026-03-15)*
+  - <https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/>
 - **Meta** delayed its flagship model ("Avocado") after performance concerns, despite billions spent to stay competitive. *(2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html>
-- **OpenAI vs. Google:** OpenAI released new tech claiming to top Google's latest, signaling a tougher competitive phase ahead. *(2025-12-11)*
-  - <https://www.nytimes.com/2025/12/11/technology/openai-google-ai-technology-gap.html>
-- **OpenAI / Disney** struck a deal to bring Disney characters into Sora-generated video — a watershed moment for Hollywood's AI reckoning. *(2025-12-11)*
-  - <https://www.nytimes.com/2025/12/11/business/media/disney-openai-sora-deal.html>
+- **OpenAI** and **Anthropic** official feeds returned no parseable items this cycle. [UNVERIFIED]
 
 ---
 
@@ -20,22 +21,21 @@
 
 | Company | Metric | Period |
 |---------|--------|--------|
+| **Meta + Nebius** | $27B Nvidia Vera Rubin deal | Mar 2026 |
 | **Anthropic** | +$6B ARR in February alone | Feb 2026 |
 | **Nvidia** | $43B quarterly profit / $120B FY | Q4 FY2026 |
 | **Microsoft** | $81.3B revenue, profit +60% | Q2 FY2026 |
 | **Google** | $34.5B profit (+30%), CapEx up to $185B | Q4 FY2025 |
 | **OpenAI** | Raised $110B at $730B valuation | Feb 2026 |
 
-- **Anthropic** added a staggering **$6B of ARR in February alone**, driven by surging token demand and rapid adoption of agentic workflows. *(SemiAnalysis, 2026-03-12)*
+- **Meta and Nebius signed a $27B deal** to power Nvidia Vera Rubin deployments — one of the largest AI hardware commitments on record. *(Data Center Knowledge, 2026-03-17)*
+- **Kleiner Perkins and a16z** led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*
+  - <https://www.theinformation.com/briefings/kleiner-perkins-andreessen-horowitz-lead-investment-1-billion-neolab>
+- **Ex-Anthropic researchers** in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*
+  - <https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation>
+- **Anthropic** added $6B of ARR in February alone, driven by surging token demand and agentic workflow adoption. *(SemiAnalysis, 2026-03-12)*
   - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
-- **Nvidia** quarterly profit hit $43B; full fiscal year was $120B vs. $4.4B just three years ago. *(2026-02-25)*
-  - <https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html>
-- **OpenAI** closed $110B raise led by Amazon, Nvidia, and SoftBank at a $730B valuation. *(2026-02-27)*
-  - <https://www.nytimes.com/2026/02/27/business/openai-funding.html>
-- **Microsoft** Q2: $81.3B revenue, profit +60% — stock still dropped 7% after-hours on capex concerns. *(2026-01-28)*
-  - <https://www.nytimes.com/2026/01/28/technology/microsoft-earnings-ai-expenditures.html>
-- **Google** profits +30% to $34.5B last quarter; plans to increase capital spending to as much as $185B this year. *(2026-02-04)*
-  - <https://www.nytimes.com/2026/02/04/business/google-earnings-ai.html>
+- **SEC/IR filings** (Microsoft, Alphabet, Meta, Nvidia) flagged for manual review — no automated extraction this cycle. [UNVERIFIED]
 
 ---
 
@@ -43,10 +43,11 @@
 
 - **Anthropic sued DeepSeek, Moonshot, and MiniMax**, accusing the three Chinese AI firms of using ~24,000 fraudulent accounts to harvest training data. *(2026-02-23)*
   - <https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html>
-- **Trump banned Anthropic** from federal use after a Pentagon standoff over AI safety guardrails — complicating intelligence and defense work. *(2026-02-27)*
+- **Trump banned Anthropic** from federal use after a Pentagon standoff over AI safety guardrails; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*
   - <https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html>
-- **OpenAI filled the gap** hours later, reaching a separate AI agreement with the Defense Department. *(2026-02-28)*
   - <https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html>
+- **Lawsuit filed against Rubio** challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger social media/AI regulation. *(2026-03-09)*
+  - <https://www.nytimes.com/2026/03/09/us/politics/lawsuit-rubio-social-media.html>
 - **Microsoft publicly sided with Anthropic** against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*
   - <https://www.nytimes.com/2026/03/11/business/dealbook/microsoft-anthropic-pentagon.html>
 - **DOGE used ChatGPT** to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*
@@ -56,28 +57,20 @@
 
 ## 🏗️ Infrastructure
 
-- **Global AI silicon shortage deepening:** TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks are compressing supply chains — SemiAnalysis names winners and losers. *(2026-03-12)*
-  - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
-- **Jensen Huang opened Nvidia GTC 2026**, leaning on technology from a recent acquisition to demonstrate AI's next phase — framed as Nvidia defending the era it built. *(2026-03-16)*
-  - <https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html>
-- **Iran threatened attacks** on Amazon, Google, and other U.S. tech infrastructure in the Persian Gulf, putting trillions in regional AI investments at risk. *(2026-03-13)*
-  - <https://www.nytimes.com/2026/03/13/technology/amazon-google-persian-gulf-war.html>
-- **AI industry energy pledge:** Google, Microsoft, and OpenAI committed to fund their own power plants and grid upgrades at a White House event. *(2026-03-04)*
-  - <https://www.nytimes.com/2026/03/04/technology/ai-energy-pledge-white-house-trump.html>
-- **Nscale** raised $2B for AI data centers; Sheryl Sandberg joined its board. *(2026-03-09)*
-  - <https://www.nytimes.com/2026/03/09/business/nscale-ai-data-center-boom.html>
-
----
-
-## 📥 Inbox Leads (Tier 0.5 Fastmail)
-
-- **AI Daily Brief email lead:** potential movement around Nvidia cloud ally Nscale and U.S. data center site activity. **[UNVERIFIED]** (paywalled source not independently resolved in this pass)
+- **Rural NY data center backlash:** A proposed AI data center between Buffalo and Rochester faces local opposition over rising electric bills and harm to a nearby tribal reservation. *(2026-03-17)*
+  - <https://www.nytimes.com/2026/03/17/nyregion/ai-data-center-new-york.html>
+- **Iran's Hormuz stranglehold** is escalating energy prices and scrambling Trump's foreign policy — compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*
+  - <https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html>
+- **Microsoft + Meta fueling a near-$1T boom** in global data center leases. [UNVERIFIED] *(AFR, 2026-03-13)*
+  - <https://www.afr.com/technology/microsoft-meta-fuel-near-1trn-boom-in-data-centre-leases-20260313-p5oa2l>
+- **CoreWeave expanded its AI cloud with Nvidia B300 chips** as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*
   - <https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo>
-- **AI Daily Brief email lead:** ByteDance reportedly paused global launch of Seedance 2.0 video generator, with matching secondary signal from TechCrunch.
-  - <https://www.theinformation.com/articles/bytedance-suspends-launch-video-ai-model-copyright-disputes-hollywood>
-  - <https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/>
-- **Data Center Knowledge inbox item:** newsletter contained mostly redirect/tracking links after filtering and did not produce additional high-confidence new links in this pass.
+- **NTT landed 115 MW** in data center deals as part of a $10B AI infrastructure push. *(Data Center Knowledge, 2026-03-16)*
+- **Global AI silicon shortage deepening:** TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks compressing supply chains. *(SemiAnalysis, 2026-03-12)*
+  - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
+- **Jensen Huang opened Nvidia GTC 2026**, framing Nvidia as defending the AI era it built. *(2026-03-16)*
+  - <https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html>
 
 ---
 
-*Sources: SemiAnalysis (Tier 0) + Fastmail Inbox (Tier 0.5) + NYT Article Search via researcher agent | Generated: 2026-03-16 21:49 UTC*
+*Sources: Google Blog (Tier 1 polling) · SemiAnalysis (Tier 0) · Fastmail newsletters: Data Center Knowledge, AI Daily Brief (Tier 0.5) · NYT Article Search | Generated: 2026-03-17T17:05:42Z*
