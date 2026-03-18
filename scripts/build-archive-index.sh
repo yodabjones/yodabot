@@ -32,21 +32,50 @@ const add = (value) => {
 
 const lower = summary.toLowerCase();
 const topicMap = [
-  ["infrastructure", ["infrastructure", "data center", "datacenter", "power", "grid", "cooling", "facility"]],
-  ["model", ["model", "release", "llm", "foundation model", "reasoning"]],
-  ["revenue", ["revenue", "earnings", "qoq", "guidance", "capex", "contract"]],
-  ["regulation", ["regulation", "regulatory", "doj", "ftc", "eu", "cma", "lawsuit"]],
-  ["policy", ["policy", "export control", "antitrust", "compliance"]],
-  ["gpu", ["gpu", "chip", "accelerator", "cuda", "h100", "b200", "rubin"]],
-  ["cloud", ["cloud", "azure", "aws", "gcp", "hosting"]],
-  ["funding", ["funding", "raise", "valuation", "series", "investment"]],
-  ["acquisition", ["acquire", "acquisition", "merger", "m&a"]],
+  // Layer 1 — Raw Materials
+  ["L1.1-critical-minerals", ["critical mineral", "rare earth", "lithium", "cobalt", "tantalum", "albemarle", "sqm", "mp materials", "lynas"]],
+  ["L1.2-energy-power", ["power grid", "electricity demand", "data center energy", "ppa", "constellation energy", "vistra", "nextera", "energy consumption"]],
+  ["L1.3-water-cooling", ["cooling", "liquid cooling", "water usage", "thermal management", "vertiv", "modine", "green revolution cooling"]],
+  // Layer 2 — Semiconductor Manufacturing
+  ["L2.1-foundry", ["foundry", "tsmc", "samsung foundry", "globalfoundries", "smic", "intel foundry", "wafer", "fab capacity", "process node"]],
+  ["L2.2-equipment", ["asml", "euv", "applied materials", "lam research", "kla", "tokyo electron", "lithography", "semiconductor equipment"]],
+  ["L2.3-memory", ["hbm", "dram", "nand", "sk hynix", "micron", "samsung memory", "kioxia", "western digital", "memory bandwidth"]],
+  // Layer 3 — AI Hardware
+  ["L3.1-training-accelerators", ["nvidia", "h100", "b200", "gb200", "rubin", "amd mi300", "gpu", "cerebras", "sambanova", "gaudi", "training cluster"]],
+  ["L3.2-inference-edge", ["inference chip", "trainium", "inferentia", "qualcomm ai", "apple silicon", "custom asic", "groq", "maia", "edge inference"]],
+  ["L3.3-networking", ["infiniband", "nvlink", "broadcom", "arista", "marvell", "cluster networking", "interconnect", "roce", "ethernet switching"]],
+  // Layer 4 — Infrastructure & Data Centers
+  ["L4.1-hyperscaler-dc", ["data center", "datacenter", "azure", "aws", "gcp", "capex", "oracle cloud", "meta infra", "infrastructure investment"]],
+  ["L4.2-colo-operators", ["equinix", "digital realty", "colocation", "iron mountain", "coresite", "qts", "colo", "mw capacity", "lease"]],
+  ["L4.3-connectivity-edge", ["cloudflare", "fastly", "akamai", "cdn", "edge computing", "submarine cable", "lumen", "zayo"]],
+  // Layer 5 — AI Platform & Software
+  ["L5.1-foundation-models", ["openai", "anthropic", "gpt", "claude", "gemini", "llama", "mistral", "foundation model", "model release", "llm"]],
+  ["L5.2-cloud-ai-mlops", ["databricks", "hugging face", "scale ai", "cohere", "weights biases", "vertex ai", "bedrock", "mlops", "model serving"]],
+  ["L5.3-developer-tools", ["langchain", "replicate", "together ai", "modal", "lightning ai", "open source ai", "fine-tuning", "developer framework"]],
+  // Layer 6 — Applications & Deployment
+  ["L6.1-enterprise-ai", ["salesforce", "servicenow", "workday", "sap ai", "uipath", "enterprise automation", "ai agent", "workforce ai"]],
+  ["L6.2-consumer-ai", ["chatgpt", "gemini advanced", "copilot", "perplexity", "consumer ai", "ai subscription", "monthly active users"]],
+  ["L6.3-regulation-policy", ["regulation", "regulatory", "doj", "ftc", "eu ai act", "export control", "antitrust", "compliance", "ai governance", "nist"]],
 ];
 
 for (const [topic, keys] of topicMap) {
   if (keys.some((k) => lower.includes(k))) add(topic);
 }
 
+// Canonical entity aliases.
+const entityAliases = [
+  ["openai", "OpenAI"], ["chatgpt", "ChatGPT"], ["deepmind", "DeepMind"],
+  ["deepseek", "DeepSeek"], ["bytedance", "ByteDance"], ["coreweave", "CoreWeave"],
+  ["softbank", "SoftBank"], ["servicenow", "ServiceNow"], ["langchain", "LangChain"],
+  ["globalfoundries", "GlobalFoundries"], ["sambanova", "SambaNova"], ["nextera", "NextEra"],
+  ["sk hynix", "SK Hynix"], ["hugging face", "Hugging Face"], ["scale ai", "Scale AI"],
+  ["a16z", "a16z"], ["palantir", "Palantir"], ["mistral ai", "Mistral AI"],
+];
+for (const [kw, entity] of entityAliases) {
+  if (lower.includes(kw)) add(entity);
+}
+
+// Source domain components.
 try {
   const host = new URL(url).hostname.replace(/^www\./, "");
   add(host);
@@ -55,10 +84,21 @@ try {
   }
 } catch {}
 
-for (const m of summary.matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) add(m[0]);
+// ALL-CAPS acronyms — common English words filtered out.
+const capsStop = new Set(["THE","AND","FOR","NOT","BUT","ARE","WAS","HAS","HAD","ITS","WITH","THIS","THAT","WILL","HAVE","FROM","THEY","BEEN","WERE","ALSO","THAN","MORE","INTO","OVER","SUCH","MOST","ONLY","EVEN","MUCH","MANY","HOW","NEW","NOW","SO","IF","AS","AN","NO","DO","UP","OR","BY","IN","ON","AT","TO","OF","A","BE","WE","US","IT","IS"]);
+for (const m of summary.matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) {
+  if (!capsStop.has(m[0])) add(m[0]);
+}
 
+// CamelCase proper nouns (OpenAI, ServiceNow, CoreWeave, ByteDance, etc.)
+for (const m of summary.matchAll(/\b[A-Z][a-z]+(?:[A-Z][a-zA-Z0-9]*)+\b/g)) add(m[0]);
+
+// Title-case named entities.
 const stop = new Set([
-  "The", "A", "An", "And", "Or", "For", "With", "From", "In", "On", "At", "By", "To", "Of", "Latest", "Report", "Open", "Source"
+  "The","A","An","And","Or","For","With","From","In","On","At","By","To","Of",
+  "Latest","Report","Open","Source","New","Its","Their","This","That","Which",
+  "Also","All","Has","Had","Was","Are","Were","Been","Will","His","Her","It",
+  "But","Not","So","If","As","Be","We","Us","No","Do","Up","Is","Ex","Just","More"
 ]);
 for (const m of summary.matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\b/g)) {
   const phrase = m[1].trim();
@@ -92,21 +132,50 @@ function extractArticleTags(summary, url) {
 
   const lower = (summary || "").toLowerCase();
   const topicMap = [
-    ["infrastructure", ["infrastructure", "data center", "datacenter", "power", "grid", "cooling", "facility"]],
-    ["model", ["model", "release", "llm", "foundation model", "reasoning"]],
-    ["revenue", ["revenue", "earnings", "qoq", "guidance", "capex", "contract"]],
-    ["regulation", ["regulation", "regulatory", "doj", "ftc", "eu", "cma", "lawsuit"]],
-    ["policy", ["policy", "export control", "antitrust", "compliance"]],
-    ["gpu", ["gpu", "chip", "accelerator", "cuda", "h100", "b200", "rubin"]],
-    ["cloud", ["cloud", "azure", "aws", "gcp", "hosting"]],
-    ["funding", ["funding", "raise", "valuation", "series", "investment"]],
-    ["acquisition", ["acquire", "acquisition", "merger", "m&a"]],
+    // Layer 1 — Raw Materials
+    ["L1.1-critical-minerals", ["critical mineral", "rare earth", "lithium", "cobalt", "tantalum", "albemarle", "sqm", "mp materials", "lynas"]],
+    ["L1.2-energy-power", ["power grid", "electricity demand", "data center energy", "ppa", "constellation energy", "vistra", "nextera", "energy consumption"]],
+    ["L1.3-water-cooling", ["cooling", "liquid cooling", "water usage", "thermal management", "vertiv", "modine", "green revolution cooling"]],
+    // Layer 2 — Semiconductor Manufacturing
+    ["L2.1-foundry", ["foundry", "tsmc", "samsung foundry", "globalfoundries", "smic", "intel foundry", "wafer", "fab capacity", "process node"]],
+    ["L2.2-equipment", ["asml", "euv", "applied materials", "lam research", "kla", "tokyo electron", "lithography", "semiconductor equipment"]],
+    ["L2.3-memory", ["hbm", "dram", "nand", "sk hynix", "micron", "samsung memory", "kioxia", "western digital", "memory bandwidth"]],
+    // Layer 3 — AI Hardware
+    ["L3.1-training-accelerators", ["nvidia", "h100", "b200", "gb200", "rubin", "amd mi300", "gpu", "cerebras", "sambanova", "gaudi", "training cluster"]],
+    ["L3.2-inference-edge", ["inference chip", "trainium", "inferentia", "qualcomm ai", "apple silicon", "custom asic", "groq", "maia", "edge inference"]],
+    ["L3.3-networking", ["infiniband", "nvlink", "broadcom", "arista", "marvell", "cluster networking", "interconnect", "roce", "ethernet switching"]],
+    // Layer 4 — Infrastructure & Data Centers
+    ["L4.1-hyperscaler-dc", ["data center", "datacenter", "azure", "aws", "gcp", "capex", "oracle cloud", "meta infra", "infrastructure investment"]],
+    ["L4.2-colo-operators", ["equinix", "digital realty", "colocation", "iron mountain", "coresite", "qts", "colo", "mw capacity", "lease"]],
+    ["L4.3-connectivity-edge", ["cloudflare", "fastly", "akamai", "cdn", "edge computing", "submarine cable", "lumen", "zayo"]],
+    // Layer 5 — AI Platform & Software
+    ["L5.1-foundation-models", ["openai", "anthropic", "gpt", "claude", "gemini", "llama", "mistral", "foundation model", "model release", "llm"]],
+    ["L5.2-cloud-ai-mlops", ["databricks", "hugging face", "scale ai", "cohere", "weights biases", "vertex ai", "bedrock", "mlops", "model serving"]],
+    ["L5.3-developer-tools", ["langchain", "replicate", "together ai", "modal", "lightning ai", "open source ai", "fine-tuning", "developer framework"]],
+    // Layer 6 — Applications & Deployment
+    ["L6.1-enterprise-ai", ["salesforce", "servicenow", "workday", "sap ai", "uipath", "enterprise automation", "ai agent", "workforce ai"]],
+    ["L6.2-consumer-ai", ["chatgpt", "gemini advanced", "copilot", "perplexity", "consumer ai", "ai subscription", "monthly active users"]],
+    ["L6.3-regulation-policy", ["regulation", "regulatory", "doj", "ftc", "eu ai act", "export control", "antitrust", "compliance", "ai governance", "nist"]],
   ];
 
   for (const [topic, keys] of topicMap) {
     if (keys.some((k) => lower.includes(k))) add(topic);
   }
 
+  // Canonical entity aliases.
+  const entityAliases = [
+    ["openai", "OpenAI"], ["chatgpt", "ChatGPT"], ["deepmind", "DeepMind"],
+    ["deepseek", "DeepSeek"], ["bytedance", "ByteDance"], ["coreweave", "CoreWeave"],
+    ["softbank", "SoftBank"], ["servicenow", "ServiceNow"], ["langchain", "LangChain"],
+    ["globalfoundries", "GlobalFoundries"], ["sambanova", "SambaNova"], ["nextera", "NextEra"],
+    ["sk hynix", "SK Hynix"], ["hugging face", "Hugging Face"], ["scale ai", "Scale AI"],
+    ["a16z", "a16z"], ["palantir", "Palantir"], ["mistral ai", "Mistral AI"],
+  ];
+  for (const [kw, entity] of entityAliases) {
+    if (lower.includes(kw)) add(entity);
+  }
+
+  // Source domain components.
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
     add(host);
@@ -115,9 +184,22 @@ function extractArticleTags(summary, url) {
     }
   } catch {}
 
-  for (const m of (summary || "").matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) add(m[0]);
+  // ALL-CAPS acronyms — common English words filtered out.
+  const capsStop = new Set(["THE","AND","FOR","NOT","BUT","ARE","WAS","HAS","HAD","ITS","WITH","THIS","THAT","WILL","HAVE","FROM","THEY","BEEN","WERE","ALSO","THAN","MORE","INTO","OVER","SUCH","MOST","ONLY","EVEN","MUCH","MANY","HOW","NEW","NOW","SO","IF","AS","AN","NO","DO","UP","OR","BY","IN","ON","AT","TO","OF","A","BE","WE","US","IT","IS"]);
+  for (const m of (summary || "").matchAll(/\b[A-Z]{2,}(?:\.[A-Z]{2,})?\b/g)) {
+    if (!capsStop.has(m[0])) add(m[0]);
+  }
 
-  const stop = new Set(["The", "A", "An", "And", "Or", "For", "With", "From", "In", "On", "At", "By", "To", "Of", "Latest", "Report", "Open", "Source"]);
+  // CamelCase proper nouns (OpenAI, ServiceNow, CoreWeave, ByteDance, etc.)
+  for (const m of (summary || "").matchAll(/\b[A-Z][a-z]+(?:[A-Z][a-zA-Z0-9]*)+\b/g)) add(m[0]);
+
+  // Title-case named entities.
+  const stop = new Set([
+    "The","A","An","And","Or","For","With","From","In","On","At","By","To","Of",
+    "Latest","Report","Open","Source","New","Its","Their","This","That","Which",
+    "Also","All","Has","Had","Was","Are","Were","Been","Will","His","Her","It",
+    "But","Not","So","If","As","Be","We","Us","No","Do","Up","Is","Ex","Just","More"
+  ]);
   for (const m of (summary || "").matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})\b/g)) {
     const phrase = m[1].trim();
     const parts = phrase.split(/\s+/);

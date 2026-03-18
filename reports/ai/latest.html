@@ -4,138 +4,775 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Report - Latest</title>
-  <meta name="description" content="yodabot AI report" />
+  <meta name="description" content="AI supply chain intelligence report" />
   <style>
     :root {
-      --bg: #f4f6f8;
-      --panel: #ffffff;
-      --ink: #1f2933;
-      --muted: #5f6c7b;
-      --line: #d9e2ec;
-      --accent: #0b6e4f;
-      --accent-soft: #e5f6f1;
-      --code-bg: #f7fafc;
+      --bg: #f5f1e8;
+      --ink: #1e2a39;
+      --muted: #556173;
+      --panel: #fffdf8;
+      --line: #ddcfb9;
+      --accent: #1f6b75;
+      --shadow: 0 16px 38px rgba(30, 42, 57, 0.10);
+      --radius: 18px;
     }
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 45%);
+      background:
+        radial-gradient(80vw 60vh at 8% 8%, rgba(255, 184, 107, 0.18), transparent 60%),
+        radial-gradient(80vw 60vh at 100% 0%, rgba(31, 107, 117, 0.20), transparent 62%),
+        var(--bg);
       color: var(--ink);
-      font: 16px/1.6 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font: 16px/1.55 "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      letter-spacing: 0.01em;
     }
     .shell {
-      width: min(980px, 100% - 2rem);
-      margin: 1.2rem auto 2rem;
+      width: min(1180px, 100% - 1.4rem);
+      margin: 1rem auto 2rem;
     }
-    .card {
-      padding: 1rem 1.2rem;
+    .hero {
+      padding: 1rem 1.2rem 1.15rem;
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: var(--radius);
       background: var(--panel);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      box-shadow: var(--shadow);
+      margin-bottom: 0.9rem;
     }
-    .meta {
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .kicker {
+      margin: 0;
+      color: #8a4f1d;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .headline {
+      margin: 0.15rem 0 0.2rem;
+      font-size: clamp(1.35rem, 4.2vw, 2.2rem);
+      line-height: 1.15;
+    }
+    .lede {
       margin: 0;
       color: var(--muted);
-      font-size: 0.95rem;
+      max-width: 78ch;
     }
-    h1 {
-      margin: 0.15rem 0 0.25rem;
-      font-size: clamp(1.5rem, 3.8vw, 2.1rem);
-      line-height: 1.2;
+    .meta-pill {
+      border: 1px solid #d2bf9f;
+      background: #fff1d9;
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.8rem;
+      color: #66390f;
+      font-weight: 700;
     }
-    .status { margin: 0 0 0.8rem; color: var(--muted); }
-    .status.error { color: #b42318; font-weight: 700; }
-    #content { max-width: 78ch; }
-    #content h1, #content h2, #content h3, #content h4 { line-height: 1.25; margin: 1.1em 0 0.45em; }
-    #content h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.2em; }
-    #content p, #content ul, #content ol, #content pre, #content blockquote, #content table { margin: 0.65em 0; }
-    #content a { color: var(--accent); text-underline-offset: 0.12em; }
-    #content a:hover { background: var(--accent-soft); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .map {
+      padding: 0.9rem;
+    }
+
+    .layer-wrap {
+      padding: 0.35rem 0 0;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: layerIn .45s ease forwards;
+      animation-delay: calc(var(--layer-index, 0) * 75ms);
+    }
+    .layer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5a6473;
+      margin: 0 0 0.32rem 0.15rem;
+    }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.65rem; }
+    .node {
+      min-width: 0;
+      border: 1px solid #d8cfbf;
+      border-radius: 12px;
+      padding: 0.62rem 0.68rem;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      background: #fffdf8;
+      text-align: left;
+      color: inherit;
+      font: inherit;
+      opacity: 0;
+      transform: translateY(7px) scale(0.995);
+      animation: nodeIn .35s ease forwards;
+      animation-delay: calc((var(--layer-index, 0) * 60ms) + (var(--node-index, 0) * 45ms));
+    }
+    .node:hover {
+      border-color: #9c8360;
+      transform: translateY(-1px);
+      background: #fff8eb;
+    }
+    .node.active {
+      border-color: var(--accent);
+      background: #e7f5f6;
+      box-shadow: inset 0 0 0 1px rgba(31, 107, 117, 0.18);
+    }
+    .node-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin: 0 0 0.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .node-sub {
+      margin: 0;
+      color: #586576;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .layer-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.2rem 0.35rem;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .layer-bar:hover {
+      border-color: #d8cfbf;
+      background: #fff8eb;
+    }
+    .layer-wrap.active-layer .layer-bar {
+      border-color: #a7cab7;
+      background: #eef8f0;
+    }
+    .layer-line { flex: 1; height: 1px; background: #e2d6c2; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+    .detail {
+      margin-top: 0.85rem;
+      border: 1px solid #dcd2c2;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff7ea 0%, #fffcf7 100%);
+      min-height: 108px;
+      padding: 0.85rem 0.95rem;
+      opacity: 1;
+      transition: opacity .2s ease;
+    }
+    .detail.pulse {
+      animation: detailPulse .28s ease;
+    }
+    .detail-name {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .detail-desc {
+      margin: 0 0 0.55rem;
+      color: #415062;
+      font-size: 0.91rem;
+      line-height: 1.5;
+    }
+    .detail-examples { display: flex; flex-wrap: wrap; gap: 0.36rem; }
+    .chip {
+      font-size: 0.73rem;
+      border-radius: 999px;
+      border: 1px solid #c8d7d8;
+      background: #f7feff;
+      padding: 0.16rem 0.52rem;
+      color: #33565b;
+      font-weight: 600;
+    }
+
+    .report {
+      padding: 0.95rem 1.05rem;
+    }
+    .report-tools {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 0 0.6rem;
+    }
+    .filter-pill {
+      font-size: 0.74rem;
+      border-radius: 999px;
+      border: 1px solid #cdd8cf;
+      background: #f4f9f4;
+      color: #456150;
+      padding: 0.2rem 0.5rem;
+      font-weight: 700;
+    }
+    .filter-pill strong {
+      color: #245a46;
+      font-weight: 700;
+    }
+    .clear-filter {
+      border: 1px solid #d7c9b2;
+      background: #fff7eb;
+      color: #6f4b24;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      padding: 0.2rem 0.55rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .clear-filter:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .status {
+      margin: 0 0 0.65rem;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .status.error { color: #9e2317; }
+    #content { max-width: none; }
+    .section-block {
+      border: 1px solid #ddcfb9;
+      border-radius: 12px;
+      background: #fffaf2;
+      padding: 0.72rem 0.8rem;
+      margin: 0 0 0.8rem;
+    }
+    .section-head {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.45rem;
+    }
+    .section-id {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6a7461;
+      border: 1px solid #cad7c0;
+      background: #f3fbef;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+    }
+    .section-title {
+      margin: 0;
+      font-size: 1.01rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .section-sub {
+      margin: 0.15rem 0 0.45rem;
+      font-size: 0.84rem;
+      color: #556173;
+    }
+    .tbl-wrap { overflow-x: auto; }
+    .revenue-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.4rem 0 0.65rem;
+      font-size: 0.84rem;
+    }
+    .revenue-table th,
+    .revenue-table td {
+      border: 1px solid #d8cfbf;
+      padding: 0.38rem 0.52rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .revenue-table th {
+      background: #f6eee0;
+      font-weight: 700;
+      color: #344656;
+    }
+    .news-title {
+      margin: 0.45rem 0 0.3rem;
+      font-size: 0.88rem;
+      color: #49576a;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-list {
+      margin: 0;
+      padding-left: 1rem;
+    }
+    .news-list li { margin: 0.28rem 0; }
+    .news-list a { color: #0d6572; text-underline-offset: 0.13em; }
+    .news-list a:hover { background: #dff3f5; }
+    .all-stories .news-list li { margin: 0.34rem 0; }
+    .muted-note {
+      color: #5b6778;
+      font-size: 0.86rem;
+      margin: 0.2rem 0 0.4rem;
+    }
+    .filter-empty {
+      display: none;
+      border: 1px dashed #d5cab7;
+      border-radius: 10px;
+      color: #5f6e82;
+      font-size: 0.86rem;
+      padding: 0.55rem 0.7rem;
+      margin: 0.35rem 0 0.75rem;
+      background: #fffaf2;
+    }
+    .filter-empty.show {
+      display: block;
+    }
     #content code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      font-size: 0.92em;
-      background: var(--code-bg);
-      border: 1px solid var(--line);
-      border-radius: 0.35em;
-      padding: 0.12em 0.35em;
+      font-size: 0.9em;
+      background: #f8f4ec;
+      border: 1px solid #ddd2c1;
+      border-radius: 0.32em;
+      padding: 0.1em 0.32em;
     }
-    #content pre {
-      overflow: auto;
-      background: var(--code-bg);
-      border: 1px solid var(--line);
-      border-radius: 0.65rem;
-      padding: 0.8rem;
+
+    @media (max-width: 880px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 0.9rem;
+      }
     }
-    #content pre code { border: 0; background: transparent; padding: 0; }
-    #content blockquote {
-      border-left: 4px solid #7ec9b0;
-      background: #f0faf7;
-      border-radius: 0 10px 10px 0;
-      padding: 0.3rem 0.9rem;
+
+    @media (prefers-reduced-motion: reduce) {
+      .layer-wrap,
+      .node,
+      .detail.pulse {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
     }
-    #content table { border-collapse: collapse; width: 100%; }
-    #content th, #content td { border: 1px solid var(--line); padding: 0.45rem 0.6rem; text-align: left; }
-    #content th { background: #edf7f3; }
+
+    @keyframes layerIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes nodeIn {
+      from { opacity: 0; transform: translateY(7px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes detailPulse {
+      from { transform: scale(0.99); }
+      to { transform: scale(1); }
+    }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 </head>
 <body>
   <main class="shell">
-    <section class="card" aria-live="polite">
-      <p class="meta">yodabot AI report</p>
-      <h1>AI Report - Latest</h1>
-      <p id="status" class="status">Loading report markdown...</p>
-      <article id="content"></article>
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <p class="kicker">OpenClaw Research Output</p>
+          <h1 class="headline">AI Supply Chain Intelligence</h1>
+          <p class="lede">Six layers, three operating groups each. Click any node to inspect a layer component, then scroll for the full markdown report generated by the researcher-writer-sender pipeline.</p>
+        </div>
+        <p class="meta-pill">Live from yodabot</p>
+      </div>
+    </section>
+
+    <section class="layout">
+      <article class="card map" aria-label="AI supply chain map">
+        <div id="layers"></div>
+        <div id="detail" class="detail">
+          <p style="margin:0; color:#5b6778; font-size:0.9rem; text-align:center; padding-top:1.7rem;">Select a group to explore context and examples.</p>
+        </div>
+      </article>
+
+      <article class="card report" aria-live="polite">
+        <div class="report-tools">
+          <span id="active-filter" class="filter-pill">Report focus: <strong>All latest stories</strong></span>
+          <button id="clear-filter" type="button" class="clear-filter" disabled>Show all sections</button>
+        </div>
+        <p id="filter-empty" class="filter-empty">No stories matched this selection yet.</p>
+        <p id="status" class="status">Loading latest story index...</p>
+        <article id="content"></article>
+      </article>
     </section>
   </main>
 
   <script>
+    const layers = [
+      {
+        id: "raw",
+        label: "Raw materials",
+        dotColor: "#7f7a70",
+        cards: [
+          { id:"silicon", title:"Silicon & minerals", sub:"Wafer feedstock", desc:"High-purity silicon, rare earths, and specialty gases are the foundation of every chip. Silica sand is refined to 99.9999% purity before wafer production.", examples:["MEMC","Shin-Etsu","Quartz Corp"] },
+          { id:"energy", title:"Energy & water", sub:"Fab utilities", desc:"Semiconductor fabs are among the most energy- and water-intensive facilities on earth. A single fab can consume 10 MW+ and millions of gallons of ultrapure water daily.", examples:["Renewables","Grid power","UPW systems"] },
+          { id:"chemicals", title:"Specialty chemicals", sub:"Process gases, photoresists", desc:"Hundreds of ultra-high-purity chemicals are required for etching, deposition, and lithography. Any contamination at this stage propagates through the entire wafer.", examples:["Air Products","JSR","Dupont"] }
+        ]
+      },
+      {
+        id: "semi",
+        label: "Semiconductors",
+        dotColor: "#7d4abf",
+        cards: [
+          { id:"eqp", title:"Fab equipment", sub:"Lithography, etch, CVD", desc:"The tools that pattern transistors onto wafers. EUV lithography machines, made almost exclusively by ASML, cost around $350M each and are essential for leading-edge nodes.", examples:["ASML","Applied Materials","Lam Research"] },
+          { id:"foundry", title:"Foundries", sub:"Chip manufacturing", desc:"Contract manufacturers that build chips to customer designs. TSMC alone produces over 90% of the world's leading-edge chips, with manufacturing at 3nm and below.", examples:["TSMC","Samsung","Intel Foundry"] },
+          { id:"memory", title:"Memory & storage", sub:"DRAM, NAND, HBM", desc:"AI training requires enormous memory bandwidth. HBM is stacked directly on GPUs via TSVs, delivering up to 3 TB/s. Tight supply constrains AI build-outs.", examples:["SK Hynix","Micron","Samsung"] }
+        ]
+      },
+      {
+        id: "hw",
+        label: "AI hardware",
+        dotColor: "#0b7763",
+        cards: [
+          { id:"gpu", title:"GPUs & accelerators", sub:"Training & inference compute", desc:"The dominant AI workhorse. A single H100 GPU performs up to 2,000 TFLOPS of FP8 and consumes 700W. Demand has outstripped supply since late 2022, driving long lead times.", examples:["Nvidia","AMD","Intel Gaudi"] },
+          { id:"asic", title:"Custom ASICs", sub:"TPUs, inference chips", desc:"Purpose-built silicon optimized for specific AI workloads, trading flexibility for efficiency. Google TPUs, AWS Trainium and Inferentia, and Apple Neural Engine are prominent examples.", examples:["Google TPU","AWS Trainium","Groq LPU"] },
+          { id:"networking", title:"Networking & interconnects", sub:"InfiniBand, NVLink", desc:"At scale, the network between GPUs becomes the bottleneck. NVLink connects GPUs within a node at high bandwidth, while InfiniBand links nodes across a cluster.", examples:["Nvidia NVLink","InfiniBand","Ultra Ethernet"] }
+        ]
+      },
+      {
+        id: "infra",
+        label: "Infrastructure",
+        dotColor: "#af5a24",
+        cards: [
+          { id:"dc", title:"Data centers", sub:"Power, cooling, real estate", desc:"AI clusters require specialized facilities with 10-100 kW/rack power densities. Liquid cooling is increasingly mandatory as regions race to permit and build capacity.", examples:["Hyperscalers","Colo providers","Edge DCs"] },
+          { id:"cloud", title:"Cloud platforms", sub:"IaaS, managed compute", desc:"AWS, Azure, and GCP provide on-demand GPU clusters. Hyperscalers have committed massive AI infrastructure capex and now compete directly with model labs.", examples:["AWS","Azure","Google Cloud"] },
+          { id:"power", title:"Power grid & cooling", sub:"Electricity, liquid cooling", desc:"A 1 GW AI campus can require grid upgrades, permitting, and dedicated generation. Direct liquid cooling and rear-door systems are becoming standard.", examples:["Power utilities","Vertiv","Schneider"] }
+        ]
+      },
+      {
+        id: "platform",
+        label: "AI platforms",
+        dotColor: "#2664ac",
+        cards: [
+          { id:"frameworks", title:"ML frameworks", sub:"Training & serving stacks", desc:"Open-source software orchestrates hardware for model training and inference. PyTorch dominates research while specialized kernels increasingly target GPU intrinsics.", examples:["PyTorch","JAX","TensorFlow"] },
+          { id:"models", title:"Foundation models", sub:"Frontier & open-weight", desc:"Large pretrained models are core products of the AI supply chain. Frontier training runs can cost tens of millions in compute alone, turning model weights into strategic assets.", examples:["OpenAI","Anthropic","Meta Llama"] },
+          { id:"ops", title:"MLOps & data infra", sub:"Pipelines, monitoring, data", desc:"The operational layer covers ingestion, preprocessing, experiment tracking, versioning, deployment, and drift monitoring, increasingly consolidated into managed platforms.", examples:["Databricks","Weights & Biases","HuggingFace"] }
+        ]
+      },
+      {
+        id: "app",
+        label: "Applications",
+        dotColor: "#5b7d17",
+        cards: [
+          { id:"api", title:"API & developer tools", sub:"Inference APIs, SDKs", desc:"Abstraction layers let developers build on frontier models without managing infrastructure. API surfaces are a primary near-term monetization channel.", examples:["Anthropic API","OpenAI","Replicate"] },
+          { id:"enterprise", title:"Enterprise software", sub:"Vertical AI products", desc:"AI is being embedded into CRM, ERP, productivity, and vertical software to increase workflow automation and decision support inside existing systems.", examples:["Microsoft 365","Salesforce","ServiceNow"] },
+          { id:"consumer", title:"Consumer products", sub:"Assistants, creative tools", desc:"End-user products including chatbots, image generators, code assistants, and voice interfaces remain the most visible layer of AI adoption.", examples:["Claude","ChatGPT","Midjourney"] }
+        ]
+      }
+    ];
+
+    let activeId = null;
+    let activeLayerId = null;
+    let archiveArticles = [];
+
+    const sectionProfiles = {
+      silicon: { sectionId: "L1.1", title: "Critical Minerals", layerId: "raw", metric: "Revenue / production", keywords: ["silicon", "mineral", "rare earth", "lithium", "cobalt", "wafer"], companies: ["Albemarle", "SQM", "MP Materials", "Lynas", "Ucore"] },
+      energy: { sectionId: "L1.2", title: "Energy & Power", layerId: "raw", metric: "Revenue / PPAs", keywords: ["power", "grid", "electricity", "utility", "energy"], companies: ["Constellation Energy", "Vistra", "NextEra", "AES", "NRG Energy"] },
+      chemicals: { sectionId: "L1.3", title: "Water & Cooling Supply", layerId: "raw", metric: "Revenue / shipments", keywords: ["cooling", "water", "thermal", "hvac", "liquid cooling"], companies: ["Vertiv", "Modine", "Alfa Laval", "Stulz", "Schneider Electric"] },
+      foundry: { sectionId: "L2.1", title: "Foundry & Fab Capacity", layerId: "semi", metric: "Revenue / utilization", keywords: ["foundry", "fab", "wafer", "tsmc", "samsung foundry", "smic"], companies: ["TSMC", "Samsung Foundry", "GlobalFoundries", "SMIC", "Intel Foundry"] },
+      eqp: { sectionId: "L2.2", title: "Equipment & Lithography", layerId: "semi", metric: "Revenue / order backlog", keywords: ["asml", "euv", "lithography", "applied materials", "lam research", "kla"], companies: ["ASML", "Applied Materials", "Lam Research", "KLA", "Tokyo Electron"] },
+      memory: { sectionId: "L2.3", title: "Memory & Storage", layerId: "semi", metric: "Revenue / HBM shipments", keywords: ["hbm", "dram", "nand", "memory", "micron", "sk hynix"], companies: ["SK Hynix", "Micron", "Samsung Memory", "Kioxia", "Western Digital"] },
+      gpu: { sectionId: "L3.1", title: "Training Accelerators", layerId: "hw", metric: "Revenue / GPU units", keywords: ["gpu", "nvidia", "h100", "b200", "gaudi", "accelerator"], companies: ["NVIDIA", "AMD", "Intel Gaudi", "Cerebras", "SambaNova"] },
+      asic: { sectionId: "L3.2", title: "Inference & Edge Silicon", layerId: "hw", metric: "Revenue / throughput", keywords: ["inference", "edge", "trainium", "inferentia", "asic", "qualcomm"], companies: ["Qualcomm", "AWS", "Apple", "Microsoft", "Groq"] },
+      networking: { sectionId: "L3.3", title: "Networking & Interconnects", layerId: "hw", metric: "Revenue / port units", keywords: ["infiniband", "nvlink", "interconnect", "ethernet", "networking"], companies: ["Broadcom", "Arista", "NVIDIA Networking", "Marvell", "Juniper"] },
+      dc: { sectionId: "L4.1", title: "Hyperscaler Data Centers", layerId: "infra", metric: "Revenue / capex", keywords: ["hyperscaler", "data center", "datacenter", "azure", "aws", "gcp", "capex"], companies: ["Microsoft", "Google", "AWS", "Meta", "Oracle"] },
+      cloud: { sectionId: "L4.2", title: "Colo & Independent Operators", layerId: "infra", metric: "Revenue / MW capacity", keywords: ["colo", "colocation", "equinix", "digital realty", "leasing", "facility"], companies: ["Equinix", "Digital Realty", "Iron Mountain", "CoreSite", "QTS"] },
+      power: { sectionId: "L4.3", title: "Connectivity & Edge", layerId: "infra", metric: "Revenue / traffic", keywords: ["edge", "cdn", "connectivity", "cloudflare", "akamai", "fastly"], companies: ["Cloudflare", "Fastly", "Akamai", "Zayo", "Lumen"] },
+      models: { sectionId: "L5.1", title: "Foundation Model Providers", layerId: "platform", metric: "ARR / model releases", keywords: ["foundation model", "llm", "openai", "anthropic", "gemini", "claude"], companies: ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI", "Mistral"] },
+      ops: { sectionId: "L5.2", title: "Cloud AI Services & MLOps", layerId: "platform", metric: "ARR / valuation", keywords: ["mlops", "model serving", "databricks", "hugging face", "scale ai", "cohere"], companies: ["Databricks", "Hugging Face", "Scale AI", "Cohere", "Weights & Biases"] },
+      frameworks: { sectionId: "L5.3", title: "Developer Tools & Frameworks", layerId: "platform", metric: "ARR / usage growth", keywords: ["framework", "developer", "langchain", "replicate", "open source ai", "tooling"], companies: ["LangChain", "Replicate", "Together AI", "Modal", "Lightning AI"] },
+      enterprise: { sectionId: "L6.1", title: "Enterprise AI Applications", layerId: "app", metric: "Revenue / AI ARR", keywords: ["enterprise", "crm", "erp", "copilot", "workflow", "automation"], companies: ["Salesforce", "ServiceNow", "Workday", "SAP", "UiPath"] },
+      consumer: { sectionId: "L6.2", title: "Consumer AI Products", layerId: "app", metric: "Subscribers / MAU", keywords: ["consumer", "chatgpt", "gemini", "assistant", "app", "subscription"], companies: ["ChatGPT", "Google Gemini", "Microsoft Copilot", "Apple", "Perplexity"] },
+      api: { sectionId: "L6.3", title: "Regulation & Policy", layerId: "app", metric: "Fine risk / compliance", keywords: ["regulation", "policy", "doj", "ftc", "eu ai act", "compliance", "lawsuit"], companies: ["OpenAI", "Google", "Meta", "Anthropic", "Apple"] },
+    };
+
+    const layerLabelById = layers.reduce((acc, layer) => {
+      acc[layer.id] = layer.label;
+      return acc;
+    }, {});
+
+    const cardTitleById = layers.flatMap((layer) => layer.cards.map((card) => [card.id, card.title]))
+      .reduce((acc, item) => {
+        acc[item[0]] = item[1];
+        return acc;
+      }, {});
+
+    const normalize = (value) => (value || "").toLowerCase();
+    const esc = (value) => String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+    const articleBlob = (article) => {
+      const tags = Array.isArray(article.tags) ? article.tags.join(" ") : "";
+      return normalize((article.summary || "") + " " + tags);
+    };
+
+    function articleMatchesProfile(article, profile) {
+      const hay = articleBlob(article);
+      const byKeyword = (profile.keywords || []).some((k) => hay.includes(normalize(k)));
+      const byCompany = (profile.companies || []).some((c) => hay.includes(normalize(c)));
+      return byKeyword || byCompany;
+    }
+
+    function getSelectedProfiles() {
+      if (activeId && sectionProfiles[activeId]) {
+        return [sectionProfiles[activeId]];
+      }
+      if (activeLayerId) {
+        const layer = layers.find((item) => item.id === activeLayerId);
+        return (layer ? layer.cards : [])
+          .map((card) => sectionProfiles[card.id])
+          .filter(Boolean);
+      }
+      return [];
+    }
+
+    function buildRevenueRows(profile, stories) {
+      return (profile.companies || []).map((company) => {
+        const matches = stories.filter((story) => articleBlob(story).includes(normalize(company)));
+        const value = matches.length > 0 ? ("Mentioned in " + matches.length + " " + (matches.length === 1 ? "story" : "stories")) : "—";
+        const period = matches[0] ? (matches[0].stamp || "Latest cycle") : "Latest cycle";
+        return "<tr>" +
+          "<td>" + esc(company) + "</td>" +
+          "<td>" + esc(profile.metric || "Revenue") + "</td>" +
+          "<td>" + esc(value) + "</td>" +
+          "<td>" + esc(period) + "</td>" +
+          "<td>—</td>" +
+          "</tr>";
+      }).join("");
+    }
+
+    function renderSectionBlock(profile) {
+      const stories = archiveArticles.filter((article) => articleMatchesProfile(article, profile)).slice(0, 8);
+      const tableRows = buildRevenueRows(profile, stories);
+      const storiesMarkup = stories.length
+        ? ("<ul class=\"news-list\">" + stories.map((story) => "<li><a href=\"" + esc(story.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + esc(story.summary || "Untitled story") + "</a></li>").join("") + "</ul>")
+        : "<p class=\"muted-note\">No matching stories found in the latest archive for this section yet.</p>";
+
+      return "<section class=\"section-block\">" +
+        "<div class=\"section-head\">" +
+        "<span class=\"section-id\">" + esc(profile.sectionId) + "</span>" +
+        "<h3 class=\"section-title\">" + esc(profile.title) + "</h3>" +
+        "</div>" +
+        "<p class=\"section-sub\">Revenue table + latest stories for this section.</p>" +
+        "<div class=\"tbl-wrap\"><table class=\"revenue-table\"><thead><tr><th>Company</th><th>Metric</th><th>Value</th><th>Period</th><th>vs. Prior</th></tr></thead><tbody>" + tableRows + "</tbody></table></div>" +
+        "<p class=\"news-title\">News</p>" +
+        storiesMarkup +
+        "</section>";
+    }
+
+    function renderAllStories() {
+      const stories = archiveArticles.slice(0, 36);
+      const rows = stories.length
+        ? ("<ul class=\"news-list\">" + stories.map((story) => "<li><a href=\"" + esc(story.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + esc(story.summary || "Untitled story") + "</a></li>").join("") + "</ul>")
+        : "<p class=\"muted-note\">No archived stories available yet.</p>";
+      return "<section class=\"section-block all-stories\">" +
+        "<div class=\"section-head\"><span class=\"section-id\">LIVE</span><h3 class=\"section-title\">All Latest Stories</h3></div>" +
+        "<p class=\"section-sub\">No section or layer selected. Showing all recent stories.</p>" + rows +
+        "</section>";
+    }
+
+    function renderContentPanel() {
+      const content = document.getElementById("content");
+      const filterChip = document.getElementById("active-filter");
+      const clearButton = document.getElementById("clear-filter");
+      const emptyState = document.getElementById("filter-empty");
+      const status = document.getElementById("status");
+      const hasSelection = !!(activeId || activeLayerId);
+
+      if (filterChip) {
+        const label = activeId ? (cardTitleById[activeId] || "Selected section") : (activeLayerId ? (layerLabelById[activeLayerId] || "Selected layer") : "All latest stories");
+        filterChip.innerHTML = "Report focus: <strong>" + esc(label) + "</strong>";
+      }
+      if (clearButton) clearButton.disabled = !hasSelection;
+
+      if (!archiveArticles.length) {
+        content.innerHTML = "<p class=\"muted-note\">Story index is still loading.</p>";
+        if (emptyState) emptyState.classList.remove("show");
+        return;
+      }
+
+      if (!hasSelection) {
+        content.innerHTML = renderAllStories();
+        if (emptyState) emptyState.classList.remove("show");
+        status.textContent = "Showing all latest stories.";
+        return;
+      }
+
+      const profiles = getSelectedProfiles();
+      content.innerHTML = profiles.map(renderSectionBlock).join("");
+      const matched = content.querySelectorAll(".news-list li").length;
+      if (emptyState) emptyState.classList.toggle("show", matched === 0);
+      status.textContent = activeId
+        ? "Showing selected section with revenue table and news."
+        : "Showing all three sections in selected layer with revenue tables and news.";
+    }
+
+    function renderLayers() {
+      const container = document.getElementById("layers");
+      container.innerHTML = "";
+
+      layers.forEach((layer) => {
+        const wrap = document.createElement("section");
+        wrap.className = "layer-wrap" + ((activeLayerId === layer.id && !activeId) ? " active-layer" : "");
+        wrap.style.setProperty("--layer-index", String(layers.indexOf(layer)));
+
+        const bar = document.createElement("div");
+        bar.className = "layer-bar";
+        bar.setAttribute("role", "button");
+        bar.setAttribute("tabindex", "0");
+        bar.onclick = () => {
+          if (activeLayerId === layer.id && !activeId) {
+            activeLayerId = null;
+            activeId = null;
+            updateDetail(null);
+          } else {
+            activeLayerId = layer.id;
+            activeId = null;
+            updateDetail(null);
+          }
+          renderLayers();
+          renderContentPanel();
+        };
+        bar.onkeydown = (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            bar.onclick();
+          }
+        };
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.style.background = layer.dotColor;
+        const label = document.createElement("span");
+        label.className = "layer-label";
+        label.textContent = layer.label;
+        const line = document.createElement("span");
+        line.className = "layer-line";
+        bar.appendChild(dot);
+        bar.appendChild(label);
+        bar.appendChild(line);
+        wrap.appendChild(bar);
+
+        const cards = document.createElement("div");
+        cards.className = "cards";
+
+        layer.cards.forEach((card) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "node" + (activeId === card.id ? " active" : "");
+          button.style.setProperty("--layer-index", String(layers.indexOf(layer)));
+          button.style.setProperty("--node-index", String(layer.cards.indexOf(card)));
+
+          const title = document.createElement("p");
+          title.className = "node-title";
+          title.textContent = card.title;
+          const sub = document.createElement("p");
+          sub.className = "node-sub";
+          sub.textContent = card.sub;
+          button.appendChild(title);
+          button.appendChild(sub);
+
+          button.onclick = () => {
+            if (activeId === card.id) {
+              activeId = null;
+              activeLayerId = null;
+              updateDetail(null);
+            } else {
+              activeId = card.id;
+              activeLayerId = layer.id;
+              updateDetail(card);
+            }
+            renderLayers();
+            renderContentPanel();
+          };
+
+          cards.appendChild(button);
+        });
+
+        wrap.appendChild(cards);
+        container.appendChild(wrap);
+      });
+    }
+
+    function updateDetail(card) {
+      const panel = document.getElementById("detail");
+      if (!card) {
+        panel.innerHTML = '<p style="margin:0; color:#5b6778; font-size:0.9rem; text-align:center; padding-top:1.7rem;">Select a group to explore context and examples.</p>';
+        return;
+      }
+
+      const chips = (card.examples || []).map((item) => '<span class="chip">' + item + '</span>').join('');
+      panel.innerHTML = '<p class="detail-name">' + card.title + '</p>' +
+        '<p class="detail-desc">' + card.desc + '</p>' +
+        '<div class="detail-examples">' + chips + '</div>';
+      panel.classList.remove("pulse");
+      void panel.offsetWidth;
+      panel.classList.add("pulse");
+    }
+
+    renderLayers();
+    const clearFilter = document.getElementById("clear-filter");
+    if (clearFilter) {
+      clearFilter.onclick = () => {
+        activeId = null;
+        activeLayerId = null;
+        renderLayers();
+        updateDetail(null);
+        renderContentPanel();
+      };
+    }
+
     (async () => {
       const status = document.getElementById("status");
       const content = document.getElementById("content");
 
-      const retargetExternalLinks = (root) => {
-        if (!root) return;
-        root.querySelectorAll("a[href]").forEach((a) => {
-          const href = a.getAttribute("href") || "";
-          if (!href || href.startsWith("#") || href.startsWith("/") || href.startsWith("./") || href.startsWith("../")) {
-            return;
-          }
-          if (/^https?:\/\//i.test(href)) {
-            a.setAttribute("target", "_blank");
-            a.setAttribute("rel", "noopener noreferrer");
-          }
-        });
-      };
-
       try {
-        const resp = await fetch("./latest.md", { cache: "no-cache" });
+        const resp = await fetch("./tag-index.json", { cache: "no-cache" });
         if (!resp.ok) {
-          throw new Error("HTTP " + resp.status + " while loading ./latest.md");
+          throw new Error("HTTP " + resp.status + " while loading ./tag-index.json");
         }
-        const markdown = await resp.text();
-
-        if (window.marked && typeof window.marked.parse === "function") {
-          window.marked.setOptions({ gfm: true, breaks: true, headerIds: true, mangle: false });
-          const rawHtml = window.marked.parse(markdown);
-          const safeHtml = (window.DOMPurify && typeof window.DOMPurify.sanitize === "function")
-            ? window.DOMPurify.sanitize(rawHtml)
-            : rawHtml;
-          content.innerHTML = safeHtml;
-          retargetExternalLinks(content);
-          status.textContent = "Report loaded.";
-          return;
+        const payload = await resp.json();
+        archiveArticles = Array.isArray(payload.articles)
+          ? payload.articles.slice().sort((a, b) => (Number(b.epoch) || 0) - (Number(a.epoch) || 0))
+          : [];
+        renderContentPanel();
+        if (!archiveArticles.length) {
+          status.textContent = "No stories found yet in tag index.";
         }
-
-        content.textContent = markdown;
-        status.textContent = "Renderer unavailable, showing markdown text fallback.";
       } catch (err) {
-        status.textContent = "Failed to load report markdown.";
+        status.textContent = "Failed to load story index.";
         status.classList.add("error");
-        content.innerHTML = "<p>Could not render report content. Confirm the markdown file exists.</p>";
+        content.innerHTML = "<p class=\"muted-note\">Could not load tag-index.json. Run the sender publish/archive step to generate it.</p>";
         console.error(err);
       }
     })();
