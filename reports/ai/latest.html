@@ -557,15 +557,64 @@
       return [];
     }
 
+    function extractFinanceValue(summary, keyword) {
+      if (!summary) return "";
+      const sentenceMatch = summary.match(new RegExp("[^.]*\\b" + keyword + "\\b[^.]*", "i"));
+      if (!sentenceMatch) return "";
+
+      const sentence = sentenceMatch[0];
+      const withDollar = sentence.match(/\$\s*[0-9][0-9.,]*(?:\s*(?:billion|million|trillion|bn|mn|m|b|t))?/i);
+      if (withDollar) {
+        return withDollar[0].replace(/\s+/g, " ").trim();
+      }
+
+      const usdText = sentence.match(/\b[0-9][0-9.,]*\s*(?:billion|million|trillion|bn|mn)\s*(?:usd|dollars?)\b/i);
+      if (usdText) {
+        return usdText[0].replace(/\s+/g, " ").trim();
+      }
+
+      return "";
+    }
+
+    function extractFinancePeriod(summary, fallbackStamp) {
+      if (summary) {
+        const qfy = summary.match(/\bQ[1-4]\s*(?:FY\s*)?20\d{2}\b/i);
+        if (qfy) return qfy[0].replace(/\s+/g, " ").trim();
+
+        const fy = summary.match(/\bFY\s*20\d{2}\b/i);
+        if (fy) return fy[0].replace(/\s+/g, " ").trim();
+
+        const year = summary.match(/\b20\d{2}\b/);
+        if (year) return year[0];
+      }
+      return fallbackStamp || "";
+    }
+
+    function getCompanyFinanceObservation(companyStories, keyword) {
+      for (const story of companyStories) {
+        const summary = story.summary || "";
+        const value = extractFinanceValue(summary, keyword);
+        if (!value) continue;
+        return {
+          value,
+          period: extractFinancePeriod(summary, story.stamp || "")
+        };
+      }
+      return { value: "", period: "" };
+    }
+
     function buildRevenueRows(profile, stories) {
       return (profile.companies || []).map((company) => {
         const matches = stories.filter((story) => articleBlob(story).includes(normalize(company)));
-        const value = matches.length > 0 ? ("Mentioned in " + matches.length + " " + (matches.length === 1 ? "story" : "stories")) : "—";
-        const period = matches[0] ? (matches[0].stamp || "Latest cycle") : "Latest cycle";
+        const mentions = matches.length;
+        const revenueObservation = getCompanyFinanceObservation(matches, "revenue");
+        const capexObservation = getCompanyFinanceObservation(matches, "capex");
+        const period = revenueObservation.period || capexObservation.period || "";
         return "<tr>" +
           "<td>" + esc(company) + "</td>" +
-          "<td>" + esc(profile.metric || "Revenue") + "</td>" +
-          "<td>" + esc(value) + "</td>" +
+          "<td>" + esc(revenueObservation.value) + "</td>" +
+          "<td>" + esc(capexObservation.value) + "</td>" +
+          "<td>" + esc(String(mentions)) + "</td>" +
           "<td>" + esc(period) + "</td>" +
           "<td>—</td>" +
           "</tr>";
@@ -585,7 +634,7 @@
         "<h3 class=\"section-title\">" + esc(profile.title) + "</h3>" +
         "</div>" +
         "<p class=\"section-sub\">Revenue table + latest stories for this section.</p>" +
-        "<div class=\"tbl-wrap\"><table class=\"revenue-table\"><thead><tr><th>Company</th><th>Metric</th><th>Value</th><th>Period</th><th>vs. Prior</th></tr></thead><tbody>" + tableRows + "</tbody></table></div>" +
+        "<div class=\"tbl-wrap\"><table class=\"revenue-table\"><thead><tr><th>Company</th><th>Revenue</th><th>Capex</th><th>Mentions</th><th>Period</th><th>vs. Prior</th></tr></thead><tbody>" + tableRows + "</tbody></table></div>" +
         "<p class=\"news-title\">News</p>" +
         storiesMarkup +
         "</section>";
