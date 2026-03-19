@@ -1,23 +1,24 @@
 # AI Intelligence Report
 
-**Timestamp:** Mar 19, 2026 12:12:32 EDT
-**BLUF:** China approved Nvidia H200 chip sales while simultaneously cracking down on AI in state banks, Encyclopedia Britannica sued OpenAI for memorizing its content, Anthropic launched "Agent Skills" for real-world AI agents — and component shortages, not tariffs, are now the primary drag on data center build timelines.
+**Timestamp:** Mar 19, 2026 7:57:12 EDT
+**Timestamp:** 2026-03-19T23:38:52Z
+**BLUF:** Tech giants are abandoning the power grid for expensive gas generators as AI energy demand hits a breaking point — while AI agents go mainstream in today's NYT, Merriam-Webster joins Britannica in suing OpenAI over 100,000 copyrighted articles, and Dell/HPE rally behind Nvidia's Vera Rubin at GTC.
 
 ---
 
 ## 🤖 Model Releases
 
-- **Anthropic launched "Agent Skills"** — equipping AI agents for real-world tasks, per the official Claude blog. *(2026-03-17)*
+- **AI agents go mainstream:** NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*
+  - <https://www.nytimes.com/2026/03/19/business/ai-agents-anxiety-openclaw.html>
+  - <https://www.nytimes.com/2026/03/19/technology/ai-agents-uses.html>
+- **Anthropic launched "Agent Skills"** — equipping Claude agents for real-world tasks. *(Anthropic, 2026-03-17)*
   - <https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills>
-- **Nvidia announced NeMoClaw** — details pending; announced via official Nvidia newsroom. *(2026-03-17)*
+- **Nvidia announced NeMoClaw** — enterprise AI platform, details via official newsroom. *(Nvidia, 2026-03-17)*
   - <https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw>
-- **Google DeepMind** published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon for capability benchmarks. *(Google Blog, 2026-03-17)*
-  - <https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/>
-- **ByteDance paused the global launch of Seedance 2.0** due to copyright disputes with Hollywood. *(TechCrunch, 2026-03-15)*
+- **ByteDance paused Seedance 2.0** global launch due to Hollywood copyright disputes. *(TechCrunch, 2026-03-15)*
   - <https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/>
-- **Meta** delayed its flagship model ("Avocado") after performance concerns. *(2026-03-12)*
+- **Meta** delayed its flagship model ("Avocado") after performance concerns. *(NYT, 2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html>
-- **OpenAI** official feed: no parseable items this cycle. [UNVERIFIED]
 
 ---
 
@@ -29,23 +30,22 @@
 | **Meta + Nebius** | $27B Nvidia Vera Rubin deal | Mar 2026 |
 | **Anthropic** | +$6B ARR in February alone | Feb 2026 |
 | **Nvidia** | $43B quarterly profit / $120B FY | Q4 FY2026 |
-| **Amazon (AWS)** | CEO projects $600B in AI-driven revenue by 2036 | Mar 2026 |
+| **Amazon (AWS)** | CEO projects $600B AI-driven by 2036 | Mar 2026 |
 | **Microsoft** | $81.3B revenue, profit +60% | Q2 FY2026 |
 | **Google** | $34.5B profit (+30%), CapEx up to $185B | Q4 FY2025 |
 | **OpenAI** | Raised $110B at $730B valuation | Feb 2026 |
 
-- **Amazon CEO** projects AI will double prior AWS sales projections to **$600B by 2036**. *(Reuters, 2026-03-17)*
+- **Nvidia: $1T in Blackwell + Vera Rubin orders** projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*
+  - <https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/>
+  - <https://www.bloomberg.com/news/articles/2026-03-16/nvidia-expects-to-make-1-trillion-from-ai-chips-through-2027>
+- **Amazon and Google are eating into Nvidia's chip supremacy** — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*
+  - <https://www.nytimes.com/2026/01/29/technology/amazon-google-nvidia-chips-competition.html>
+- **Amazon CEO** projects AI will double AWS sales projections to $600B by 2036. [UNVERIFIED] *(Reuters, 2026-03-17)*
   - <https://www.reuters.com/business/amazon-ceo-sees-ai-doubling-his-prior-aws-sales-projections-600-billion-by-2036-2026-03-17/>
-- **Alibaba is planning a major revamp** to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]
+- **Alibaba** planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]
   - <https://www.bloomberg.com/news/articles/2026-03-16/alibaba-plans-major-revamp-to-heighten-focus-on-ai-profits>
-- **Nvidia raised its revenue outlook to $1T through 2027** at GTC alongside the Vera Rubin and Vera CPU debuts. *(DCK, 2026-03-17)*
-  - <https://www.datacenterknowledge.com/data-center-chips/gtc-2026-nvidia-unveils-vera-rubin-ai-platform-eyes-1t-by-2027>
-- **Moody's: hyperscaler capex snowballing toward $700B** — firms pacing builds to limit overbuild risk. *(DCK, 2026-03-17)*
-  - <https://www.datacenterknowledge.com/hyperscalers/hyperscaler-capex-snowballs-toward-700b-as-firms-stage-ai-capacity-builds>
-- **Anthropic** added $6B of ARR in February alone on surging token demand. *(SemiAnalysis, 2026-03-12)*
-  - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
-- **Ex-Anthropic researchers** in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*
-  - <https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation>
+- **HBM/AI memory demand** is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*
+  - <https://www.nytimes.com/2026/01/29/technology/ai-memory-chips-pc-smartphone.html>
 
 ---
 
@@ -53,61 +53,58 @@
 
 **Policy & Geopolitics**
 
-- **Google is quietly winning the Pentagon AI race** — rebuilt its DoD relationship and is poised to benefit as OpenAI and Anthropic fight over military AI terms. *(NYT, 2026-03-18)*
+- **Google quietly winning the Pentagon AI race** — rebuilt its DoD relationship and is poised to benefit while OpenAI and Anthropic fight over terms. *(NYT, 2026-03-18)*
   - <https://www.nytimes.com/2026/03/18/technology/google-ai-pentagon.html>
-- **China approved Nvidia H200 AI chip sales** — a significant reversal as export-control tensions persist. [UNVERIFIED] *(Reuters, 2026-03-18)*
+- **China approved Nvidia H200 chip sales** and is simultaneously restarting H200 manufacturing for China — a significant policy reversal. [UNVERIFIED] *(Reuters / The Information, 2026-03-18)*
   - <https://www.reuters.com/world/china/chinese-authorities-approve-nvidias-h200-ai-chip-sales-source-says-2026-03-18/>
-- **China moved to curb AI use in banks and state agencies** — reported via Bloomberg/Reuters. [UNVERIFIED] *(Reuters, 2026-03-11)*
-  - <https://www.reuters.com/technology/china-moves-curb-use-openclaw-ai-banks-state-agencies-bloomberg-news-reports-2026-03-11/>
-- **China scrutinizing Meta's Manus AI** — authorities examining the AI agent's domestic rollout. *(NYT, 2026-03-17)*
-  - <https://www.nytimes.com/2026/03/17/technology/china-scrutiny-meta-manus.html>
-- **OpenAI named new infrastructure leaders** following a Stargate strategy shift. [UNVERIFIED] *(The Information, 2026-03-17)*
-  - <https://www.theinformation.com/articles/openai-names-new-infrastructure-leaders-following-stargate-strategy-shift>
+- **China wary of AI agents:** Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*
+  - <https://www.nytimes.com/2026/03/17/business/china-ai-agent.html>
+- **Florida Republicans split on AI regulation** — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*
+  - <https://www.nytimes.com/2026/03/16/technology/ai-florida-republicans.html>
 - **Anthropic sued DeepSeek, Moonshot, and MiniMax** — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*
   - <https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html>
 
 **IP & Legal**
 
-- **Encyclopedia Britannica sued OpenAI** for allegedly "memorizing" its content and generating copies via ChatGPT. *(The Verge, 2026-03-16)*
+- **Merriam-Webster and Encyclopedia Britannica sued OpenAI** — together they allege OpenAI violated copyright on nearly **100,000 articles** used for LLM training. *(TechCrunch, 2026-03-16)*
+  - <https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/>
   - <https://www.theverge.com/ai-artificial-intelligence/895372/encyclopedia-britannica-openai-lawsuit>
 
 **AI Labor Market**
 
 - **Coding After Coders:** Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html>
-- **"Mass Hysteria. Thousands of Jobs Lost."** — NYT examines AI's white-collar impact and potential political fallout. *(NYT, 2026-03-05)*
+- **"Mass Hysteria. Thousands of Jobs Lost."** — AI's white-collar impact may transform politics and society. *(NYT, 2026-03-05)*
   - <https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html>
 
 ---
 
 ## 🏗️ Infrastructure
 
-**Data Centers & Platforms**
+**Data Centers & Power**
 
-- **Tariffs are adding cost, but component shortages — not tariffs — are the real drag on data center build timelines.** Memory and accelerator supply is the binding constraint. *(DCK Tier 0, 2026-03-19)*
+- **Tech giants are ditching the power grid** — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*
+  - <https://www.nytimes.com/interactive/2026/03/18/business/energy-environment/data-center-energy-gas-generators.html>
+- **Dell, HPE, and OEMs at GTC 2026** backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*
+  - <https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026>
+- **Ampere expanding European cloud footprint** — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*
+  - <https://www.datacenterknowledge.com/cloud/ampere-arms-european-cloud-footprint-with-new-deployments>
+- **Component shortages — not tariffs — are the binding constraint on data center build timelines.** Memory and accelerator supply is the real bottleneck. *(DCK Tier 0, 2026-03-19)*
   - <https://www.datacenterknowledge.com/supply-chain/tariffs-add-cost-but-component-shortages-dictate-data-center-timelines>
-- **Germany's data center market is expanding** despite power and regulatory pressures; Europe's first microgrid data center is in play. *(DCK, 2026-03-19)*
-- **Data centers going off-grid:** Utilities face new cost and planning risks as AI hyperscalers bypass the grid. *(DCK, 2026-03-18)* [UNVERIFIED full details]
-  - <https://www.utilitydive.com/news/as-data-centers-go-off-grid-utilities-face-new-cost-and-planning-risks/811944/>
-- **U.S. startup building South Korea's biggest AI data center.** [UNVERIFIED] *(AI Business, 2026-03-18)*
-  - <https://aibusiness.com/generative-ai/us-startup-to-build-south-korea-s-biggest-ai-data-center>
-- **Nvidia Vera CPU** debuts to anchor next-phase AI infra — shifts design toward orchestration and real-time inference. *(DCK, 2026-03-17)*
-  - <https://www.datacenterknowledge.com/infrastructure/nvidia-debuts-vera-cpu-to-anchor-next-phase-of-ai-infrastructure>
-- **CoreWeave expanded with Nvidia B300**; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information)*
-  - <https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo>
-- **Iran's Hormuz stranglehold** continues to escalate energy prices and compress geopolitical risk for Persian Gulf AI infra. *(NYT, 2026-03-17)*
+- **Iran's Hormuz stranglehold** continues to escalate energy prices, compounding Persian Gulf AI infrastructure risk. *(NYT, 2026-03-17)*
   - <https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html>
 
-**Semiconductor Manufacturing & Supply Chain**
+**Semiconductor & Supply Chain**
 
-- **Intel Xeon 6 confirmed as host CPUs in Nvidia DGX Rubin NVL8 systems.** *(Intel Newsroom, 2026-03-16)*
-  - <https://newsroom.intel.com/data-center/intel-xeon-6-used-as-host-cpus-in-nvidia-dgx-rubin-nvl8-systems>
-- **Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm**, raising national security concerns. *(NYT, 2026-03-04)*
-  - <https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html>
+- **Taiwan chip disaster risk:** If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*
+  - <https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html>
 - **TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks** remain the core AI supply chain pressure. *(SemiAnalysis, 2026-03-12)*
   - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
-- **TSMC** press feed: no data this cycle. [UNVERIFIED] **ASML** flagged for manual review. [UNVERIFIED]
+- **Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm**, raising national security concerns about the partly taxpayer-owned chipmaker. *(NYT, 2026-03-04)*
+  - <https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html>
+- **China built a chip industry — but it's still not enough.** Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*
+  - <https://www.nytimes.com/2026/02/14/business/china-chips-nvidia-huawei.html>
 
 ---
 
-*Sources: DataCenterKnowledge + SemiAnalysis (Tier 0) · Fastmail: Data Center Knowledge, AI Daily Brief (Tier 0.5) · Google Blog + Intel Newsroom (Tier 1 polling) · NYT Article Search | Generated: 2026-03-19T16:06:41Z*
+*Sources: DataCenterKnowledge + SemiAnalysis (Tier 0) · Fastmail: Data Center Knowledge, AI Daily Brief (Tier 0.5) · NYT Article Search (17 queries) | Generated: 2026-03-19T23:38:52Z*

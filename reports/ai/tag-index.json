@@ -1,11 +1,498 @@
 {
   "version": 1,
-  "generatedAt": "2026-03-19T16:12:35.989Z",
-  "articleCount": 40,
-  "tagCount": 116,
+  "generatedAt": "2026-03-19T23:57:15.994Z",
+  "articleCount": 53,
+  "tagCount": 163,
   "articles": [
     {
       "id": "a1",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "\"Mass Hysteria. Thousands of Jobs Lost.\" — NYT examines AI's white-collar impact and potential political fallout. *(NYT, 2026-03-05)*",
+      "url": "https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html",
+      "tags": [
+        "AI",
+        "Jobs Lost",
+        "Mass Hysteria",
+        "NYT",
+        "nytimes",
+        "nytimes.com",
+        "Thousands"
+      ]
+    },
+    {
+      "id": "a2",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Alibaba is planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]",
+      "url": "https://www.bloomberg.com/news/articles/2026-03-16/alibaba-plans-major-revamp-to-heighten-focus-on-ai-profits",
+      "tags": [
+        "AI",
+        "Alibaba",
+        "bloomberg",
+        "Bloomberg",
+        "bloomberg.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a3",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Amazon CEO projects AI will double prior AWS sales projections to $600B by 2036. *(Reuters, 2026-03-17)*",
+      "url": "https://www.reuters.com/business/amazon-ceo-sees-ai-doubling-his-prior-aws-sales-projections-600-billion-by-2036-2026-03-17/",
+      "tags": [
+        "AI",
+        "Amazon",
+        "AWS",
+        "CEO",
+        "L3.2-custom-asics",
+        "L4.1-data-centers",
+        "L4.2-cloud-platforms",
+        "reuters",
+        "Reuters",
+        "reuters.com"
+      ]
+    },
+    {
+      "id": "a4",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Anthropic added $6B of ARR in February alone on surging token demand. *(SemiAnalysis, 2026-03-12)*",
+      "url": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
+      "tags": [
+        "Anthropic",
+        "ARR",
+        "February",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "newsletter",
+        "newsletter.semianalysis.com",
+        "semianalysis",
+        "SemiAnalysis"
+      ]
+    },
+    {
+      "id": "a5",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Anthropic launched \"Agent Skills\" — equipping AI agents for real-world tasks, per the official Claude blog. *(2026-03-17)*",
+      "url": "https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills",
+      "tags": [
+        "Agent Skills",
+        "AI",
+        "Anthropic",
+        "claude",
+        "Claude",
+        "claude.com",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools"
+      ]
+    },
+    {
+      "id": "a6",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Anthropic sued DeepSeek, Moonshot, and MiniMax — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*",
+      "url": "https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html",
+      "tags": [
+        "Anthropic",
+        "DeepSeek",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "MiniMax",
+        "Moonshot",
+        "NYT",
+        "nytimes",
+        "nytimes.com"
+      ]
+    },
+    {
+      "id": "a7",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns. *(NYT, 2026-03-04)*",
+      "url": "https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html",
+      "tags": [
+        "Bipartisan",
+        "Chinese",
+        "Intel",
+        "NYT",
+        "nytimes",
+        "nytimes.com"
+      ]
+    },
+    {
+      "id": "a8",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "ByteDance paused the global launch of Seedance 2.0 due to copyright disputes with Hollywood. *(TechCrunch, 2026-03-15)*",
+      "url": "https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/",
+      "tags": [
+        "ByteDance",
+        "Hollywood",
+        "Seedance",
+        "techcrunch",
+        "TechCrunch",
+        "techcrunch.com"
+      ]
+    },
+    {
+      "id": "a9",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "China approved Nvidia H200 AI chip sales — a significant reversal as export-control tensions persist. [UNVERIFIED] *(Reuters, 2026-03-18)*",
+      "url": "https://www.reuters.com/world/china/chinese-authorities-approve-nvidias-h200-ai-chip-sales-source-says-2026-03-18/",
+      "tags": [
+        "AI",
+        "China",
+        "L3.1-gpus-accelerators",
+        "Nvidia",
+        "NVIDIA",
+        "reuters",
+        "Reuters",
+        "reuters.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a10",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "China moved to curb AI use in banks and state agencies — reported via Bloomberg/Reuters. [UNVERIFIED] *(Reuters, 2026-03-11)*",
+      "url": "https://www.reuters.com/technology/china-moves-curb-use-openclaw-ai-banks-state-agencies-bloomberg-news-reports-2026-03-11/",
+      "tags": [
+        "AI",
+        "Bloomberg",
+        "China",
+        "reuters",
+        "Reuters",
+        "reuters.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a11",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "China scrutinizing Meta's Manus AI — authorities examining the AI agent's domestic rollout. *(NYT, 2026-03-17)*",
+      "url": "https://www.nytimes.com/2026/03/17/technology/china-scrutiny-meta-manus.html",
+      "tags": [
+        "AI",
+        "China",
+        "L4.1-data-centers",
+        "L6.1-api-developer-tools",
+        "Manus",
+        "Meta",
+        "NYT",
+        "nytimes",
+        "nytimes.com"
+      ]
+    },
+    {
+      "id": "a12",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*",
+      "url": "https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html",
+      "tags": [
+        "AI",
+        "Coding After Coders",
+        "L1.1-silicon-minerals",
+        "Magazine",
+        "NYT",
+        "nytimes",
+        "nytimes.com",
+        "Silicon Valley"
+      ]
+    },
+    {
+      "id": "a13",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "CoreWeave expanded with Nvidia B300; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information)*",
+      "url": "https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo",
+      "tags": [
+        "CoreWeave",
+        "IPO",
+        "L3.1-gpus-accelerators",
+        "Nvidia",
+        "NVIDIA",
+        "The Information",
+        "theinformation",
+        "theinformation.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a14",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Data centers going off-grid: Utilities face new cost and planning risks as AI hyperscalers bypass the grid. *(DCK, 2026-03-18)* [UNVERIFIED full details]",
+      "url": "https://www.utilitydive.com/news/as-data-centers-go-off-grid-utilities-face-new-cost-and-planning-risks/811944/",
+      "tags": [
+        "AI",
+        "Data",
+        "DCK",
+        "L1.2-energy-water",
+        "L4.1-data-centers",
+        "L4.3-power-grid-cooling",
+        "UNVERIFIED",
+        "Utilities",
+        "utilitydive",
+        "utilitydive.com"
+      ]
+    },
+    {
+      "id": "a15",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Encyclopedia Britannica sued OpenAI for allegedly \"memorizing\" its content and generating copies via ChatGPT. *(The Verge, 2026-03-16)*",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/895372/encyclopedia-britannica-openai-lawsuit",
+      "tags": [
+        "ChatGPT",
+        "Encyclopedia Britannica",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "L6.3-consumer-products",
+        "OpenAI",
+        "The Verge",
+        "theverge",
+        "theverge.com"
+      ]
+    },
+    {
+      "id": "a16",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*",
+      "url": "https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation",
+      "tags": [
+        "AI",
+        "Anthropic",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "The Information",
+        "theinformation",
+        "theinformation.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a17",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon for capability benchmarks. *(Google Blog, 2026-03-17)*",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/",
+      "tags": [
+        "AGI",
+        "blog",
+        "blog.google",
+        "DeepMind",
+        "google",
+        "Google",
+        "Google Blog",
+        "Google DeepMind",
+        "Kaggle",
+        "L4.1-data-centers",
+        "L5.1-ml-frameworks",
+        "L5.2-foundation-models",
+        "L5.3-mlops-data-infra",
+        "L6.1-api-developer-tools"
+      ]
+    },
+    {
+      "id": "a18",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Google is quietly winning the Pentagon AI race — rebuilt its DoD relationship and is poised to benefit as OpenAI and Anthropic fight over military AI terms. *(NYT, 2026-03-18)*",
+      "url": "https://www.nytimes.com/2026/03/18/technology/google-ai-pentagon.html",
+      "tags": [
+        "AI",
+        "Anthropic",
+        "DoD",
+        "Google",
+        "L4.1-data-centers",
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "NYT",
+        "nytimes",
+        "nytimes.com",
+        "OpenAI",
+        "Pentagon"
+      ]
+    },
+    {
+      "id": "a19",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Intel Xeon 6 confirmed as host CPUs in Nvidia DGX Rubin NVL8 systems. *(Intel Newsroom, 2026-03-16)*",
+      "url": "https://newsroom.intel.com/data-center/intel-xeon-6-used-as-host-cpus-in-nvidia-dgx-rubin-nvl8-systems",
+      "tags": [
+        "DGX",
+        "intel",
+        "Intel Newsroom",
+        "Intel Xeon",
+        "L3.1-gpus-accelerators",
+        "newsroom",
+        "newsroom.intel.com",
+        "Nvidia",
+        "NVIDIA",
+        "Rubin"
+      ]
+    },
+    {
+      "id": "a20",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Iran's Hormuz stranglehold continues to escalate energy prices and compress geopolitical risk for Persian Gulf AI infra. *(NYT, 2026-03-17)*",
+      "url": "https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html",
+      "tags": [
+        "AI",
+        "Hormuz",
+        "Iran",
+        "L1.1-silicon-minerals",
+        "L1.2-energy-water",
+        "L1.3-specialty-chemicals",
+        "NYT",
+        "nytimes",
+        "nytimes.com",
+        "Persian Gulf"
+      ]
+    },
+    {
+      "id": "a21",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Meta delayed its flagship model (\"Avocado\") after performance concerns. *(2026-03-12)*",
+      "url": "https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html",
+      "tags": [
+        "Avocado",
+        "L4.1-data-centers",
+        "L6.1-api-developer-tools",
+        "Meta",
+        "nytimes",
+        "nytimes.com"
+      ]
+    },
+    {
+      "id": "a22",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Moody's: hyperscaler capex snowballing toward $700B — firms pacing builds to limit overbuild risk. *(DCK, 2026-03-17)*",
+      "url": "https://www.datacenterknowledge.com/hyperscalers/hyperscaler-capex-snowballs-toward-700b-as-firms-stage-ai-capacity-builds",
+      "tags": [
+        "datacenterknowledge",
+        "datacenterknowledge.com",
+        "DCK",
+        "L4.1-data-centers",
+        "Moody"
+      ]
+    },
+    {
+      "id": "a23",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Nvidia Vera CPU debuts to anchor next-phase AI infra — shifts design toward orchestration and real-time inference. *(DCK, 2026-03-17)*",
+      "url": "https://www.datacenterknowledge.com/infrastructure/nvidia-debuts-vera-cpu-to-anchor-next-phase-of-ai-infrastructure",
+      "tags": [
+        "AI",
+        "CPU",
+        "datacenterknowledge",
+        "datacenterknowledge.com",
+        "DCK",
+        "L3.1-gpus-accelerators",
+        "NVIDIA",
+        "Nvidia Vera"
+      ]
+    },
+    {
+      "id": "a24",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Nvidia announced NeMoClaw — details pending; announced via official Nvidia newsroom. *(2026-03-17)*",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw",
+      "tags": [
+        "L3.1-gpus-accelerators",
+        "NeMoClaw",
+        "nvidia",
+        "Nvidia",
+        "NVIDIA",
+        "nvidianews",
+        "nvidianews.nvidia.com"
+      ]
+    },
+    {
+      "id": "a25",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Nvidia raised its revenue outlook to $1T through 2027 at GTC alongside the Vera Rubin and Vera CPU debuts. *(DCK, 2026-03-17)*",
+      "url": "https://www.datacenterknowledge.com/data-center-chips/gtc-2026-nvidia-unveils-vera-rubin-ai-platform-eyes-1t-by-2027",
+      "tags": [
+        "CPU",
+        "datacenterknowledge",
+        "datacenterknowledge.com",
+        "DCK",
+        "GTC",
+        "L3.1-gpus-accelerators",
+        "Nvidia",
+        "NVIDIA",
+        "Vera",
+        "Vera Rubin"
+      ]
+    },
+    {
+      "id": "a26",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "OpenAI named new infrastructure leaders following a Stargate strategy shift. [UNVERIFIED] *(The Information, 2026-03-17)*",
+      "url": "https://www.theinformation.com/articles/openai-names-new-infrastructure-leaders-following-stargate-strategy-shift",
+      "tags": [
+        "L5.2-foundation-models",
+        "L6.1-api-developer-tools",
+        "OpenAI",
+        "Stargate",
+        "The Information",
+        "theinformation",
+        "theinformation.com",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a27",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "Tariffs are adding cost, but component shortages — not tariffs — are the real drag on data center build timelines. Memory and accelerator supply is the binding constraint. *(DCK Tier 0, 2026-03-19)*",
+      "url": "https://www.datacenterknowledge.com/supply-chain/tariffs-add-cost-but-component-shortages-dictate-data-center-timelines",
+      "tags": [
+        "datacenterknowledge",
+        "datacenterknowledge.com",
+        "DCK",
+        "L3.1-gpus-accelerators",
+        "L3.2-custom-asics",
+        "L3.3-networking-interconnects",
+        "Memory",
+        "Tariffs",
+        "Tier"
+      ]
+    },
+    {
+      "id": "a28",
+      "epoch": 1773936752,
+      "stamp": "Mar 19, 2026 12:12:32 EDT",
+      "summary": "U.S. startup building South Korea's biggest AI data center. [UNVERIFIED] *(AI Business, 2026-03-18)*",
+      "url": "https://aibusiness.com/generative-ai/us-startup-to-build-south-korea-s-biggest-ai-data-center",
+      "tags": [
+        "AI",
+        "aibusiness",
+        "aibusiness.com",
+        "Business",
+        "South Korea",
+        "UNVERIFIED"
+      ]
+    },
+    {
+      "id": "a29",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "\"America Cannot Withstand the Economic Shock That's Coming\" — op-ed argues AI's worst job effects require empowering the private sector to absorb displaced workers. *(2026-03-06)*",
@@ -20,126 +507,7 @@
       ]
     },
     {
-      "id": "a2",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "\"Mass Hysteria. Thousands of Jobs Lost. Just How Bad Is It Going to Get?\" — NYT examines AI's impact on white-collar jobs and potential political fallout. *(2026-03-05)*",
-      "url": "https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html",
-      "tags": [
-        "AI",
-        "Get",
-        "It Going",
-        "Jobs Lost",
-        "Just How Bad Is",
-        "Mass Hysteria",
-        "NYT",
-        "nytimes",
-        "nytimes.com",
-        "Thousands"
-      ]
-    },
-    {
-      "id": "a3",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Anthropic added $6B of ARR in February alone on surging token demand and agentic workflow adoption. *(SemiAnalysis, 2026-03-12)*",
-      "url": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
-      "tags": [
-        "Anthropic",
-        "ARR",
-        "February",
-        "L5.1-foundation-models",
-        "newsletter",
-        "newsletter.semianalysis.com",
-        "semianalysis",
-        "SemiAnalysis"
-      ]
-    },
-    {
-      "id": "a4",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Anthropic sued DeepSeek, Moonshot, and MiniMax, accusing the three Chinese AI firms of using ~24,000 fraudulent accounts to harvest training data. *(2026-02-23)*",
-      "url": "https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html",
-      "tags": [
-        "AI",
-        "Anthropic",
-        "Chinese",
-        "DeepSeek",
-        "L5.1-foundation-models",
-        "MiniMax",
-        "Moonshot",
-        "nytimes",
-        "nytimes.com"
-      ]
-    },
-    {
-      "id": "a5",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns about the partly taxpayer-owned chipmaker. *(2026-03-04)*",
-      "url": "https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html",
-      "tags": [
-        "Bipartisan",
-        "Chinese",
-        "Intel",
-        "nytimes",
-        "nytimes.com"
-      ]
-    },
-    {
-      "id": "a6",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "ByteDance paused the global launch of Seedance 2.0, its video AI model, due to copyright disputes with Hollywood. *(TechCrunch, 2026-03-15)*",
-      "url": "https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/",
-      "tags": [
-        "AI",
-        "ByteDance",
-        "Hollywood",
-        "Seedance",
-        "techcrunch",
-        "TechCrunch",
-        "techcrunch.com"
-      ]
-    },
-    {
-      "id": "a7",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it, and the transformation is \"deeply weird,\" per NYT Magazine. *(2026-03-12)*",
-      "url": "https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html",
-      "tags": [
-        "AI",
-        "Coding After Coders",
-        "L6.1-enterprise-ai",
-        "Magazine",
-        "NYT",
-        "nytimes",
-        "nytimes.com",
-        "Silicon Valley"
-      ]
-    },
-    {
-      "id": "a8",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "CoreWeave expanded with Nvidia B300 chips as inference demand surges; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information, 2026-03-17)*",
-      "url": "https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo",
-      "tags": [
-        "CoreWeave",
-        "IPO",
-        "L3.1-training-accelerators",
-        "L4.1-hyperscaler-dc",
-        "Nvidia",
-        "The Information",
-        "theinformation",
-        "theinformation.com",
-        "UNVERIFIED"
-      ]
-    },
-    {
-      "id": "a9",
+      "id": "a30",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "DOGE used ChatGPT to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*",
@@ -156,74 +524,7 @@
       ]
     },
     {
-      "id": "a10",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*",
-      "url": "https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation",
-      "tags": [
-        "AI",
-        "Anthropic",
-        "L5.1-foundation-models",
-        "The Information",
-        "theinformation",
-        "theinformation.com",
-        "UNVERIFIED"
-      ]
-    },
-    {
-      "id": "a11",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon to build capability benchmarks. *(Google Blog, 2026-03-17)*",
-      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/",
-      "tags": [
-        "AGI",
-        "blog",
-        "blog.google",
-        "DeepMind",
-        "google",
-        "Google",
-        "Google Blog",
-        "Kaggle"
-      ]
-    },
-    {
-      "id": "a12",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Intel Xeon 6 confirmed as host CPUs in Nvidia DGX Rubin NVL8 systems — direct integration into Nvidia's flagship AI server platform. *(Intel Newsroom, 2026-03-16)*",
-      "url": "https://newsroom.intel.com/data-center/intel-xeon-6-used-as-host-cpus-in-nvidia-dgx-rubin-nvl8-systems",
-      "tags": [
-        "AI",
-        "DGX",
-        "intel",
-        "Intel Newsroom",
-        "Intel Xeon",
-        "L3.1-training-accelerators",
-        "newsroom",
-        "newsroom.intel.com",
-        "Nvidia",
-        "Rubin"
-      ]
-    },
-    {
-      "id": "a13",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Iran's Hormuz stranglehold continues to escalate energy prices, compounding geopolitical risk to Persian Gulf AI infrastructure. *(2026-03-17)*",
-      "url": "https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html",
-      "tags": [
-        "AI",
-        "Hormuz",
-        "Iran",
-        "nytimes",
-        "nytimes.com",
-        "Persian Gulf"
-      ]
-    },
-    {
-      "id": "a14",
+      "id": "a31",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "Kleiner Perkins and a16z led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*",
@@ -239,7 +540,7 @@
       ]
     },
     {
-      "id": "a15",
+      "id": "a32",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "Lawsuit filed against Rubio challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger AI/social media regulation. *(2026-03-09)*",
@@ -256,69 +557,7 @@
       ]
     },
     {
-      "id": "a16",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Meta delayed its flagship model (\"Avocado\") after performance concerns, despite billions spent to stay competitive. *(2026-03-12)*",
-      "url": "https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html",
-      "tags": [
-        "Avocado",
-        "Meta",
-        "nytimes",
-        "nytimes.com"
-      ]
-    },
-    {
-      "id": "a17",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Moody's: hyperscaler capex snowballing toward $700B — but firms are pacing builds and chip orders to limit overbuild risk. *(DCK, 2026-03-17)*",
-      "url": "https://www.datacenterknowledge.com/hyperscalers/hyperscaler-capex-snowballs-toward-700b-as-firms-stage-ai-capacity-builds",
-      "tags": [
-        "datacenterknowledge",
-        "datacenterknowledge.com",
-        "DCK",
-        "L4.1-hyperscaler-dc",
-        "Moody"
-      ]
-    },
-    {
-      "id": "a18",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Nvidia debuts Vera CPU to anchor next-phase AI infrastructure — signals a shift toward orchestration, inference, and real-time execution at the center of data center design. *(DCK, 2026-03-17)*",
-      "url": "https://www.datacenterknowledge.com/infrastructure/nvidia-debuts-vera-cpu-to-anchor-next-phase-of-ai-infrastructure",
-      "tags": [
-        "AI",
-        "CPU",
-        "datacenterknowledge",
-        "datacenterknowledge.com",
-        "DCK",
-        "L3.1-training-accelerators",
-        "L4.1-hyperscaler-dc",
-        "Nvidia",
-        "Vera"
-      ]
-    },
-    {
-      "id": "a19",
-      "epoch": 1773737586,
-      "stamp": "Mar 17, 2026 4:53:06 EDT",
-      "summary": "Nvidia raised its revenue outlook to $1T through 2027 at GTC alongside the Vera Rubin debut and a path to orbital data centers. *(DCK, 2026-03-17)*",
-      "url": "https://www.datacenterknowledge.com/data-center-chips/gtc-2026-nvidia-unveils-vera-rubin-ai-platform-eyes-1t-by-2027",
-      "tags": [
-        "datacenterknowledge",
-        "datacenterknowledge.com",
-        "DCK",
-        "GTC",
-        "L3.1-training-accelerators",
-        "L4.1-hyperscaler-dc",
-        "Nvidia",
-        "Vera Rubin"
-      ]
-    },
-    {
-      "id": "a20",
+      "id": "a33",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces opposition over rising electric bills and harm to a nearby tribal reservation. *(2026-03-17)*",
@@ -336,7 +575,7 @@
       ]
     },
     {
-      "id": "a21",
+      "id": "a34",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "South Korea and Taiwan chipmaking stocks plunged then rebounded on Iran energy fears — showing AI-sector bullishness offsetting macro risk. *(2026-03-05)*",
@@ -351,7 +590,7 @@
       ]
     },
     {
-      "id": "a22",
+      "id": "a35",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "Trump banned Anthropic from federal use after a Pentagon standoff; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*",
@@ -367,7 +606,7 @@
       ]
     },
     {
-      "id": "a23",
+      "id": "a36",
       "epoch": 1773737586,
       "stamp": "Mar 17, 2026 4:53:06 EDT",
       "summary": "Trump banned Anthropic from federal use after a Pentagon standoff; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*",
@@ -383,7 +622,7 @@
       ]
     },
     {
-      "id": "a24",
+      "id": "a37",
       "epoch": 1773730361,
       "stamp": "Mar 17, 2026 2:52:41 EDT",
       "summary": "Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*",
@@ -397,7 +636,7 @@
       ]
     },
     {
-      "id": "a25",
+      "id": "a38",
       "epoch": 1773724096,
       "stamp": "Mar 17, 2026 1:08:16 EDT",
       "summary": "Jensen Huang opened Nvidia GTC 2026, framing Nvidia as defending the AI era it built. *(2026-03-16)*",
@@ -412,7 +651,7 @@
       ]
     },
     {
-      "id": "a26",
+      "id": "a39",
       "epoch": 1773724096,
       "stamp": "Mar 17, 2026 1:08:16 EDT",
       "summary": "Microsoft + Meta fueling a near-$1T boom in global data center leases. [UNVERIFIED] *(AFR, 2026-03-13)*",
@@ -428,7 +667,7 @@
       ]
     },
     {
-      "id": "a27",
+      "id": "a40",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "AI Daily Brief email lead: ByteDance reportedly paused global launch of Seedance 2.0 video generator, with matching secondary signal from TechCrunch.",
@@ -442,7 +681,7 @@
       ]
     },
     {
-      "id": "a28",
+      "id": "a41",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "AI industry energy pledge: Google, Microsoft, and OpenAI committed to fund their own power plants and grid upgrades at a White House event. *(2026-03-04)*",
@@ -458,7 +697,7 @@
       ]
     },
     {
-      "id": "a29",
+      "id": "a42",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "Google profits +30% to $34.5B last quarter; plans to increase capital spending to as much as $185B this year. *(2026-02-04)*",
@@ -470,7 +709,7 @@
       ]
     },
     {
-      "id": "a30",
+      "id": "a43",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "Iran threatened attacks on Amazon, Google, and other U.S. tech infrastructure in the Persian Gulf, putting trillions in regional AI investments at risk. *(2026-03-13)*",
@@ -488,7 +727,7 @@
       ]
     },
     {
-      "id": "a31",
+      "id": "a44",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "Microsoft Q2: $81.3B revenue, profit +60% — stock still dropped 7% after-hours on capex concerns. *(2026-01-28)*",
@@ -501,7 +740,7 @@
       ]
     },
     {
-      "id": "a32",
+      "id": "a45",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "Nscale raised $2B for AI data centers; Sheryl Sandberg joined its board. *(2026-03-09)*",
@@ -517,7 +756,7 @@
       ]
     },
     {
-      "id": "a33",
+      "id": "a46",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "Nvidia quarterly profit hit $43B; full fiscal year was $120B vs. $4.4B just three years ago. *(2026-02-25)*",
@@ -529,7 +768,7 @@
       ]
     },
     {
-      "id": "a34",
+      "id": "a47",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "OpenAI / Disney struck a deal to bring Disney characters into Sora-generated video — a watershed moment for Hollywood's AI reckoning. *(2025-12-11)*",
@@ -544,7 +783,7 @@
       ]
     },
     {
-      "id": "a35",
+      "id": "a48",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "OpenAI closed $110B raise led by Amazon, Nvidia, and SoftBank at a $730B valuation. *(2026-02-27)*",
@@ -558,7 +797,7 @@
       ]
     },
     {
-      "id": "a36",
+      "id": "a49",
       "epoch": 1773707938,
       "stamp": "2026-03-17T00-38-58Z",
       "summary": "OpenAI vs. Google: OpenAI released new tech claiming to top Google's latest, signaling a tougher competitive phase ahead. *(2025-12-11)*",
@@ -571,7 +810,7 @@
       ]
     },
     {
-      "id": "a37",
+      "id": "a50",
       "epoch": 1773504436,
       "stamp": "2026-03-14T16-07-16Z",
       "summary": "AMD signed a chips-for-stock deal with Meta in a push to challenge Nvidia. *(2026-02-24)*",
@@ -586,7 +825,7 @@
       ]
     },
     {
-      "id": "a38",
+      "id": "a51",
       "epoch": 1773504436,
       "stamp": "2026-03-14T16-07-16Z",
       "summary": "Anthropic resumed talks with the Pentagon and is reportedly working toward a resolution. *(2026-03-05)*",
@@ -599,7 +838,7 @@
       ]
     },
     {
-      "id": "a39",
+      "id": "a52",
       "epoch": 1773504436,
       "stamp": "2026-03-14T16-07-16Z",
       "summary": "Cloverleaf Infrastructure is packaging land + electricity for data center buildouts — the modern \"land rush\" play. *(2026-03-05)*",
@@ -612,7 +851,7 @@
       ]
     },
     {
-      "id": "a40",
+      "id": "a53",
       "epoch": 1773504436,
       "stamp": "2026-03-14T16-07-16Z",
       "summary": "Google acquired Intersect (data center + energy developer) for $4.75B to accelerate AI infra buildout. *(2025-12-22)*",
@@ -630,355 +869,502 @@
   ],
   "tagToArticleIds": {
     "a16z": [
-      "a14"
+      "a31"
     ],
     "acquisition": [
-      "a40"
+      "a53"
     ],
     "afr": [
-      "a26"
+      "a39"
     ],
     "AFR": [
-      "a26"
+      "a39"
     ],
     "afr.com": [
-      "a26"
+      "a39"
+    ],
+    "Agent Skills": [
+      "a5"
     ],
     "AGI": [
-      "a11"
+      "a17"
     ],
     "AI": [
       "a1",
       "a2",
-      "a4",
-      "a6",
-      "a7",
+      "a3",
+      "a5",
       "a9",
       "a10",
+      "a11",
       "a12",
-      "a13",
-      "a15",
+      "a14",
+      "a16",
       "a18",
       "a20",
-      "a21",
-      "a25",
-      "a27",
+      "a23",
       "a28",
+      "a29",
       "a30",
       "a32",
+      "a33",
       "a34",
-      "a40"
+      "a38",
+      "a40",
+      "a41",
+      "a43",
+      "a45",
+      "a47",
+      "a53"
+    ],
+    "aibusiness": [
+      "a28"
+    ],
+    "aibusiness.com": [
+      "a28"
+    ],
+    "Alibaba": [
+      "a2"
     ],
     "Amazon": [
-      "a30",
-      "a35"
+      "a3",
+      "a43",
+      "a48"
     ],
     "AMD": [
-      "a37"
+      "a50"
     ],
     "America Cannot Withstand": [
-      "a1"
+      "a29"
     ],
     "Anthropic": [
-      "a3",
       "a4",
-      "a10",
-      "a22",
-      "a23",
-      "a24",
-      "a38"
+      "a5",
+      "a6",
+      "a16",
+      "a18",
+      "a35",
+      "a36",
+      "a37",
+      "a51"
     ],
     "ARR": [
-      "a3"
+      "a4"
     ],
     "Avocado": [
-      "a16"
+      "a21"
+    ],
+    "AWS": [
+      "a3"
     ],
     "Bipartisan": [
-      "a5"
+      "a7"
     ],
     "blog": [
-      "a11"
+      "a17"
     ],
     "blog.google": [
-      "a11"
+      "a17"
+    ],
+    "bloomberg": [
+      "a2"
+    ],
+    "Bloomberg": [
+      "a2",
+      "a10"
+    ],
+    "bloomberg.com": [
+      "a2"
     ],
     "Buffalo": [
-      "a20"
+      "a33"
+    ],
+    "Business": [
+      "a28"
     ],
     "ByteDance": [
-      "a6"
+      "a8"
+    ],
+    "CEO": [
+      "a3"
     ],
     "ChatGPT": [
-      "a9"
+      "a15",
+      "a30"
+    ],
+    "China": [
+      "a9",
+      "a10",
+      "a11"
     ],
     "Chinese": [
-      "a4",
+      "a7"
+    ],
+    "claude": [
+      "a5"
+    ],
+    "Claude": [
+      "a5"
+    ],
+    "claude.com": [
       "a5"
     ],
     "Cloverleaf Infrastructure": [
-      "a39"
+      "a52"
     ],
     "Coding After Coders": [
-      "a7"
+      "a12"
     ],
     "Coming": [
-      "a1"
+      "a29"
     ],
     "CoreWeave": [
-      "a8"
-    ],
-    "CPU": [
-      "a18"
-    ],
-    "Daily Brief": [
-      "a27"
-    ],
-    "datacenterknowledge": [
-      "a17",
-      "a18",
-      "a19"
-    ],
-    "datacenterknowledge.com": [
-      "a17",
-      "a18",
-      "a19"
-    ],
-    "DCK": [
-      "a17",
-      "a18",
-      "a19"
-    ],
-    "DeepMind": [
-      "a11"
-    ],
-    "DeepSeek": [
-      "a4"
-    ],
-    "DGX": [
-      "a12"
-    ],
-    "Disney": [
-      "a34"
-    ],
-    "DOGE": [
-      "a9"
-    ],
-    "Economic Shock That": [
-      "a1"
-    ],
-    "February": [
-      "a3"
-    ],
-    "funding": [
-      "a30",
-      "a32",
-      "a35"
-    ],
-    "Get": [
-      "a2"
-    ],
-    "google": [
-      "a11"
-    ],
-    "Google": [
-      "a11",
-      "a28",
-      "a29",
-      "a30",
-      "a36",
-      "a40"
-    ],
-    "Google Blog": [
-      "a11"
-    ],
-    "gpu": [
-      "a37"
-    ],
-    "GTC": [
-      "a19",
-      "a25"
-    ],
-    "Hollywood": [
-      "a6",
-      "a34"
-    ],
-    "Hormuz": [
       "a13"
     ],
-    "infrastructure": [
-      "a26",
-      "a28",
-      "a30",
-      "a32",
-      "a39",
-      "a40"
-    ],
-    "intel": [
-      "a12"
-    ],
-    "Intel": [
-      "a5"
-    ],
-    "Intel Newsroom": [
-      "a12"
-    ],
-    "Intel Xeon": [
-      "a12"
-    ],
-    "Intersect": [
-      "a40"
-    ],
-    "IPO": [
-      "a8"
-    ],
-    "Iran": [
-      "a13",
-      "a21",
-      "a30"
-    ],
-    "It Going": [
-      "a2"
-    ],
-    "Jensen Huang": [
+    "CPU": [
+      "a23",
       "a25"
     ],
-    "Jobs Lost": [
-      "a2"
+    "Daily Brief": [
+      "a40"
     ],
-    "Just How Bad Is": [
-      "a2"
-    ],
-    "Kaggle": [
-      "a11"
-    ],
-    "Kleiner Perkins": [
+    "Data": [
       "a14"
     ],
-    "L2.2-equipment": [
-      "a20"
-    ],
-    "L3.1-training-accelerators": [
-      "a8",
-      "a12",
-      "a18",
-      "a19"
-    ],
-    "L4.1-hyperscaler-dc": [
-      "a8",
-      "a15",
-      "a17",
-      "a18",
-      "a19",
-      "a20"
-    ],
-    "L5.1-foundation-models": [
-      "a3",
-      "a4",
-      "a9",
-      "a10",
+    "datacenterknowledge": [
       "a22",
-      "a23"
+      "a23",
+      "a25",
+      "a27"
     ],
-    "L6.1-enterprise-ai": [
-      "a7"
+    "datacenterknowledge.com": [
+      "a22",
+      "a23",
+      "a25",
+      "a27"
     ],
-    "L6.2-consumer-ai": [
-      "a9"
+    "DCK": [
+      "a14",
+      "a22",
+      "a23",
+      "a25",
+      "a27"
     ],
-    "L6.3-regulation-policy": [
-      "a15"
-    ],
-    "Lawsuit": [
-      "a15"
-    ],
-    "Magazine": [
-      "a7"
-    ],
-    "Mass Hysteria": [
-      "a2"
-    ],
-    "Meta": [
-      "a16",
-      "a26",
-      "a37"
-    ],
-    "Microsoft": [
-      "a24",
-      "a26",
-      "a28",
-      "a31"
-    ],
-    "MiniMax": [
-      "a4"
-    ],
-    "model": [
-      "a36"
-    ],
-    "Moody": [
+    "DeepMind": [
       "a17"
     ],
-    "Moonshot": [
+    "DeepSeek": [
+      "a6"
+    ],
+    "DGX": [
+      "a19"
+    ],
+    "Disney": [
+      "a47"
+    ],
+    "DoD": [
+      "a18"
+    ],
+    "DOGE": [
+      "a30"
+    ],
+    "Economic Shock That": [
+      "a29"
+    ],
+    "Encyclopedia Britannica": [
+      "a15"
+    ],
+    "February": [
       "a4"
     ],
-    "NEH": [
-      "a9"
+    "funding": [
+      "a43",
+      "a45",
+      "a48"
     ],
-    "Neolab": [
-      "a14"
+    "google": [
+      "a17"
     ],
-    "newsletter": [
-      "a3"
-    ],
-    "newsletter.semianalysis.com": [
-      "a3"
-    ],
-    "newsroom": [
-      "a12"
-    ],
-    "newsroom.intel.com": [
-      "a12"
-    ],
-    "Nscale": [
-      "a32"
-    ],
-    "Nvidia": [
-      "a8",
-      "a12",
+    "Google": [
+      "a17",
       "a18",
-      "a19",
-      "a25",
-      "a33",
-      "a35",
-      "a37"
+      "a41",
+      "a42",
+      "a43",
+      "a49",
+      "a53"
     ],
-    "NY": [
+    "Google Blog": [
+      "a17"
+    ],
+    "Google DeepMind": [
+      "a17"
+    ],
+    "gpu": [
+      "a50"
+    ],
+    "GTC": [
+      "a25",
+      "a38"
+    ],
+    "Hollywood": [
+      "a8",
+      "a47"
+    ],
+    "Hormuz": [
       "a20"
     ],
-    "NYT": [
-      "a2",
+    "infrastructure": [
+      "a39",
+      "a41",
+      "a43",
+      "a45",
+      "a52",
+      "a53"
+    ],
+    "intel": [
+      "a19"
+    ],
+    "Intel": [
       "a7"
+    ],
+    "Intel Newsroom": [
+      "a19"
+    ],
+    "Intel Xeon": [
+      "a19"
+    ],
+    "Intersect": [
+      "a53"
+    ],
+    "IPO": [
+      "a13"
+    ],
+    "Iran": [
+      "a20",
+      "a34",
+      "a43"
+    ],
+    "Jensen Huang": [
+      "a38"
+    ],
+    "Jobs Lost": [
+      "a1"
+    ],
+    "Kaggle": [
+      "a17"
+    ],
+    "Kleiner Perkins": [
+      "a31"
+    ],
+    "L1.1-silicon-minerals": [
+      "a12",
+      "a20"
+    ],
+    "L1.2-energy-water": [
+      "a14",
+      "a20"
+    ],
+    "L1.3-specialty-chemicals": [
+      "a20"
+    ],
+    "L2.2-equipment": [
+      "a33"
+    ],
+    "L3.1-gpus-accelerators": [
+      "a9",
+      "a13",
+      "a19",
+      "a23",
+      "a24",
+      "a25",
+      "a27"
+    ],
+    "L3.2-custom-asics": [
+      "a3",
+      "a27"
+    ],
+    "L3.3-networking-interconnects": [
+      "a27"
+    ],
+    "L4.1-data-centers": [
+      "a3",
+      "a11",
+      "a14",
+      "a17",
+      "a18",
+      "a21",
+      "a22"
+    ],
+    "L4.1-hyperscaler-dc": [
+      "a32",
+      "a33"
+    ],
+    "L4.2-cloud-platforms": [
+      "a3"
+    ],
+    "L4.3-power-grid-cooling": [
+      "a14"
+    ],
+    "L5.1-foundation-models": [
+      "a30",
+      "a35",
+      "a36"
+    ],
+    "L5.1-ml-frameworks": [
+      "a17"
+    ],
+    "L5.2-foundation-models": [
+      "a4",
+      "a5",
+      "a6",
+      "a15",
+      "a16",
+      "a17",
+      "a18",
+      "a26"
+    ],
+    "L5.3-mlops-data-infra": [
+      "a17"
+    ],
+    "L6.1-api-developer-tools": [
+      "a4",
+      "a5",
+      "a6",
+      "a11",
+      "a15",
+      "a16",
+      "a17",
+      "a18",
+      "a21",
+      "a26"
+    ],
+    "L6.2-consumer-ai": [
+      "a30"
+    ],
+    "L6.3-consumer-products": [
+      "a15"
+    ],
+    "L6.3-regulation-policy": [
+      "a32"
+    ],
+    "Lawsuit": [
+      "a32"
+    ],
+    "Magazine": [
+      "a12"
+    ],
+    "Manus": [
+      "a11"
+    ],
+    "Mass Hysteria": [
+      "a1"
+    ],
+    "Memory": [
+      "a27"
+    ],
+    "Meta": [
+      "a11",
+      "a21",
+      "a39",
+      "a50"
+    ],
+    "Microsoft": [
+      "a37",
+      "a39",
+      "a41",
+      "a44"
+    ],
+    "MiniMax": [
+      "a6"
+    ],
+    "model": [
+      "a49"
+    ],
+    "Moody": [
+      "a22"
+    ],
+    "Moonshot": [
+      "a6"
+    ],
+    "NEH": [
+      "a30"
+    ],
+    "NeMoClaw": [
+      "a24"
+    ],
+    "Neolab": [
+      "a31"
+    ],
+    "newsletter": [
+      "a4"
+    ],
+    "newsletter.semianalysis.com": [
+      "a4"
+    ],
+    "newsroom": [
+      "a19"
+    ],
+    "newsroom.intel.com": [
+      "a19"
+    ],
+    "Nscale": [
+      "a45"
+    ],
+    "nvidia": [
+      "a24"
+    ],
+    "Nvidia": [
+      "a9",
+      "a13",
+      "a19",
+      "a24",
+      "a25",
+      "a38",
+      "a46",
+      "a48",
+      "a50"
+    ],
+    "NVIDIA": [
+      "a9",
+      "a13",
+      "a19",
+      "a23",
+      "a24",
+      "a25"
+    ],
+    "Nvidia Vera": [
+      "a23"
+    ],
+    "nvidianews": [
+      "a24"
+    ],
+    "nvidianews.nvidia.com": [
+      "a24"
+    ],
+    "NY": [
+      "a33"
+    ],
+    "NYT": [
+      "a1",
+      "a6",
+      "a7",
+      "a11",
+      "a12",
+      "a18",
+      "a20"
     ],
     "nytimes": [
       "a1",
-      "a2",
-      "a4",
-      "a5",
+      "a6",
       "a7",
-      "a9",
-      "a13",
-      "a15",
-      "a16",
+      "a11",
+      "a12",
+      "a18",
       "a20",
       "a21",
-      "a22",
-      "a23",
-      "a24",
-      "a25",
-      "a28",
       "a29",
       "a30",
-      "a31",
       "a32",
       "a33",
       "a34",
@@ -986,29 +1372,31 @@
       "a36",
       "a37",
       "a38",
-      "a39",
-      "a40"
+      "a41",
+      "a42",
+      "a43",
+      "a44",
+      "a45",
+      "a46",
+      "a47",
+      "a48",
+      "a49",
+      "a50",
+      "a51",
+      "a52",
+      "a53"
     ],
     "nytimes.com": [
       "a1",
-      "a2",
-      "a4",
-      "a5",
+      "a6",
       "a7",
-      "a9",
-      "a13",
-      "a15",
-      "a16",
+      "a11",
+      "a12",
+      "a18",
       "a20",
       "a21",
-      "a22",
-      "a23",
-      "a24",
-      "a25",
-      "a28",
       "a29",
       "a30",
-      "a31",
       "a32",
       "a33",
       "a34",
@@ -1016,113 +1404,180 @@
       "a36",
       "a37",
       "a38",
-      "a39",
-      "a40"
+      "a41",
+      "a42",
+      "a43",
+      "a44",
+      "a45",
+      "a46",
+      "a47",
+      "a48",
+      "a49",
+      "a50",
+      "a51",
+      "a52",
+      "a53"
     ],
     "OpenAI": [
-      "a22",
-      "a23"
+      "a15",
+      "a18",
+      "a26",
+      "a35",
+      "a36"
     ],
     "Pentagon": [
-      "a22",
-      "a23",
-      "a24",
-      "a38"
+      "a18",
+      "a35",
+      "a36",
+      "a37",
+      "a51"
     ],
     "Persian Gulf": [
-      "a13",
-      "a30"
+      "a20",
+      "a43"
+    ],
+    "reuters": [
+      "a3",
+      "a9",
+      "a10"
+    ],
+    "Reuters": [
+      "a3",
+      "a9",
+      "a10"
+    ],
+    "reuters.com": [
+      "a3",
+      "a9",
+      "a10"
     ],
     "revenue": [
-      "a31"
+      "a44"
     ],
     "Rochester": [
-      "a20"
+      "a33"
     ],
     "Rubin": [
-      "a12"
-    ],
-    "Rubio": [
-      "a15"
-    ],
-    "Rural": [
-      "a20"
-    ],
-    "Seedance": [
-      "a6",
-      "a27"
-    ],
-    "semianalysis": [
-      "a3"
-    ],
-    "SemiAnalysis": [
-      "a3"
-    ],
-    "Sheryl Sandberg": [
-      "a32"
-    ],
-    "Silicon Valley": [
-      "a7"
-    ],
-    "Sora": [
-      "a34"
-    ],
-    "South Korea": [
-      "a21"
-    ],
-    "State Dept": [
-      "a15"
-    ],
-    "Taiwan": [
-      "a21"
-    ],
-    "techcrunch": [
-      "a6"
-    ],
-    "TechCrunch": [
-      "a6"
-    ],
-    "techcrunch.com": [
-      "a6"
-    ],
-    "The Information": [
-      "a8",
-      "a10",
-      "a14"
-    ],
-    "theinformation": [
-      "a8",
-      "a10",
-      "a14",
-      "a27"
-    ],
-    "theinformation.com": [
-      "a8",
-      "a10",
-      "a14",
-      "a27"
-    ],
-    "Thousands": [
-      "a2"
-    ],
-    "Trump": [
-      "a22",
-      "a23"
-    ],
-    "UNVERIFIED": [
-      "a8",
-      "a10",
-      "a14",
-      "a26"
-    ],
-    "Vera": [
-      "a18"
-    ],
-    "Vera Rubin": [
       "a19"
     ],
+    "Rubio": [
+      "a32"
+    ],
+    "Rural": [
+      "a33"
+    ],
+    "Seedance": [
+      "a8",
+      "a40"
+    ],
+    "semianalysis": [
+      "a4"
+    ],
+    "SemiAnalysis": [
+      "a4"
+    ],
+    "Sheryl Sandberg": [
+      "a45"
+    ],
+    "Silicon Valley": [
+      "a12"
+    ],
+    "Sora": [
+      "a47"
+    ],
+    "South Korea": [
+      "a28",
+      "a34"
+    ],
+    "Stargate": [
+      "a26"
+    ],
+    "State Dept": [
+      "a32"
+    ],
+    "Taiwan": [
+      "a34"
+    ],
+    "Tariffs": [
+      "a27"
+    ],
+    "techcrunch": [
+      "a8"
+    ],
+    "TechCrunch": [
+      "a8"
+    ],
+    "techcrunch.com": [
+      "a8"
+    ],
+    "The Information": [
+      "a13",
+      "a16",
+      "a26",
+      "a31"
+    ],
+    "The Verge": [
+      "a15"
+    ],
+    "theinformation": [
+      "a13",
+      "a16",
+      "a26",
+      "a31",
+      "a40"
+    ],
+    "theinformation.com": [
+      "a13",
+      "a16",
+      "a26",
+      "a31",
+      "a40"
+    ],
+    "theverge": [
+      "a15"
+    ],
+    "theverge.com": [
+      "a15"
+    ],
+    "Thousands": [
+      "a1"
+    ],
+    "Tier": [
+      "a27"
+    ],
+    "Trump": [
+      "a35",
+      "a36"
+    ],
+    "UNVERIFIED": [
+      "a2",
+      "a9",
+      "a10",
+      "a13",
+      "a14",
+      "a16",
+      "a26",
+      "a28",
+      "a31",
+      "a39"
+    ],
+    "Utilities": [
+      "a14"
+    ],
+    "utilitydive": [
+      "a14"
+    ],
+    "utilitydive.com": [
+      "a14"
+    ],
+    "Vera": [
+      "a25"
+    ],
+    "Vera Rubin": [
+      "a25"
+    ],
     "White House": [
-      "a28"
+      "a41"
     ]
   }
 }
