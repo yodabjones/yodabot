@@ -1,0 +1,593 @@
+{
+  "activeTemplateId": "ai",
+  "templates": {
+    "ai": {
+      "id": "ai",
+      "name": "AI Supply Chain Intelligence",
+      "description": "Template for AI supply-chain and ecosystem research.",
+      "defaultGroupPopupTable": {
+        "buttonLabel": "▦ Revenue",
+        "title": "Revenue Table",
+        "subtitle": "Group finance snapshot",
+        "note": "Revenue and CapEx values are extracted from matched story text for the selected group.",
+        "rowSource": {
+          "type": "companies"
+        },
+        "columns": [
+          {
+            "key": "company",
+            "label": "Company",
+            "valueDescription": "Tracked company name for this group",
+            "derive": { "type": "company" }
+          },
+          {
+            "key": "revenue",
+            "label": "Revenue",
+            "valueDescription": "First revenue-like mention in a matched story (revenue, ARR, funding, valuation, or profit)",
+            "derive": { "type": "financeValue", "metric": "revenue" }
+          },
+          {
+            "key": "capex",
+            "label": "Capex",
+            "valueDescription": "First capital spending mention from matched stories",
+            "derive": { "type": "financeValue", "metric": "capex" }
+          },
+          {
+            "key": "mentions",
+            "label": "Mentions",
+            "valueDescription": "Count of matched stories that mention the company",
+            "derive": { "type": "mentions" }
+          },
+          {
+            "key": "period",
+            "label": "Period",
+            "valueDescription": "Reported period inferred from story text (e.g., quarter/year)",
+            "derive": { "type": "financePeriod", "metrics": ["revenue", "capex"] }
+          },
+          {
+            "key": "vsPrior",
+            "label": "vs. Prior",
+            "valueDescription": "Comparison versus prior report (placeholder until trend storage is added)",
+            "derive": { "type": "literal", "value": "—" }
+          }
+        ]
+      },
+      "signalHosts": [
+        "openai.com",
+        "anthropic.com",
+        "google.com",
+        "cloud.google.com",
+        "microsoft.com",
+        "nvidia.com",
+        "investor.nvidia.com",
+        "datacenterknowledge.com",
+        "datacenterdynamics.com",
+        "datacenterfrontier.com",
+        "sec.gov",
+        "ftc.gov",
+        "justice.gov",
+        "gov.uk",
+        "reuters.com",
+        "bloomberg.com",
+        "ft.com",
+        "techcrunch.com",
+        "theverge.com",
+        "theinformation.com",
+        "fortune.com",
+        "wired.com",
+        "newyorkfed.org",
+        "forbes.com"
+      ],
+      "layers": [
+        {
+          "id": "raw",
+          "name": "Raw materials",
+          "description": "Upstream physical and utility inputs",
+          "searchTopicKeywords": ["minerals", "energy", "water"],
+          "groups": [
+            {
+              "id": "silicon",
+              "name": "Silicon & minerals",
+              "description": "Critical mineral and silicon supply",
+              "searchTopicKeywords": ["silicon", "mineral", "rare earth"],
+              "search": {
+                "entities": ["silicon", "rare earth", "lithium"],
+                "phrases": ["semiconductor supply"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["rare earth silicon semiconductor supply"]
+                  }
+                }
+              },
+              "companies": ["Albemarle", "SQM", "MP Materials", "Lynas", "Ucore"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Silicon & minerals Revenue Table"
+              }
+            },
+            {
+              "id": "energy",
+              "name": "Energy & water",
+              "description": "Power and water constraints",
+              "searchTopicKeywords": ["power", "grid", "water"],
+              "search": {
+                "entities": ["datacenter", "power grid", "utility"],
+                "phrases": ["power demand"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["data center power grid demand"]
+                  }
+                }
+              },
+              "companies": ["Constellation Energy", "Vistra", "NextEra", "AES", "NRG Energy"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Energy & water Revenue Table"
+              }
+            },
+            {
+              "id": "chemicals",
+              "name": "Specialty chemicals",
+              "description": "Cooling and specialty process inputs",
+              "searchTopicKeywords": ["cooling", "chemical", "thermal"],
+              "search": {
+                "entities": ["liquid cooling", "thermal management"],
+                "phrases": ["datacenter cooling"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["ai data center liquid cooling"]
+                  }
+                }
+              },
+              "companies": ["Vertiv", "Modine", "Alfa Laval", "Stulz", "Schneider Electric"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Specialty chemicals Revenue Table"
+              }
+            }
+          ]
+        },
+        {
+          "id": "semi",
+          "name": "Semiconductors",
+          "description": "Foundry, equipment, and memory supply",
+          "searchTopicKeywords": ["foundry", "fab", "hbm"],
+          "groups": [
+            {
+              "id": "eqp",
+              "name": "Fab equipment",
+              "description": "Lithography and fab tooling",
+              "searchTopicKeywords": ["asml", "euv", "equipment"],
+              "search": {
+                "entities": ["asml", "applied materials", "lam research"],
+                "phrases": ["semiconductor equipment"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["asml lithography semiconductor equipment"]
+                  }
+                }
+              },
+              "companies": ["ASML", "Applied Materials", "Lam Research", "KLA", "Tokyo Electron"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Fab equipment Revenue Table"
+              }
+            },
+            {
+              "id": "foundry",
+              "name": "Foundries",
+              "description": "Process capacity and foundry dynamics",
+              "searchTopicKeywords": ["foundry", "tsmc", "samsung"],
+              "search": {
+                "entities": ["tsmc", "samsung", "intel foundry"],
+                "phrases": ["foundry capacity"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["tsmc samsung foundry capacity"]
+                  }
+                }
+              },
+              "companies": ["TSMC", "Samsung Foundry", "GlobalFoundries", "SMIC", "Intel Foundry"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Foundries Revenue Table"
+              }
+            },
+            {
+              "id": "memory",
+              "name": "Memory & storage",
+              "description": "HBM and memory subsystem supply",
+              "searchTopicKeywords": ["hbm", "dram", "nand"],
+              "search": {
+                "entities": ["hbm", "dram", "micron"],
+                "phrases": ["ai memory supply"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["hbm dram ai memory supply"]
+                  }
+                }
+              },
+              "companies": ["SK Hynix", "Micron", "Samsung Memory", "Kioxia", "Western Digital"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Memory & storage Revenue Table"
+              }
+            }
+          ]
+        },
+        {
+          "id": "hw",
+          "name": "AI hardware",
+          "description": "Compute and interconnect hardware",
+          "searchTopicKeywords": ["gpu", "accelerator", "interconnect"],
+          "groups": [
+            {
+              "id": "gpu",
+              "name": "GPUs & accelerators",
+              "description": "Training compute hardware",
+              "searchTopicKeywords": ["nvidia", "h100", "b200"],
+              "search": {
+                "entities": ["nvidia", "h100", "b200"],
+                "phrases": ["ai datacenter"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["nvidia ai chips data centers"]
+                  }
+                }
+              },
+              "companies": ["NVIDIA", "AMD", "Intel Gaudi", "Cerebras", "SambaNova"],
+              "popupTable": {
+                "enabled": true,
+                "title": "GPUs & accelerators Revenue Table"
+              }
+            },
+            {
+              "id": "asic",
+              "name": "Custom ASICs",
+              "description": "Inference and custom silicon",
+              "searchTopicKeywords": ["asic", "trainium", "inferentia"],
+              "search": {
+                "entities": ["trainium", "inferentia", "asic"],
+                "phrases": ["custom ai chip"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["trainium inferentia custom ai chip"]
+                  }
+                }
+              },
+              "companies": ["Qualcomm", "AWS", "Apple", "Microsoft", "Groq"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Custom ASICs Revenue Table"
+              }
+            },
+            {
+              "id": "networking",
+              "name": "Networking & interconnects",
+              "description": "Cluster and fabric links",
+              "searchTopicKeywords": ["infiniband", "ethernet", "nvlink"],
+              "search": {
+                "entities": ["infiniband", "nvlink", "ethernet"],
+                "phrases": ["ai networking"],
+                "sources": {
+                  "nyt": {
+                    "enabled": false,
+                    "queries": []
+                  }
+                }
+              },
+              "companies": ["Broadcom", "Arista", "NVIDIA Networking", "Marvell", "Juniper"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Networking & interconnects Revenue Table"
+              }
+            }
+          ]
+        },
+        {
+          "id": "infra",
+          "name": "Infrastructure",
+          "description": "Data center and cloud operations",
+          "searchTopicKeywords": ["datacenter", "cloud", "power"],
+          "groups": [
+            {
+              "id": "dc",
+              "name": "Data centers",
+              "description": "Hyperscaler and regional capacity",
+              "searchTopicKeywords": ["datacenter", "hyperscaler", "megawatt"],
+              "search": {
+                "entities": ["datacenter", "hyperscaler", "megawatt"],
+                "phrases": ["ai capacity"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["ai datacenter hyperscaler capacity"]
+                  }
+                }
+              },
+              "companies": ["Microsoft", "Google", "AWS", "Meta", "Oracle"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Data centers Revenue Table"
+              }
+            },
+            {
+              "id": "cloud",
+              "name": "Cloud platforms",
+              "description": "Cloud vendor and service infra",
+              "searchTopicKeywords": ["azure", "aws", "gcp"],
+              "search": {
+                "entities": ["microsoft", "google", "azure", "gcp"],
+                "phrases": ["ai infrastructure", "ai earnings"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["microsoft ai earnings", "google ai infrastructure"]
+                  }
+                }
+              },
+              "companies": ["Equinix", "Digital Realty", "Iron Mountain", "CoreSite", "QTS"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Cloud platforms Revenue Table"
+              }
+            },
+            {
+              "id": "power",
+              "name": "Power grid & cooling",
+              "description": "Power delivery and thermal management",
+              "searchTopicKeywords": ["grid", "cooling", "electricity"],
+              "search": {
+                "entities": ["grid", "cooling", "electricity"],
+                "phrases": ["datacenter power"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["grid cooling electricity datacenter"]
+                  }
+                }
+              },
+              "companies": ["Cloudflare", "Fastly", "Akamai", "Zayo", "Lumen"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Power grid & cooling Revenue Table"
+              }
+            }
+          ]
+        },
+        {
+          "id": "platform",
+          "name": "AI platforms",
+          "description": "Model and MLOps platform layer",
+          "searchTopicKeywords": ["foundation model", "mlops", "framework"],
+          "groups": [
+            {
+              "id": "frameworks",
+              "name": "ML frameworks",
+              "description": "Developer frameworks and tooling",
+              "searchTopicKeywords": ["framework", "sdk", "developer"],
+              "search": {
+                "entities": ["pytorch", "jax", "tensorflow"],
+                "phrases": ["ai developer framework"],
+                "sources": {
+                  "nyt": {
+                    "enabled": false,
+                    "queries": []
+                  }
+                }
+              },
+              "companies": ["LangChain", "Replicate", "Together AI", "Modal", "Lightning AI"],
+              "popupTable": {
+                "enabled": true,
+                "title": "ML frameworks Revenue Table"
+              }
+            },
+            {
+              "id": "models",
+              "name": "Foundation models",
+              "description": "Model provider releases and benchmarks",
+              "searchTopicKeywords": ["llm", "model release", "benchmark"],
+              "search": {
+                "entities": ["openai", "anthropic", "model"],
+                "phrases": ["model release"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["openai model release", "anthropic model release"]
+                  }
+                }
+              },
+              "companies": ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI", "Mistral"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Foundation models Revenue Table"
+              }
+            },
+            {
+              "id": "ops",
+              "name": "MLOps & data infra",
+              "description": "Serving, pipelines, and data platforms",
+              "searchTopicKeywords": ["mlops", "model serving", "pipeline"],
+              "search": {
+                "entities": ["mlops", "model serving", "databricks"],
+                "phrases": ["data infrastructure"],
+                "sources": {
+                  "nyt": {
+                    "enabled": false,
+                    "queries": []
+                  }
+                }
+              },
+              "companies": ["Databricks", "Hugging Face", "Scale AI", "Cohere", "Weights & Biases"],
+              "popupTable": {
+                "enabled": true,
+                "title": "MLOps & data infra Revenue Table"
+              }
+            }
+          ]
+        },
+        {
+          "id": "app",
+          "name": "Applications",
+          "description": "Application and policy demand layer",
+          "searchTopicKeywords": ["enterprise", "consumer", "regulation"],
+          "groups": [
+            {
+              "id": "api",
+              "name": "API & developer tools",
+              "description": "API and ecosystem platform surface",
+              "searchTopicKeywords": ["api", "developer", "tooling"],
+              "search": {
+                "entities": ["api", "developer", "ftc", "doj"],
+                "phrases": ["ai regulation"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["artificial intelligence regulation doj ftc antitrust"]
+                  }
+                }
+              },
+              "companies": ["OpenAI", "Google", "Meta", "Anthropic", "Apple"],
+              "popupTable": {
+                "enabled": true,
+                "title": "API & developer tools Revenue Table"
+              }
+            },
+            {
+              "id": "enterprise",
+              "name": "Enterprise software",
+              "description": "Business software adoption",
+              "searchTopicKeywords": ["enterprise", "workflow", "copilot"],
+              "search": {
+                "entities": ["enterprise", "workflow", "copilot"],
+                "phrases": ["enterprise ai adoption"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["enterprise ai copilot workflow"]
+                  }
+                }
+              },
+              "companies": ["Salesforce", "ServiceNow", "Workday", "SAP", "UiPath"],
+              "popupTable": {
+                "enabled": true,
+                "title": "Enterprise software Revenue Table"
+              }
+            },
+            {
+              "id": "consumer",
+              "name": "Consumer products",
+              "description": "Consumer product demand and usage",
+              "searchTopicKeywords": ["consumer", "assistant", "chatgpt"],
+              "search": {
+                "entities": ["chatgpt", "assistant", "consumer"],
+                "phrases": ["consumer ai product"],
+                "sources": {
+                  "nyt": {
+                    "queries": ["consumer ai assistant chatgpt"]
+                  }
+                }
+              },
+              "companies": ["ChatGPT", "Google Gemini", "Microsoft Copilot", "Apple", "Perplexity"],
+              "popupTable": {
+                "enabled": true,
+                "buttonLabel": "▦ Consumer Table",
+                "title": "Consumer products Signal Table",
+                "subtitle": "Consumer product monetization snapshot",
+                "note": "Demo override: this group defines custom columns and labels instead of inheriting template defaults.",
+                "columns": [
+                  {
+                    "key": "company",
+                    "label": "Product / Brand",
+                    "valueDescription": "Consumer-facing product tracked for this group",
+                    "derive": { "type": "company" }
+                  },
+                  {
+                    "key": "revenueSignal",
+                    "label": "Revenue/Funding Signal",
+                    "valueDescription": "First monetization-style value found in matching stories",
+                    "derive": { "type": "financeValue", "metric": "revenue" }
+                  },
+                  {
+                    "key": "mentions",
+                    "label": "Story Mentions",
+                    "valueDescription": "How many matching stories mention the product",
+                    "derive": { "type": "mentions" }
+                  },
+                  {
+                    "key": "period",
+                    "label": "Reported Window",
+                    "valueDescription": "Time period inferred from story text",
+                    "derive": { "type": "financePeriod", "metrics": ["revenue", "capex"] }
+                  },
+                  {
+                    "key": "demo",
+                    "label": "Demo Flag",
+                    "valueDescription": "Static marker to show per-group schema override",
+                    "derive": { "type": "literal", "value": "custom" }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "tier0Sources": [
+        {
+          "id": "datacenterknowledge",
+          "name": "DataCenterKnowledge",
+          "enabled": true,
+          "adapter": "dck_rss_today",
+          "feedUrl": "https://www.datacenterknowledge.com/rss.xml",
+          "timezone": "UTC",
+          "read": {
+            "mode": "meta-description"
+          }
+        },
+        {
+          "id": "semianalysis",
+          "name": "SemiAnalysis",
+          "enabled": true,
+          "adapter": "semianalysis_rss_latest",
+          "feedUrl": "https://newsletter.semianalysis.com/feed",
+          "timezone": "UTC",
+          "read": {
+            "mode": "meta-description"
+          }
+        }
+      ]
+    },
+    "health": {
+      "id": "health",
+      "name": "Health Intelligence",
+      "description": "Starter template for health-focused research.",
+      "layers": [
+        {
+          "id": "health-policy",
+          "name": "Policy & Regulation",
+          "description": "Health policy and regulation watch",
+          "searchTopicKeywords": ["fda", "policy", "reimbursement"],
+          "groups": [
+            { "id": "approval", "name": "Approvals", "description": "Drug and device approvals", "searchTopicKeywords": ["fda approval", "trial"] },
+            { "id": "pricing", "name": "Pricing", "description": "Pricing and reimbursement trends", "searchTopicKeywords": ["pricing", "reimbursement"] },
+            { "id": "compliance", "name": "Compliance", "description": "Compliance and enforcement activity", "searchTopicKeywords": ["compliance", "enforcement"] }
+          ]
+        }
+      ],
+      "tier0Sources": []
+    },
+    "weather": {
+      "id": "weather",
+      "name": "Weather Intelligence",
+      "description": "Starter template for weather and climate operations research.",
+      "layers": [
+        {
+          "id": "weather-risk",
+          "name": "Risk & Impact",
+          "description": "Severe weather risk and impact monitoring",
+          "searchTopicKeywords": ["storm", "flood", "forecast"],
+          "groups": [
+            { "id": "extreme", "name": "Extreme Events", "description": "Severe event tracking", "searchTopicKeywords": ["hurricane", "flood", "heatwave"] },
+            { "id": "infra", "name": "Infrastructure", "description": "Infrastructure resilience and outages", "searchTopicKeywords": ["grid", "outage", "resilience"] },
+            { "id": "forecast", "name": "Forecasting", "description": "Forecast model and warning updates", "searchTopicKeywords": ["forecast", "warning", "model"] }
+          ]
+        }
+      ],
+      "tier0Sources": []
+    }
+  }
+}

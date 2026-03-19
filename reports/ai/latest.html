@@ -1053,7 +1053,7 @@
             context: profile.context || [],
             deny: profile.deny || [],
             companies: profile.companies || [],
-            popupTable: true
+            popupTable: Object.prototype.hasOwnProperty.call(profile, "popupTable") ? profile.popupTable : true
           };
         })
       }))
@@ -1107,6 +1107,111 @@
 
     let activeTemplateId = "ai";
 
+    function getTemplateFromConfig(cfg, templateId) {
+      if (!cfg || typeof cfg !== "object") return null;
+      const source = cfg.templates;
+      if (Array.isArray(source)) {
+        return source.find((item) => String(item && item.id || "") === templateId) || null;
+      }
+      if (source && typeof source === "object") {
+        return source[templateId] || null;
+      }
+      return null;
+    }
+
+    function mergePopupTable(base, override) {
+      if (override === false) return false;
+      if (override === true) return base || true;
+      if (!override || typeof override !== "object") return base || null;
+
+      const merged = Object.assign({}, base && typeof base === "object" ? base : {}, override);
+      if (override.columns !== undefined) {
+        merged.columns = Array.isArray(override.columns) ? override.columns : [];
+      }
+      if (override.rowSource !== undefined) {
+        merged.rowSource = override.rowSource;
+      }
+      if (override.rows !== undefined) {
+        merged.rows = Array.isArray(override.rows) ? override.rows : [];
+      }
+      return merged;
+    }
+
+    function mergeTemplateOverrides(cfg) {
+      if (!cfg || typeof cfg !== "object") return;
+
+      for (const template of templates) {
+        const overrideTemplate = getTemplateFromConfig(cfg, template.id);
+        if (!overrideTemplate || typeof overrideTemplate !== "object") continue;
+
+        if (typeof overrideTemplate.name === "string" && overrideTemplate.name.trim()) {
+          template.name = overrideTemplate.name;
+        }
+        if (typeof overrideTemplate.description === "string" && overrideTemplate.description.trim()) {
+          template.description = overrideTemplate.description;
+        }
+        if (typeof overrideTemplate.kicker === "string" && overrideTemplate.kicker.trim()) {
+          template.kicker = overrideTemplate.kicker;
+        }
+
+        if (overrideTemplate.defaultGroupPopupTable && typeof overrideTemplate.defaultGroupPopupTable === "object") {
+          template.defaultGroupPopupTable = mergePopupTable(template.defaultGroupPopupTable || null, overrideTemplate.defaultGroupPopupTable);
+        }
+
+        const layerOverrides = new Map((overrideTemplate.layers || []).map((layer) => [String(layer && layer.id || ""), layer]));
+        for (const layer of template.layers || []) {
+          const layerOverride = layerOverrides.get(layer.id);
+          if (!layerOverride) continue;
+
+          if (typeof layerOverride.name === "string" && layerOverride.name.trim()) {
+            layer.label = layerOverride.name;
+          }
+
+          const groupOverrides = new Map((layerOverride.groups || []).map((group) => [String(group && group.id || ""), group]));
+          for (const group of layer.groups || []) {
+            const groupOverride = groupOverrides.get(group.id);
+            if (!groupOverride) continue;
+
+            if (typeof groupOverride.name === "string" && groupOverride.name.trim()) {
+              group.name = groupOverride.name;
+            }
+
+            const profile = sectionProfiles[group.id] || (sectionProfiles[group.id] = {});
+            if (Array.isArray(groupOverride.companies)) {
+              profile.companies = groupOverride.companies.slice();
+              group.companies = groupOverride.companies.slice();
+            }
+
+            if (Object.prototype.hasOwnProperty.call(groupOverride, "popupTable")) {
+              const mergedPopup = mergePopupTable(profile.popupTable, groupOverride.popupTable);
+              profile.popupTable = mergedPopup;
+              group.popupTable = mergedPopup;
+            }
+
+            if (typeof groupOverride.sectionId === "string" && groupOverride.sectionId.trim()) {
+              profile.sectionId = groupOverride.sectionId;
+            }
+          }
+        }
+      }
+
+      const desiredTemplateId = String(cfg.activeTemplateId || "").trim();
+      if (desiredTemplateId && templatesById[desiredTemplateId]) {
+        activeTemplateId = desiredTemplateId;
+      }
+    }
+
+    async function loadTemplateOverrides() {
+      try {
+        const resp = await fetch("./template-config.json", { cache: "no-cache" });
+        if (!resp.ok) return;
+        const cfg = await resp.json();
+        mergeTemplateOverrides(cfg);
+      } catch (_err) {
+        // Keep built-in template defaults when external config is unavailable.
+      }
+    }
+
     function getActiveTemplate() {
       return templatesById[activeTemplateId] || templates[0];
     }
@@ -1130,14 +1235,18 @@
       const profile = getGroupProfile(groupId);
       if (!profile) return null;
 
-      if (profile.popupTable === false) return null;
-      if (profile.popupTable && profile.popupTable !== true && typeof profile.popupTable === "object") {
-        return profile.popupTable;
+      const tableSetting = profile.popupTable;
+      const baseTable = template.defaultGroupPopupTable || null;
+
+      if (tableSetting === false) return null;
+      if (tableSetting === true) return baseTable;
+
+      if (tableSetting && typeof tableSetting === "object") {
+        if (tableSetting.enabled === false) return null;
+        return mergePopupTable(baseTable, tableSetting);
       }
-      if (profile.popupTable === true) {
-        return template.defaultGroupPopupTable || null;
-      }
-      return null;
+
+      return baseTable;
     }
 
     const NEW_WINDOW_SECONDS = 72 * 60 * 60;
@@ -1352,22 +1461,117 @@
       return { value: "", period: "" };
     }
 
+    function resolvePopupRows(profile, popupTable) {
+      const explicitRows = Array.isArray(popupTable && popupTable.rows) ? popupTable.rows : [];
+      if (explicitRows.length) {
+        return explicitRows.map((row, idx) => {
+          if (typeof row === "string") {
+            return {
+              id: "row:" + String(idx),
+              label: row,
+              matchTerms: [row]
+            };
+          }
+          const label = String(row && row.label || row && row.company || row && row.id || "Row " + String(idx + 1)).trim();
+          const matchTerms = Array.isArray(row && row.matchTerms)
+            ? row.matchTerms.map((v) => String(v || "").trim()).filter(Boolean)
+            : (label ? [label] : []);
+          return {
+            id: String(row && row.id || "row:" + String(idx)),
+            label,
+            matchTerms
+          };
+        });
+      }
+
+      const rowSource = popupTable && popupTable.rowSource || {};
+      const sourceValues = Array.isArray(rowSource.values)
+        ? rowSource.values.map((v) => String(v || "").trim()).filter(Boolean)
+        : [];
+      const companies = sourceValues.length
+        ? sourceValues
+        : (Array.isArray(profile && profile.companies) ? profile.companies : []);
+
+      return companies.map((company, idx) => ({
+        id: "company:" + String(idx),
+        label: String(company || "").trim(),
+        matchTerms: [String(company || "").trim()]
+      })).filter((row) => row.label);
+    }
+
+    function getRowMatches(stories, row) {
+      const terms = Array.isArray(row && row.matchTerms) ? row.matchTerms.filter(Boolean) : [];
+      if (!terms.length) return [];
+      return stories.filter((story) => {
+        const blob = articleBlob(story);
+        return terms.some((term) => blob.includes(normalize(term)));
+      });
+    }
+
+    function derivePopupCellValue(column, context) {
+      const derive = column && column.derive && typeof column.derive === "object"
+        ? column.derive
+        : { type: "field", field: column && column.key };
+      const type = String(derive.type || "field").toLowerCase();
+
+      if (type === "literal") {
+        return String(derive.value || "");
+      }
+      if (type === "company") {
+        return String(context.rowLabel || "");
+      }
+      if (type === "mentions") {
+        return String(context.mentions);
+      }
+      if (type === "financevalue") {
+        const metric = String(derive.metric || derive.keyword || "revenue").toLowerCase();
+        return metric === "capex" ? context.capex.value : context.revenue.value;
+      }
+      if (type === "financeperiod") {
+        const metrics = Array.isArray(derive.metrics) ? derive.metrics : [derive.metric || "revenue", "capex"];
+        for (const metricRaw of metrics) {
+          const metric = String(metricRaw || "").toLowerCase();
+          if (metric === "capex" && context.capex.period) return context.capex.period;
+          if (metric !== "capex" && context.revenue.period) return context.revenue.period;
+        }
+        return context.period;
+      }
+
+      const field = String(derive.field || column && column.key || "").trim();
+      return field ? String(context.values[field] || "") : "";
+    }
+
     function buildPopupRows(profile, popupTable, stories) {
-      return (profile.companies || []).map((company) => {
-        const matches = stories.filter((story) => articleBlob(story).includes(normalize(company)));
+      const columns = Array.isArray(popupTable && popupTable.columns) ? popupTable.columns : [];
+      const rows = resolvePopupRows(profile, popupTable);
+
+      return rows.map((row) => {
+        const matches = getRowMatches(stories, row);
         const mentions = matches.length;
-        const revenueObservation = getCompanyFinanceObservation(matches, "revenue");
-        const capexObservation = getCompanyFinanceObservation(matches, "capex");
-        const period = revenueObservation.period || capexObservation.period || "";
+        const revenue = getCompanyFinanceObservation(matches, "revenue");
+        const capex = getCompanyFinanceObservation(matches, "capex");
+        const period = revenue.period || capex.period || "";
         const values = {
-          company,
-          revenue: revenueObservation.value,
-          capex: capexObservation.value,
+          company: row.label,
+          revenue: revenue.value,
+          capex: capex.value,
           mentions: String(mentions),
           period,
           vsPrior: "—"
         };
-        const cells = (popupTable.columns || []).map((col) => "<td>" + esc(values[col.key] || "") + "</td>").join("");
+
+        const cells = columns.map((col) => {
+          const value = derivePopupCellValue(col, {
+            rowLabel: row.label,
+            matches,
+            mentions,
+            revenue,
+            capex,
+            period,
+            values
+          });
+          return "<td>" + esc(value) + "</td>";
+        }).join("");
         return "<tr>" + cells + "</tr>";
       }).join("");
     }
@@ -2068,6 +2272,7 @@
 
     (async () => {
       const status = document.getElementById("status");
+      await loadTemplateOverrides();
       applyTemplateMeta();
       renderTemplateSwitcher();
       try {
