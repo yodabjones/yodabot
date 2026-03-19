@@ -7,694 +7,389 @@
   <meta name="description" content="AI supply chain intelligence report" />
   <style>
     :root {
-      --bg: #f4efe4;
-      --ink: #1f2b39;
-      --muted: #586779;
-      --panel: #fffdf9;
-      --line: #dbcdb6;
+      --bg: #f5f1e8;
+      --ink: #1e2a39;
+      --muted: #556173;
+      --panel: #fffdf8;
+      --line: #ddcfb9;
       --accent: #1f6b75;
-      --accent-soft: #e3f3f5;
-      --warn: #8a4f1d;
-      --new: #1b6d3d;
-      --danger: #9a2e22;
-      --shadow: 0 16px 38px rgba(30, 42, 57, 0.1);
+      --shadow: 0 16px 38px rgba(30, 42, 57, 0.10);
       --radius: 18px;
     }
-
     * { box-sizing: border-box; }
-
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      color: var(--ink);
       background:
-        radial-gradient(76vw 60vh at 6% 7%, rgba(255, 184, 107, 0.2), transparent 60%),
-        radial-gradient(80vw 62vh at 96% 0%, rgba(31, 107, 117, 0.2), transparent 62%),
+        radial-gradient(80vw 60vh at 8% 8%, rgba(255, 184, 107, 0.18), transparent 60%),
+        radial-gradient(80vw 60vh at 100% 0%, rgba(31, 107, 117, 0.20), transparent 62%),
         var(--bg);
-      font: 16px/1.5 "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      font: 16px/1.55 "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
     }
-
-    h1,
-    h2,
-    h3 {
-      margin: 0;
+    h1, h2, h3 {
       font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
       letter-spacing: 0.01em;
     }
-
     .shell {
-      width: min(1320px, 100% - 1.2rem);
-      margin: 0.9rem auto 1.3rem;
+      width: min(1180px, 100% - 1.4rem);
+      margin: 1rem auto 2rem;
     }
-
     .hero {
-      padding: 0.9rem 1.1rem 1rem;
+      padding: 1rem 1.2rem 1.15rem;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--panel);
       box-shadow: var(--shadow);
-      margin-bottom: 0.8rem;
-      animation: fadeIn 280ms ease;
+      margin-bottom: 0.9rem;
     }
-
     .hero-top {
       display: flex;
       justify-content: space-between;
-      gap: 0.7rem;
+      gap: 0.8rem;
       align-items: center;
       flex-wrap: wrap;
     }
-
     .kicker {
       margin: 0;
-      color: var(--warn);
+      color: #8a4f1d;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       font-weight: 700;
     }
-
     .headline {
-      margin-top: 0.12rem;
-      font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+      margin: 0.15rem 0 0.2rem;
+      font-size: clamp(1.35rem, 4.2vw, 2.2rem);
       line-height: 1.15;
     }
-
     .lede {
-      margin: 0.2rem 0 0;
+      margin: 0;
       color: var(--muted);
-      max-width: 74ch;
-      font-size: 0.92rem;
+      max-width: 78ch;
     }
-
     .meta-pill {
-      border: 1px solid #d4c2a4;
+      border: 1px solid #d2bf9f;
       background: #fff1d9;
       border-radius: 999px;
-      padding: 0.26rem 0.62rem;
-      font-size: 0.78rem;
-      color: #67390f;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.8rem;
+      color: #66390f;
       font-weight: 700;
-      white-space: nowrap;
     }
 
-    .mail-frame {
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--panel);
       box-shadow: var(--shadow);
-      overflow: hidden;
     }
 
-    .mail-toolbar {
-      display: flex;
-      gap: 0.65rem;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #dfd3bf;
-      background:
-        linear-gradient(90deg, rgba(255, 252, 245, 0.98) 0%, rgba(248, 243, 233, 0.92) 55%, rgba(238, 247, 248, 0.9) 100%);
-      padding: 0.55rem 0.75rem;
+    .map {
+      padding: 0.9rem;
     }
 
-    .toolbar-left,
-    .toolbar-right {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-wrap: wrap;
+    .layer-wrap {
+      padding: 0.35rem 0 0;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: layerIn .45s ease forwards;
+      animation-delay: calc(var(--layer-index, 0) * 75ms);
     }
-
-    .search-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border: 1px solid #d7c9b3;
-      background: #fff8ec;
-      border-radius: 999px;
-      padding: 0.2rem 0.28rem 0.2rem 0.52rem;
-      min-width: min(460px, 66vw);
-      max-width: 100%;
-    }
-
-    .search-wrap label {
+    .layer-label {
       font-size: 0.72rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 700;
-      color: #6a7482;
-      white-space: nowrap;
+      letter-spacing: 0.08em;
+      color: #5a6473;
+      margin: 0 0 0.32rem 0.15rem;
     }
-
-    .search-input {
-      border: 0;
-      background: transparent;
-      color: var(--ink);
-      font: inherit;
-      min-width: 180px;
-      width: min(380px, 45vw);
-      outline: none;
-      font-size: 0.82rem;
-    }
-
-    .search-input::placeholder {
-      color: #77859a;
-    }
-
-    .search-scope {
-      border: 1px solid #d7c7ad;
-      background: #fff4df;
-      color: #66431f;
-      border-radius: 999px;
-      padding: 0.1rem 0.38rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      outline: none;
-      cursor: pointer;
-      max-width: 88px;
-    }
-
-    .search-clear {
-      border: 1px solid #cfbfa6;
-      border-radius: 999px;
-      background: #fff2da;
-      color: #6f4b24;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.12rem 0.42rem;
-      cursor: pointer;
-    }
-
-    .mail-status {
-      margin: 0;
-      font-size: 0.86rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .mail-status.error {
-      color: var(--danger);
-    }
-
-    .pill {
-      border: 1px solid #ccd8dd;
-      background: #f3fcff;
-      color: #2d4b52;
-      border-radius: 999px;
-      padding: 0.2rem 0.52rem;
-      font-size: 0.74rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .toggle-control {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #2b3e54;
-      border: 1px solid #d4c7b2;
-      background: #fff8ee;
-      border-radius: 999px;
-      padding: 0.18rem 0.48rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .toggle-control input {
-      margin: 0;
-      accent-color: var(--accent);
-    }
-
-    .mail-app {
-      --left-w: 290px;
-      --middle-w: 440px;
-      display: grid;
-      grid-template-columns: minmax(220px, var(--left-w)) 8px minmax(280px, var(--middle-w)) 8px minmax(320px, 1fr);
-      min-height: 76vh;
-      max-height: 82vh;
-      background: #fffcf8;
-    }
-
-    .pane {
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.65rem; }
+    .node {
       min-width: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .pane-head {
-      border-bottom: 1px solid #e0d4c1;
-      background: #fbf7ee;
-      padding: 0.62rem 0.72rem;
-    }
-
-    .pane-title {
-      font-size: 0.95rem;
-      line-height: 1.2;
-    }
-
-    .pane-sub {
-      margin: 0.16rem 0 0;
-      color: #5e6b7a;
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 700;
-    }
-
-    .pane-body {
-      overflow: auto;
-      min-height: 0;
-      padding: 0.46rem;
-      background: #fffcf8;
-    }
-
-    .resizer {
-      cursor: col-resize;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          #d7c9b1 0,
-          #d7c9b1 6px,
-          #ece3d1 6px,
-          #ece3d1 12px
-        );
-      transition: background 120ms ease;
-    }
-
-    .resizer:hover,
-    .resizer.dragging {
-      background: linear-gradient(180deg, #d0b68f 0%, #c8b08a 100%);
-    }
-
-    .folder-layer {
-      margin-bottom: 0.35rem;
-      border: 1px solid #e3d8c7;
-      border-radius: 11px;
-      background: #fff9ef;
-      overflow: hidden;
-      animation: fadeUp 320ms ease;
-    }
-
-    .layer-name {
-      width: 100%;
-      margin: 0;
-      padding: 0.46rem 0.58rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      font-size: 0.74rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #5e6a7a;
-      border: 0;
-      border-bottom: 1px solid #ece2d3;
-      background: #f9f3e9;
-      text-align: left;
+      border: 1px solid #d8cfbf;
+      border-radius: 12px;
+      padding: 0.62rem 0.68rem;
       cursor: pointer;
-      font-family: inherit;
-    }
-
-    .layer-name:hover {
-      background: #f5eddc;
-    }
-
-    .layer-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .layer-chevron {
-      width: 16px;
-      color: #6b7788;
-      font-size: 0.74rem;
-      transition: transform 140ms ease;
-    }
-
-    .folder-layer.expanded .layer-chevron {
-      transform: rotate(90deg);
-    }
-
-    .layer-total-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.26rem;
-      flex: 0 0 auto;
-    }
-
-    .folder-list {
-      display: none;
-    }
-
-    .folder-layer.expanded .folder-list {
-      display: block;
-    }
-
-    .folder-btn {
-      width: 100%;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      background: #fffdf8;
       text-align: left;
-      border: 0;
-      border-top: 1px solid #efe5d7;
-      background: transparent;
-      padding: 0.44rem 0.58rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.4rem;
       color: inherit;
-      cursor: pointer;
       font: inherit;
-      transition: background 140ms ease;
+      opacity: 0;
+      transform: translateY(7px) scale(0.995);
+      animation: nodeIn .35s ease forwards;
+      animation-delay: calc((var(--layer-index, 0) * 60ms) + (var(--node-index, 0) * 45ms));
     }
-
-    .folder-btn:first-of-type {
-      border-top: 0;
+    .node:hover {
+      border-color: #9c8360;
+      transform: translateY(-1px);
+      background: #fff8eb;
     }
-
-    .folder-btn:hover {
-      background: #fff4de;
+    .node.active {
+      border-color: var(--accent);
+      background: #e7f5f6;
+      box-shadow: inset 0 0 0 1px rgba(31, 107, 117, 0.18);
     }
-
-    .folder-btn.active {
-      background: var(--accent-soft);
-      box-shadow: inset 3px 0 0 var(--accent);
-    }
-
-    .folder-left {
-      min-width: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.36rem;
-    }
-
-    .folder-icon {
-      color: #8b764f;
-      font-size: 0.82rem;
-      flex: 0 0 auto;
-    }
-
-    .folder-label {
-      font-size: 0.83rem;
-      font-weight: 600;
+    .node-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin: 0 0 0.1rem;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
     }
-
-    .folder-meta {
-      display: inline-flex;
+    .node-sub {
+      margin: 0;
+      color: #586576;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .layer-bar {
+      display: flex;
       align-items: center;
-      gap: 0.26rem;
-      flex: 0 0 auto;
-    }
-
-    .count-total,
-    .count-new {
-      border-radius: 999px;
-      padding: 0.08rem 0.4rem;
-      font-size: 0.68rem;
-      font-weight: 700;
-      line-height: 1.2;
-      white-space: nowrap;
-    }
-
-    .count-total {
-      border: 1px solid #d8cfbe;
-      background: #fcf8f1;
-      color: #5c6472;
-    }
-
-    .count-new {
-      border: 1px solid #bdd7c1;
-      background: #ecf9ef;
-      color: var(--new);
-    }
-
-    .folder-empty {
-      color: #627084;
-      font-size: 0.83rem;
-      margin: 0.2rem;
-      border: 1px dashed #d7ccb8;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+      border: 1px solid transparent;
       border-radius: 10px;
-      padding: 0.55rem;
-      background: #fffaf1;
-    }
-
-    .story-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .story-row {
-      width: 100%;
-      border: 1px solid #e4d8c6;
-      border-radius: 12px;
-      background: #fff9f0;
-      padding: 0.48rem 0.56rem;
-      margin-bottom: 0.42rem;
-      text-align: left;
-      color: inherit;
+      padding: 0.2rem 0.35rem;
       cursor: pointer;
-      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
-      opacity: 0;
-      transform: translateY(7px);
-      animation: fadeUp 250ms ease forwards;
-      animation-delay: calc(var(--story-index, 0) * 26ms);
-      font: inherit;
+      transition: border-color .2s ease, background .2s ease;
     }
-
-    .story-row:hover {
-      border-color: #cab28f;
-      background: #fff2dd;
-      transform: translateY(-1px);
+    .layer-bar:hover {
+      border-color: #d8cfbf;
+      background: #fff8eb;
     }
-
-    .story-row.active {
-      border-color: var(--accent);
-      background: #eaf7f8;
-      box-shadow: inset 0 0 0 1px rgba(31, 107, 117, 0.2);
+    .layer-wrap.active-layer .layer-bar {
+      border-color: #a7cab7;
+      background: #eef8f0;
     }
+    .layer-line { flex: 1; height: 1px; background: #e2d6c2; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-    .story-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.46rem;
-    }
-
-    .story-subject {
-      margin: 0;
-      font-size: 0.86rem;
-      font-weight: 700;
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .story-time {
-      font-size: 0.69rem;
-      color: #617084;
-      white-space: nowrap;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .story-preview {
-      margin: 0.26rem 0 0;
-      font-size: 0.77rem;
-      color: #4b5b6f;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      line-height: 1.38;
-    }
-
-    .story-meta {
-      margin-top: 0.34rem;
-      display: flex;
-      align-items: center;
-      gap: 0.26rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      border-radius: 999px;
-      padding: 0.1rem 0.42rem;
-      font-size: 0.67rem;
-      font-weight: 700;
-      line-height: 1.2;
-      border: 1px solid #d6ccbb;
-      background: #faf5eb;
-      color: #58667a;
-    }
-
-    .badge.new {
-      border-color: #b4d3be;
-      background: #e9f8ee;
-      color: #1f7040;
-    }
-
-    .badge.strong {
-      border-color: #b7dcc1;
-      background: #daf2e3;
-      color: #1f6a3b;
-    }
-
-    .badge.medium {
-      border-color: #e8d6a7;
-      background: #fff4d7;
-      color: #7a5d12;
-    }
-
-    .badge.weak {
-      border-color: #e8c5c5;
-      background: #fdeaea;
-      color: #9c3232;
-    }
-
-    .reader-wrap {
-      height: 100%;
-      overflow: auto;
-      padding: 0.72rem 0.8rem 0.9rem;
-      background: linear-gradient(180deg, #fffbf4 0%, #fffdf9 100%);
-    }
-
-    .reader-empty {
-      border: 1px dashed #d6c9b6;
+    .detail {
+      margin-top: 0.85rem;
+      border: 1px solid #dcd2c2;
       border-radius: 12px;
-      background: #fff9ef;
-      padding: 0.9rem;
-      color: #586779;
+      background: linear-gradient(180deg, #fff7ea 0%, #fffcf7 100%);
+      min-height: 108px;
+      padding: 0.85rem 0.95rem;
+      opacity: 1;
+      transition: opacity .2s ease;
+    }
+    .detail.pulse {
+      animation: detailPulse .28s ease;
+    }
+    .detail-name {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .detail-desc {
+      margin: 0 0 0.55rem;
+      color: #415062;
+      font-size: 0.91rem;
+      line-height: 1.5;
+    }
+    .detail-examples { display: flex; flex-wrap: wrap; gap: 0.36rem; }
+    .chip {
+      font-size: 0.73rem;
+      border-radius: 999px;
+      border: 1px solid #c8d7d8;
+      background: #f7feff;
+      padding: 0.16rem 0.52rem;
+      color: #33565b;
+      font-weight: 600;
+    }
+
+    .report {
+      padding: 0.95rem 1.05rem;
+    }
+    .report-tools {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 0 0.6rem;
+    }
+    .filter-pill {
+      font-size: 0.74rem;
+      border-radius: 999px;
+      border: 1px solid #cdd8cf;
+      background: #f4f9f4;
+      color: #456150;
+      padding: 0.2rem 0.5rem;
+      font-weight: 700;
+    }
+    .filter-pill strong {
+      color: #245a46;
+      font-weight: 700;
+    }
+    .clear-filter {
+      border: 1px solid #d7c9b2;
+      background: #fff7eb;
+      color: #6f4b24;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      padding: 0.2rem 0.55rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .clear-filter:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .status {
+      margin: 0 0 0.65rem;
+      color: var(--muted);
+      font-weight: 600;
       font-size: 0.9rem;
     }
-
-    .reader-title {
-      font-size: clamp(1rem, 2.2vw, 1.25rem);
-      line-height: 1.25;
-      margin-bottom: 0.4rem;
-    }
-
-    .reader-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.55rem;
-    }
-
-    .reader-link {
-      display: inline-block;
-      margin-bottom: 0.62rem;
-      color: #0f6774;
-      font-weight: 700;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.15em;
-      word-break: break-all;
-    }
-
-    .reader-content {
-      border: 1px solid #e3d7c6;
+    .status.error { color: #9e2317; }
+    #content { max-width: none; }
+    .section-block {
+      border: 1px solid #ddcfb9;
       border-radius: 12px;
       background: #fffaf2;
-      padding: 0.72rem 0.74rem;
-      color: #334457;
-      white-space: pre-wrap;
-      line-height: 1.55;
-      font-size: 0.92rem;
+      padding: 0.72rem 0.8rem;
+      margin: 0 0 0.8rem;
     }
-
-    .reader-section {
-      margin-top: 0.62rem;
+    .section-head {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.45rem;
     }
-
-    .reader-section h3 {
-      font-size: 0.82rem;
+    .section-id {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6a7461;
+      border: 1px solid #cad7c0;
+      background: #f3fbef;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+    }
+    .section-title {
+      margin: 0;
+      font-size: 1.01rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .section-sub {
+      margin: 0.15rem 0 0.45rem;
+      font-size: 0.84rem;
+      color: #556173;
+    }
+    .tbl-wrap { overflow-x: auto; }
+    .revenue-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.4rem 0 0.65rem;
+      font-size: 0.84rem;
+    }
+    .revenue-table th,
+    .revenue-table td {
+      border: 1px solid #d8cfbf;
+      padding: 0.38rem 0.52rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .revenue-table th {
+      background: #f6eee0;
+      font-weight: 700;
+      color: #344656;
+    }
+    .news-title {
+      margin: 0.45rem 0 0.3rem;
+      font-size: 0.88rem;
+      color: #49576a;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #5b697c;
-      margin: 0 0 0.25rem;
     }
-
-    .reader-list {
+    .news-list {
       margin: 0;
-      padding-left: 1.08rem;
-      color: #46586f;
-      font-size: 0.87rem;
+      padding-left: 1rem;
+    }
+    .news-list li { margin: 0.28rem 0; }
+    .news-list a { color: #0d6572; text-underline-offset: 0.13em; }
+    .news-list a:hover { background: #dff3f5; }
+    .all-stories .news-list li { margin: 0.34rem 0; }
+    .muted-note {
+      color: #5b6778;
+      font-size: 0.86rem;
+      margin: 0.2rem 0 0.4rem;
+    }
+    .filter-empty {
+      display: none;
+      border: 1px dashed #d5cab7;
+      border-radius: 10px;
+      color: #5f6e82;
+      font-size: 0.86rem;
+      padding: 0.55rem 0.7rem;
+      margin: 0.35rem 0 0.75rem;
+      background: #fffaf2;
+    }
+    .filter-empty.show {
+      display: block;
+    }
+    #content code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9em;
+      background: #f8f4ec;
+      border: 1px solid #ddd2c1;
+      border-radius: 0.32em;
+      padding: 0.1em 0.32em;
     }
 
-    .reader-list li {
-      margin: 0.18rem 0;
-    }
-
-    @media (max-width: 1080px) {
-      .mail-app {
-        grid-template-columns: minmax(210px, 250px) 6px minmax(250px, 320px) 6px minmax(260px, 1fr);
+    @media (max-width: 880px) {
+      .cards {
+        grid-template-columns: 1fr;
       }
-    }
-
-    @media (max-width: 920px) {
-      .mail-app {
-        display: block;
-        min-height: 0;
-        max-height: none;
-      }
-
-      .resizer {
-        display: none;
-      }
-
-      .pane {
-        min-height: 260px;
-        border-bottom: 1px solid #e1d5c2;
-      }
-
-      .pane:last-child {
-        border-bottom: 0;
+      .hero {
+        padding: 0.9rem;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * {
+      .layer-wrap,
+      .node,
+      .detail.pulse {
         animation: none !important;
-        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes layerIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(7px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes nodeIn {
+      from { opacity: 0; transform: translateY(7px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes detailPulse {
+      from { transform: scale(0.99); }
+      to { transform: scale(1); }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 </head>
 <body>
   <main class="shell">
@@ -703,67 +398,29 @@
         <div>
           <p class="kicker">OpenClaw Research Output</p>
           <h1 class="headline">AI Supply Chain Intelligence</h1>
-          <p class="lede">Email-style workspace view: choose a layer inbox or group folder on the left, browse matching stories in the middle, and read the selected story details on the right.</p>
+          <p class="lede">Six layers, three operating groups each. Click any node to inspect a layer component, then scroll for the full markdown report generated by the researcher-writer-sender pipeline.</p>
         </div>
         <p class="meta-pill">Live from yodabot</p>
       </div>
     </section>
 
-    <section class="mail-frame">
-      <div class="mail-toolbar">
-        <div class="toolbar-left">
-          <p id="status" class="mail-status">Loading story index...</p>
+    <section class="layout">
+      <article class="card map" aria-label="AI supply chain map">
+        <div id="layers"></div>
+        <div id="detail" class="detail">
+          <p style="margin:0; color:#5b6778; font-size:0.9rem; text-align:center; padding-top:1.7rem;">Select a group to explore context and examples.</p>
         </div>
-        <div class="toolbar-right">
-          <span id="folder-summary" class="pill">Folder: Loading...</span>
-          <label class="toggle-control" for="only-new">
-            <input id="only-new" type="checkbox" />
-            Show only new (72h)
-          </label>
-          <div class="search-wrap">
-            <label for="story-search">Search</label>
-            <input id="story-search" class="search-input" type="text" placeholder="Tag or text (example: #openai or nvidia)" />
-            <select id="search-scope" class="search-scope" aria-label="Search scope">
-              <option value="folder">Folder</option>
-              <option value="global" selected>Global</option>
-            </select>
-            <button id="search-clear" class="search-clear" type="button">Clear</button>
-          </div>
+      </article>
+
+      <article class="card report" aria-live="polite">
+        <div class="report-tools">
+          <span id="active-filter" class="filter-pill">Report focus: <strong>All latest stories</strong></span>
+          <button id="clear-filter" type="button" class="clear-filter" disabled>Show all sections</button>
         </div>
-      </div>
-
-      <div id="mail-app" class="mail-app" aria-label="Email style report interface">
-        <aside class="pane" aria-label="Folders">
-          <header class="pane-head">
-            <h2 id="inbox-pane-title" class="pane-title">Inbox</h2>
-            <p class="pane-sub">Layers and groups</p>
-          </header>
-          <div id="folder-tree" class="pane-body"></div>
-        </aside>
-
-        <div id="resizer-left" class="resizer" aria-hidden="true"></div>
-
-        <section class="pane" aria-label="Stories list">
-          <header class="pane-head">
-            <h2 id="story-pane-title" class="pane-title">Stories</h2>
-            <p id="story-pane-sub" class="pane-sub">Select a folder</p>
-          </header>
-          <div class="pane-body">
-            <ul id="story-list" class="story-list"></ul>
-            <p id="story-empty" class="folder-empty" style="display:none;">No stories in this folder yet.</p>
-          </div>
-        </section>
-
-        <div id="resizer-middle" class="resizer" aria-hidden="true"></div>
-
-        <article class="pane" aria-label="Story reader">
-          <header class="pane-head">
-            <h2 class="pane-title">Story Content</h2>
-            <p class="pane-sub">Open selected story details</p>
-          </header>
-          <div id="story-reader" class="reader-wrap"></div>
-        </article>
-      </div>
+        <p id="filter-empty" class="filter-empty">No stories matched this selection yet.</p>
+        <p id="status" class="status">Loading latest story index...</p>
+        <article id="content"></article>
+      </article>
     </section>
   </main>
 
@@ -772,95 +429,102 @@
       {
         id: "raw",
         label: "Raw materials",
+        dotColor: "#7f7a70",
         cards: [
-          { id: "silicon", title: "Silicon & minerals" },
-          { id: "energy", title: "Energy & water" },
-          { id: "chemicals", title: "Specialty chemicals" }
+          { id:"silicon", title:"Silicon & minerals", sub:"Wafer feedstock", desc:"High-purity silicon, rare earths, and specialty gases are the foundation of every chip. Silica sand is refined to 99.9999% purity before wafer production.", examples:["MEMC","Shin-Etsu","Quartz Corp"] },
+          { id:"energy", title:"Energy & water", sub:"Fab utilities", desc:"Semiconductor fabs are among the most energy- and water-intensive facilities on earth. A single fab can consume 10 MW+ and millions of gallons of ultrapure water daily.", examples:["Renewables","Grid power","UPW systems"] },
+          { id:"chemicals", title:"Specialty chemicals", sub:"Process gases, photoresists", desc:"Hundreds of ultra-high-purity chemicals are required for etching, deposition, and lithography. Any contamination at this stage propagates through the entire wafer.", examples:["Air Products","JSR","Dupont"] }
         ]
       },
       {
         id: "semi",
         label: "Semiconductors",
+        dotColor: "#7d4abf",
         cards: [
-          { id: "eqp", title: "Fab equipment" },
-          { id: "foundry", title: "Foundries" },
-          { id: "memory", title: "Memory & storage" }
+          { id:"eqp", title:"Fab equipment", sub:"Lithography, etch, CVD", desc:"The tools that pattern transistors onto wafers. EUV lithography machines, made almost exclusively by ASML, cost around AI Report - Latest50M each and are essential for leading-edge nodes.", examples:["ASML","Applied Materials","Lam Research"] },
+          { id:"foundry", title:"Foundries", sub:"Chip manufacturing", desc:"Contract manufacturers that build chips to customer designs. TSMC alone produces over 90% of the world's leading-edge chips, with manufacturing at 3nm and below.", examples:["TSMC","Samsung","Intel Foundry"] },
+          { id:"memory", title:"Memory & storage", sub:"DRAM, NAND, HBM", desc:"AI training requires enormous memory bandwidth. HBM is stacked directly on GPUs via TSVs, delivering up to 3 TB/s. Tight supply constrains AI build-outs.", examples:["SK Hynix","Micron","Samsung"] }
         ]
       },
       {
         id: "hw",
         label: "AI hardware",
+        dotColor: "#0b7763",
         cards: [
-          { id: "gpu", title: "GPUs & accelerators" },
-          { id: "asic", title: "Custom ASICs" },
-          { id: "networking", title: "Networking & interconnects" }
+          { id:"gpu", title:"GPUs & accelerators", sub:"Training & inference compute", desc:"The dominant AI workhorse. A single H100 GPU performs up to 2,000 TFLOPS of FP8 and consumes 700W. Demand has outstripped supply since late 2022, driving long lead times.", examples:["Nvidia","AMD","Intel Gaudi"] },
+          { id:"asic", title:"Custom ASICs", sub:"TPUs, inference chips", desc:"Purpose-built silicon optimized for specific AI workloads, trading flexibility for efficiency. Google TPUs, AWS Trainium and Inferentia, and Apple Neural Engine are prominent examples.", examples:["Google TPU","AWS Trainium","Groq LPU"] },
+          { id:"networking", title:"Networking & interconnects", sub:"InfiniBand, NVLink", desc:"At scale, the network between GPUs becomes the bottleneck. NVLink connects GPUs within a node at high bandwidth, while InfiniBand links nodes across a cluster.", examples:["Nvidia NVLink","InfiniBand","Ultra Ethernet"] }
         ]
       },
       {
         id: "infra",
         label: "Infrastructure",
+        dotColor: "#af5a24",
         cards: [
-          { id: "dc", title: "Data centers" },
-          { id: "cloud", title: "Cloud platforms" },
-          { id: "power", title: "Power grid & cooling" }
+          { id:"dc", title:"Data centers", sub:"Power, cooling, real estate", desc:"AI clusters require specialized facilities with 10-100 kW/rack power densities. Liquid cooling is increasingly mandatory as regions race to permit and build capacity.", examples:["Hyperscalers","Colo providers","Edge DCs"] },
+          { id:"cloud", title:"Cloud platforms", sub:"IaaS, managed compute", desc:"AWS, Azure, and GCP provide on-demand GPU clusters. Hyperscalers have committed massive AI infrastructure capex and now compete directly with model labs.", examples:["AWS","Azure","Google Cloud"] },
+          { id:"power", title:"Power grid & cooling", sub:"Electricity, liquid cooling", desc:"A 1 GW AI campus can require grid upgrades, permitting, and dedicated generation. Direct liquid cooling and rear-door systems are becoming standard.", examples:["Power utilities","Vertiv","Schneider"] }
         ]
       },
       {
         id: "platform",
         label: "AI platforms",
+        dotColor: "#2664ac",
         cards: [
-          { id: "frameworks", title: "ML frameworks" },
-          { id: "models", title: "Foundation models" },
-          { id: "ops", title: "MLOps & data infra" }
+          { id:"frameworks", title:"ML frameworks", sub:"Training & serving stacks", desc:"Open-source software orchestrates hardware for model training and inference. PyTorch dominates research while specialized kernels increasingly target GPU intrinsics.", examples:["PyTorch","JAX","TensorFlow"] },
+          { id:"models", title:"Foundation models", sub:"Frontier & open-weight", desc:"Large pretrained models are core products of the AI supply chain. Frontier training runs can cost tens of millions in compute alone, turning model weights into strategic assets.", examples:["OpenAI","Anthropic","Meta Llama"] },
+          { id:"ops", title:"MLOps & data infra", sub:"Pipelines, monitoring, data", desc:"The operational layer covers ingestion, preprocessing, experiment tracking, versioning, deployment, and drift monitoring, increasingly consolidated into managed platforms.", examples:["Databricks","Weights & Biases","HuggingFace"] }
         ]
       },
       {
         id: "app",
         label: "Applications",
+        dotColor: "#5b7d17",
         cards: [
-          { id: "api", title: "API & developer tools" },
-          { id: "enterprise", title: "Enterprise software" },
-          { id: "consumer", title: "Consumer products" }
+          { id:"api", title:"API & developer tools", sub:"Inference APIs, SDKs", desc:"Abstraction layers let developers build on frontier models without managing infrastructure. API surfaces are a primary near-term monetization channel.", examples:["Anthropic API","OpenAI","Replicate"] },
+          { id:"enterprise", title:"Enterprise software", sub:"Vertical AI products", desc:"AI is being embedded into CRM, ERP, productivity, and vertical software to increase workflow automation and decision support inside existing systems.", examples:["Microsoft 365","Salesforce","ServiceNow"] },
+          { id:"consumer", title:"Consumer products", sub:"Assistants, creative tools", desc:"End-user products including chatbots, image generators, code assistants, and voice interfaces remain the most visible layer of AI adoption.", examples:["Claude","ChatGPT","Midjourney"] }
         ]
       }
     ];
 
+    let activeId = null;
+    let activeLayerId = null;
+    let archiveArticles = [];
+
     const sectionProfiles = {
-      silicon: { sectionId: "L1.1", title: "Critical Minerals", layerId: "raw", keywords: ["silicon", "mineral", "rare earth", "lithium", "cobalt", "wafer"], context: ["mining", "extraction", "smelting", "refining", "ore", "reserves", "oxide"], deny: [], companies: ["Albemarle", "SQM", "MP Materials", "Lynas", "Ucore"] },
-      energy: { sectionId: "L1.2", title: "Energy & Power", layerId: "raw", keywords: ["power", "grid", "electricity", "utility", "energy"], context: ["megawatt", "gigawatt", "ppa", "power purchase agreement", "grid connection", "electricity generation", "data center power"], deny: ["political power", "power vacuum", "negotiating power", "soft power", "staying power", "power play", "manpower"], companies: ["Constellation Energy", "Vistra", "NextEra", "AES", "NRG Energy"] },
-      chemicals: { sectionId: "L1.3", title: "Water & Cooling Supply", layerId: "raw", keywords: ["cooling", "water", "thermal", "hvac", "liquid cooling"], context: ["data center cooling", "thermal management", "coolant", "chiller", "cooling system", "heat exchanger", "immersion cooling"], deny: ["watershed", "watered down", "water rights", "flood", "drought", "water company"], companies: ["Vertiv", "Modine", "Alfa Laval", "Stulz", "Schneider Electric"] },
-      foundry: { sectionId: "L2.1", title: "Foundry & Fab Capacity", layerId: "semi", keywords: ["foundry", "fab", "wafer", "tsmc", "samsung foundry", "smic"], context: ["semiconductor", "chip manufacturing", "wafer fabrication", "process node", "nanometer node", "yield rate"], deny: [], companies: ["TSMC", "Samsung Foundry", "GlobalFoundries", "SMIC", "Intel Foundry"] },
-      eqp: { sectionId: "L2.2", title: "Equipment & Lithography", layerId: "semi", keywords: ["asml", "euv", "lithography", "applied materials", "lam research", "kla"], context: ["semiconductor equipment", "photolithography", "chip manufacturing", "etch system", "deposition"], deny: [], companies: ["ASML", "Applied Materials", "Lam Research", "KLA", "Tokyo Electron"] },
-      memory: { sectionId: "L2.3", title: "Memory & Storage", layerId: "semi", keywords: ["hbm", "dram", "nand", "memory", "micron", "sk hynix"], context: ["high bandwidth memory", "storage chip", "semiconductor", "gigabyte", "bandwidth"], deny: ["emotional memory", "in memory of", "memoriam", "memorial"], companies: ["SK Hynix", "Micron", "Samsung Memory", "Kioxia", "Western Digital"] },
-      gpu: { sectionId: "L3.1", title: "Training Accelerators", layerId: "hw", keywords: ["gpu", "nvidia", "h100", "b200", "gaudi", "accelerator"], context: ["training cluster", "compute cluster", "machine learning", "deep learning", "ai chip"], deny: [], companies: ["NVIDIA", "AMD", "Intel Gaudi", "Cerebras", "SambaNova"] },
-      asic: { sectionId: "L3.2", title: "Inference & Edge Silicon", layerId: "hw", keywords: ["inference", "edge", "trainium", "inferentia", "asic", "qualcomm"], context: ["inference chip", "inference server", "custom silicon", "machine learning chip", "silicon"], deny: ["edge case", "cutting edge", "bleeding edge", "leading edge", "draw an inference"], companies: ["Qualcomm", "AWS", "Apple", "Microsoft", "Groq"] },
-      networking: { sectionId: "L3.3", title: "Networking & Interconnects", layerId: "hw", keywords: ["infiniband", "nvlink", "interconnect", "ethernet", "networking"], context: ["data center networking", "cluster interconnect", "switch fabric", "network fabric", "rdma"], deny: [], companies: ["Broadcom", "Arista", "NVIDIA Networking", "Marvell", "Juniper"] },
-      dc: { sectionId: "L4.1", title: "Hyperscaler Data Centers", layerId: "infra", keywords: ["hyperscaler", "data center", "datacenter", "azure", "aws", "gcp", "capex"], context: ["cloud infrastructure", "server farm", "megawatt", "data hall", "ai infrastructure"], deny: [], companies: ["Microsoft", "Google", "AWS", "Meta", "Oracle"] },
-      cloud: { sectionId: "L4.2", title: "Colo & Independent Operators", layerId: "infra", keywords: ["colo", "colocation", "equinix", "digital realty", "leasing", "facility"], context: ["data center", "megawatt", "rack space", "cage", "powered shell", "colocation facility"], deny: [], companies: ["Equinix", "Digital Realty", "Iron Mountain", "CoreSite", "QTS"] },
-      power: { sectionId: "L4.3", title: "Connectivity & Edge", layerId: "infra", keywords: ["edge", "cdn", "connectivity", "cloudflare", "akamai", "fastly"], context: ["network traffic", "latency", "content delivery", "internet peering", "bandwidth"], deny: ["edge case", "cutting edge", "bleeding edge", "leading edge"], companies: ["Cloudflare", "Fastly", "Akamai", "Zayo", "Lumen"] },
-      models: { sectionId: "L5.1", title: "Foundation Model Providers", layerId: "platform", keywords: ["foundation model", "llm", "openai", "anthropic", "gemini", "claude"], context: ["ai model", "model release", "benchmark", "model weights", "training run"], deny: [], companies: ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI", "Mistral"] },
-      ops: { sectionId: "L5.2", title: "Cloud AI Services & MLOps", layerId: "platform", keywords: ["mlops", "model serving", "databricks", "hugging face", "scale ai", "cohere"], context: ["ml platform", "model deployment", "machine learning ops", "training pipeline", "data platform"], deny: [], companies: ["Databricks", "Hugging Face", "Scale AI", "Cohere", "Weights & Biases"] },
-      frameworks: { sectionId: "L5.3", title: "Developer Tools & Frameworks", layerId: "platform", keywords: ["framework", "developer", "langchain", "replicate", "open source ai", "tooling"], context: ["developer platform", "sdk", "api library", "open source", "developer tool"], deny: [], companies: ["LangChain", "Replicate", "Together AI", "Modal", "Lightning AI"] },
-      enterprise: { sectionId: "L6.1", title: "Enterprise AI Applications", layerId: "app", keywords: ["enterprise", "crm", "erp", "copilot", "workflow", "automation"], context: ["enterprise software", "business software", "saas", "productivity", "workflow automation"], deny: [], companies: ["Salesforce", "ServiceNow", "Workday", "SAP", "UiPath"] },
-      consumer: { sectionId: "L6.2", title: "Consumer AI Products", layerId: "app", keywords: ["consumer", "chatgpt", "gemini", "assistant", "app", "subscription"], context: ["monthly active", "consumer product", "end user", "chat interface", "mobile app"], deny: [], companies: ["ChatGPT", "Google Gemini", "Microsoft Copilot", "Apple", "Perplexity"] },
-      api: { sectionId: "L6.3", title: "Regulation & Policy", layerId: "app", keywords: ["regulation", "policy", "doj", "ftc", "eu ai act", "compliance", "lawsuit"], context: ["antitrust", "regulatory", "legislation", "enforcement", "government policy", "compliance mandate"], deny: [], companies: ["OpenAI", "Google", "Meta", "Anthropic", "Apple"] }
+      silicon: { sectionId: "L1.1", title: "Critical Minerals", layerId: "raw", metric: "Revenue / production", keywords: ["silicon", "mineral", "rare earth", "lithium", "cobalt", "wafer"], companies: ["Albemarle", "SQM", "MP Materials", "Lynas", "Ucore"] },
+      energy: { sectionId: "L1.2", title: "Energy & Power", layerId: "raw", metric: "Revenue / PPAs", keywords: ["power", "grid", "electricity", "utility", "energy"], companies: ["Constellation Energy", "Vistra", "NextEra", "AES", "NRG Energy"] },
+      chemicals: { sectionId: "L1.3", title: "Water & Cooling Supply", layerId: "raw", metric: "Revenue / shipments", keywords: ["cooling", "water", "thermal", "hvac", "liquid cooling"], companies: ["Vertiv", "Modine", "Alfa Laval", "Stulz", "Schneider Electric"] },
+      foundry: { sectionId: "L2.1", title: "Foundry & Fab Capacity", layerId: "semi", metric: "Revenue / utilization", keywords: ["foundry", "fab", "wafer", "tsmc", "samsung foundry", "smic"], companies: ["TSMC", "Samsung Foundry", "GlobalFoundries", "SMIC", "Intel Foundry"] },
+      eqp: { sectionId: "L2.2", title: "Equipment & Lithography", layerId: "semi", metric: "Revenue / order backlog", keywords: ["asml", "euv", "lithography", "applied materials", "lam research", "kla"], companies: ["ASML", "Applied Materials", "Lam Research", "KLA", "Tokyo Electron"] },
+      memory: { sectionId: "L2.3", title: "Memory & Storage", layerId: "semi", metric: "Revenue / HBM shipments", keywords: ["hbm", "dram", "nand", "memory", "micron", "sk hynix"], companies: ["SK Hynix", "Micron", "Samsung Memory", "Kioxia", "Western Digital"] },
+      gpu: { sectionId: "L3.1", title: "Training Accelerators", layerId: "hw", metric: "Revenue / GPU units", keywords: ["gpu", "nvidia", "h100", "b200", "gaudi", "accelerator"], companies: ["NVIDIA", "AMD", "Intel Gaudi", "Cerebras", "SambaNova"] },
+      asic: { sectionId: "L3.2", title: "Inference & Edge Silicon", layerId: "hw", metric: "Revenue / throughput", keywords: ["inference", "edge", "trainium", "inferentia", "asic", "qualcomm"], companies: ["Qualcomm", "AWS", "Apple", "Microsoft", "Groq"] },
+      networking: { sectionId: "L3.3", title: "Networking & Interconnects", layerId: "hw", metric: "Revenue / port units", keywords: ["infiniband", "nvlink", "interconnect", "ethernet", "networking"], companies: ["Broadcom", "Arista", "NVIDIA Networking", "Marvell", "Juniper"] },
+      dc: { sectionId: "L4.1", title: "Hyperscaler Data Centers", layerId: "infra", metric: "Revenue / capex", keywords: ["hyperscaler", "data center", "datacenter", "azure", "aws", "gcp", "capex"], companies: ["Microsoft", "Google", "AWS", "Meta", "Oracle"] },
+      cloud: { sectionId: "L4.2", title: "Colo & Independent Operators", layerId: "infra", metric: "Revenue / MW capacity", keywords: ["colo", "colocation", "equinix", "digital realty", "leasing", "facility"], companies: ["Equinix", "Digital Realty", "Iron Mountain", "CoreSite", "QTS"] },
+      power: { sectionId: "L4.3", title: "Connectivity & Edge", layerId: "infra", metric: "Revenue / traffic", keywords: ["edge", "cdn", "connectivity", "cloudflare", "akamai", "fastly"], companies: ["Cloudflare", "Fastly", "Akamai", "Zayo", "Lumen"] },
+      models: { sectionId: "L5.1", title: "Foundation Model Providers", layerId: "platform", metric: "ARR / model releases", keywords: ["foundation model", "llm", "openai", "anthropic", "gemini", "claude"], companies: ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI", "Mistral"] },
+      ops: { sectionId: "L5.2", title: "Cloud AI Services & MLOps", layerId: "platform", metric: "ARR / valuation", keywords: ["mlops", "model serving", "databricks", "hugging face", "scale ai", "cohere"], companies: ["Databricks", "Hugging Face", "Scale AI", "Cohere", "Weights & Biases"] },
+      frameworks: { sectionId: "L5.3", title: "Developer Tools & Frameworks", layerId: "platform", metric: "ARR / usage growth", keywords: ["framework", "developer", "langchain", "replicate", "open source ai", "tooling"], companies: ["LangChain", "Replicate", "Together AI", "Modal", "Lightning AI"] },
+      enterprise: { sectionId: "L6.1", title: "Enterprise AI Applications", layerId: "app", metric: "Revenue / AI ARR", keywords: ["enterprise", "crm", "erp", "copilot", "workflow", "automation"], companies: ["Salesforce", "ServiceNow", "Workday", "SAP", "UiPath"] },
+      consumer: { sectionId: "L6.2", title: "Consumer AI Products", layerId: "app", metric: "Subscribers / MAU", keywords: ["consumer", "chatgpt", "gemini", "assistant", "app", "subscription"], companies: ["ChatGPT", "Google Gemini", "Microsoft Copilot", "Apple", "Perplexity"] },
+      api: { sectionId: "L6.3", title: "Regulation & Policy", layerId: "app", metric: "Fine risk / compliance", keywords: ["regulation", "policy", "doj", "ftc", "eu ai act", "compliance", "lawsuit"], companies: ["OpenAI", "Google", "Meta", "Anthropic", "Apple"] },
     };
 
-    const NEW_WINDOW_SECONDS = 72 * 60 * 60;
-    const GLOBAL_SEARCH_FOLDER_KEY = "global:search";
+    const layerLabelById = layers.reduce((acc, layer) => {
+      acc[layer.id] = layer.label;
+      return acc;
+    }, {});
 
-    let archiveArticles = [];
-    let latestEpoch = 0;
-    let onlyNew = false;
-    let searchQuery = "";
-    let searchScope = "global";
+    const cardTitleById = layers.flatMap((layer) => layer.cards.map((card) => [card.id, card.title]))
+      .reduce((acc, item) => {
+        acc[item[0]] = item[1];
+        return acc;
+      }, {});
 
-    let folderState = [];
-    let storiesByFolder = {};
-    let layerExpandedState = {};
-    let activeFolderKey = "";
-    let activeStoryKey = "";
-
+    const normalize = (value) => (value || "").toLowerCase();
     const esc = (value) => String(value || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
@@ -868,727 +532,296 @@
       .replace(/\"/g, "&quot;")
       .replace(/'/g, "&#39;");
 
-    const normalize = (value) => (value || "").toLowerCase();
-    const getEpoch = (article) => Number(article && article.epoch) || 0;
-
-    function escRegex(str) {
-      return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    }
-
-    function wordTest(hay, phrase) {
-      return new RegExp("\\b" + escRegex(normalize(phrase)) + "\\b").test(hay);
-    }
-
-    function articleBlob(article) {
+    const articleBlob = (article) => {
       const tags = Array.isArray(article.tags) ? article.tags.join(" ") : "";
       return normalize((article.summary || "") + " " + tags);
-    }
+    };
 
-    function scoreArticle(article, profile) {
+    function articleMatchesProfile(article, profile) {
       const hay = articleBlob(article);
-      const denyHit = (profile.deny || []).find((d) => wordTest(hay, d));
-      if (denyHit) return { matched: false, score: 0, reasons: [], deniedBy: denyHit };
-
-      const reasons = [];
-      let score = 0;
-
-      for (const c of (profile.companies || [])) {
-        if (wordTest(hay, c)) {
-          score += 3;
-          reasons.push({ type: "company", term: c, pts: 3 });
-        }
-      }
-
-      for (const k of (profile.context || [])) {
-        if (wordTest(hay, k)) {
-          score += 2;
-          reasons.push({ type: "context", term: k, pts: 2 });
-        }
-      }
-
-      for (const k of (profile.keywords || [])) {
-        if (wordTest(hay, k)) {
-          const pts = k.includes(" ") ? 2 : 1;
-          score += pts;
-          reasons.push({ type: k.includes(" ") ? "phrase" : "keyword", term: k, pts });
-        }
-      }
-
-      return {
-        matched: score >= 2 && reasons.some((r) => r.pts >= 2),
-        score,
-        reasons
-      };
+      const byKeyword = (profile.keywords || []).some((k) => hay.includes(normalize(k)));
+      const byCompany = (profile.companies || []).some((c) => hay.includes(normalize(c)));
+      return byKeyword || byCompany;
     }
 
-    function confidenceLabel(score) {
-      if (score >= 6) return "strong";
-      if (score >= 3) return "medium";
-      return "weak";
-    }
-
-    function isNewStory(article) {
-      const epoch = getEpoch(article);
-      if (!epoch || !latestEpoch) return false;
-      return epoch >= (latestEpoch - NEW_WINDOW_SECONDS);
-    }
-
-    function asStoryKey(folderKey, article, idx) {
-      return folderKey + "|" + (article.url || "") + "|" + String(getEpoch(article)) + "|" + String(idx);
-    }
-
-    function prettyTime(article) {
-      if (article && article.stamp) return article.stamp;
-      const epoch = getEpoch(article);
-      if (!epoch) return "Unknown time";
-      try {
-        return new Date(epoch * 1000).toLocaleString();
-      } catch (_err) {
-        return "Unknown time";
+    function getSelectedProfiles() {
+      if (activeId && sectionProfiles[activeId]) {
+        return [sectionProfiles[activeId]];
       }
+      if (activeLayerId) {
+        const layer = layers.find((item) => item.id === activeLayerId);
+        return (layer ? layer.cards : [])
+          .map((card) => sectionProfiles[card.id])
+          .filter(Boolean);
+      }
+      return [];
     }
 
-    function sourceHost(url) {
-      try {
-        return new URL(url).hostname.replace(/^www\./, "");
-      } catch (_err) {
-        return "Unknown source";
-      }
-    }
+    function extractFinanceValue(summary, keyword) {
+      if (!summary) return "";
+      const sentenceMatch = summary.match(new RegExp("[^.]*\b" + keyword + "\b[^.]*", "i"));
+      if (!sentenceMatch) return "";
 
-    function getFolderByKey(folderKey) {
-      for (const layer of folderState) {
-        for (const folder of layer.folders) {
-          if (folder.key === folderKey) return folder;
-        }
+      const sentence = sentenceMatch[0];
+      const withDollar = sentence.match(/$\s*[0-9][0-9.,]*(?:\s*(?:billion|million|trillion|bn|mn|m|b|t))?/i);
+      if (withDollar) {
+        return withDollar[0].replace(/\s+/g, " ").trim();
       }
-      return null;
-    }
 
-    function getLayerIdByFolderKey(folderKey) {
-      for (const layer of folderState) {
-        if (layer.folders.some((folder) => folder.key === folderKey)) {
-          return layer.id;
-        }
+      const usdText = sentence.match(/\b[0-9][0-9.,]*\s*(?:billion|million|trillion|bn|mn)\s*(?:usd|dollars?)\b/i);
+      if (usdText) {
+        return usdText[0].replace(/\s+/g, " ").trim();
       }
+
       return "";
     }
 
-    function uniqueStoriesFromArchive() {
-      const dedupe = new Map();
-      for (const article of archiveArticles) {
-        const key = (article.url || "") + "|" + String(getEpoch(article));
-        if (!dedupe.has(key)) {
-          dedupe.set(key, article);
-        }
+    function extractFinancePeriod(summary, fallbackStamp) {
+      if (summary) {
+        const qfy = summary.match(/\bQ[1-4]\s*(?:FY\s*)?20\d{2}\b/i);
+        if (qfy) return qfy[0].replace(/\s+/g, " ").trim();
+
+        const fy = summary.match(/\bFY\s*20\d{2}\b/i);
+        if (fy) return fy[0].replace(/\s+/g, " ").trim();
+
+        const year = summary.match(/\b20\d{2}\b/);
+        if (year) return year[0];
       }
-      return Array.from(dedupe.values()).sort((a, b) => getEpoch(b) - getEpoch(a));
+      return fallbackStamp || "";
     }
 
-    function buildGlobalSearchItems() {
-      return uniqueStoriesFromArchive().map((article, idx) => ({
-        key: asStoryKey(GLOBAL_SEARCH_FOLDER_KEY, article, idx),
-        article,
-        isNew: isNewStory(article),
-        source: sourceHost(article.url || ""),
-        timeLabel: prettyTime(article),
-        confidence: "weak",
-        score: 0,
-        reasons: [],
-        groups: [],
-        contextLabel: "Global search"
-      }));
+    function getCompanyFinanceObservation(companyStories, keyword) {
+      for (const story of companyStories) {
+        const summary = story.summary || "";
+        const value = extractFinanceValue(summary, keyword);
+        if (!value) continue;
+        return {
+          value,
+          period: extractFinancePeriod(summary, story.stamp || "")
+        };
+      }
+      return { value: "", period: "" };
     }
 
-    function storyMatchesSearch(story, query) {
-      const q = (query || "").trim().toLowerCase();
-      if (!q) return true;
-
-      const tags = Array.isArray(story.article.tags) ? story.article.tags : [];
-      const reasons = Array.isArray(story.reasons) ? story.reasons.map((reason) => reason.term || "") : [];
-      const blob = [
-        story.article.summary || "",
-        story.article.url || "",
-        story.source || "",
-        story.contextLabel || "",
-        (story.groups || []).join(" "),
-        tags.join(" "),
-        reasons.join(" ")
-      ].join(" ").toLowerCase();
-
-      if (q.startsWith("#")) {
-        const tagQuery = q.slice(1).trim();
-        if (!tagQuery) return true;
-        return tags.some((tag) => String(tag || "").toLowerCase().includes(tagQuery));
-      }
-
-      const parts = q.split(/\s+/).filter(Boolean);
-      return parts.every((part) => blob.includes(part));
-    }
-
-    function buildFolderState() {
-      const nextStoriesByFolder = {};
-      const layersOut = [];
-
-      for (const layer of layers) {
-        const groups = layer.cards;
-        const folders = [];
-
-        const groupMatched = {};
-        for (const group of groups) {
-          const profile = sectionProfiles[group.id];
-          const matched = archiveArticles
-            .map((article, idx) => {
-              const result = scoreArticle(article, profile);
-              return result.matched ? {
-                article,
-                result,
-                group,
-                groupId: group.id,
-                groupTitle: group.title,
-                articleIndex: idx
-              } : null;
-            })
-            .filter(Boolean)
-            .sort((a, b) => getEpoch(b.article) - getEpoch(a.article));
-          groupMatched[group.id] = matched;
-        }
-
-        const layerMap = new Map();
-        for (const group of groups) {
-          for (const item of groupMatched[group.id]) {
-            const dedupe = (item.article.url || "") + "|" + String(getEpoch(item.article));
-            if (!layerMap.has(dedupe)) {
-              layerMap.set(dedupe, {
-                article: item.article,
-                groups: [],
-                score: item.result.score,
-                reasons: item.result.reasons
-              });
-            }
-            const current = layerMap.get(dedupe);
-            current.groups.push(item.groupTitle);
-            if (item.result.score > current.score) {
-              current.score = item.result.score;
-              current.reasons = item.result.reasons;
-            }
-          }
-        }
-
-        const inboxItems = Array.from(layerMap.values())
-          .sort((a, b) => getEpoch(b.article) - getEpoch(a.article))
-          .map((item, idx) => {
-            const key = asStoryKey("layer:" + layer.id + ":inbox", item.article, idx);
-            return {
-              key,
-              article: item.article,
-              isNew: isNewStory(item.article),
-              source: sourceHost(item.article.url || ""),
-              timeLabel: prettyTime(item.article),
-              confidence: confidenceLabel(item.score),
-              score: item.score,
-              reasons: item.reasons || [],
-              groups: item.groups || [],
-              contextLabel: layer.label + " inbox"
-            };
-          });
-
-        const inboxKey = "layer:" + layer.id + ":inbox";
-        nextStoriesByFolder[inboxKey] = inboxItems;
-
-        folders.push({
-          key: inboxKey,
-          kind: "inbox",
-          layerId: layer.id,
-          title: "Inbox",
-          totalCount: inboxItems.length,
-          newCount: inboxItems.filter((item) => item.isNew).length
-        });
-
-        for (const group of groups) {
-          const folderKey = "group:" + group.id;
-          const items = groupMatched[group.id].map((item, idx) => ({
-            key: asStoryKey(folderKey, item.article, idx),
-            article: item.article,
-            isNew: isNewStory(item.article),
-            source: sourceHost(item.article.url || ""),
-            timeLabel: prettyTime(item.article),
-            confidence: confidenceLabel(item.result.score),
-            score: item.result.score,
-            reasons: item.result.reasons || [],
-            groups: [group.title],
-            contextLabel: group.title
-          }));
-
-          nextStoriesByFolder[folderKey] = items;
-
-          folders.push({
-            key: folderKey,
-            kind: "group",
-            layerId: layer.id,
-            groupId: group.id,
-            title: group.title,
-            totalCount: items.length,
-            newCount: items.filter((item) => item.isNew).length
-          });
-        }
-
-        layersOut.push({
-          id: layer.id,
-          label: layer.label,
-          folders
-        });
-      }
-
-      folderState = layersOut;
-      storiesByFolder = nextStoriesByFolder;
-      storiesByFolder[GLOBAL_SEARCH_FOLDER_KEY] = buildGlobalSearchItems();
-
-      const nextExpanded = {};
-      for (const layer of folderState) {
-        nextExpanded[layer.id] = !!layerExpandedState[layer.id];
-      }
-      layerExpandedState = nextExpanded;
-
-      if (!activeFolderKey) {
-        const firstLayer = folderState[0];
-        if (firstLayer && firstLayer.folders.length) {
-          activeFolderKey = firstLayer.folders[0].key;
-        }
-      }
-
-      if (activeFolderKey && !getFolderByKey(activeFolderKey)) {
-        const fallbackLayer = folderState[0];
-        activeFolderKey = fallbackLayer && fallbackLayer.folders.length ? fallbackLayer.folders[0].key : "";
-      }
-
-      const activeStories = getActiveStories();
-      if (!activeStories.length) {
-        activeStoryKey = "";
-      } else if (!activeStories.some((story) => story.key === activeStoryKey)) {
-        activeStoryKey = activeStories[0].key;
-      }
-
-      if (searchScope === "global" && searchQuery.trim() && activeFolderKey !== GLOBAL_SEARCH_FOLDER_KEY) {
-        activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
-        const globalStories = getActiveStories();
-        activeStoryKey = globalStories.length ? globalStories[0].key : "";
-      }
-
-      if ((searchScope !== "global" || !searchQuery.trim()) && activeFolderKey === GLOBAL_SEARCH_FOLDER_KEY) {
-        const firstLayer = folderState[0];
-        if (firstLayer && firstLayer.folders.length) {
-          activeFolderKey = firstLayer.folders[0].key;
-          layerExpandedState[firstLayer.id] = true;
-          const fallbackStories = getActiveStories();
-          activeStoryKey = fallbackStories.length ? fallbackStories[0].key : "";
-        }
-      }
-
-      updateInboxPaneTitle();
-    }
-
-    function getFilteredStoriesForFolder(folderKey) {
-      const stories = storiesByFolder[folderKey] || [];
-      return stories.filter((story) => {
-        if (onlyNew && !story.isNew) return false;
-        if (!storyMatchesSearch(story, searchQuery)) return false;
-        return true;
-      });
-    }
-
-    function getEffectiveFolderKey() {
-      if (searchScope === "global" && searchQuery.trim()) return GLOBAL_SEARCH_FOLDER_KEY;
-      return activeFolderKey;
-    }
-
-    function getActiveStories() {
-      return getFilteredStoriesForFolder(getEffectiveFolderKey());
-    }
-
-    function updateInboxPaneTitle() {
-      const inboxTitle = document.getElementById("inbox-pane-title");
-      if (!inboxTitle) return;
-      inboxTitle.textContent = "Inbox (" + String(uniqueStoriesFromArchive().length) + ")";
-    }
-
-    function renderFolders() {
-      const holder = document.getElementById("folder-tree");
-      if (!holder) return;
-
-      let html = "";
-      if (searchScope === "global" && searchQuery.trim()) {
-        const globalStories = getFilteredStoriesForFolder(GLOBAL_SEARCH_FOLDER_KEY);
-        const globalNew = globalStories.filter((story) => story.isNew).length;
-        const rowClass = getEffectiveFolderKey() === GLOBAL_SEARCH_FOLDER_KEY ? "folder-btn active" : "folder-btn";
-
-        html += '<section class="folder-layer expanded">';
-        html += '<div class="layer-name">';
-        html += '<span class="layer-title"><span class="layer-chevron" style="transform:rotate(90deg)">></span>Search Results</span>';
-        html += '<span class="layer-total-meta">';
-        html += '<span class="count-total" title="Total matching stories">' + String(globalStories.length) + '</span>';
-        html += '<span class="count-new" title="New matching stories">+' + String(globalNew) + '</span>';
-        html += '</span>';
-        html += '</div>';
-        html += '<div class="folder-list">';
-        html += '<button type="button" class="' + rowClass + '" data-folder-key="' + GLOBAL_SEARCH_FOLDER_KEY + '">';
-        html += '<span class="folder-left">';
-        html += '<span class="folder-icon">Search</span>';
-        html += '<span class="folder-label">All Results (' + String(globalStories.length) + ')</span>';
-        html += '</span>';
-        html += '<span class="folder-meta">';
-        html += '<span class="count-total" title="Total matching stories">' + String(globalStories.length) + '</span>';
-        html += '<span class="count-new" title="New matching stories">+' + String(globalNew) + '</span>';
-        html += '</span>';
-        html += '</button>';
-        html += '</div>';
-        html += '</section>';
-      }
-
-      for (const layer of folderState) {
-        const layerTotal = layer.folders.reduce((sum, folder) => sum + folder.totalCount, 0);
-        const layerNew = layer.folders.reduce((sum, folder) => sum + folder.newCount, 0);
-        const isExpanded = !!layerExpandedState[layer.id];
-
-        html += '<section class="folder-layer' + (isExpanded ? ' expanded' : '') + '" data-layer-id="' + esc(layer.id) + '">';
-        html += '<button type="button" class="layer-name" data-layer-toggle="' + esc(layer.id) + '">';
-        html += '<span class="layer-title"><span class="layer-chevron">></span>' + esc(layer.label) + '</span>';
-        html += '<span class="layer-total-meta">';
-        html += '<span class="count-total" title="Total stories">' + String(layerTotal) + '</span>';
-        html += '<span class="count-new" title="New or unread stories">+' + String(layerNew) + '</span>';
-        html += '</span>';
-        html += '</button>';
-        html += '<div class="folder-list">';
-
-        for (const folder of layer.folders) {
-          const icon = folder.kind === "inbox" ? "Inbox" : "Group";
-          const isActive = folder.key === activeFolderKey;
-          const rowClass = isActive ? "folder-btn active" : "folder-btn";
-          const title = folder.kind === "inbox"
-            ? ("Inbox (" + String(folder.totalCount) + ")")
-            : ("  " + folder.title);
-
-          html += '<button type="button" class="' + rowClass + '" data-folder-key="' + esc(folder.key) + '">';
-          html += '<span class="folder-left">';
-          html += '<span class="folder-icon">' + esc(icon) + '</span>';
-          html += '<span class="folder-label">' + esc(title) + '</span>';
-          html += '</span>';
-          html += '<span class="folder-meta">';
-          html += '<span class="count-total" title="Total stories">' + String(folder.totalCount) + '</span>';
-          html += '<span class="count-new" title="New or unread stories">+' + String(folder.newCount) + '</span>';
-          html += '</span>';
-          html += '</button>';
-        }
-
-        html += '</div>';
-        html += '</section>';
-      }
-
-      if (!html) {
-        html = '<p class="folder-empty">No folders available yet.</p>';
-      }
-
-      holder.innerHTML = html;
-
-      holder.querySelectorAll("button[data-folder-key]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const key = button.getAttribute("data-folder-key") || "";
-          if (!key || key === activeFolderKey) return;
-          const layerId = getLayerIdByFolderKey(key);
-          if (layerId) {
-            Object.keys(layerExpandedState).forEach((id) => {
-              layerExpandedState[id] = false;
-            });
-            layerExpandedState[layerId] = true;
-          }
-          activeFolderKey = key;
-          const stories = getActiveStories();
-          activeStoryKey = stories.length ? stories[0].key : "";
-          renderApp();
-        });
-      });
-
-      holder.querySelectorAll("button[data-layer-toggle]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const layerId = button.getAttribute("data-layer-toggle") || "";
-          if (!layerId) return;
-          const next = !layerExpandedState[layerId];
-          Object.keys(layerExpandedState).forEach((id) => {
-            layerExpandedState[id] = false;
-          });
-          layerExpandedState[layerId] = next;
-          renderFolders();
-        });
-      });
-    }
-
-    function renderStories() {
-      const list = document.getElementById("story-list");
-      const empty = document.getElementById("story-empty");
-      const title = document.getElementById("story-pane-title");
-      const sub = document.getElementById("story-pane-sub");
-      const summary = document.getElementById("folder-summary");
-      if (!list || !empty || !title || !sub || !summary) return;
-
-      const effectiveFolderKey = getEffectiveFolderKey();
-      const folder = effectiveFolderKey === GLOBAL_SEARCH_FOLDER_KEY
-        ? { kind: "search", title: "All Search Results", layerId: "" }
-        : getFolderByKey(effectiveFolderKey);
-      const stories = getActiveStories();
-
-      if (!folder) {
-        title.textContent = "Stories";
-        sub.textContent = "Select a folder";
-        summary.textContent = "Folder: None";
-        list.innerHTML = "";
-        empty.style.display = "block";
-        return;
-      }
-
-      if (folder.kind === "inbox") {
-        title.textContent = folder.layerId.toUpperCase() + " Inbox";
-      } else if (folder.kind === "search") {
-        title.textContent = "All Search Results";
-      } else {
-        title.textContent = folder.title;
-      }
-      sub.textContent = onlyNew
-        ? ("Showing " + stories.length + " new stories (72h)")
-        : ("Showing " + stories.length + " stories");
-      if (searchQuery.trim()) {
-        sub.textContent += " | filtered by search";
-      }
-      summary.textContent = "Folder: " + folder.title + " (" + stories.length + ")" + (searchQuery.trim() ? " | search" : "");
-
-      if (!stories.length) {
-        list.innerHTML = "";
-        empty.style.display = "block";
-        empty.textContent = onlyNew
-          ? "No new stories in this folder for the last 72 hours."
-          : "No stories in this folder yet.";
-        return;
-      }
-
-      empty.style.display = "none";
-
-      list.innerHTML = stories.map((story, idx) => {
-        const isActive = story.key === activeStoryKey;
-        const badges = [];
-        if (story.isNew) badges.push('<span class="badge new">new</span>');
-        badges.push('<span class="badge ' + story.confidence + '">' + story.confidence + '</span>');
-        badges.push('<span class="badge">' + esc(story.source) + '</span>');
-
-        if (story.groups && story.groups.length) {
-          const groupsLabel = story.groups.slice(0, 2).join(", ") + (story.groups.length > 2 ? " +" + String(story.groups.length - 2) : "");
-          badges.push('<span class="badge">' + esc(groupsLabel) + '</span>');
-        }
-
-        return '<li>' +
-          '<button type="button" class="story-row' + (isActive ? ' active' : '') + '" data-story-key="' + esc(story.key) + '" style="--story-index:' + String(idx) + '">' +
-          '<div class="story-head">' +
-          '<p class="story-subject">' + esc(story.article.summary || "Untitled story") + '</p>' +
-          '<span class="story-time">' + esc(story.timeLabel) + '</span>' +
-          '</div>' +
-          '<p class="story-preview">' + esc(story.contextLabel) + ' | Score ' + String(story.score) + '</p>' +
-          '<div class="story-meta">' + badges.join("") + '</div>' +
-          '</button>' +
-          '</li>';
+    function buildRevenueRows(profile, stories) {
+      return (profile.companies || []).map((company) => {
+        const matches = stories.filter((story) => articleBlob(story).includes(normalize(company)));
+        const mentions = matches.length;
+        const revenueObservation = getCompanyFinanceObservation(matches, "revenue");
+        const capexObservation = getCompanyFinanceObservation(matches, "capex");
+        const period = revenueObservation.period || capexObservation.period || "";
+        return "<tr>" +
+          "<td>" + esc(company) + "</td>" +
+          "<td>" + esc(revenueObservation.value) + "</td>" +
+          "<td>" + esc(capexObservation.value) + "</td>" +
+          "<td>" + esc(String(mentions)) + "</td>" +
+          "<td>" + esc(period) + "</td>" +
+          "<td>—</td>" +
+          "</tr>";
       }).join("");
-
-      list.querySelectorAll("button[data-story-key]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const key = button.getAttribute("data-story-key") || "";
-          if (!key || key === activeStoryKey) return;
-          activeStoryKey = key;
-          renderStories();
-          renderReader();
-        });
-      });
     }
 
-    function renderReader() {
-      const reader = document.getElementById("story-reader");
-      if (!reader) return;
+    function renderSectionBlock(profile) {
+      const stories = archiveArticles.filter((article) => articleMatchesProfile(article, profile)).slice(0, 8);
+      const tableRows = buildRevenueRows(profile, stories);
+      const storiesMarkup = stories.length
+        ? ("<ul class=\"news-list\">" + stories.map((story) => "<li><a href=\"" + esc(story.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + esc(story.summary || "Untitled story") + "</a></li>").join("") + "</ul>")
+        : "<p class=\"muted-note\">No matching stories found in the latest archive for this section yet.</p>";
 
-      const stories = getActiveStories();
-      const story = stories.find((item) => item.key === activeStoryKey);
+      return "<section class=\"section-block\">" +
+        "<div class=\"section-head\">" +
+        "<span class=\"section-id\">" + esc(profile.sectionId) + "</span>" +
+        "<h3 class=\"section-title\">" + esc(profile.title) + "</h3>" +
+        "</div>" +
+        "<p class=\"section-sub\">Revenue table + latest stories for this section.</p>" +
+        "<div class=\"tbl-wrap\"><table class=\"revenue-table\"><thead><tr><th>Company</th><th>Revenue</th><th>Capex</th><th>Mentions</th><th>Period</th><th>vs. Prior</th></tr></thead><tbody>" + tableRows + "</tbody></table></div>" +
+        "<p class=\"news-title\">News</p>" +
+        storiesMarkup +
+        "</section>";
+    }
 
-      if (!story) {
-        reader.innerHTML = '<div class="reader-empty">Select a story in the middle panel to view full story content here.</div>';
+    function renderAllStories() {
+      const stories = archiveArticles.slice(0, 36);
+      const rows = stories.length
+        ? ("<ul class=\"news-list\">" + stories.map((story) => "<li><a href=\"" + esc(story.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + esc(story.summary || "Untitled story") + "</a></li>").join("") + "</ul>")
+        : "<p class=\"muted-note\">No archived stories available yet.</p>";
+      return "<section class=\"section-block all-stories\">" +
+        "<div class=\"section-head\"><span class=\"section-id\">LIVE</span><h3 class=\"section-title\">All Latest Stories</h3></div>" +
+        "<p class=\"section-sub\">No section or layer selected. Showing all recent stories.</p>" + rows +
+        "</section>";
+    }
+
+    function renderContentPanel() {
+      const content = document.getElementById("content");
+      const filterChip = document.getElementById("active-filter");
+      const clearButton = document.getElementById("clear-filter");
+      const emptyState = document.getElementById("filter-empty");
+      const status = document.getElementById("status");
+      const hasSelection = !!(activeId || activeLayerId);
+
+      if (filterChip) {
+        const label = activeId ? (cardTitleById[activeId] || "Selected section") : (activeLayerId ? (layerLabelById[activeLayerId] || "Selected layer") : "All latest stories");
+        filterChip.innerHTML = "Report focus: <strong>" + esc(label) + "</strong>";
+      }
+      if (clearButton) clearButton.disabled = !hasSelection;
+
+      if (!archiveArticles.length) {
+        content.innerHTML = "<p class=\"muted-note\">Story index is still loading.</p>";
+        if (emptyState) emptyState.classList.remove("show");
         return;
       }
 
-      const tags = Array.isArray(story.article.tags)
-        ? story.article.tags.filter(Boolean)
-        : [];
+      if (!hasSelection) {
+        content.innerHTML = renderAllStories();
+        if (emptyState) emptyState.classList.remove("show");
+        status.textContent = "Showing all latest stories.";
+        return;
+      }
 
-      const reasons = (story.reasons || []).slice(0, 12).map((reason) => reason.term);
-
-      const metaBadges = [];
-      if (story.isNew) metaBadges.push('<span class="badge new">new</span>');
-      metaBadges.push('<span class="badge ' + story.confidence + '">' + story.confidence + ' confidence</span>');
-      metaBadges.push('<span class="badge">' + esc(story.source) + '</span>');
-      metaBadges.push('<span class="badge">score ' + String(story.score) + '</span>');
-
-      reader.innerHTML =
-        '<h2 class="reader-title">' + esc(story.article.summary || "Untitled story") + '</h2>' +
-        '<div class="reader-meta">' + metaBadges.join("") + '</div>' +
-        '<a class="reader-link" href="' + esc(story.article.url || "#") + '" target="_blank" rel="noopener noreferrer">' + esc(story.article.url || "No external link") + '</a>' +
-        '<div class="reader-content">' + esc(story.article.summary || "No summary available for this story.") + '</div>' +
-        '<section class="reader-section"><h3>Matched Folders</h3><ul class="reader-list">' +
-        (story.groups.length
-          ? story.groups.map((name) => '<li>' + esc(name) + '</li>').join("")
-          : '<li>No group details</li>') +
-        '</ul></section>' +
-        '<section class="reader-section"><h3>Match Reasons</h3><ul class="reader-list">' +
-        (reasons.length
-          ? reasons.map((term) => '<li>' + esc(term) + '</li>').join("")
-          : '<li>No match reasons recorded</li>') +
-        '</ul></section>' +
-        '<section class="reader-section"><h3>Story Tags</h3><ul class="reader-list">' +
-        (tags.length
-          ? tags.map((tag) => '<li>' + esc(tag) + '</li>').join("")
-          : '<li>No tags on this story</li>') +
-        '</ul></section>';
+      const profiles = getSelectedProfiles();
+      content.innerHTML = profiles.map(renderSectionBlock).join("");
+      const matched = content.querySelectorAll(".news-list li").length;
+      if (emptyState) emptyState.classList.toggle("show", matched === 0);
+      status.textContent = activeId
+        ? "Showing selected section with revenue table and news."
+        : "Showing all three sections in selected layer with revenue tables and news.";
     }
 
-    function renderApp() {
-      renderFolders();
-      renderStories();
-      renderReader();
-    }
+    function renderLayers() {
+      const container = document.getElementById("layers");
+      container.innerHTML = "";
 
-    function setupResizer(handleId, variableName, minPx, maxPx) {
-      const handle = document.getElementById(handleId);
-      const app = document.getElementById("mail-app");
-      if (!handle || !app) return;
+      layers.forEach((layer) => {
+        const wrap = document.createElement("section");
+        wrap.className = "layer-wrap" + ((activeLayerId === layer.id && !activeId) ? " active-layer" : "");
+        wrap.style.setProperty("--layer-index", String(layers.indexOf(layer)));
 
-      let dragging = false;
-      let startX = 0;
-      let startValue = 0;
-
-      const onMove = (event) => {
-        if (!dragging) return;
-        const delta = event.clientX - startX;
-        const next = Math.max(minPx, Math.min(maxPx, startValue + delta));
-        app.style.setProperty(variableName, String(next) + "px");
-      };
-
-      const onUp = () => {
-        if (!dragging) return;
-        dragging = false;
-        handle.classList.remove("dragging");
-        document.body.style.cursor = "";
-        window.removeEventListener("pointermove", onMove);
-        window.removeEventListener("pointerup", onUp);
-      };
-
-      handle.addEventListener("pointerdown", (event) => {
-        if (window.matchMedia("(max-width: 920px)").matches) return;
-        const computed = getComputedStyle(app).getPropertyValue(variableName).trim();
-        startValue = Number(computed.replace("px", "")) || minPx;
-        startX = event.clientX;
-        dragging = true;
-        handle.classList.add("dragging");
-        document.body.style.cursor = "col-resize";
-        window.addEventListener("pointermove", onMove);
-        window.addEventListener("pointerup", onUp);
-      });
-    }
-
-    setupResizer("resizer-left", "--left-w", 220, 460);
-    setupResizer("resizer-middle", "--middle-w", 300, 680);
-
-    const onlyNewInput = document.getElementById("only-new");
-    if (onlyNewInput) {
-      onlyNewInput.checked = onlyNew;
-      onlyNewInput.addEventListener("change", () => {
-        onlyNew = !!onlyNewInput.checked;
-        const stories = getActiveStories();
-        activeStoryKey = stories.length ? stories[0].key : "";
-        renderStories();
-        renderReader();
-      });
-    }
-
-    const searchInput = document.getElementById("story-search");
-    const searchScopeInput = document.getElementById("search-scope");
-    const searchClear = document.getElementById("search-clear");
-    if (searchScopeInput) {
-      searchScopeInput.value = searchScope;
-      searchScopeInput.addEventListener("change", () => {
-        searchScope = searchScopeInput.value === "global" ? "global" : "folder";
-        if (searchScope === "global" && searchQuery.trim()) {
-          activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
-        }
-        if (searchScope === "folder" && activeFolderKey === GLOBAL_SEARCH_FOLDER_KEY) {
-          const firstLayer = folderState[0];
-          if (firstLayer && firstLayer.folders.length) {
-            activeFolderKey = firstLayer.folders[0].key;
-            layerExpandedState[firstLayer.id] = true;
+        const bar = document.createElement("div");
+        bar.className = "layer-bar";
+        bar.setAttribute("role", "button");
+        bar.setAttribute("tabindex", "0");
+        bar.onclick = () => {
+          if (activeLayerId === layer.id && !activeId) {
+            activeLayerId = null;
+            activeId = null;
+            updateDetail(null);
+          } else {
+            activeLayerId = layer.id;
+            activeId = null;
+            updateDetail(null);
           }
-        }
-        const stories = getActiveStories();
-        activeStoryKey = stories.length ? stories[0].key : "";
-        renderApp();
+          renderLayers();
+          renderContentPanel();
+        };
+        bar.onkeydown = (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            bar.onclick();
+          }
+        };
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.style.background = layer.dotColor;
+        const label = document.createElement("span");
+        label.className = "layer-label";
+        label.textContent = layer.label;
+        const line = document.createElement("span");
+        line.className = "layer-line";
+        bar.appendChild(dot);
+        bar.appendChild(label);
+        bar.appendChild(line);
+        wrap.appendChild(bar);
+
+        const cards = document.createElement("div");
+        cards.className = "cards";
+
+        layer.cards.forEach((card) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "node" + (activeId === card.id ? " active" : "");
+          button.style.setProperty("--layer-index", String(layers.indexOf(layer)));
+          button.style.setProperty("--node-index", String(layer.cards.indexOf(card)));
+
+          const title = document.createElement("p");
+          title.className = "node-title";
+          title.textContent = card.title;
+          const sub = document.createElement("p");
+          sub.className = "node-sub";
+          sub.textContent = card.sub;
+          button.appendChild(title);
+          button.appendChild(sub);
+
+          button.onclick = () => {
+            if (activeId === card.id) {
+              activeId = null;
+              activeLayerId = null;
+              updateDetail(null);
+            } else {
+              activeId = card.id;
+              activeLayerId = layer.id;
+              updateDetail(card);
+            }
+            renderLayers();
+            renderContentPanel();
+          };
+
+          cards.appendChild(button);
+        });
+
+        wrap.appendChild(cards);
+        container.appendChild(wrap);
       });
     }
-    if (searchInput) {
-      searchInput.addEventListener("input", () => {
-        searchQuery = searchInput.value || "";
-        if (searchScope === "global" && searchQuery.trim()) {
-          activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
-        }
-        const stories = getActiveStories();
-        activeStoryKey = stories.length ? stories[0].key : "";
-        renderApp();
-      });
+
+    function updateDetail(card) {
+      const panel = document.getElementById("detail");
+      if (!card) {
+        panel.innerHTML = '<p style="margin:0; color:#5b6778; font-size:0.9rem; text-align:center; padding-top:1.7rem;">Select a group to explore context and examples.</p>';
+        return;
+      }
+
+      const chips = (card.examples || []).map((item) => '<span class="chip">' + item + '</span>').join('');
+      panel.innerHTML = '<p class="detail-name">' + card.title + '</p>' +
+        '<p class="detail-desc">' + card.desc + '</p>' +
+        '<div class="detail-examples">' + chips + '</div>';
+      panel.classList.remove("pulse");
+      void panel.offsetWidth;
+      panel.classList.add("pulse");
     }
-    if (searchClear && searchInput) {
-      searchClear.addEventListener("click", () => {
-        searchInput.value = "";
-        searchQuery = "";
-        buildFolderState();
-        renderApp();
-      });
+
+    renderLayers();
+    const clearFilter = document.getElementById("clear-filter");
+    if (clearFilter) {
+      clearFilter.onclick = () => {
+        activeId = null;
+        activeLayerId = null;
+        renderLayers();
+        updateDetail(null);
+        renderContentPanel();
+      };
     }
 
     (async () => {
       const status = document.getElementById("status");
+      const content = document.getElementById("content");
+
       try {
         const resp = await fetch("./tag-index.json", { cache: "no-cache" });
-        if (!resp.ok) throw new Error("HTTP " + resp.status + " while loading ./tag-index.json");
-
+        if (!resp.ok) {
+          throw new Error("HTTP " + resp.status + " while loading ./tag-index.json");
+        }
         const payload = await resp.json();
         archiveArticles = Array.isArray(payload.articles)
-          ? payload.articles.slice().sort((a, b) => getEpoch(b) - getEpoch(a))
+          ? payload.articles.slice().sort((a, b) => (Number(b.epoch) || 0) - (Number(a.epoch) || 0))
           : [];
-
-        latestEpoch = archiveArticles.length ? getEpoch(archiveArticles[0]) : 0;
-        buildFolderState();
-        renderApp();
-
+        renderContentPanel();
         if (!archiveArticles.length) {
           status.textContent = "No stories found yet in tag index.";
-          return;
         }
-
-        status.textContent = "Loaded " + String(archiveArticles.length) + " stories. Choose a folder to explore.";
       } catch (err) {
-        if (status) {
-          status.textContent = "Failed to load story index.";
-          status.classList.add("error");
-        }
-        const folderTree = document.getElementById("folder-tree");
-        const storyList = document.getElementById("story-list");
-        const reader = document.getElementById("story-reader");
-
-        if (folderTree) folderTree.innerHTML = '<p class="folder-empty">Could not load folder data.</p>';
-        if (storyList) storyList.innerHTML = '';
-        if (reader) {
-          reader.innerHTML = '<div class="reader-empty">Could not load tag-index.json. Run the sender publish/archive step to regenerate report data.</div>';
-        }
-
+        status.textContent = "Failed to load story index.";
+        status.classList.add("error");
+        content.innerHTML = "<p class=\"muted-note\">Could not load tag-index.json. Run the sender publish/archive step to generate it.</p>";
         console.error(err);
       }
     })();
