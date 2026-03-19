@@ -835,9 +835,9 @@
     <section class="hero">
       <div class="hero-top">
         <div>
-          <p class="kicker">OpenClaw Research Output</p>
-          <h1 class="headline">AI Supply Chain Intelligence</h1>
-          <p class="lede">Email-style workspace view: choose a layer inbox or group folder on the left, browse matching stories in the middle, and read the selected story details on the right.</p>
+          <p id="hero-kicker" class="kicker">OpenClaw Research Output</p>
+          <h1 id="hero-headline" class="headline">AI Supply Chain Intelligence</h1>
+          <p id="hero-lede" class="lede">Email-style workspace view: choose a layer inbox or group folder on the left, browse matching stories in the middle, and read the selected story details on the right.</p>
         </div>
         <p class="meta-pill">Live from yodabot</p>
       </div>
@@ -871,6 +871,7 @@
           <header class="pane-head">
             <h2 id="inbox-pane-title" class="pane-title">Inbox</h2>
             <p class="pane-sub">Layers and groups</p>
+            <div id="template-switcher" class="toolbar-right" style="margin-top:0.45rem;"></div>
           </header>
           <div id="folder-tree" class="pane-body"></div>
         </aside>
@@ -910,13 +911,13 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="revenue-modal-title">
       <div class="modal-head">
         <div>
-          <h2 id="revenue-modal-title" class="modal-title">Revenue Table</h2>
-          <p id="revenue-modal-sub" class="modal-sub">Group finance snapshot</p>
+          <h2 id="revenue-modal-title" class="modal-title">Group Table</h2>
+          <p id="revenue-modal-sub" class="modal-sub">Group snapshot</p>
         </div>
         <button id="revenue-modal-close" class="modal-close" type="button">Close</button>
       </div>
       <div class="modal-body">
-        <p class="modal-note">Revenue and CapEx values are extracted from matched story text for the selected group.</p>
+        <p id="revenue-modal-note" class="modal-note">Table values are extracted from matched story text for the selected group.</p>
         <div class="tbl-wrap">
           <table class="revenue-table">
             <thead>
@@ -1015,8 +1016,131 @@
       api: { sectionId: "L6.3", title: "Regulation & Policy", layerId: "app", keywords: ["regulation", "policy", "doj", "ftc", "eu ai act", "compliance", "lawsuit"], context: ["antitrust", "regulatory", "legislation", "enforcement", "government policy", "compliance mandate"], deny: [], companies: ["OpenAI", "Google", "Meta", "Anthropic", "Apple"] }
     };
 
+    const aiTemplate = {
+      id: "ai",
+      name: "AI Supply Chain Intelligence",
+      description: "Email-style workspace view for AI: choose a layer inbox or group folder on the left, browse matching stories in the middle, and read details on the right.",
+      kicker: "OpenClaw Research Output",
+      searchTopicKeywords: ["ai", "models", "datacenter", "earnings", "regulation"],
+      defaultGroupPopupTable: {
+        buttonLabel: "▦ Revenue",
+        title: "Revenue Table",
+        subtitle: "Group finance snapshot",
+        note: "Revenue and CapEx values are extracted from matched story text for the selected group.",
+        columns: [
+          { key: "company", label: "Company", valueDescription: "Tracked company name for this group" },
+          { key: "revenue", label: "Revenue", valueDescription: "First revenue-like mention in a matched story (revenue, ARR, funding, valuation, or profit)" },
+          { key: "capex", label: "Capex", valueDescription: "First capital spending mention from matched stories" },
+          { key: "mentions", label: "Mentions", valueDescription: "Count of matched stories that mention the company" },
+          { key: "period", label: "Period", valueDescription: "Reported period inferred from story text (e.g., quarter/year)" },
+          { key: "vsPrior", label: "vs. Prior", valueDescription: "Comparison versus prior report (placeholder until trend storage is added)" }
+        ]
+      },
+      layers: layers.map((layer) => ({
+        id: layer.id,
+        name: layer.label,
+        description: layer.label + " monitoring layer",
+        searchTopicKeywords: [layer.label.toLowerCase()],
+        groups: layer.cards.map((card) => {
+          const profile = sectionProfiles[card.id] || {};
+          return {
+            id: card.id,
+            name: card.title,
+            description: profile.title || card.title,
+            sectionId: profile.sectionId || "",
+            searchTopicKeywords: profile.keywords || [],
+            keywords: profile.keywords || [],
+            context: profile.context || [],
+            deny: profile.deny || [],
+            companies: profile.companies || [],
+            popupTable: true
+          };
+        })
+      }))
+    };
+
+    const templates = [
+      aiTemplate,
+      {
+        id: "health",
+        name: "Health Intelligence",
+        description: "Starter template for health and biotech monitoring.",
+        kicker: "OpenClaw Research Output",
+        searchTopicKeywords: ["health", "biotech", "hospital", "pharma"],
+        layers: [
+          {
+            id: "health-policy",
+            name: "Policy & Regulation",
+            description: "Health policy and regulatory shifts",
+            searchTopicKeywords: ["fda", "cms", "health policy"],
+            groups: [
+              { id: "approval", name: "Approvals", description: "Drug and device approvals", keywords: ["approval", "fda"], context: ["clinical", "trial"], deny: [], companies: [] },
+              { id: "pricing", name: "Pricing", description: "Pricing and reimbursement", keywords: ["pricing", "reimbursement"], context: ["payer", "medicare"], deny: [], companies: [] },
+              { id: "compliance", name: "Compliance", description: "Compliance and enforcement", keywords: ["compliance", "enforcement"], context: ["settlement", "penalty"], deny: [], companies: [] }
+            ]
+          }
+        ]
+      },
+      {
+        id: "weather",
+        name: "Weather Intelligence",
+        description: "Starter template for weather and climate operations monitoring.",
+        kicker: "OpenClaw Research Output",
+        searchTopicKeywords: ["weather", "climate", "storm", "forecast"],
+        layers: [
+          {
+            id: "weather-risk",
+            name: "Risk & Impact",
+            description: "Weather event risks and downstream impact",
+            searchTopicKeywords: ["storm", "flood", "wildfire"],
+            groups: [
+              { id: "extreme", name: "Extreme Events", description: "Severe weather events", keywords: ["hurricane", "flood", "heatwave"], context: ["impact", "damage"], deny: [], companies: [] },
+              { id: "infra", name: "Infrastructure", description: "Grid and transport disruption", keywords: ["grid", "outage", "transport"], context: ["power", "resilience"], deny: [], companies: [] },
+              { id: "forecast", name: "Forecasting", description: "Forecast model and warning updates", keywords: ["forecast", "warning"], context: ["model", "prediction"], deny: [], companies: [] }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const templatesById = Object.fromEntries(templates.map((tpl) => [tpl.id, tpl]));
+
+    let activeTemplateId = "ai";
+
+    function getActiveTemplate() {
+      return templatesById[activeTemplateId] || templates[0];
+    }
+
+    function getGlobalSearchFolderKey() {
+      return "global:search:" + activeTemplateId;
+    }
+
+    function getGroupProfile(groupId) {
+      const template = getActiveTemplate();
+      for (const layer of template.layers || []) {
+        for (const group of layer.groups || []) {
+          if (group.id === groupId) return group;
+        }
+      }
+      return null;
+    }
+
+    function resolvePopupTable(groupId) {
+      const template = getActiveTemplate();
+      const profile = getGroupProfile(groupId);
+      if (!profile) return null;
+
+      if (profile.popupTable === false) return null;
+      if (profile.popupTable && profile.popupTable !== true && typeof profile.popupTable === "object") {
+        return profile.popupTable;
+      }
+      if (profile.popupTable === true) {
+        return template.defaultGroupPopupTable || null;
+      }
+      return null;
+    }
+
     const NEW_WINDOW_SECONDS = 72 * 60 * 60;
-    const GLOBAL_SEARCH_FOLDER_KEY = "global:search";
 
     let archiveArticles = [];
     let latestEpoch = 0;
@@ -1228,21 +1352,23 @@
       return { value: "", period: "" };
     }
 
-    function buildRevenueRows(profile, stories) {
+    function buildPopupRows(profile, popupTable, stories) {
       return (profile.companies || []).map((company) => {
         const matches = stories.filter((story) => articleBlob(story).includes(normalize(company)));
         const mentions = matches.length;
         const revenueObservation = getCompanyFinanceObservation(matches, "revenue");
         const capexObservation = getCompanyFinanceObservation(matches, "capex");
         const period = revenueObservation.period || capexObservation.period || "";
-        return "<tr>" +
-          "<td>" + esc(company) + "</td>" +
-          "<td>" + esc(revenueObservation.value) + "</td>" +
-          "<td>" + esc(capexObservation.value) + "</td>" +
-          "<td>" + esc(String(mentions)) + "</td>" +
-          "<td>" + esc(period) + "</td>" +
-          "<td>—</td>" +
-          "</tr>";
+        const values = {
+          company,
+          revenue: revenueObservation.value,
+          capex: capexObservation.value,
+          mentions: String(mentions),
+          period,
+          vsPrior: "—"
+        };
+        const cells = (popupTable.columns || []).map((col) => "<td>" + esc(values[col.key] || "") + "</td>").join("");
+        return "<tr>" + cells + "</tr>";
       }).join("");
     }
 
@@ -1254,19 +1380,31 @@
     function openRevenueModalForFolder(folder) {
       if (!folder || folder.kind !== "group" || !folder.groupId) return;
 
-      const profile = sectionProfiles[folder.groupId];
+      const profile = getGroupProfile(folder.groupId);
+      const popupTable = resolvePopupTable(folder.groupId);
       const rowsTarget = document.getElementById("revenue-modal-body");
       const titleTarget = document.getElementById("revenue-modal-title");
       const subTarget = document.getElementById("revenue-modal-sub");
+      const noteTarget = document.getElementById("revenue-modal-note");
+      const tableHeadRow = document.querySelector(".revenue-table thead tr");
       const modal = document.getElementById("revenue-modal");
-      if (!profile || !rowsTarget || !titleTarget || !subTarget || !modal) return;
+      if (!profile || !popupTable || !rowsTarget || !titleTarget || !subTarget || !modal || !tableHeadRow) return;
 
       const stories = (storiesByFolder[folder.key] || []).map((item) => item.article);
-      const rows = buildRevenueRows(profile, stories);
+      const rows = buildPopupRows(profile, popupTable, stories);
 
-      titleTarget.textContent = folder.title + " Revenue";
-      subTarget.textContent = profile.sectionId + " · " + folder.title;
-      rowsTarget.innerHTML = rows || '<tr><td colspan="6">No finance rows available.</td></tr>';
+      titleTarget.textContent = popupTable.title || (folder.title + " Table");
+      subTarget.textContent = (profile.sectionId ? profile.sectionId + " · " : "") + folder.title;
+      if (noteTarget) {
+        noteTarget.textContent = popupTable.note || "Table values are extracted from matched story text for the selected group.";
+      }
+
+      tableHeadRow.innerHTML = (popupTable.columns || []).map((col) => {
+        const tip = col.valueDescription ? ' title="' + esc(col.valueDescription) + '"' : "";
+        return "<th" + tip + ">" + esc(col.label || col.key || "") + "</th>";
+      }).join("");
+
+      rowsTarget.innerHTML = rows || '<tr><td colspan="' + String((popupTable.columns || []).length || 1) + '">No rows available.</td></tr>';
       modal.hidden = false;
     }
 
@@ -1283,7 +1421,7 @@
 
     function buildGlobalSearchItems() {
       return uniqueStoriesFromArchive().map((article, idx) => ({
-        key: asStoryKey(GLOBAL_SEARCH_FOLDER_KEY, article, idx),
+        key: asStoryKey(getGlobalSearchFolderKey(), article, idx),
         article,
         isNew: isNewStory(article),
         source: sourceHost(article.url || ""),
@@ -1325,14 +1463,15 @@
     function buildFolderState() {
       const nextStoriesByFolder = {};
       const layersOut = [];
+      const template = getActiveTemplate();
 
-      for (const layer of layers) {
-        const groups = layer.cards;
+      for (const layer of template.layers || []) {
+        const groups = layer.groups || [];
         const folders = [];
 
         const groupMatched = {};
         for (const group of groups) {
-          const profile = sectionProfiles[group.id];
+          const profile = group;
           const matched = archiveArticles
             .map((article, idx) => {
               const result = scoreArticle(article, profile);
@@ -1341,7 +1480,7 @@
                 result,
                 group,
                 groupId: group.id,
-                groupTitle: group.title,
+                groupTitle: group.name,
                 articleIndex: idx
               } : null;
             })
@@ -1374,7 +1513,7 @@
         const inboxItems = Array.from(layerMap.values())
           .sort((a, b) => getEpoch(b.article) - getEpoch(a.article))
           .map((item, idx) => {
-            const key = asStoryKey("layer:" + layer.id + ":inbox", item.article, idx);
+            const key = asStoryKey("tpl:" + template.id + ":layer:" + layer.id + ":inbox", item.article, idx);
             return {
               key,
               article: item.article,
@@ -1385,11 +1524,11 @@
               score: item.score,
               reasons: item.reasons || [],
               groups: item.groups || [],
-              contextLabel: layer.label + " inbox"
+              contextLabel: layer.name + " inbox"
             };
           });
 
-        const inboxKey = "layer:" + layer.id + ":inbox";
+        const inboxKey = "tpl:" + template.id + ":layer:" + layer.id + ":inbox";
         nextStoriesByFolder[inboxKey] = inboxItems;
 
         folders.push({
@@ -1402,7 +1541,7 @@
         });
 
         for (const group of groups) {
-          const folderKey = "group:" + group.id;
+          const folderKey = "tpl:" + template.id + ":group:" + group.id;
           const items = groupMatched[group.id].map((item, idx) => ({
             key: asStoryKey(folderKey, item.article, idx),
             article: item.article,
@@ -1412,8 +1551,8 @@
             confidence: confidenceLabel(item.result.score),
             score: item.result.score,
             reasons: item.result.reasons || [],
-            groups: [group.title],
-            contextLabel: group.title
+            groups: [group.name],
+            contextLabel: group.name
           }));
 
           nextStoriesByFolder[folderKey] = items;
@@ -1423,7 +1562,7 @@
             kind: "group",
             layerId: layer.id,
             groupId: group.id,
-            title: group.title,
+            title: group.name,
             totalCount: items.length,
             newCount: items.filter((item) => item.isNew).length
           });
@@ -1431,14 +1570,14 @@
 
         layersOut.push({
           id: layer.id,
-          label: layer.label,
+          label: layer.name,
           folders
         });
       }
 
       folderState = layersOut;
       storiesByFolder = nextStoriesByFolder;
-      storiesByFolder[GLOBAL_SEARCH_FOLDER_KEY] = buildGlobalSearchItems();
+      storiesByFolder[getGlobalSearchFolderKey()] = buildGlobalSearchItems();
 
       const nextExpanded = {};
       for (const layer of folderState) {
@@ -1465,13 +1604,13 @@
         activeStoryKey = activeStories[0].key;
       }
 
-      if (searchScope === "global" && searchQuery.trim() && activeFolderKey !== GLOBAL_SEARCH_FOLDER_KEY) {
-        activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
+      if (searchScope === "global" && searchQuery.trim() && activeFolderKey !== getGlobalSearchFolderKey()) {
+        activeFolderKey = getGlobalSearchFolderKey();
         const globalStories = getActiveStories();
         activeStoryKey = globalStories.length ? globalStories[0].key : "";
       }
 
-      if ((searchScope !== "global" || !searchQuery.trim()) && activeFolderKey === GLOBAL_SEARCH_FOLDER_KEY) {
+      if ((searchScope !== "global" || !searchQuery.trim()) && activeFolderKey === getGlobalSearchFolderKey()) {
         const firstLayer = folderState[0];
         if (firstLayer && firstLayer.folders.length) {
           activeFolderKey = firstLayer.folders[0].key;
@@ -1494,7 +1633,7 @@
     }
 
     function getEffectiveFolderKey() {
-      if (searchScope === "global" && searchQuery.trim()) return GLOBAL_SEARCH_FOLDER_KEY;
+      if (searchScope === "global" && searchQuery.trim()) return getGlobalSearchFolderKey();
       return activeFolderKey;
     }
 
@@ -1505,7 +1644,42 @@
     function updateInboxPaneTitle() {
       const inboxTitle = document.getElementById("inbox-pane-title");
       if (!inboxTitle) return;
-      inboxTitle.textContent = "Inbox (" + String(uniqueStoriesFromArchive().length) + ")";
+      const template = getActiveTemplate();
+      inboxTitle.textContent = template.name + " Inbox (" + String(uniqueStoriesFromArchive().length) + ")";
+    }
+
+    function renderTemplateSwitcher() {
+      const holder = document.getElementById("template-switcher");
+      if (!holder) return;
+
+      holder.innerHTML = templates.map((template) => {
+        const active = template.id === activeTemplateId;
+        return '<button type="button" class="pill" data-template-id="' + esc(template.id) + '" aria-pressed="' + String(active) + '" style="cursor:pointer;' + (active ? 'border-color:#7ea6b0;background:#def3f8;' : '') + '">' + esc(template.name) + '</button>';
+      }).join("");
+
+      holder.querySelectorAll("button[data-template-id]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const nextTemplateId = button.getAttribute("data-template-id") || "";
+          if (!nextTemplateId || nextTemplateId === activeTemplateId) return;
+          activeTemplateId = nextTemplateId;
+          activeFolderKey = "";
+          activeStoryKey = "";
+          layerExpandedState = {};
+          applyTemplateMeta();
+          buildFolderState();
+          renderApp();
+        });
+      });
+    }
+
+    function applyTemplateMeta() {
+      const template = getActiveTemplate();
+      const kicker = document.getElementById("hero-kicker");
+      const headline = document.getElementById("hero-headline");
+      const lede = document.getElementById("hero-lede");
+      if (kicker) kicker.textContent = template.kicker || "OpenClaw Research Output";
+      if (headline) headline.textContent = template.name || "Research Intelligence";
+      if (lede) lede.textContent = template.description || "Template-driven research workspace.";
     }
 
     function renderFolders() {
@@ -1514,9 +1688,9 @@
 
       let html = "";
       if (searchScope === "global" && searchQuery.trim()) {
-        const globalStories = getFilteredStoriesForFolder(GLOBAL_SEARCH_FOLDER_KEY);
+        const globalStories = getFilteredStoriesForFolder(getGlobalSearchFolderKey());
         const globalNew = globalStories.filter((story) => story.isNew).length;
-        const rowClass = getEffectiveFolderKey() === GLOBAL_SEARCH_FOLDER_KEY ? "folder-btn active" : "folder-btn";
+        const rowClass = getEffectiveFolderKey() === getGlobalSearchFolderKey() ? "folder-btn active" : "folder-btn";
 
         html += '<section class="folder-layer expanded">';
         html += '<div class="layer-name">';
@@ -1527,7 +1701,7 @@
         html += '</span>';
         html += '</div>';
         html += '<div class="folder-list">';
-        html += '<button type="button" class="' + rowClass + '" data-folder-key="' + GLOBAL_SEARCH_FOLDER_KEY + '">';
+        html += '<button type="button" class="' + rowClass + '" data-folder-key="' + getGlobalSearchFolderKey() + '">';
         html += '<span class="folder-left">';
         html += '<span class="folder-icon">Search</span>';
         html += '<span class="folder-label">All Results (' + String(globalStories.length) + ')</span>';
@@ -1639,7 +1813,7 @@
       if (!list || !empty || !title || !sub || !summary || !revenueButton) return;
 
       const effectiveFolderKey = getEffectiveFolderKey();
-      const folder = effectiveFolderKey === GLOBAL_SEARCH_FOLDER_KEY
+      const folder = effectiveFolderKey === getGlobalSearchFolderKey()
         ? { kind: "search", title: "All Search Results", layerId: "" }
         : getFolderByKey(effectiveFolderKey);
       const stories = getActiveStories();
@@ -1670,9 +1844,11 @@
       }
       summary.textContent = "Folder: " + folder.title + " (" + stories.length + ")" + (searchQuery.trim() ? " | search" : "");
 
-      if (folder.kind === "group" && folder.groupId && sectionProfiles[folder.groupId]) {
+      const popupTable = folder.kind === "group" && folder.groupId ? resolvePopupTable(folder.groupId) : null;
+      if (popupTable) {
         revenueButton.hidden = false;
-        revenueButton.title = "Show revenue table for " + folder.title;
+        revenueButton.textContent = popupTable.buttonLabel || "▦ Table";
+        revenueButton.title = "Show table for " + folder.title;
         revenueButton.onclick = () => openRevenueModalForFolder(folder);
       } else {
         revenueButton.hidden = true;
@@ -1772,6 +1948,7 @@
     }
 
     function renderApp() {
+      renderTemplateSwitcher();
       renderFolders();
       renderStories();
       renderReader();
@@ -1840,9 +2017,9 @@
       searchScopeInput.addEventListener("change", () => {
         searchScope = searchScopeInput.value === "global" ? "global" : "folder";
         if (searchScope === "global" && searchQuery.trim()) {
-          activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
+          activeFolderKey = getGlobalSearchFolderKey();
         }
-        if (searchScope === "folder" && activeFolderKey === GLOBAL_SEARCH_FOLDER_KEY) {
+        if (searchScope === "folder" && activeFolderKey === getGlobalSearchFolderKey()) {
           const firstLayer = folderState[0];
           if (firstLayer && firstLayer.folders.length) {
             activeFolderKey = firstLayer.folders[0].key;
@@ -1858,7 +2035,7 @@
       searchInput.addEventListener("input", () => {
         searchQuery = searchInput.value || "";
         if (searchScope === "global" && searchQuery.trim()) {
-          activeFolderKey = GLOBAL_SEARCH_FOLDER_KEY;
+          activeFolderKey = getGlobalSearchFolderKey();
         }
         const stories = getActiveStories();
         activeStoryKey = stories.length ? stories[0].key : "";
@@ -1891,6 +2068,8 @@
 
     (async () => {
       const status = document.getElementById("status");
+      applyTemplateMeta();
+      renderTemplateSwitcher();
       try {
         const resp = await fetch("./tag-index.json", { cache: "no-cache" });
         if (!resp.ok) throw new Error("HTTP " + resp.status + " while loading ./tag-index.json");
@@ -1909,7 +2088,7 @@
           return;
         }
 
-        status.textContent = "Loaded " + String(archiveArticles.length) + " stories. Choose a folder to explore.";
+        status.textContent = "Loaded " + String(archiveArticles.length) + " stories for " + getActiveTemplate().name + ". Choose a folder to explore.";
       } catch (err) {
         if (status) {
           status.textContent = "Failed to load story index.";
