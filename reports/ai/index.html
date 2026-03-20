@@ -55,22 +55,12 @@
       padding: 0.3rem 0;
       overflow: hidden;
     }
-    .month-row {
-      padding: 0.45rem 1rem;
-      border-top: 1px solid var(--line);
-      background: #f6fbff;
-      color: #0d3c5a;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
     .row {
       display: grid;
       grid-template-columns: minmax(180px, 280px) 1fr auto;
       gap: 0.8rem;
       align-items: center;
-      padding: 0.62rem 1rem;
+      padding: 0.75rem 1rem;
       border-top: 1px solid var(--line);
     }
     .row:first-child {
@@ -83,42 +73,6 @@
     }
     .label {
       color: var(--muted);
-    }
-    .summary {
-      color: var(--ink);
-      margin-bottom: 0.25rem;
-    }
-    .tag-list {
-      display: flex;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-    }
-    .tag {
-      border: 1px solid #c8d8e6;
-      background: #f4f9ff;
-      color: #36546b;
-      border-radius: 999px;
-      padding: 0.12rem 0.48rem;
-      font-size: 0.74rem;
-      font-weight: 700;
-    }
-    .search-row {
-      display: block;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid var(--line);
-      background: #f9fcff;
-    }
-    .search-row input {
-      width: 100%;
-      border: 1px solid #c5dbef;
-      border-radius: 10px;
-      padding: 0.5rem 0.65rem;
-      font: inherit;
-      margin-bottom: 0.4rem;
-    }
-    .search-row .hint {
-      color: var(--muted);
-      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -136,48 +90,6 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
-    .domain {
-      border: 1px solid #c2d8ea;
-      background: #f7fbff;
-      color: #33536a;
-      border-radius: 999px;
-      padding: 0.23rem 0.55rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-    .pager {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      border-top: 1px solid var(--line);
-      padding: 0.65rem 1rem;
-      background: #f8fcff;
-    }
-    .pager.hidden { display: none; }
-    .pager .meta {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .pager .controls {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .pager button {
-      border: 1px solid #c5dbef;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 700;
-      border-radius: 999px;
-      padding: 0.28rem 0.7rem;
-      cursor: pointer;
-    }
-    .pager button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
     @media (max-width: 720px) {
       .row {
         grid-template-columns: 1fr;
@@ -188,10 +100,6 @@
       }
       .ts {
         white-space: normal;
-      }
-      .pager {
-        flex-direction: column;
-        align-items: stretch;
       }
     }
   </style>
