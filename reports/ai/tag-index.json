@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-03-20T00:09:11.924Z",
+  "generatedAt": "2026-03-20T00:09:49.083Z",
   "articleCount": 67,
   "tagCount": 185,
   "articles": [
@@ -493,8 +493,8 @@
     },
     {
       "id": "a29",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*",
       "url": "https://www.nytimes.com/2026/03/19/business/ai-agents-anxiety-openclaw.html",
       "tags": [
@@ -509,8 +509,8 @@
     },
     {
       "id": "a30",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*",
       "url": "https://www.nytimes.com/2026/03/19/technology/ai-agents-uses.html",
       "tags": [
@@ -525,8 +525,8 @@
     },
     {
       "id": "a31",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*",
       "url": "https://www.nytimes.com/2026/01/29/technology/amazon-google-nvidia-chips-competition.html",
       "tags": [
@@ -545,8 +545,8 @@
     },
     {
       "id": "a32",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*",
       "url": "https://www.datacenterknowledge.com/cloud/ampere-arms-european-cloud-footprint-with-new-deployments",
       "tags": [
@@ -564,8 +564,8 @@
     },
     {
       "id": "a33",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*",
       "url": "https://www.nytimes.com/2026/02/14/business/china-chips-nvidia-huawei.html",
       "tags": [
@@ -578,8 +578,8 @@
     },
     {
       "id": "a34",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*",
       "url": "https://www.nytimes.com/2026/03/17/business/china-ai-agent.html",
       "tags": [
@@ -594,8 +594,8 @@
     },
     {
       "id": "a35",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*",
       "url": "https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026",
       "tags": [
@@ -617,8 +617,8 @@
     },
     {
       "id": "a36",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*",
       "url": "https://www.nytimes.com/2026/03/16/technology/ai-florida-republicans.html",
       "tags": [
@@ -637,8 +637,8 @@
     },
     {
       "id": "a37",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*",
       "url": "https://www.nytimes.com/2026/01/29/technology/ai-memory-chips-pc-smartphone.html",
       "tags": [
@@ -655,8 +655,8 @@
     },
     {
       "id": "a38",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*",
       "url": "https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/",
       "tags": [
@@ -674,8 +674,8 @@
     },
     {
       "id": "a39",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*",
       "url": "https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/",
       "tags": [
@@ -692,8 +692,8 @@
     },
     {
       "id": "a40",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*",
       "url": "https://www.bloomberg.com/news/articles/2026-03-16/nvidia-expects-to-make-1-trillion-from-ai-chips-through-2027",
       "tags": [
@@ -710,8 +710,8 @@
     },
     {
       "id": "a41",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*",
       "url": "https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html",
       "tags": [
@@ -728,8 +728,8 @@
     },
     {
       "id": "a42",
-      "epoch": 1773921432,
-      "stamp": "Mar 19, 2026 7:57:12 EDT",
+      "epoch": 1773922147,
+      "stamp": "Mar 19, 2026 8:09:07 EDT",
       "summary": "Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*",
       "url": "https://www.nytimes.com/interactive/2026/03/18/business/energy-environment/data-center-energy-gas-generators.html",
       "tags": [

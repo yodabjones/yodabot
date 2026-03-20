@@ -55,12 +55,22 @@
       padding: 0.3rem 0;
       overflow: hidden;
     }
+    .month-row {
+      padding: 0.45rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f6fbff;
+      color: #0d3c5a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
     .row {
       display: grid;
       grid-template-columns: minmax(180px, 280px) 1fr auto;
       gap: 0.8rem;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.62rem 1rem;
       border-top: 1px solid var(--line);
     }
     .row:first-child {
@@ -73,6 +83,42 @@
     }
     .label {
       color: var(--muted);
+    }
+    .summary {
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tag-list {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      border: 1px solid #c8d8e6;
+      background: #f4f9ff;
+      color: #36546b;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .search-row {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f9fcff;
+    }
+    .search-row input {
+      width: 100%;
+      border: 1px solid #c5dbef;
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font: inherit;
+      margin-bottom: 0.4rem;
+    }
+    .search-row .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -90,6 +136,48 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
+    .domain {
+      border: 1px solid #c2d8ea;
+      background: #f7fbff;
+      color: #33536a;
+      border-radius: 999px;
+      padding: 0.23rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      border-top: 1px solid var(--line);
+      padding: 0.65rem 1rem;
+      background: #f8fcff;
+    }
+    .pager.hidden { display: none; }
+    .pager .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pager .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pager button {
+      border: 1px solid #c5dbef;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+    }
+    .pager button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     @media (max-width: 720px) {
       .row {
         grid-template-columns: 1fr;
@@ -100,6 +188,10 @@
       }
       .ts {
         white-space: normal;
+      }
+      .pager {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -697,7 +789,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a29" data-month="Mar 19," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*</div>
           <div class="tag-list">
@@ -716,7 +808,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a30" data-month="Mar 19," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*</div>
           <div class="tag-list">
@@ -735,7 +827,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a31" data-month="Mar 19," data-tags="AI|Amazon|Google|L3.1-gpus-accelerators|L4.1-data-centers|L6.1-api-developer-tools|Nvidia|NVIDIA|NYT|nytimes|nytimes.com">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*</div>
           <div class="tag-list">
@@ -758,7 +850,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a32" data-month="Mar 19," data-tags="Ampere|AmpereOne|datacenterknowledge|datacenterknowledge.com|DCK|European|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|Tier">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*</div>
           <div class="tag-list">
@@ -780,7 +872,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a33" data-month="Mar 19," data-tags="China|Chinese|NYT|nytimes|nytimes.com">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*</div>
           <div class="tag-list">
@@ -797,7 +889,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a34" data-month="Mar 19," data-tags="AI|China|Excitement|L6.3-consumer-products|NYT|nytimes|nytimes.com">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*</div>
           <div class="tag-list">
@@ -816,7 +908,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a35" data-month="Mar 19," data-tags="AI|datacenterknowledge|datacenterknowledge.com|DCK|Dell|GTC|HPE|L3.1-gpus-accelerators|L3.2-custom-asics|L3.3-networking-interconnects|Nvidia|NVIDIA|Tier|Vera Rubin">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*</div>
           <div class="tag-list">
@@ -842,7 +934,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a36" data-month="Mar 19," data-tags="AI|DeSantis|Florida|Florida Republicans|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com|Trump">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*</div>
           <div class="tag-list">
@@ -865,7 +957,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a37" data-month="Mar 19," data-tags="AI|HBM|L2.1-fab-equipment|L2.2-foundries|L2.3-memory-storage|NYT|nytimes|nytimes.com|PC">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*</div>
           <div class="tag-list">
@@ -886,7 +978,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a38" data-month="Mar 19," data-tags="Encyclopedia Britannica|L5.2-foundation-models|L6.1-api-developer-tools|LLM|Merriam|OpenAI|techcrunch|TechCrunch|techcrunch.com|Webster">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*</div>
           <div class="tag-list">
@@ -908,7 +1000,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a39" data-month="Mar 19," data-tags="Blackwell|Bloomberg|L3.1-gpus-accelerators|Nvidia|NVIDIA|techcrunch|TechCrunch|techcrunch.com|Vera Rubin">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*</div>
           <div class="tag-list">
@@ -929,7 +1021,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a40" data-month="Mar 19," data-tags="Blackwell|bloomberg|Bloomberg|bloomberg.com|L3.1-gpus-accelerators|Nvidia|NVIDIA|TechCrunch|Vera Rubin">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*</div>
           <div class="tag-list">
@@ -950,7 +1042,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a41" data-month="Mar 19," data-tags="If China|L1.1-silicon-minerals|L2.2-foundries|NYT|nytimes|nytimes.com|Silicon Valley|Taiwan|TSMC">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*</div>
           <div class="tag-list">
@@ -971,7 +1063,7 @@
         </div>
       </div>
       <div class="row" data-entry="1" data-article-id="a42" data-month="Mar 19," data-tags="L1.2-energy-water|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|L6.1-api-developer-tools|Meta|NYT|nytimes|nytimes.com|Tech">
-        <div class="ts">Mar 19, 2026 7:57:12 EDT</div>
+        <div class="ts">Mar 19, 2026 8:09:07 EDT</div>
         <div class="label">
           <div class="summary">Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*</div>
           <div class="tag-list">
