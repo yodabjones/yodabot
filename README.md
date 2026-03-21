@@ -18,12 +18,14 @@ It is designed to be simple, stable, and easy to browse in GitHub.
 - Delivery operations: [docs/OPERATIONS.md](docs/OPERATIONS.md)
 - Editorial and verification policy: [docs/STYLE.md](docs/STYLE.md)
 - Archive index page: [docs/ARCHIVE.md](docs/ARCHIVE.md)
+- Agent session cost dashboard: [reports/ai/agent-session-costs.html](reports/ai/agent-session-costs.html)
 
 ## What This Repo Contains
 
 - A rolling latest report at [reports/ai/latest.md](reports/ai/latest.md)
 - A chronological article archive dataset at [reports/ai/article-archive.tsv](reports/ai/article-archive.tsv)
 - A browser archive page generated from article history at [reports/ai/index.html](reports/ai/index.html)
+- An agent session cost dashboard generated from local session usage records at [reports/ai/agent-session-costs.html](reports/ai/agent-session-costs.html)
 - Operational docs for generation, delivery, and troubleshooting in [docs/README.md](docs/README.md)
 
 ## How To Read Reports

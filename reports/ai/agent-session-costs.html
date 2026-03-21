@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Session Cost Dashboard</title>
+  <style>
+    :root {
+      --bg: #f2f7fa;
+      --panel: #ffffff;
+      --ink: #17313c;
+      --muted: #5e7c89;
+      --line: #d5e3ea;
+      --accent: #1776a5;
+      --chip: #eaf4f9;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      background: radial-gradient(circle at top right, #deedf4 0%, var(--bg) 45%, #eef6fa 100%);
+      color: var(--ink);
+    }
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.2rem 1.2rem 1rem;
+      box-shadow: 0 10px 30px rgba(16, 54, 73, 0.08);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.6rem;
+    }
+    p {
+      margin: 0.25rem 0;
+      color: var(--muted);
+    }
+    .links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--chip);
+      border: 1px solid #cce2ee;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.9rem;
+    }
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(16, 54, 73, 0.06);
+    }
+    .panel h2 {
+      margin: 0;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--line);
+      background: #f7fbfd;
+    }
+    .table-wrap {
+      overflow: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      background: #fbfdfe;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .totals {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .totals span {
+      background: #f5fbff;
+      border: 1px solid #d4e8f3;
+      border-radius: 10px;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.9rem;
+      color: #1d4e63;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>Agent Session Cost Dashboard</h1>
+      <p>Source: local OpenClaw session transcripts under <code>/home/yodabjones/.openclaw/agents</code>.</p>
+      <p>Generated (UTC): 2026-03-21T16:51:56.504Z</p>
+      <div class="totals">
+        <span>Total sessions: 5</span>
+        <span>Total assistant turns: 188</span>
+        <span>Total cost: $6.309079</span>
+        <span>Total tokens: 3,178,096</span>
+      </div>
+      <nav class="links" aria-label="cost links">
+        <a href="/">Back to latest report</a>
+        <a href="/reports/ai/">Open report archive</a>
+      </nav>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>By Agent</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Agent</th>
+                <th>Sessions</th>
+                <th>Assistant turns</th>
+                <th>Total cost</th>
+                <th>Total tokens</th>
+              </tr>
+            </thead>
+            <tbody>
+<tr>
+<td>writer</td>
+<td class="num">1</td>
+<td class="num">96</td>
+<td class="num">$5.159019</td>
+<td class="num">2,384,949</td>
+</tr>
+<tr>
+<td>sender</td>
+<td class="num">1</td>
+<td class="num">49</td>
+<td class="num">$0.773271</td>
+<td class="num">422,121</td>
+</tr>
+<tr>
+<td>researcher-coordinator</td>
+<td class="num">1</td>
+<td class="num">29</td>
+<td class="num">$0.247149</td>
+<td class="num">231,898</td>
+</tr>
+<tr>
+<td>main</td>
+<td class="num">2</td>
+<td class="num">14</td>
+<td class="num">$0.129640</td>
+<td class="num">139,128</td>
+</tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>By Session</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Agent</th>
+                <th>Session ID</th>
+                <th>Model</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Assistant turns</th>
+                <th>Total cost</th>
+                <th>Total tokens</th>
+              </tr>
+            </thead>
+            <tbody>
+<tr>
+<td>writer</td>
+<td>c3b4b0bf-49eb-4569-b224-bab8f714efe6</td>
+<td>claude-sonnet-4-6</td>
+<td>2026-03-09T15:43:51.650Z</td>
+<td>2026-03-20T00:07:36.619Z</td>
+<td class="num">96</td>
+<td class="num">$5.159019</td>
+<td class="num">2,384,949</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>194cdded-f999-4aa6-bac1-d85a02ef2780</td>
+<td>claude-sonnet-4-6</td>
+<td>2026-03-13T15:39:03.257Z</td>
+<td>2026-03-20T00:09:52.156Z</td>
+<td class="num">49</td>
+<td class="num">$0.773271</td>
+<td class="num">422,121</td>
+</tr>
+<tr>
+<td>researcher-coordinator</td>
+<td>dbe85fe5-e242-4450-af24-8d25861c7d0f</td>
+<td>claude-sonnet-4-6</td>
+<td>2026-03-17T16:55:23.289Z</td>
+<td>2026-03-19T23:53:22.319Z</td>
+<td class="num">29</td>
+<td class="num">$0.247149</td>
+<td class="num">231,898</td>
+</tr>
+<tr>
+<td>main</td>
+<td>e3ffaa50-590d-4af4-8ba1-9db8e700dc82</td>
+<td>claude-sonnet-4-6</td>
+<td>2026-03-17T16:18:57.800Z</td>
+<td>2026-03-17T16:22:41.570Z</td>
+<td class="num">13</td>
+<td class="num">$0.097947</td>
+<td class="num">130,883</td>
+</tr>
+<tr>
+<td>main</td>
+<td>292f5b9d-d825-4ec3-9846-0257a0d4f334</td>
+<td>claude-sonnet-4-6</td>
+<td>2026-03-09T19:23:10.846Z</td>
+<td>2026-03-09T19:23:13.554Z</td>
+<td class="num">1</td>
+<td class="num">$0.031693</td>
+<td class="num">8,245</td>
+</tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
