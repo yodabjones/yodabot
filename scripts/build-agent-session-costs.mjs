@@ -13,14 +13,17 @@ function getOpenClawRoot() {
 function parseArgs(argv) {
   const args = {
     output: null,
+    history: null,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
     if (token === "--output") {
       args.output = argv[++i] || null;
+    } else if (token === "--history") {
+      args.history = argv[++i] || null;
     } else if (token === "-h" || token === "--help") {
-      console.log("Usage: node scripts/build-agent-session-costs.mjs [--output <path>]");
+      console.log("Usage: node scripts/build-agent-session-costs.mjs [--output <path>] [--history <path>]");
       process.exit(0);
     } else {
       throw new Error(`Unknown argument: ${token}`);
@@ -290,23 +293,31 @@ ${sessionRows || "<tr><td colspan=\"8\">No cost records found.</td></tr>"}
 </html>`;
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const openclawRoot = getOpenClawRoot();
-  const agentsDir = path.join(openclawRoot, "agents");
-  const outPath = args.output
-    ? (path.isAbsolute(args.output) ? args.output : path.join(process.cwd(), args.output))
-    : path.join(process.cwd(), "reports/ai/agent-session-costs.html");
+async function loadHistorySessions(historyPath) {
+  /** Returns Map<sessionId, sessionRecord> from the JSON accumulator file. */
+  try {
+    const raw = await fs.readFile(historyPath, "utf8");
+    const parsed = JSON.parse(raw);
+    const sessions = parsed?.sessions;
+    if (sessions && typeof sessions === "object") {
+      return new Map(Object.entries(sessions));
+    }
+  } catch {
+    // File missing or corrupt — return empty map.
+  }
+  return new Map();
+}
 
-  const sessions = [];
-  const totalsByAgent = new Map();
+async function scanLiveSessions(agentsDir) {
+  /** Returns Map<sessionId, sessionRecord> from current JSONL files. */
+  const live = new Map();
 
   let agentNames = [];
   try {
     const children = await fs.readdir(agentsDir, { withFileTypes: true });
     agentNames = children.filter((d) => d.isDirectory()).map((d) => d.name).sort();
   } catch {
-    agentNames = [];
+    return live;
   }
 
   for (const agentId of agentNames) {
@@ -340,14 +351,11 @@ async function main() {
           if (!startedAt || ts < startedAt) startedAt = ts;
           if (!endedAt || ts > endedAt) endedAt = ts;
         }
-
         if (!isAssistantUsageRecord(evt)) continue;
         assistantTurns += 1;
-
         const usage = evt.message.usage;
         tokensTotal += Number(usage.totalTokens || 0);
         costTotal += Number(usage.cost.total || 0);
-
         if (!model && typeof evt.message.model === "string") {
           model = evt.message.model;
         }
@@ -355,7 +363,7 @@ async function main() {
 
       if (assistantTurns === 0) continue;
 
-      sessions.push({
+      live.set(sessionId, {
         agentId,
         sessionId,
         model: model || "unknown",
@@ -365,21 +373,53 @@ async function main() {
         tokensTotal,
         costTotal,
       });
-
-      const bucket = totalsByAgent.get(agentId) || {
-        agentId,
-        sessions: 0,
-        assistantTurns: 0,
-        tokensTotal: 0,
-        costTotal: 0,
-      };
-
-      bucket.sessions += 1;
-      bucket.assistantTurns += assistantTurns;
-      bucket.tokensTotal += tokensTotal;
-      bucket.costTotal += costTotal;
-      totalsByAgent.set(agentId, bucket);
     }
+  }
+
+  return live;
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const openclawRoot = getOpenClawRoot();
+  const agentsDir = path.join(openclawRoot, "agents");
+  const outPath = args.output
+    ? (path.isAbsolute(args.output) ? args.output : path.join(process.cwd(), args.output))
+    : path.join(process.cwd(), "reports/ai/agent-session-costs.html");
+  const historyPath = args.history
+    ? (path.isAbsolute(args.history) ? args.history : path.join(process.cwd(), args.history))
+    : null;
+
+  // Merge live sessions with history (if provided). Live data takes precedence
+  // for sessions that exist in both (captures any new messages since last accumulation).
+  // History-only sessions survive even after container restart wipes live JSONL files.
+  const [historyMap, liveMap] = await Promise.all([
+    historyPath ? loadHistorySessions(historyPath) : Promise.resolve(new Map()),
+    scanLiveSessions(agentsDir),
+  ]);
+
+  const merged = new Map([...historyMap, ...liveMap]);
+
+  const sessions = [];
+  const totalsByAgent = new Map();
+
+  for (const record of merged.values()) {
+    const { agentId, sessionId, model, startedAt, endedAt, assistantTurns, tokensTotal, costTotal } = record;
+
+    sessions.push({ agentId, sessionId, model, startedAt, endedAt, assistantTurns, tokensTotal, costTotal });
+
+    const bucket = totalsByAgent.get(agentId) || {
+      agentId,
+      sessions: 0,
+      assistantTurns: 0,
+      tokensTotal: 0,
+      costTotal: 0,
+    };
+    bucket.sessions += 1;
+    bucket.assistantTurns += assistantTurns;
+    bucket.tokensTotal += tokensTotal;
+    bucket.costTotal += costTotal;
+    totalsByAgent.set(agentId, bucket);
   }
 
   sessions.sort((a, b) => b.costTotal - a.costTotal);
