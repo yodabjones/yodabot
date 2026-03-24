@@ -524,6 +524,83 @@
               }
             }
           ]
+        }, 
+        {
+          "id": "analog",
+          "name": "Analog World",
+          "description": "AI effects in physical systems, labor, and public institutions",
+          "searchTopicKeywords": ["policy", "labor", "robotics"],
+          "groups": [
+            {
+              "id": "politics",
+              "name": "Politics and Policy",
+              "description": "Regulation, legislation, and geopolitical AI policy",
+              "searchTopicKeywords": ["regulation", "policy", "antitrust", "export controls"],
+              "search": {
+                "entities": ["congress", "white house", "eu commission", "ftc", "doj", "export controls", "ai act"],
+                "phrases": ["ai regulation", "ai policy", "chip export controls", "model governance"],
+                "sources": {
+                  "nyt": {
+                    "queries": [
+                      "artificial intelligence regulation congress",
+                      "eu ai act openai google microsoft",
+                      "ai chip export controls nvidia china"
+                    ]
+                  }
+                }
+              },
+              "companies": ["OpenAI", "Microsoft", "Google", "Meta", "NVIDIA"],
+              "popupTable": false
+            },
+            {
+              "id": "labor",
+              "name": "Labor Market",
+              "description": "Hiring, displacement, productivity, and wage effects from AI adoption",
+              "searchTopicKeywords": ["jobs", "hiring", "layoffs", "productivity", "wages"],
+              "search": {
+                "entities": ["labor market", "unemployment", "hiring", "layoffs", "upskilling", "automation"],
+                "phrases": ["ai jobs", "ai productivity", "ai displacement", "labor market impact"],
+                "sources": {
+                  "nyt": {
+                    "queries": [
+                      "ai jobs hiring layoffs productivity",
+                      "artificial intelligence labor market wages",
+                      "automation workers unions ai"
+                    ]
+                  }
+                }
+              },
+              "companies": ["LinkedIn", "Indeed", "Workday", "ADP", "Upwork"],
+              "popupTable": false
+            },
+            {
+              "id": "robots",
+              "name": "Robots",
+              "description": "Embodied AI, industrial robotics, and warehouse automation",
+              "searchTopicKeywords": ["robots", "humanoids", "automation", "warehouse"],
+              "search": {
+                "entities": ["robot", "humanoid", "warehouse automation", "factory automation", "embodied ai"],
+                "phrases": ["humanoid robot", "industrial robotics", "warehouse robot deployment"],
+                "sources": {
+                  "nyt": {
+                    "queries": [
+                      "humanoid robots embodied ai",
+                      "warehouse automation robots amazon figure",
+                      "tesla optimus agility robotics"
+                    ]
+                  }
+                }
+              },
+              "companies": ["Tesla", "Figure", "Agility Robotics", "Boston Dynamics", "ABB"],
+              "popupTable": {
+                "enabled": true,
+                "buttonLabel": "▦ Robot Table",
+                "title": "Robotics Signal Table",
+                "subtitle": "Embodied AI and robotics activity snapshot",
+                "note": "Tracks company mentions and finance-style signals for robotics-related stories."
+              }
+            }
+          ]
         }
       ],
       "tier0Sources": [

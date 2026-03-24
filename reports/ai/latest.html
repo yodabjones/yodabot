@@ -850,6 +850,7 @@
         </div>
         <div class="toolbar-right">
           <a href="./agent-session-costs.html" class="pill" style="text-decoration: none; color: inherit; cursor: pointer; display: inline-flex; align-items: center;">📊 Agent costs</a>
+          <a href="./by-source.html" class="pill" style="text-decoration: none; color: inherit; cursor: pointer; display: inline-flex; align-items: center;">📈 Source scores</a>
           <span id="folder-summary" class="pill">Folder: Loading...</span>
           <label class="toggle-control" for="only-new">
             <input id="only-new" type="checkbox" />
@@ -1176,12 +1177,36 @@
             if (typeof groupOverride.name === "string" && groupOverride.name.trim()) {
               group.name = groupOverride.name;
             }
+            if (typeof groupOverride.description === "string" && groupOverride.description.trim()) {
+              group.description = groupOverride.description;
+            }
+
+            if (Array.isArray(groupOverride.searchTopicKeywords)) {
+              group.searchTopicKeywords = groupOverride.searchTopicKeywords.slice();
+            }
+            if (Array.isArray(groupOverride.keywords)) {
+              group.keywords = groupOverride.keywords.slice();
+            }
+            if (Array.isArray(groupOverride.context)) {
+              group.context = groupOverride.context.slice();
+            }
+            if (Array.isArray(groupOverride.deny)) {
+              group.deny = groupOverride.deny.slice();
+            }
 
             const profile = sectionProfiles[group.id] || (sectionProfiles[group.id] = {});
             if (Array.isArray(groupOverride.companies)) {
               profile.companies = groupOverride.companies.slice();
               group.companies = groupOverride.companies.slice();
             }
+
+            profile.layerId = layer.id;
+            profile.title = group.description || group.name || profile.title;
+            profile.keywords = Array.isArray(group.keywords) && group.keywords.length
+              ? group.keywords.slice()
+              : (Array.isArray(group.searchTopicKeywords) ? group.searchTopicKeywords.slice() : []);
+            profile.context = Array.isArray(group.context) ? group.context.slice() : [];
+            profile.deny = Array.isArray(group.deny) ? group.deny.slice() : [];
 
             if (Object.prototype.hasOwnProperty.call(groupOverride, "popupTable")) {
               const mergedPopup = mergePopupTable(profile.popupTable, groupOverride.popupTable);
@@ -1193,6 +1218,95 @@
               profile.sectionId = groupOverride.sectionId;
             }
           }
+
+          for (const groupOverride of (layerOverride.groups || [])) {
+            if (!groupOverride || typeof groupOverride !== "object") continue;
+            const groupId = String(groupOverride.id || "").trim();
+            if (!groupId) continue;
+            if ((layer.groups || []).some((group) => group.id === groupId)) continue;
+
+            const newGroup = {
+              id: groupId,
+              name: String(groupOverride.name || groupId),
+              description: String(groupOverride.description || groupOverride.name || groupId),
+              searchTopicKeywords: Array.isArray(groupOverride.searchTopicKeywords) ? groupOverride.searchTopicKeywords.slice() : [],
+              keywords: Array.isArray(groupOverride.keywords)
+                ? groupOverride.keywords.slice()
+                : (Array.isArray(groupOverride.searchTopicKeywords) ? groupOverride.searchTopicKeywords.slice() : []),
+              context: Array.isArray(groupOverride.context) ? groupOverride.context.slice() : [],
+              deny: Array.isArray(groupOverride.deny) ? groupOverride.deny.slice() : [],
+              companies: Array.isArray(groupOverride.companies) ? groupOverride.companies.slice() : [],
+              popupTable: Object.prototype.hasOwnProperty.call(groupOverride, "popupTable") ? groupOverride.popupTable : true
+            };
+
+            const profile = sectionProfiles[groupId] || (sectionProfiles[groupId] = {});
+            profile.layerId = layer.id;
+            profile.sectionId = typeof groupOverride.sectionId === "string" && groupOverride.sectionId.trim()
+              ? groupOverride.sectionId
+              : (profile.sectionId || "");
+            profile.title = newGroup.description || newGroup.name;
+            profile.keywords = newGroup.keywords.slice();
+            profile.context = newGroup.context.slice();
+            profile.deny = newGroup.deny.slice();
+            profile.companies = newGroup.companies.slice();
+            profile.popupTable = newGroup.popupTable;
+
+            layer.groups = Array.isArray(layer.groups) ? layer.groups : [];
+            layer.groups.push(newGroup);
+          }
+        }
+
+        for (const layerOverride of (overrideTemplate.layers || [])) {
+          if (!layerOverride || typeof layerOverride !== "object") continue;
+          const layerId = String(layerOverride.id || "").trim();
+          if (!layerId) continue;
+          if ((template.layers || []).some((layer) => layer.id === layerId)) continue;
+
+          const newLayer = {
+            id: layerId,
+            label: String(layerOverride.name || layerId),
+            name: String(layerOverride.name || layerId),
+            description: String(layerOverride.description || ""),
+            searchTopicKeywords: Array.isArray(layerOverride.searchTopicKeywords) ? layerOverride.searchTopicKeywords.slice() : [],
+            groups: []
+          };
+
+          for (const groupOverride of (layerOverride.groups || [])) {
+            if (!groupOverride || typeof groupOverride !== "object") continue;
+            const groupId = String(groupOverride.id || "").trim();
+            if (!groupId) continue;
+
+            const newGroup = {
+              id: groupId,
+              name: String(groupOverride.name || groupId),
+              description: String(groupOverride.description || groupOverride.name || groupId),
+              searchTopicKeywords: Array.isArray(groupOverride.searchTopicKeywords) ? groupOverride.searchTopicKeywords.slice() : [],
+              keywords: Array.isArray(groupOverride.keywords)
+                ? groupOverride.keywords.slice()
+                : (Array.isArray(groupOverride.searchTopicKeywords) ? groupOverride.searchTopicKeywords.slice() : []),
+              context: Array.isArray(groupOverride.context) ? groupOverride.context.slice() : [],
+              deny: Array.isArray(groupOverride.deny) ? groupOverride.deny.slice() : [],
+              companies: Array.isArray(groupOverride.companies) ? groupOverride.companies.slice() : [],
+              popupTable: Object.prototype.hasOwnProperty.call(groupOverride, "popupTable") ? groupOverride.popupTable : true
+            };
+
+            const profile = sectionProfiles[groupId] || (sectionProfiles[groupId] = {});
+            profile.layerId = layerId;
+            profile.sectionId = typeof groupOverride.sectionId === "string" && groupOverride.sectionId.trim()
+              ? groupOverride.sectionId
+              : (profile.sectionId || "");
+            profile.title = newGroup.description || newGroup.name;
+            profile.keywords = newGroup.keywords.slice();
+            profile.context = newGroup.context.slice();
+            profile.deny = newGroup.deny.slice();
+            profile.companies = newGroup.companies.slice();
+            profile.popupTable = newGroup.popupTable;
+
+            newLayer.groups.push(newGroup);
+          }
+
+          template.layers = Array.isArray(template.layers) ? template.layers : [];
+          template.layers.push(newLayer);
         }
       }
 
