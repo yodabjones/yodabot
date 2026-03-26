@@ -55,12 +55,22 @@
       padding: 0.3rem 0;
       overflow: hidden;
     }
+    .month-row {
+      padding: 0.45rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f6fbff;
+      color: #0d3c5a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
     .row {
       display: grid;
       grid-template-columns: minmax(180px, 280px) 1fr auto;
       gap: 0.8rem;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.62rem 1rem;
       border-top: 1px solid var(--line);
     }
     .row:first-child {
@@ -73,6 +83,42 @@
     }
     .label {
       color: var(--muted);
+    }
+    .summary {
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .tag-list {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      border: 1px solid #c8d8e6;
+      background: #f4f9ff;
+      color: #36546b;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .search-row {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+      background: #f9fcff;
+    }
+    .search-row input {
+      width: 100%;
+      border: 1px solid #c5dbef;
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font: inherit;
+      margin-bottom: 0.4rem;
+    }
+    .search-row .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
     .actions {
       display: flex;
@@ -90,6 +136,48 @@
       font-size: 0.88rem;
       font-weight: 700;
     }
+    .domain {
+      border: 1px solid #c2d8ea;
+      background: #f7fbff;
+      color: #33536a;
+      border-radius: 999px;
+      padding: 0.23rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      border-top: 1px solid var(--line);
+      padding: 0.65rem 1rem;
+      background: #f8fcff;
+    }
+    .pager.hidden { display: none; }
+    .pager .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pager .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pager button {
+      border: 1px solid #c5dbef;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+    }
+    .pager button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     @media (max-width: 720px) {
       .row {
         grid-template-columns: 1fr;
@@ -101,6 +189,10 @@
       .ts {
         white-space: normal;
       }
+      .pager {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   </style>
 </head>
@@ -108,7 +200,7 @@
   <main class="shell">
     <section class="hero">
       <h1>AI Article Archive</h1>
-      <p>Chronological feed of previously reported article links and summaries. <a href="/">Go to landing page</a>.</p>
+      <p>Chronological feed of previously reported article links and summaries. <a href="/">Go to landing page</a>. <a href="./by-source.html">View source scoreboard</a>.</p>
     </section>
     <section class="card">
       <div class="row">
@@ -124,9 +216,9 @@
         <datalist id="tag-options"></datalist>
         <div id="filter-hint" class="hint">Showing all archived articles.</div>
       </div>
-      <div class="month-row" data-month="Mar 24,">Mar 24,</div>
-      <div class="row" data-entry="1" data-article-id="a1" data-month="Mar 24," data-tags="AI|Jobs Lost|L7.2-labor-market|Mass Hysteria|NYT|nytimes|nytimes.com|Thousands	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="month-row" data-month="Mar 26,">Mar 26,</div>
+      <div class="row" data-entry="1" data-article-id="a1" data-month="Mar 26," data-tags="AI|Jobs Lost|L7.2-labor-market|Mass Hysteria|NYT|nytimes|nytimes.com|Thousands">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">&quot;Mass Hysteria. Thousands of Jobs Lost.&quot; — AI's white-collar impact may transform politics and society. *(NYT, 2026-03-05)*</div>
           <div class="tag-list">
@@ -137,7 +229,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Thousands	nytimes.com</span>
+            <span class="tag">Thousands</span>
           </div>
         </div>
         <div class="actions">
@@ -145,8 +237,8 @@
           <a href="https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a2" data-month="Mar 24," data-tags="AI|Alibaba|bloomberg|Bloomberg|bloomberg.com|UNVERIFIED	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a2" data-month="Mar 26," data-tags="AI|Alibaba|bloomberg|Bloomberg|bloomberg.com|UNVERIFIED">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Alibaba planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]</div>
           <div class="tag-list">
@@ -155,7 +247,7 @@
             <span class="tag">bloomberg</span>
             <span class="tag">Bloomberg</span>
             <span class="tag">bloomberg.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -163,8 +255,8 @@
           <a href="https://www.bloomberg.com/news/articles/2026-03-16/alibaba-plans-major-revamp-to-heighten-focus-on-ai-profits" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a3" data-month="Mar 24," data-tags="AI|Amazon|AWS|CEO|L3.2-custom-asics|L4.1-data-centers|L4.2-cloud-platforms|reuters|Reuters|reuters.com|UNVERIFIED	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a3" data-month="Mar 26," data-tags="AI|Amazon|AWS|CEO|L3.2-custom-asics|L4.1-data-centers|L4.2-cloud-platforms|reuters|Reuters|reuters.com|UNVERIFIED">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Amazon CEO projects AI will double AWS sales projections to $600B by 2036. [UNVERIFIED] *(Reuters, 2026-03-17)*</div>
           <div class="tag-list">
@@ -178,7 +270,7 @@
             <span class="tag">reuters</span>
             <span class="tag">Reuters</span>
             <span class="tag">reuters.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -186,8 +278,8 @@
           <a href="https://www.reuters.com/business/amazon-ceo-sees-ai-doubling-his-prior-aws-sales-projections-600-billion-by-2036-2026-03-17/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a4" data-month="Mar 24," data-tags="AI|L2.2-foundries|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|newsletter|newsletter.semianalysis.com|semianalysis|SemiAnalysis|TSMC	newsletter.semianalysis.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a4" data-month="Mar 26," data-tags="AI|L2.2-foundries|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|newsletter|newsletter.semianalysis.com|semianalysis|SemiAnalysis|TSMC">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks remain the core AI supply chain pressure. *(SemiAnalysis, 2026-03-12)*</div>
           <div class="tag-list">
@@ -200,7 +292,7 @@
             <span class="tag">newsletter.semianalysis.com</span>
             <span class="tag">semianalysis</span>
             <span class="tag">SemiAnalysis</span>
-            <span class="tag">TSMC	newsletter.semianalysis.com</span>
+            <span class="tag">TSMC</span>
           </div>
         </div>
         <div class="actions">
@@ -208,8 +300,8 @@
           <a href="https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a5" data-month="Mar 24," data-tags="Agent Skills|Anthropic|claude|Claude|claude.com|L5.2-foundation-models|L6.1-api-developer-tools	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a5" data-month="Mar 26," data-tags="Agent Skills|Anthropic|claude|Claude|claude.com|L5.2-foundation-models|L6.1-api-developer-tools">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Anthropic launched &quot;Agent Skills&quot; — equipping Claude agents for real-world tasks. *(Anthropic, 2026-03-17)*</div>
           <div class="tag-list">
@@ -219,7 +311,7 @@
             <span class="tag">Claude</span>
             <span class="tag">claude.com</span>
             <span class="tag">L5.2-foundation-models</span>
-            <span class="tag">L6.1-api-developer-tools	mail.beehiiv.com</span>
+            <span class="tag">L6.1-api-developer-tools</span>
           </div>
         </div>
         <div class="actions">
@@ -227,8 +319,8 @@
           <a href="https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a6" data-month="Mar 24," data-tags="Anthropic|DeepSeek|L5.2-foundation-models|L6.1-api-developer-tools|MiniMax|Moonshot|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a6" data-month="Mar 26," data-tags="Anthropic|DeepSeek|L5.2-foundation-models|L6.1-api-developer-tools|MiniMax|Moonshot|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Anthropic sued DeepSeek, Moonshot, and MiniMax — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*</div>
           <div class="tag-list">
@@ -240,7 +332,7 @@
             <span class="tag">Moonshot</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -248,8 +340,8 @@
           <a href="https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a7" data-month="Mar 24," data-tags="Bipartisan|Chinese|Intel|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a7" data-month="Mar 26," data-tags="Bipartisan|Chinese|Intel|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns about the partly taxpayer-owned chipmaker. *(NYT, 2026-03-04)*</div>
           <div class="tag-list">
@@ -258,7 +350,7 @@
             <span class="tag">Intel</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -266,8 +358,8 @@
           <a href="https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a8" data-month="Mar 24," data-tags="ByteDance|Hollywood|Seedance|techcrunch|TechCrunch|techcrunch.com	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a8" data-month="Mar 26," data-tags="ByteDance|Hollywood|Seedance|techcrunch|TechCrunch|techcrunch.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">ByteDance paused Seedance 2.0 global launch due to Hollywood copyright disputes. *(TechCrunch, 2026-03-15)*</div>
           <div class="tag-list">
@@ -276,7 +368,7 @@
             <span class="tag">Seedance</span>
             <span class="tag">techcrunch</span>
             <span class="tag">TechCrunch</span>
-            <span class="tag">techcrunch.com	mail.beehiiv.com</span>
+            <span class="tag">techcrunch.com</span>
           </div>
         </div>
         <div class="actions">
@@ -284,8 +376,8 @@
           <a href="https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a9" data-month="Mar 24," data-tags="China|L3.1-gpus-accelerators|L7.1-politics-and-policy|L7.2-labor-market|L7.3-robots|Nvidia|NVIDIA|reuters|Reuters|reuters.com|The Information|UNVERIFIED	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a9" data-month="Mar 26," data-tags="China|L3.1-gpus-accelerators|L7.1-politics-and-policy|L7.2-labor-market|L7.3-robots|Nvidia|NVIDIA|reuters|Reuters|reuters.com|The Information|UNVERIFIED">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">China approved Nvidia H200 chip sales and is simultaneously restarting H200 manufacturing for China — a significant policy reversal. [UNVERIFIED] *(Reuters / The Information, 2026-03-18)*</div>
           <div class="tag-list">
@@ -300,7 +392,7 @@
             <span class="tag">Reuters</span>
             <span class="tag">reuters.com</span>
             <span class="tag">The Information</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -308,8 +400,8 @@
           <a href="https://www.reuters.com/world/china/chinese-authorities-approve-nvidias-h200-ai-chip-sales-source-says-2026-03-18/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a10" data-month="Mar 24," data-tags="AI|Coding After Coders|L1.1-silicon-minerals|Magazine|NYT|nytimes|nytimes.com|Silicon Valley	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a10" data-month="Mar 26," data-tags="AI|Coding After Coders|L1.1-silicon-minerals|Magazine|NYT|nytimes|nytimes.com|Silicon Valley">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*</div>
           <div class="tag-list">
@@ -320,7 +412,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Silicon Valley	nytimes.com</span>
+            <span class="tag">Silicon Valley</span>
           </div>
         </div>
         <div class="actions">
@@ -328,8 +420,8 @@
           <a href="https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a11" data-month="Mar 24," data-tags="Encyclopedia Britannica|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|LLM|Merriam|OpenAI|TechCrunch|theverge|theverge.com|Webster	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a11" data-month="Mar 26," data-tags="Encyclopedia Britannica|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|LLM|Merriam|OpenAI|TechCrunch|theverge|theverge.com|Webster">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*</div>
           <div class="tag-list">
@@ -343,7 +435,7 @@
             <span class="tag">TechCrunch</span>
             <span class="tag">theverge</span>
             <span class="tag">theverge.com</span>
-            <span class="tag">Webster	mail.beehiiv.com</span>
+            <span class="tag">Webster</span>
           </div>
         </div>
         <div class="actions">
@@ -351,8 +443,8 @@
           <a href="https://www.theverge.com/ai-artificial-intelligence/895372/encyclopedia-britannica-openai-lawsuit" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a12" data-month="Mar 24," data-tags="AI|Anthropic|DoD|Google|L4.1-data-centers|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|NYT|nytimes|nytimes.com|OpenAI|Pentagon	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a12" data-month="Mar 26," data-tags="AI|Anthropic|DoD|Google|L4.1-data-centers|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|NYT|nytimes|nytimes.com|OpenAI|Pentagon">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Google quietly winning the Pentagon AI race — rebuilt its DoD relationship and is poised to benefit while OpenAI and Anthropic fight over terms. *(NYT, 2026-03-18)*</div>
           <div class="tag-list">
@@ -368,7 +460,7 @@
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
             <span class="tag">OpenAI</span>
-            <span class="tag">Pentagon	nytimes.com</span>
+            <span class="tag">Pentagon</span>
           </div>
         </div>
         <div class="actions">
@@ -376,8 +468,8 @@
           <a href="https://www.nytimes.com/2026/03/18/technology/google-ai-pentagon.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a13" data-month="Mar 24," data-tags="AI|Hormuz|Iran|L1.1-silicon-minerals|L1.2-energy-water|L1.3-specialty-chemicals|NYT|nytimes|nytimes.com|Persian Gulf	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a13" data-month="Mar 26," data-tags="AI|Hormuz|Iran|L1.1-silicon-minerals|L1.2-energy-water|L1.3-specialty-chemicals|NYT|nytimes|nytimes.com|Persian Gulf">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Iran's Hormuz stranglehold continues to escalate energy prices, compounding Persian Gulf AI infrastructure risk. *(NYT, 2026-03-17)*</div>
           <div class="tag-list">
@@ -390,7 +482,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Persian Gulf	nytimes.com</span>
+            <span class="tag">Persian Gulf</span>
           </div>
         </div>
         <div class="actions">
@@ -398,8 +490,8 @@
           <a href="https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a14" data-month="Mar 24," data-tags="Avocado|L4.1-data-centers|L6.1-api-developer-tools|L7.1-politics-and-policy|Meta|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a14" data-month="Mar 26," data-tags="Avocado|L4.1-data-centers|L6.1-api-developer-tools|L7.1-politics-and-policy|Meta|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Meta delayed its flagship model (&quot;Avocado&quot;) after performance concerns. *(NYT, 2026-03-12)*</div>
           <div class="tag-list">
@@ -410,7 +502,7 @@
             <span class="tag">Meta</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -418,8 +510,8 @@
           <a href="https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a15" data-month="Mar 24," data-tags="AI|L3.1-gpus-accelerators|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|L7.1-politics-and-policy|NeMoClaw|nvidia|Nvidia|NVIDIA|nvidianews|nvidianews.nvidia.com	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a15" data-month="Mar 26," data-tags="AI|L3.1-gpus-accelerators|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|L7.1-politics-and-policy|NeMoClaw|nvidia|Nvidia|NVIDIA|nvidianews|nvidianews.nvidia.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Nvidia announced NeMoClaw — enterprise AI platform, details via official newsroom. *(Nvidia, 2026-03-17)*</div>
           <div class="tag-list">
@@ -434,7 +526,7 @@
             <span class="tag">Nvidia</span>
             <span class="tag">NVIDIA</span>
             <span class="tag">nvidianews</span>
-            <span class="tag">nvidianews.nvidia.com	mail.beehiiv.com</span>
+            <span class="tag">nvidianews.nvidia.com</span>
           </div>
         </div>
         <div class="actions">
@@ -442,8 +534,8 @@
           <a href="https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a16" data-month="Mar 24," data-tags="Component|datacenterknowledge|datacenterknowledge.com|DCK|L3.1-gpus-accelerators|L3.2-custom-asics|L3.3-networking-interconnects|Memory|Tier	datacenterknowledge.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a16" data-month="Mar 26," data-tags="Component|datacenterknowledge|datacenterknowledge.com|DCK|L3.1-gpus-accelerators|L3.2-custom-asics|L3.3-networking-interconnects|Memory|Tier">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Component shortages — not tariffs — are the binding constraint on data center build timelines. Memory and accelerator supply is the real bottleneck. *(DCK Tier 0, 2026-03-19)*</div>
           <div class="tag-list">
@@ -455,7 +547,7 @@
             <span class="tag">L3.2-custom-asics</span>
             <span class="tag">L3.3-networking-interconnects</span>
             <span class="tag">Memory</span>
-            <span class="tag">Tier	datacenterknowledge.com</span>
+            <span class="tag">Tier</span>
           </div>
         </div>
         <div class="actions">
@@ -463,8 +555,8 @@
           <a href="https://www.datacenterknowledge.com/supply-chain/tariffs-add-cost-but-component-shortages-dictate-data-center-timelines" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a17" data-month="Mar 24," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a17" data-month="Mar 26," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*</div>
           <div class="tag-list">
@@ -474,7 +566,7 @@
             <span class="tag">L6.3-consumer-products</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -482,8 +574,8 @@
           <a href="https://www.nytimes.com/2026/03/19/business/ai-agents-anxiety-openclaw.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a18" data-month="Mar 24," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a18" data-month="Mar 26," data-tags="AI|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*</div>
           <div class="tag-list">
@@ -493,7 +585,7 @@
             <span class="tag">L6.3-consumer-products</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -501,8 +593,8 @@
           <a href="https://www.nytimes.com/2026/03/19/technology/ai-agents-uses.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a19" data-month="Mar 24," data-tags="AI|Amazon|Google|L3.1-gpus-accelerators|L4.1-data-centers|L6.1-api-developer-tools|L7.1-politics-and-policy|Nvidia|NVIDIA|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a19" data-month="Mar 26," data-tags="AI|Amazon|Google|L3.1-gpus-accelerators|L4.1-data-centers|L6.1-api-developer-tools|L7.1-politics-and-policy|Nvidia|NVIDIA|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*</div>
           <div class="tag-list">
@@ -517,7 +609,7 @@
             <span class="tag">NVIDIA</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -525,8 +617,8 @@
           <a href="https://www.nytimes.com/2026/01/29/technology/amazon-google-nvidia-chips-competition.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a20" data-month="Mar 24," data-tags="Ampere|AmpereOne|datacenterknowledge|datacenterknowledge.com|DCK|European|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|Tier	datacenterknowledge.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a20" data-month="Mar 26," data-tags="Ampere|AmpereOne|datacenterknowledge|datacenterknowledge.com|DCK|European|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|Tier">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*</div>
           <div class="tag-list">
@@ -539,7 +631,7 @@
             <span class="tag">L4.1-data-centers</span>
             <span class="tag">L4.2-cloud-platforms</span>
             <span class="tag">L4.3-power-grid-cooling</span>
-            <span class="tag">Tier	datacenterknowledge.com</span>
+            <span class="tag">Tier</span>
           </div>
         </div>
         <div class="actions">
@@ -547,8 +639,8 @@
           <a href="https://www.datacenterknowledge.com/cloud/ampere-arms-european-cloud-footprint-with-new-deployments" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a21" data-month="Mar 24," data-tags="China|Chinese|NYT|nytimes|nytimes.com	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a21" data-month="Mar 26," data-tags="China|Chinese|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*</div>
           <div class="tag-list">
@@ -556,7 +648,7 @@
             <span class="tag">Chinese</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -564,8 +656,8 @@
           <a href="https://www.nytimes.com/2026/02/14/business/china-chips-nvidia-huawei.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a22" data-month="Mar 24," data-tags="AI|China|Excitement|L6.3-consumer-products|NYT|nytimes|nytimes.com	mail.beehiiv.com|nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a22" data-month="Mar 26," data-tags="AI|China|Excitement|L6.3-consumer-products|NYT|nytimes|nytimes.com">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*</div>
           <div class="tag-list">
@@ -575,7 +667,6 @@
             <span class="tag">L6.3-consumer-products</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	mail.beehiiv.com</span>
             <span class="tag">nytimes.com</span>
           </div>
         </div>
@@ -584,8 +675,8 @@
           <a href="https://www.nytimes.com/2026/03/17/business/china-ai-agent.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a23" data-month="Mar 24," data-tags="AI|datacenterknowledge|datacenterknowledge.com|DCK|Dell|GTC|HPE|L3.1-gpus-accelerators|L3.2-custom-asics|L3.3-networking-interconnects|L7.1-politics-and-policy|Nvidia|NVIDIA|Tier|Vera Rubin	datacenterknowledge.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a23" data-month="Mar 26," data-tags="AI|datacenterknowledge|datacenterknowledge.com|DCK|Dell|GTC|HPE|L3.1-gpus-accelerators|L3.2-custom-asics|L3.3-networking-interconnects|L7.1-politics-and-policy|Nvidia|NVIDIA|Tier|Vera Rubin">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*</div>
           <div class="tag-list">
@@ -603,7 +694,7 @@
             <span class="tag">Nvidia</span>
             <span class="tag">NVIDIA</span>
             <span class="tag">Tier</span>
-            <span class="tag">Vera Rubin	datacenterknowledge.com</span>
+            <span class="tag">Vera Rubin</span>
           </div>
         </div>
         <div class="actions">
@@ -611,8 +702,8 @@
           <a href="https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a24" data-month="Mar 24," data-tags="AI|DeSantis|Florida|Florida Republicans|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|L7.1-politics-and-policy|NYT|nytimes|nytimes.com|Trump	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a24" data-month="Mar 26," data-tags="AI|DeSantis|Florida|Florida Republicans|L6.1-api-developer-tools|L6.2-enterprise-software|L6.3-consumer-products|L7.1-politics-and-policy|NYT|nytimes|nytimes.com|Trump">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*</div>
           <div class="tag-list">
@@ -627,7 +718,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Trump	nytimes.com</span>
+            <span class="tag">Trump</span>
           </div>
         </div>
         <div class="actions">
@@ -635,8 +726,8 @@
           <a href="https://www.nytimes.com/2026/03/16/technology/ai-florida-republicans.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a25" data-month="Mar 24," data-tags="AI|HBM|L2.1-fab-equipment|L2.2-foundries|L2.3-memory-storage|NYT|nytimes|nytimes.com|PC	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a25" data-month="Mar 26," data-tags="AI|HBM|L2.1-fab-equipment|L2.2-foundries|L2.3-memory-storage|NYT|nytimes|nytimes.com|PC">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*</div>
           <div class="tag-list">
@@ -648,7 +739,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">PC	nytimes.com</span>
+            <span class="tag">PC</span>
           </div>
         </div>
         <div class="actions">
@@ -656,8 +747,8 @@
           <a href="https://www.nytimes.com/2026/01/29/technology/ai-memory-chips-pc-smartphone.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a26" data-month="Mar 24," data-tags="Encyclopedia Britannica|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|LLM|Merriam|OpenAI|techcrunch|TechCrunch|techcrunch.com|Webster	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a26" data-month="Mar 26," data-tags="Encyclopedia Britannica|L5.2-foundation-models|L6.1-api-developer-tools|L7.1-politics-and-policy|LLM|Merriam|OpenAI|techcrunch|TechCrunch|techcrunch.com|Webster">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*</div>
           <div class="tag-list">
@@ -671,7 +762,7 @@
             <span class="tag">techcrunch</span>
             <span class="tag">TechCrunch</span>
             <span class="tag">techcrunch.com</span>
-            <span class="tag">Webster	mail.beehiiv.com</span>
+            <span class="tag">Webster</span>
           </div>
         </div>
         <div class="actions">
@@ -679,8 +770,8 @@
           <a href="https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a27" data-month="Mar 24," data-tags="Blackwell|Bloomberg|L3.1-gpus-accelerators|L7.1-politics-and-policy|Nvidia|NVIDIA|techcrunch|TechCrunch|techcrunch.com|Vera Rubin	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a27" data-month="Mar 26," data-tags="Blackwell|Bloomberg|L3.1-gpus-accelerators|L7.1-politics-and-policy|Nvidia|NVIDIA|techcrunch|TechCrunch|techcrunch.com|Vera Rubin">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*</div>
           <div class="tag-list">
@@ -693,7 +784,7 @@
             <span class="tag">techcrunch</span>
             <span class="tag">TechCrunch</span>
             <span class="tag">techcrunch.com</span>
-            <span class="tag">Vera Rubin	mail.beehiiv.com</span>
+            <span class="tag">Vera Rubin</span>
           </div>
         </div>
         <div class="actions">
@@ -701,8 +792,8 @@
           <a href="https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a28" data-month="Mar 24," data-tags="Blackwell|bloomberg|Bloomberg|bloomberg.com|L3.1-gpus-accelerators|L7.1-politics-and-policy|Nvidia|NVIDIA|TechCrunch|Vera Rubin	mail.beehiiv.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a28" data-month="Mar 26," data-tags="Blackwell|bloomberg|Bloomberg|bloomberg.com|L3.1-gpus-accelerators|L7.1-politics-and-policy|Nvidia|NVIDIA|TechCrunch|Vera Rubin">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*</div>
           <div class="tag-list">
@@ -715,7 +806,7 @@
             <span class="tag">Nvidia</span>
             <span class="tag">NVIDIA</span>
             <span class="tag">TechCrunch</span>
-            <span class="tag">Vera Rubin	mail.beehiiv.com</span>
+            <span class="tag">Vera Rubin</span>
           </div>
         </div>
         <div class="actions">
@@ -723,8 +814,8 @@
           <a href="https://www.bloomberg.com/news/articles/2026-03-16/nvidia-expects-to-make-1-trillion-from-ai-chips-through-2027" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a29" data-month="Mar 24," data-tags="If China|L1.1-silicon-minerals|L2.2-foundries|NYT|nytimes|nytimes.com|Silicon Valley|Taiwan|TSMC	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a29" data-month="Mar 26," data-tags="If China|L1.1-silicon-minerals|L2.2-foundries|NYT|nytimes|nytimes.com|Silicon Valley|Taiwan|TSMC">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*</div>
           <div class="tag-list">
@@ -736,7 +827,7 @@
             <span class="tag">nytimes.com</span>
             <span class="tag">Silicon Valley</span>
             <span class="tag">Taiwan</span>
-            <span class="tag">TSMC	nytimes.com</span>
+            <span class="tag">TSMC</span>
           </div>
         </div>
         <div class="actions">
@@ -744,8 +835,8 @@
           <a href="https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a30" data-month="Mar 24," data-tags="L1.2-energy-water|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|L6.1-api-developer-tools|L7.1-politics-and-policy|Meta|NYT|nytimes|nytimes.com|Tech	nytimes.com">
-        <div class="ts">Mar 24, 2026 3:17:03 EDT</div>
+      <div class="row" data-entry="1" data-article-id="a30" data-month="Mar 26," data-tags="L1.2-energy-water|L4.1-data-centers|L4.2-cloud-platforms|L4.3-power-grid-cooling|L6.1-api-developer-tools|L7.1-politics-and-policy|Meta|NYT|nytimes|nytimes.com|Tech">
+        <div class="ts">Mar 26, 2026 12:04:50 EDT</div>
         <div class="label">
           <div class="summary">Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*</div>
           <div class="tag-list">
@@ -759,7 +850,7 @@
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Tech	nytimes.com</span>
+            <span class="tag">Tech</span>
           </div>
         </div>
         <div class="actions">
@@ -768,7 +859,7 @@
         </div>
       </div>
       <div class="month-row" data-month="Mar 19,">Mar 19,</div>
-      <div class="row" data-entry="1" data-article-id="a31" data-month="Mar 19," data-tags="AI|Bloomberg|China|reuters|Reuters|reuters.com|UNVERIFIED	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a31" data-month="Mar 19," data-tags="AI|Bloomberg|China|reuters|Reuters|reuters.com|UNVERIFIED">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">China moved to curb AI use in banks and state agencies — reported via Bloomberg/Reuters. [UNVERIFIED] *(Reuters, 2026-03-11)*</div>
@@ -779,7 +870,7 @@
             <span class="tag">reuters</span>
             <span class="tag">Reuters</span>
             <span class="tag">reuters.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -787,7 +878,7 @@
           <a href="https://www.reuters.com/technology/china-moves-curb-use-openclaw-ai-banks-state-agencies-bloomberg-news-reports-2026-03-11/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a32" data-month="Mar 19," data-tags="AI|China|L4.1-data-centers|L6.1-api-developer-tools|Manus|Meta|NYT|nytimes|nytimes.com	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a32" data-month="Mar 19," data-tags="AI|China|L4.1-data-centers|L6.1-api-developer-tools|Manus|Meta|NYT|nytimes|nytimes.com">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">China scrutinizing Meta's Manus AI — authorities examining the AI agent's domestic rollout. *(NYT, 2026-03-17)*</div>
@@ -800,7 +891,7 @@
             <span class="tag">Meta</span>
             <span class="tag">NYT</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	mail.beehiiv.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -808,7 +899,7 @@
           <a href="https://www.nytimes.com/2026/03/17/technology/china-scrutiny-meta-manus.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a33" data-month="Mar 19," data-tags="CoreWeave|IPO|L3.1-gpus-accelerators|Nvidia|NVIDIA|The Information|theinformation|theinformation.com|UNVERIFIED	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a33" data-month="Mar 19," data-tags="CoreWeave|IPO|L3.1-gpus-accelerators|Nvidia|NVIDIA|The Information|theinformation|theinformation.com|UNVERIFIED">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">CoreWeave expanded with Nvidia B300; NScale in talks to acquire a major U.S. data center site ahead of IPO. [UNVERIFIED] *(The Information)*</div>
@@ -821,7 +912,7 @@
             <span class="tag">The Information</span>
             <span class="tag">theinformation</span>
             <span class="tag">theinformation.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -829,7 +920,7 @@
           <a href="https://www.theinformation.com/articles/nvidia-cloud-ally-nscale-talks-buy-major-u-s-data-center-site-ahead-ipo" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a34" data-month="Mar 19," data-tags="AI|Data|DCK|L1.2-energy-water|L4.1-data-centers|L4.3-power-grid-cooling|UNVERIFIED|Utilities|utilitydive|utilitydive.com	ittnewsletter.com">
+      <div class="row" data-entry="1" data-article-id="a34" data-month="Mar 19," data-tags="AI|Data|DCK|L1.2-energy-water|L4.1-data-centers|L4.3-power-grid-cooling|UNVERIFIED|Utilities|utilitydive|utilitydive.com">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Data centers going off-grid: Utilities face new cost and planning risks as AI hyperscalers bypass the grid. *(DCK, 2026-03-18)* [UNVERIFIED full details]</div>
@@ -843,7 +934,7 @@
             <span class="tag">UNVERIFIED</span>
             <span class="tag">Utilities</span>
             <span class="tag">utilitydive</span>
-            <span class="tag">utilitydive.com	ittnewsletter.com</span>
+            <span class="tag">utilitydive.com</span>
           </div>
         </div>
         <div class="actions">
@@ -851,7 +942,7 @@
           <a href="https://www.utilitydive.com/news/as-data-centers-go-off-grid-utilities-face-new-cost-and-planning-risks/811944/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a35" data-month="Mar 19," data-tags="AI|Anthropic|L5.2-foundation-models|L6.1-api-developer-tools|The Information|theinformation|theinformation.com|UNVERIFIED	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a35" data-month="Mar 19," data-tags="AI|Anthropic|L5.2-foundation-models|L6.1-api-developer-tools|The Information|theinformation|theinformation.com|UNVERIFIED">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Ex-Anthropic researchers in talks to raise capital at a $1B valuation for a new AI startup. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
@@ -863,7 +954,7 @@
             <span class="tag">The Information</span>
             <span class="tag">theinformation</span>
             <span class="tag">theinformation.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -871,7 +962,7 @@
           <a href="https://www.theinformation.com/articles/ex-anthropic-researchers-talks-raise-capital-new-startup-1-billion-valuation" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a36" data-month="Mar 19," data-tags="AGI|blog|blog.google|DeepMind|google|Google|Google Blog|Google DeepMind|Kaggle|L4.1-data-centers|L5.1-ml-frameworks|L5.2-foundation-models|L5.3-mlops-data-infra|L6.1-api-developer-tools	blog.google">
+      <div class="row" data-entry="1" data-article-id="a36" data-month="Mar 19," data-tags="AGI|blog|blog.google|DeepMind|google|Google|Google Blog|Google DeepMind|Kaggle|L4.1-data-centers|L5.1-ml-frameworks|L5.2-foundation-models|L5.3-mlops-data-infra|L6.1-api-developer-tools">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Google DeepMind published a cognitive framework to evaluate progress toward AGI and launched a Kaggle hackathon for capability benchmarks. *(Google Blog, 2026-03-17)*</div>
@@ -889,7 +980,7 @@
             <span class="tag">L5.1-ml-frameworks</span>
             <span class="tag">L5.2-foundation-models</span>
             <span class="tag">L5.3-mlops-data-infra</span>
-            <span class="tag">L6.1-api-developer-tools	blog.google</span>
+            <span class="tag">L6.1-api-developer-tools</span>
           </div>
         </div>
         <div class="actions">
@@ -897,7 +988,7 @@
           <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a37" data-month="Mar 19," data-tags="DGX|intel|Intel Newsroom|Intel Xeon|L3.1-gpus-accelerators|newsroom|newsroom.intel.com|Nvidia|NVIDIA|Rubin	newsroom.intel.com">
+      <div class="row" data-entry="1" data-article-id="a37" data-month="Mar 19," data-tags="DGX|intel|Intel Newsroom|Intel Xeon|L3.1-gpus-accelerators|newsroom|newsroom.intel.com|Nvidia|NVIDIA|Rubin">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Intel Xeon 6 confirmed as host CPUs in Nvidia DGX Rubin NVL8 systems. *(Intel Newsroom, 2026-03-16)*</div>
@@ -911,7 +1002,7 @@
             <span class="tag">newsroom.intel.com</span>
             <span class="tag">Nvidia</span>
             <span class="tag">NVIDIA</span>
-            <span class="tag">Rubin	newsroom.intel.com</span>
+            <span class="tag">Rubin</span>
           </div>
         </div>
         <div class="actions">
@@ -919,7 +1010,7 @@
           <a href="https://newsroom.intel.com/data-center/intel-xeon-6-used-as-host-cpus-in-nvidia-dgx-rubin-nvl8-systems" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a38" data-month="Mar 19," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|L4.1-data-centers|Moody	datacenterknowledge.com">
+      <div class="row" data-entry="1" data-article-id="a38" data-month="Mar 19," data-tags="datacenterknowledge|datacenterknowledge.com|DCK|L4.1-data-centers|Moody">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Moody's: hyperscaler capex snowballing toward $700B — firms pacing builds to limit overbuild risk. *(DCK, 2026-03-17)*</div>
@@ -928,7 +1019,7 @@
             <span class="tag">datacenterknowledge.com</span>
             <span class="tag">DCK</span>
             <span class="tag">L4.1-data-centers</span>
-            <span class="tag">Moody	datacenterknowledge.com</span>
+            <span class="tag">Moody</span>
           </div>
         </div>
         <div class="actions">
@@ -936,7 +1027,7 @@
           <a href="https://www.datacenterknowledge.com/hyperscalers/hyperscaler-capex-snowballs-toward-700b-as-firms-stage-ai-capacity-builds" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a39" data-month="Mar 19," data-tags="AI|CPU|datacenterknowledge|datacenterknowledge.com|DCK|L3.1-gpus-accelerators|NVIDIA|Nvidia Vera	datacenterknowledge.com">
+      <div class="row" data-entry="1" data-article-id="a39" data-month="Mar 19," data-tags="AI|CPU|datacenterknowledge|datacenterknowledge.com|DCK|L3.1-gpus-accelerators|NVIDIA|Nvidia Vera">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Nvidia Vera CPU debuts to anchor next-phase AI infra — shifts design toward orchestration and real-time inference. *(DCK, 2026-03-17)*</div>
@@ -948,7 +1039,7 @@
             <span class="tag">DCK</span>
             <span class="tag">L3.1-gpus-accelerators</span>
             <span class="tag">NVIDIA</span>
-            <span class="tag">Nvidia Vera	datacenterknowledge.com</span>
+            <span class="tag">Nvidia Vera</span>
           </div>
         </div>
         <div class="actions">
@@ -956,7 +1047,7 @@
           <a href="https://www.datacenterknowledge.com/infrastructure/nvidia-debuts-vera-cpu-to-anchor-next-phase-of-ai-infrastructure" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a40" data-month="Mar 19," data-tags="CPU|datacenterknowledge|datacenterknowledge.com|DCK|GTC|L3.1-gpus-accelerators|Nvidia|NVIDIA|Vera|Vera Rubin	datacenterknowledge.com">
+      <div class="row" data-entry="1" data-article-id="a40" data-month="Mar 19," data-tags="CPU|datacenterknowledge|datacenterknowledge.com|DCK|GTC|L3.1-gpus-accelerators|Nvidia|NVIDIA|Vera|Vera Rubin">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">Nvidia raised its revenue outlook to $1T through 2027 at GTC alongside the Vera Rubin and Vera CPU debuts. *(DCK, 2026-03-17)*</div>
@@ -970,7 +1061,7 @@
             <span class="tag">Nvidia</span>
             <span class="tag">NVIDIA</span>
             <span class="tag">Vera</span>
-            <span class="tag">Vera Rubin	datacenterknowledge.com</span>
+            <span class="tag">Vera Rubin</span>
           </div>
         </div>
         <div class="actions">
@@ -978,7 +1069,7 @@
           <a href="https://www.datacenterknowledge.com/data-center-chips/gtc-2026-nvidia-unveils-vera-rubin-ai-platform-eyes-1t-by-2027" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a41" data-month="Mar 19," data-tags="L5.2-foundation-models|L6.1-api-developer-tools|OpenAI|Stargate|The Information|theinformation|theinformation.com|UNVERIFIED	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a41" data-month="Mar 19," data-tags="L5.2-foundation-models|L6.1-api-developer-tools|OpenAI|Stargate|The Information|theinformation|theinformation.com|UNVERIFIED">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">OpenAI named new infrastructure leaders following a Stargate strategy shift. [UNVERIFIED] *(The Information, 2026-03-17)*</div>
@@ -990,7 +1081,7 @@
             <span class="tag">The Information</span>
             <span class="tag">theinformation</span>
             <span class="tag">theinformation.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -998,7 +1089,7 @@
           <a href="https://www.theinformation.com/articles/openai-names-new-infrastructure-leaders-following-stargate-strategy-shift" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a42" data-month="Mar 19," data-tags="AI|aibusiness|aibusiness.com|Business|South Korea|UNVERIFIED	ittnewsletter.com">
+      <div class="row" data-entry="1" data-article-id="a42" data-month="Mar 19," data-tags="AI|aibusiness|aibusiness.com|Business|South Korea|UNVERIFIED">
         <div class="ts">Mar 19, 2026 12:12:32 EDT</div>
         <div class="label">
           <div class="summary">U.S. startup building South Korea's biggest AI data center. [UNVERIFIED] *(AI Business, 2026-03-18)*</div>
@@ -1008,7 +1099,7 @@
             <span class="tag">aibusiness.com</span>
             <span class="tag">Business</span>
             <span class="tag">South Korea</span>
-            <span class="tag">UNVERIFIED	ittnewsletter.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -1017,7 +1108,7 @@
         </div>
       </div>
       <div class="month-row" data-month="Mar 17,">Mar 17,</div>
-      <div class="row" data-entry="1" data-article-id="a43" data-month="Mar 17," data-tags="AI|America Cannot Withstand|Coming|Economic Shock That|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a43" data-month="Mar 17," data-tags="AI|America Cannot Withstand|Coming|Economic Shock That|nytimes|nytimes.com">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">&quot;America Cannot Withstand the Economic Shock That's Coming&quot; — op-ed argues AI's worst job effects require empowering the private sector to absorb displaced workers. *(2026-03-06)*</div>
@@ -1027,7 +1118,7 @@
             <span class="tag">Coming</span>
             <span class="tag">Economic Shock That</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1035,7 +1126,7 @@
           <a href="https://www.nytimes.com/2026/03/06/opinion/ai-labor-unemployment.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a44" data-month="Mar 17," data-tags="AI|ChatGPT|DOGE|L5.1-foundation-models|L6.2-consumer-ai|NEH|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a44" data-month="Mar 17," data-tags="AI|ChatGPT|DOGE|L5.1-foundation-models|L6.2-consumer-ai|NEH|nytimes|nytimes.com">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">DOGE used ChatGPT to cancel most previously approved NEH humanities grants — first documented federal use of AI for mass grant termination. *(2026-03-07)*</div>
@@ -1047,7 +1138,7 @@
             <span class="tag">L6.2-consumer-ai</span>
             <span class="tag">NEH</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1055,7 +1146,7 @@
           <a href="https://www.nytimes.com/2026/03/07/arts/humanities-endowment-doge-trump.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a45" data-month="Mar 17," data-tags="a16z|Kleiner Perkins|Neolab|The Information|theinformation|theinformation.com|UNVERIFIED	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a45" data-month="Mar 17," data-tags="a16z|Kleiner Perkins|Neolab|The Information|theinformation|theinformation.com|UNVERIFIED">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">Kleiner Perkins and a16z led a $1B investment in Neolab. [UNVERIFIED] *(The Information, 2026-03-16)*</div>
@@ -1066,7 +1157,7 @@
             <span class="tag">The Information</span>
             <span class="tag">theinformation</span>
             <span class="tag">theinformation.com</span>
-            <span class="tag">UNVERIFIED	mail.beehiiv.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -1074,7 +1165,7 @@
           <a href="https://www.theinformation.com/briefings/kleiner-perkins-andreessen-horowitz-lead-investment-1-billion-neolab" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a46" data-month="Mar 17," data-tags="AI|L4.1-hyperscaler-dc|L6.3-regulation-policy|Lawsuit|nytimes|nytimes.com|Rubio|State Dept	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a46" data-month="Mar 17," data-tags="AI|L4.1-hyperscaler-dc|L6.3-regulation-policy|Lawsuit|nytimes|nytimes.com|Rubio|State Dept">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">Lawsuit filed against Rubio challenging State Dept. threats to withhold visas from foreign experts who pushed for stronger AI/social media regulation. *(2026-03-09)*</div>
@@ -1086,7 +1177,7 @@
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
             <span class="tag">Rubio</span>
-            <span class="tag">State Dept	nytimes.com</span>
+            <span class="tag">State Dept</span>
           </div>
         </div>
         <div class="actions">
@@ -1094,7 +1185,7 @@
           <a href="https://www.nytimes.com/2026/03/09/us/politics/lawsuit-rubio-social-media.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a47" data-month="Mar 17," data-tags="AI|Buffalo|L2.2-equipment|L4.1-hyperscaler-dc|NY|nytimes|nytimes.com|Rochester|Rural	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a47" data-month="Mar 17," data-tags="AI|Buffalo|L2.2-equipment|L4.1-hyperscaler-dc|NY|nytimes|nytimes.com|Rochester|Rural">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">Rural NY data center backlash: A proposed AI data center between Buffalo and Rochester faces opposition over rising electric bills and harm to a nearby tribal reservation. *(2026-03-17)*</div>
@@ -1107,7 +1198,7 @@
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
             <span class="tag">Rochester</span>
-            <span class="tag">Rural	nytimes.com</span>
+            <span class="tag">Rural</span>
           </div>
         </div>
         <div class="actions">
@@ -1115,7 +1206,7 @@
           <a href="https://www.nytimes.com/2026/03/17/nyregion/ai-data-center-new-york.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a48" data-month="Mar 17," data-tags="AI|Iran|nytimes|nytimes.com|South Korea|Taiwan	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a48" data-month="Mar 17," data-tags="AI|Iran|nytimes|nytimes.com|South Korea|Taiwan">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">South Korea and Taiwan chipmaking stocks plunged then rebounded on Iran energy fears — showing AI-sector bullishness offsetting macro risk. *(2026-03-05)*</div>
@@ -1125,7 +1216,7 @@
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
             <span class="tag">South Korea</span>
-            <span class="tag">Taiwan	nytimes.com</span>
+            <span class="tag">Taiwan</span>
           </div>
         </div>
         <div class="actions">
@@ -1133,7 +1224,7 @@
           <a href="https://www.nytimes.com/2026/03/05/business/stocks-asia-iran-energy.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a49" data-month="Mar 17," data-tags="Anthropic|L5.1-foundation-models|nytimes|nytimes.com|OpenAI|Pentagon|Trump	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a49" data-month="Mar 17," data-tags="Anthropic|L5.1-foundation-models|nytimes|nytimes.com|OpenAI|Pentagon|Trump">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
@@ -1144,7 +1235,7 @@
             <span class="tag">nytimes.com</span>
             <span class="tag">OpenAI</span>
             <span class="tag">Pentagon</span>
-            <span class="tag">Trump	nytimes.com</span>
+            <span class="tag">Trump</span>
           </div>
         </div>
         <div class="actions">
@@ -1152,7 +1243,7 @@
           <a href="https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a50" data-month="Mar 17," data-tags="Anthropic|L5.1-foundation-models|nytimes|nytimes.com|OpenAI|Pentagon|Trump	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a50" data-month="Mar 17," data-tags="Anthropic|L5.1-foundation-models|nytimes|nytimes.com|OpenAI|Pentagon|Trump">
         <div class="ts">Mar 17, 2026 4:53:06 EDT</div>
         <div class="label">
           <div class="summary">Trump banned Anthropic from federal use after a Pentagon standoff; OpenAI stepped in hours later with its own Pentagon deal. *(2026-02-27/28)*</div>
@@ -1163,7 +1254,7 @@
             <span class="tag">nytimes.com</span>
             <span class="tag">OpenAI</span>
             <span class="tag">Pentagon</span>
-            <span class="tag">Trump	nytimes.com</span>
+            <span class="tag">Trump</span>
           </div>
         </div>
         <div class="actions">
@@ -1171,7 +1262,7 @@
           <a href="https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a51" data-month="Mar 17," data-tags="Anthropic|Microsoft|nytimes|nytimes.com|Pentagon	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a51" data-month="Mar 17," data-tags="Anthropic|Microsoft|nytimes|nytimes.com|Pentagon">
         <div class="ts">Mar 17, 2026 2:52:41 EDT</div>
         <div class="label">
           <div class="summary">Microsoft publicly sided with Anthropic against the Pentagon — a rare stance for a major corporation in the current political climate. *(2026-03-11)*</div>
@@ -1180,7 +1271,7 @@
             <span class="tag">Microsoft</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Pentagon	nytimes.com</span>
+            <span class="tag">Pentagon</span>
           </div>
         </div>
         <div class="actions">
@@ -1188,7 +1279,7 @@
           <a href="https://www.nytimes.com/2026/03/11/business/dealbook/microsoft-anthropic-pentagon.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a52" data-month="Mar 17," data-tags="AI|GTC|Jensen Huang|Nvidia|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a52" data-month="Mar 17," data-tags="AI|GTC|Jensen Huang|Nvidia|nytimes|nytimes.com">
         <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
         <div class="label">
           <div class="summary">Jensen Huang opened Nvidia GTC 2026, framing Nvidia as defending the AI era it built. *(2026-03-16)*</div>
@@ -1198,7 +1289,7 @@
             <span class="tag">Jensen Huang</span>
             <span class="tag">Nvidia</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1206,7 +1297,7 @@
           <a href="https://www.nytimes.com/2026/03/16/technology/nvidia-gtc-ai-chips-huang.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a53" data-month="Mar 17," data-tags="afr|AFR|afr.com|infrastructure|Meta|Microsoft|UNVERIFIED	ittnewsletter.com">
+      <div class="row" data-entry="1" data-article-id="a53" data-month="Mar 17," data-tags="afr|AFR|afr.com|infrastructure|Meta|Microsoft|UNVERIFIED">
         <div class="ts">Mar 17, 2026 1:08:16 EDT</div>
         <div class="label">
           <div class="summary">Microsoft + Meta fueling a near-$1T boom in global data center leases. [UNVERIFIED] *(AFR, 2026-03-13)*</div>
@@ -1217,7 +1308,7 @@
             <span class="tag">infrastructure</span>
             <span class="tag">Meta</span>
             <span class="tag">Microsoft</span>
-            <span class="tag">UNVERIFIED	ittnewsletter.com</span>
+            <span class="tag">UNVERIFIED</span>
           </div>
         </div>
         <div class="actions">
@@ -1226,7 +1317,7 @@
         </div>
       </div>
       <div class="month-row" data-month="2026-03">2026-03</div>
-      <div class="row" data-entry="1" data-article-id="a54" data-month="2026-03" data-tags="AI|Daily Brief|Seedance|theinformation|theinformation.com	mail.beehiiv.com">
+      <div class="row" data-entry="1" data-article-id="a54" data-month="2026-03" data-tags="AI|Daily Brief|Seedance|theinformation|theinformation.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">AI Daily Brief email lead: ByteDance reportedly paused global launch of Seedance 2.0 video generator, with matching secondary signal from TechCrunch.</div>
@@ -1235,7 +1326,7 @@
             <span class="tag">Daily Brief</span>
             <span class="tag">Seedance</span>
             <span class="tag">theinformation</span>
-            <span class="tag">theinformation.com	mail.beehiiv.com</span>
+            <span class="tag">theinformation.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1243,7 +1334,7 @@
           <a href="https://www.theinformation.com/articles/bytedance-suspends-launch-video-ai-model-copyright-disputes-hollywood" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a55" data-month="2026-03" data-tags="AI|Google|infrastructure|Microsoft|nytimes|nytimes.com|White House	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a55" data-month="2026-03" data-tags="AI|Google|infrastructure|Microsoft|nytimes|nytimes.com|White House">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">AI industry energy pledge: Google, Microsoft, and OpenAI committed to fund their own power plants and grid upgrades at a White House event. *(2026-03-04)*</div>
@@ -1254,7 +1345,7 @@
             <span class="tag">Microsoft</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">White House	nytimes.com</span>
+            <span class="tag">White House</span>
           </div>
         </div>
         <div class="actions">
@@ -1262,14 +1353,14 @@
           <a href="https://www.nytimes.com/2026/03/04/technology/ai-energy-pledge-white-house-trump.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a56" data-month="2026-03" data-tags="Google|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a56" data-month="2026-03" data-tags="Google|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Google profits +30% to $34.5B last quarter; plans to increase capital spending to as much as $185B this year. *(2026-02-04)*</div>
           <div class="tag-list">
             <span class="tag">Google</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1277,7 +1368,7 @@
           <a href="https://www.nytimes.com/2026/02/04/business/google-earnings-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a57" data-month="2026-03" data-tags="AI|Amazon|funding|Google|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a57" data-month="2026-03" data-tags="AI|Amazon|funding|Google|infrastructure|Iran|nytimes|nytimes.com|Persian Gulf">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Iran threatened attacks on Amazon, Google, and other U.S. tech infrastructure in the Persian Gulf, putting trillions in regional AI investments at risk. *(2026-03-13)*</div>
@@ -1290,7 +1381,7 @@
             <span class="tag">Iran</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Persian Gulf	nytimes.com</span>
+            <span class="tag">Persian Gulf</span>
           </div>
         </div>
         <div class="actions">
@@ -1298,7 +1389,7 @@
           <a href="https://www.nytimes.com/2026/03/13/technology/amazon-google-persian-gulf-war.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a58" data-month="2026-03" data-tags="Microsoft|nytimes|nytimes.com|revenue	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a58" data-month="2026-03" data-tags="Microsoft|nytimes|nytimes.com|revenue">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Microsoft Q2: $81.3B revenue, profit +60% — stock still dropped 7% after-hours on capex concerns. *(2026-01-28)*</div>
@@ -1306,7 +1397,7 @@
             <span class="tag">Microsoft</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">revenue	nytimes.com</span>
+            <span class="tag">revenue</span>
           </div>
         </div>
         <div class="actions">
@@ -1314,7 +1405,7 @@
           <a href="https://www.nytimes.com/2026/01/28/technology/microsoft-earnings-ai-expenditures.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a59" data-month="2026-03" data-tags="AI|funding|infrastructure|Nscale|nytimes|nytimes.com|Sheryl Sandberg	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a59" data-month="2026-03" data-tags="AI|funding|infrastructure|Nscale|nytimes|nytimes.com|Sheryl Sandberg">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Nscale raised $2B for AI data centers; Sheryl Sandberg joined its board. *(2026-03-09)*</div>
@@ -1325,7 +1416,7 @@
             <span class="tag">Nscale</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Sheryl Sandberg	nytimes.com</span>
+            <span class="tag">Sheryl Sandberg</span>
           </div>
         </div>
         <div class="actions">
@@ -1333,14 +1424,14 @@
           <a href="https://www.nytimes.com/2026/03/09/business/nscale-ai-data-center-boom.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a60" data-month="2026-03" data-tags="Nvidia|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a60" data-month="2026-03" data-tags="Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">Nvidia quarterly profit hit $43B; full fiscal year was $120B vs. $4.4B just three years ago. *(2026-02-25)*</div>
           <div class="tag-list">
             <span class="tag">Nvidia</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1348,7 +1439,7 @@
           <a href="https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a61" data-month="2026-03" data-tags="AI|Disney|Hollywood|nytimes|nytimes.com|Sora	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a61" data-month="2026-03" data-tags="AI|Disney|Hollywood|nytimes|nytimes.com|Sora">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI / Disney struck a deal to bring Disney characters into Sora-generated video — a watershed moment for Hollywood's AI reckoning. *(2025-12-11)*</div>
@@ -1358,7 +1449,7 @@
             <span class="tag">Hollywood</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Sora	nytimes.com</span>
+            <span class="tag">Sora</span>
           </div>
         </div>
         <div class="actions">
@@ -1366,7 +1457,7 @@
           <a href="https://www.nytimes.com/2025/12/11/business/media/disney-openai-sora-deal.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a62" data-month="2026-03" data-tags="Amazon|funding|Nvidia|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a62" data-month="2026-03" data-tags="Amazon|funding|Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI closed $110B raise led by Amazon, Nvidia, and SoftBank at a $730B valuation. *(2026-02-27)*</div>
@@ -1375,7 +1466,7 @@
             <span class="tag">funding</span>
             <span class="tag">Nvidia</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1383,7 +1474,7 @@
           <a href="https://www.nytimes.com/2026/02/27/business/openai-funding.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a63" data-month="2026-03" data-tags="Google|model|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a63" data-month="2026-03" data-tags="Google|model|nytimes|nytimes.com">
         <div class="ts">2026-03-17T00-38-58Z</div>
         <div class="label">
           <div class="summary">OpenAI vs. Google: OpenAI released new tech claiming to top Google's latest, signaling a tougher competitive phase ahead. *(2025-12-11)*</div>
@@ -1391,7 +1482,7 @@
             <span class="tag">Google</span>
             <span class="tag">model</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1399,7 +1490,7 @@
           <a href="https://www.nytimes.com/2025/12/11/technology/openai-google-ai-technology-gap.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a64" data-month="2026-03" data-tags="AMD|gpu|Meta|Nvidia|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a64" data-month="2026-03" data-tags="AMD|gpu|Meta|Nvidia|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">AMD signed a chips-for-stock deal with Meta in a push to challenge Nvidia. *(2026-02-24)*</div>
@@ -1409,7 +1500,7 @@
             <span class="tag">Meta</span>
             <span class="tag">Nvidia</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1417,7 +1508,7 @@
           <a href="https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a65" data-month="2026-03" data-tags="Anthropic|nytimes|nytimes.com|Pentagon	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a65" data-month="2026-03" data-tags="Anthropic|nytimes|nytimes.com|Pentagon">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Anthropic resumed talks with the Pentagon and is reportedly working toward a resolution. *(2026-03-05)*</div>
@@ -1425,7 +1516,7 @@
             <span class="tag">Anthropic</span>
             <span class="tag">nytimes</span>
             <span class="tag">nytimes.com</span>
-            <span class="tag">Pentagon	nytimes.com</span>
+            <span class="tag">Pentagon</span>
           </div>
         </div>
         <div class="actions">
@@ -1433,7 +1524,7 @@
           <a href="https://www.nytimes.com/2026/03/05/business/dealbook/anthropic-pentagon-ai.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a66" data-month="2026-03" data-tags="Cloverleaf Infrastructure|infrastructure|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a66" data-month="2026-03" data-tags="Cloverleaf Infrastructure|infrastructure|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Cloverleaf Infrastructure is packaging land + electricity for data center buildouts — the modern &quot;land rush&quot; play. *(2026-03-05)*</div>
@@ -1441,7 +1532,7 @@
             <span class="tag">Cloverleaf Infrastructure</span>
             <span class="tag">infrastructure</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">
@@ -1449,7 +1540,7 @@
           <a href="https://www.nytimes.com/2026/03/05/technology/ai-data-centers-land-cloverleaf-infrastructure.html" target="_blank" rel="noopener noreferrer">Open source</a>
         </div>
       </div>
-      <div class="row" data-entry="1" data-article-id="a67" data-month="2026-03" data-tags="acquisition|AI|Google|infrastructure|Intersect|nytimes|nytimes.com	nytimes.com">
+      <div class="row" data-entry="1" data-article-id="a67" data-month="2026-03" data-tags="acquisition|AI|Google|infrastructure|Intersect|nytimes|nytimes.com">
         <div class="ts">2026-03-14T16-07-16Z</div>
         <div class="label">
           <div class="summary">Google acquired Intersect (data center + energy developer) for $4.75B to accelerate AI infra buildout. *(2025-12-22)*</div>
@@ -1460,7 +1551,7 @@
             <span class="tag">infrastructure</span>
             <span class="tag">Intersect</span>
             <span class="tag">nytimes</span>
-            <span class="tag">nytimes.com	nytimes.com</span>
+            <span class="tag">nytimes.com</span>
           </div>
         </div>
         <div class="actions">

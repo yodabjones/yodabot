@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-03-26T16:05:00.319Z",
+  "generatedAt": "2026-03-26T16:19:26.090Z",
   "articleCount": 67,
   "tagCount": 185,
   "articles": [
     {
       "id": "a1",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "\"Mass Hysteria. Thousands of Jobs Lost.\" — AI's white-collar impact may transform politics and society. *(NYT, 2026-03-05)*",
       "url": "https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html",
       "tags": [
@@ -23,8 +23,8 @@
     },
     {
       "id": "a2",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Alibaba planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]",
       "url": "https://www.bloomberg.com/news/articles/2026-03-16/alibaba-plans-major-revamp-to-heighten-focus-on-ai-profits",
       "tags": [
@@ -38,8 +38,8 @@
     },
     {
       "id": "a3",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Amazon CEO projects AI will double AWS sales projections to $600B by 2036. [UNVERIFIED] *(Reuters, 2026-03-17)*",
       "url": "https://www.reuters.com/business/amazon-ceo-sees-ai-doubling-his-prior-aws-sales-projections-600-billion-by-2036-2026-03-17/",
       "tags": [
@@ -58,8 +58,8 @@
     },
     {
       "id": "a4",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks remain the core AI supply chain pressure. *(SemiAnalysis, 2026-03-12)*",
       "url": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
       "tags": [
@@ -77,8 +77,8 @@
     },
     {
       "id": "a5",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Anthropic launched \"Agent Skills\" — equipping Claude agents for real-world tasks. *(Anthropic, 2026-03-17)*",
       "url": "https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills",
       "tags": [
@@ -93,8 +93,8 @@
     },
     {
       "id": "a6",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Anthropic sued DeepSeek, Moonshot, and MiniMax — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*",
       "url": "https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html",
       "tags": [
@@ -111,8 +111,8 @@
     },
     {
       "id": "a7",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns about the partly taxpayer-owned chipmaker. *(NYT, 2026-03-04)*",
       "url": "https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html",
       "tags": [
@@ -126,8 +126,8 @@
     },
     {
       "id": "a8",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "ByteDance paused Seedance 2.0 global launch due to Hollywood copyright disputes. *(TechCrunch, 2026-03-15)*",
       "url": "https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/",
       "tags": [
@@ -141,8 +141,8 @@
     },
     {
       "id": "a9",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "China approved Nvidia H200 chip sales and is simultaneously restarting H200 manufacturing for China — a significant policy reversal. [UNVERIFIED] *(Reuters / The Information, 2026-03-18)*",
       "url": "https://www.reuters.com/world/china/chinese-authorities-approve-nvidias-h200-ai-chip-sales-source-says-2026-03-18/",
       "tags": [
@@ -162,8 +162,8 @@
     },
     {
       "id": "a10",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*",
       "url": "https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html",
       "tags": [
@@ -179,8 +179,8 @@
     },
     {
       "id": "a11",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*",
       "url": "https://www.theverge.com/ai-artificial-intelligence/895372/encyclopedia-britannica-openai-lawsuit",
       "tags": [
@@ -199,8 +199,8 @@
     },
     {
       "id": "a12",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Google quietly winning the Pentagon AI race — rebuilt its DoD relationship and is poised to benefit while OpenAI and Anthropic fight over terms. *(NYT, 2026-03-18)*",
       "url": "https://www.nytimes.com/2026/03/18/technology/google-ai-pentagon.html",
       "tags": [
@@ -221,8 +221,8 @@
     },
     {
       "id": "a13",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Iran's Hormuz stranglehold continues to escalate energy prices, compounding Persian Gulf AI infrastructure risk. *(NYT, 2026-03-17)*",
       "url": "https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html",
       "tags": [
@@ -240,8 +240,8 @@
     },
     {
       "id": "a14",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Meta delayed its flagship model (\"Avocado\") after performance concerns. *(NYT, 2026-03-12)*",
       "url": "https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html",
       "tags": [
@@ -257,8 +257,8 @@
     },
     {
       "id": "a15",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Nvidia announced NeMoClaw — enterprise AI platform, details via official newsroom. *(Nvidia, 2026-03-17)*",
       "url": "https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw",
       "tags": [
@@ -278,8 +278,8 @@
     },
     {
       "id": "a16",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Component shortages — not tariffs — are the binding constraint on data center build timelines. Memory and accelerator supply is the real bottleneck. *(DCK Tier 0, 2026-03-19)*",
       "url": "https://www.datacenterknowledge.com/supply-chain/tariffs-add-cost-but-component-shortages-dictate-data-center-timelines",
       "tags": [
@@ -296,8 +296,8 @@
     },
     {
       "id": "a17",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*",
       "url": "https://www.nytimes.com/2026/03/19/business/ai-agents-anxiety-openclaw.html",
       "tags": [
@@ -312,8 +312,8 @@
     },
     {
       "id": "a18",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*",
       "url": "https://www.nytimes.com/2026/03/19/technology/ai-agents-uses.html",
       "tags": [
@@ -328,8 +328,8 @@
     },
     {
       "id": "a19",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*",
       "url": "https://www.nytimes.com/2026/01/29/technology/amazon-google-nvidia-chips-competition.html",
       "tags": [
@@ -349,8 +349,8 @@
     },
     {
       "id": "a20",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*",
       "url": "https://www.datacenterknowledge.com/cloud/ampere-arms-european-cloud-footprint-with-new-deployments",
       "tags": [
@@ -368,8 +368,8 @@
     },
     {
       "id": "a21",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*",
       "url": "https://www.nytimes.com/2026/02/14/business/china-chips-nvidia-huawei.html",
       "tags": [
@@ -382,8 +382,8 @@
     },
     {
       "id": "a22",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*",
       "url": "https://www.nytimes.com/2026/03/17/business/china-ai-agent.html",
       "tags": [
@@ -398,8 +398,8 @@
     },
     {
       "id": "a23",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*",
       "url": "https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026",
       "tags": [
@@ -422,8 +422,8 @@
     },
     {
       "id": "a24",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*",
       "url": "https://www.nytimes.com/2026/03/16/technology/ai-florida-republicans.html",
       "tags": [
@@ -443,8 +443,8 @@
     },
     {
       "id": "a25",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*",
       "url": "https://www.nytimes.com/2026/01/29/technology/ai-memory-chips-pc-smartphone.html",
       "tags": [
@@ -461,8 +461,8 @@
     },
     {
       "id": "a26",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*",
       "url": "https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/",
       "tags": [
@@ -481,8 +481,8 @@
     },
     {
       "id": "a27",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*",
       "url": "https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/",
       "tags": [
@@ -500,8 +500,8 @@
     },
     {
       "id": "a28",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*",
       "url": "https://www.bloomberg.com/news/articles/2026-03-16/nvidia-expects-to-make-1-trillion-from-ai-chips-through-2027",
       "tags": [
@@ -519,8 +519,8 @@
     },
     {
       "id": "a29",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*",
       "url": "https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html",
       "tags": [
@@ -537,8 +537,8 @@
     },
     {
       "id": "a30",
-      "epoch": 1774336623,
-      "stamp": "Mar 24, 2026 3:17:03 EDT",
+      "epoch": 1774541090,
+      "stamp": "Mar 26, 2026 12:04:50 EDT",
       "summary": "Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*",
       "url": "https://www.nytimes.com/interactive/2026/03/18/business/energy-environment/data-center-energy-gas-generators.html",
       "tags": [
