@@ -1,102 +1,102 @@
 # Article Archive Index
 
-Generated: 2026-03-26 16:05:11Z
+Generated: 2026-03-26 16:19:36Z
 
 This index tracks previously reported article links and summaries in reverse chronological order.
 
 - Latest report: [../reports/ai/latest.md](../reports/ai/latest.md)
 - Archive data source: [../reports/ai/article-archive.tsv](../reports/ai/article-archive.tsv)
 
-## Mar 24,
+## Mar 26,
 
-- Mar 24, 2026 3:17:03 EDT - "Mass Hysteria. Thousands of Jobs Lost." — AI's white-collar impact may transform politics and society. *(NYT, 2026-03-05)*
+- Mar 26, 2026 12:04:50 EDT - "Mass Hysteria. Thousands of Jobs Lost." — AI's white-collar impact may transform politics and society. *(NYT, 2026-03-05)*
   - <https://www.nytimes.com/2026/03/05/opinion/ai-jobs-white-collar-apocalpyse.html>
   - tags: AI, Jobs Lost, L7.2-labor-market, Mass Hysteria, NYT, nytimes, nytimes.com, Thousands	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Alibaba planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]
+- Mar 26, 2026 12:04:50 EDT - Alibaba planning a major revamp to heighten focus on AI profits. *(Bloomberg, 2026-03-16)* [UNVERIFIED]
   - <https://www.bloomberg.com/news/articles/2026-03-16/alibaba-plans-major-revamp-to-heighten-focus-on-ai-profits>
   - tags: AI, Alibaba, bloomberg, Bloomberg, bloomberg.com, UNVERIFIED	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Amazon CEO projects AI will double AWS sales projections to $600B by 2036. [UNVERIFIED] *(Reuters, 2026-03-17)*
+- Mar 26, 2026 12:04:50 EDT - Amazon CEO projects AI will double AWS sales projections to $600B by 2036. [UNVERIFIED] *(Reuters, 2026-03-17)*
   - <https://www.reuters.com/business/amazon-ceo-sees-ai-doubling-his-prior-aws-sales-projections-600-billion-by-2036-2026-03-17/>
   - tags: AI, Amazon, AWS, CEO, L3.2-custom-asics, L4.1-data-centers, L4.2-cloud-platforms, reuters, Reuters, reuters.com, UNVERIFIED	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks remain the core AI supply chain pressure. *(SemiAnalysis, 2026-03-12)*
+- Mar 26, 2026 12:04:50 EDT - TSMC N3 wafer shortages, memory constraints, and datacenter bottlenecks remain the core AI supply chain pressure. *(SemiAnalysis, 2026-03-12)*
   - <https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage>
   - tags: AI, L2.2-foundries, L4.1-data-centers, L4.2-cloud-platforms, L4.3-power-grid-cooling, newsletter, newsletter.semianalysis.com, semianalysis, SemiAnalysis, TSMC	newsletter.semianalysis.com
-- Mar 24, 2026 3:17:03 EDT - Anthropic launched "Agent Skills" — equipping Claude agents for real-world tasks. *(Anthropic, 2026-03-17)*
+- Mar 26, 2026 12:04:50 EDT - Anthropic launched "Agent Skills" — equipping Claude agents for real-world tasks. *(Anthropic, 2026-03-17)*
   - <https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills>
   - tags: Agent Skills, Anthropic, claude, Claude, claude.com, L5.2-foundation-models, L6.1-api-developer-tools	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Anthropic sued DeepSeek, Moonshot, and MiniMax — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*
+- Mar 26, 2026 12:04:50 EDT - Anthropic sued DeepSeek, Moonshot, and MiniMax — ~24,000 fraudulent accounts used to harvest training data. *(NYT, 2026-02-23)*
   - <https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html>
   - tags: Anthropic, DeepSeek, L5.2-foundation-models, L6.1-api-developer-tools, MiniMax, Moonshot, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns about the partly taxpayer-owned chipmaker. *(NYT, 2026-03-04)*
+- Mar 26, 2026 12:04:50 EDT - Bipartisan senators questioned Intel's use of tools from a blacklisted Chinese firm, raising national security concerns about the partly taxpayer-owned chipmaker. *(NYT, 2026-03-04)*
   - <https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html>
   - tags: Bipartisan, Chinese, Intel, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - ByteDance paused Seedance 2.0 global launch due to Hollywood copyright disputes. *(TechCrunch, 2026-03-15)*
+- Mar 26, 2026 12:04:50 EDT - ByteDance paused Seedance 2.0 global launch due to Hollywood copyright disputes. *(TechCrunch, 2026-03-15)*
   - <https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/>
   - tags: ByteDance, Hollywood, Seedance, techcrunch, TechCrunch, techcrunch.com	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - China approved Nvidia H200 chip sales and is simultaneously restarting H200 manufacturing for China — a significant policy reversal. [UNVERIFIED] *(Reuters / The Information, 2026-03-18)*
+- Mar 26, 2026 12:04:50 EDT - China approved Nvidia H200 chip sales and is simultaneously restarting H200 manufacturing for China — a significant policy reversal. [UNVERIFIED] *(Reuters / The Information, 2026-03-18)*
   - <https://www.reuters.com/world/china/chinese-authorities-approve-nvidias-h200-ai-chip-sales-source-says-2026-03-18/>
   - tags: China, L3.1-gpus-accelerators, L7.1-politics-and-policy, L7.2-labor-market, L7.3-robots, Nvidia, NVIDIA, reuters, Reuters, reuters.com, The Information, UNVERIFIED	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*
+- Mar 26, 2026 12:04:50 EDT - Coding After Coders: Silicon Valley programmers are barely writing code anymore — AI agents are doing it. *(NYT Magazine, 2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/magazine/ai-coding-programming-jobs-claude-chatgpt.html>
   - tags: AI, Coding After Coders, L1.1-silicon-minerals, Magazine, NYT, nytimes, nytimes.com, Silicon Valley	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*
+- Mar 26, 2026 12:04:50 EDT - Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*
   - <https://www.theverge.com/ai-artificial-intelligence/895372/encyclopedia-britannica-openai-lawsuit>
   - tags: Encyclopedia Britannica, L5.2-foundation-models, L6.1-api-developer-tools, L7.1-politics-and-policy, LLM, Merriam, OpenAI, TechCrunch, theverge, theverge.com, Webster	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Google quietly winning the Pentagon AI race — rebuilt its DoD relationship and is poised to benefit while OpenAI and Anthropic fight over terms. *(NYT, 2026-03-18)*
+- Mar 26, 2026 12:04:50 EDT - Google quietly winning the Pentagon AI race — rebuilt its DoD relationship and is poised to benefit while OpenAI and Anthropic fight over terms. *(NYT, 2026-03-18)*
   - <https://www.nytimes.com/2026/03/18/technology/google-ai-pentagon.html>
   - tags: AI, Anthropic, DoD, Google, L4.1-data-centers, L5.2-foundation-models, L6.1-api-developer-tools, L7.1-politics-and-policy, NYT, nytimes, nytimes.com, OpenAI, Pentagon	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Iran's Hormuz stranglehold continues to escalate energy prices, compounding Persian Gulf AI infrastructure risk. *(NYT, 2026-03-17)*
+- Mar 26, 2026 12:04:50 EDT - Iran's Hormuz stranglehold continues to escalate energy prices, compounding Persian Gulf AI infrastructure risk. *(NYT, 2026-03-17)*
   - <https://www.nytimes.com/2026/03/17/business/dealbook/iran-hormuz-markets-geopolitics.html>
   - tags: AI, Hormuz, Iran, L1.1-silicon-minerals, L1.2-energy-water, L1.3-specialty-chemicals, NYT, nytimes, nytimes.com, Persian Gulf	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Meta delayed its flagship model ("Avocado") after performance concerns. *(NYT, 2026-03-12)*
+- Mar 26, 2026 12:04:50 EDT - Meta delayed its flagship model ("Avocado") after performance concerns. *(NYT, 2026-03-12)*
   - <https://www.nytimes.com/2026/03/12/technology/meta-avocado-ai-model-delayed.html>
   - tags: Avocado, L4.1-data-centers, L6.1-api-developer-tools, L7.1-politics-and-policy, Meta, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Nvidia announced NeMoClaw — enterprise AI platform, details via official newsroom. *(Nvidia, 2026-03-17)*
+- Mar 26, 2026 12:04:50 EDT - Nvidia announced NeMoClaw — enterprise AI platform, details via official newsroom. *(Nvidia, 2026-03-17)*
   - <https://nvidianews.nvidia.com/news/nvidia-announces-nemoclaw>
   - tags: AI, L3.1-gpus-accelerators, L6.1-api-developer-tools, L6.2-enterprise-software, L6.3-consumer-products, L7.1-politics-and-policy, NeMoClaw, nvidia, Nvidia, NVIDIA, nvidianews, nvidianews.nvidia.com	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Component shortages — not tariffs — are the binding constraint on data center build timelines. Memory and accelerator supply is the real bottleneck. *(DCK Tier 0, 2026-03-19)*
+- Mar 26, 2026 12:04:50 EDT - Component shortages — not tariffs — are the binding constraint on data center build timelines. Memory and accelerator supply is the real bottleneck. *(DCK Tier 0, 2026-03-19)*
   - <https://www.datacenterknowledge.com/supply-chain/tariffs-add-cost-but-component-shortages-dictate-data-center-timelines>
   - tags: Component, datacenterknowledge, datacenterknowledge.com, DCK, L3.1-gpus-accelerators, L3.2-custom-asics, L3.3-networking-interconnects, Memory, Tier	datacenterknowledge.com
-- Mar 24, 2026 3:17:03 EDT - AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*
+- Mar 26, 2026 12:04:50 EDT - AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*
   - <https://www.nytimes.com/2026/03/19/business/ai-agents-anxiety-openclaw.html>
   - tags: AI, L6.1-api-developer-tools, L6.2-enterprise-software, L6.3-consumer-products, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*
+- Mar 26, 2026 12:04:50 EDT - AI agents go mainstream: NYT published two stories today on the agent moment — one on coders delegating to AI agents, another warning consumers not to give agents their credit card. *(NYT, 2026-03-19)*
   - <https://www.nytimes.com/2026/03/19/technology/ai-agents-uses.html>
   - tags: AI, L6.1-api-developer-tools, L6.2-enterprise-software, L6.3-consumer-products, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*
+- Mar 26, 2026 12:04:50 EDT - Amazon and Google are eating into Nvidia's chip supremacy — both made billions selling AI chips last year, proving Nvidia isn't the only game in town. *(NYT, 2026-01-29)*
   - <https://www.nytimes.com/2026/01/29/technology/amazon-google-nvidia-chips-competition.html>
   - tags: AI, Amazon, Google, L3.1-gpus-accelerators, L4.1-data-centers, L6.1-api-developer-tools, L7.1-politics-and-policy, Nvidia, NVIDIA, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*
+- Mar 26, 2026 12:04:50 EDT - Ampere expanding European cloud footprint — AmpereOne-based instances rolling out across hyperscale and regional providers as sovereign cloud demand grows. *(DCK Tier 0, 2026-03-19)*
   - <https://www.datacenterknowledge.com/cloud/ampere-arms-european-cloud-footprint-with-new-deployments>
   - tags: Ampere, AmpereOne, datacenterknowledge, datacenterknowledge.com, DCK, European, L4.1-data-centers, L4.2-cloud-platforms, L4.3-power-grid-cooling, Tier	datacenterknowledge.com
-- Mar 24, 2026 3:17:03 EDT - China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*
+- Mar 26, 2026 12:04:50 EDT - China built a chip industry — but it's still not enough. Chinese firms are producing fewer, lower-performing chips than foreign competitors despite a decade of investment. *(NYT, 2026-02-14)*
   - <https://www.nytimes.com/2026/02/14/business/china-chips-nvidia-huawei.html>
   - tags: China, Chinese, NYT, nytimes, nytimes.com	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*
+- Mar 26, 2026 12:04:50 EDT - China wary of AI agents: Excitement about AI assistants is running into government security concerns about autonomous software on user devices. *(NYT, 2026-03-17)*
   - <https://www.nytimes.com/2026/03/17/business/china-ai-agent.html>
   - tags: AI, China, Excitement, L6.3-consumer-products, NYT, nytimes, nytimes.com	mail.beehiiv.com, nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*
+- Mar 26, 2026 12:04:50 EDT - Dell, HPE, and OEMs at GTC 2026 backed Nvidia's Vera Rubin platform while debuting orchestration, storage, and AI security tools to scale beyond GPUs. *(DCK Tier 0, 2026-03-19)*
   - <https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026>
   - tags: AI, datacenterknowledge, datacenterknowledge.com, DCK, Dell, GTC, HPE, L3.1-gpus-accelerators, L3.2-custom-asics, L3.3-networking-interconnects, L7.1-politics-and-policy, Nvidia, NVIDIA, Tier, Vera Rubin	datacenterknowledge.com
-- Mar 24, 2026 3:17:03 EDT - Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*
+- Mar 26, 2026 12:04:50 EDT - Florida Republicans split on AI regulation — a Florida AI bill backed by DeSantis failed after Trump signaled opposition to state-level AI rules. *(NYT, 2026-03-16)*
   - <https://www.nytimes.com/2026/03/16/technology/ai-florida-republicans.html>
   - tags: AI, DeSantis, Florida, Florida Republicans, L6.1-api-developer-tools, L6.2-enterprise-software, L6.3-consumer-products, L7.1-politics-and-policy, NYT, nytimes, nytimes.com, Trump	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*
+- Mar 26, 2026 12:04:50 EDT - HBM/AI memory demand is pushing up prices of PC and smartphone memory chips — AI companies are buying up supply. *(NYT, 2026-01-29)*
   - <https://www.nytimes.com/2026/01/29/technology/ai-memory-chips-pc-smartphone.html>
   - tags: AI, HBM, L2.1-fab-equipment, L2.2-foundries, L2.3-memory-storage, NYT, nytimes, nytimes.com, PC	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*
+- Mar 26, 2026 12:04:50 EDT - Merriam-Webster and Encyclopedia Britannica sued OpenAI — together they allege OpenAI violated copyright on nearly 100,000 articles used for LLM training. *(TechCrunch, 2026-03-16)*
   - <https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/>
   - tags: Encyclopedia Britannica, L5.2-foundation-models, L6.1-api-developer-tools, L7.1-politics-and-policy, LLM, Merriam, OpenAI, techcrunch, TechCrunch, techcrunch.com, Webster	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*
+- Mar 26, 2026 12:04:50 EDT - Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*
   - <https://techcrunch.com/2026/03/16/jensen-just-put-nvidias-blackwell-and-vera-rubin-sales-projections-into-the-1-trillion-stratosphere/>
   - tags: Blackwell, Bloomberg, L3.1-gpus-accelerators, L7.1-politics-and-policy, Nvidia, NVIDIA, techcrunch, TechCrunch, techcrunch.com, Vera Rubin	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*
+- Mar 26, 2026 12:04:50 EDT - Nvidia: $1T in Blackwell + Vera Rubin orders projected through 2027, confirmed by Bloomberg and TechCrunch. *(2026-03-16)*
   - <https://www.bloomberg.com/news/articles/2026-03-16/nvidia-expects-to-make-1-trillion-from-ai-chips-through-2027>
   - tags: Blackwell, bloomberg, Bloomberg, bloomberg.com, L3.1-gpus-accelerators, L7.1-politics-and-policy, Nvidia, NVIDIA, TechCrunch, Vera Rubin	mail.beehiiv.com
-- Mar 24, 2026 3:17:03 EDT - Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*
+- Mar 26, 2026 12:04:50 EDT - Taiwan chip disaster risk: If China invades Taiwan and cuts TSMC exports, the U.S. tech industry and economy would be crippled — a risk Silicon Valley has long ignored. *(NYT, 2026-02-24)*
   - <https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html>
   - tags: If China, L1.1-silicon-minerals, L2.2-foundries, NYT, nytimes, nytimes.com, Silicon Valley, Taiwan, TSMC	nytimes.com
-- Mar 24, 2026 3:17:03 EDT - Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*
+- Mar 26, 2026 12:04:50 EDT - Tech giants are ditching the power grid — Meta and others plan to run data centers on expensive, polluting gas generators because grid power isn't fast enough. *(NYT, 2026-03-18)*
   - <https://www.nytimes.com/interactive/2026/03/18/business/energy-environment/data-center-energy-gas-generators.html>
   - tags: L1.2-energy-water, L4.1-data-centers, L4.2-cloud-platforms, L4.3-power-grid-cooling, L6.1-api-developer-tools, L7.1-politics-and-policy, Meta, NYT, nytimes, nytimes.com, Tech	nytimes.com
 ## Mar 19,
