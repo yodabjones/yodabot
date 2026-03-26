@@ -1,6 +1,6 @@
 # AI Intelligence Report
 
-**Timestamp:** Mar 24, 2026 3:17:03 EDT
+**Timestamp:** Mar 26, 2026 12:04:50 EDT
 **Timestamp:** 2026-03-19T23:38:52Z
 **BLUF:** Tech giants are abandoning the power grid for expensive gas generators as AI energy demand hits a breaking point — while AI agents go mainstream in today's NYT, Merriam-Webster joins Britannica in suing OpenAI over 100,000 copyrighted articles, and Dell/HPE rally behind Nvidia's Vera Rubin at GTC.
 
